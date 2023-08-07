@@ -28,8 +28,6 @@ License: You must have a valid license purchased only from themeforest(the above
             if(!empty(Auth::user()->name)){
                 $name=Auth::user()->name;
                 $status=Auth::user()->status;
-            }else{
-                $name=0;
             }
         ?> 
 
@@ -77,10 +75,22 @@ License: You must have a valid license purchased only from themeforest(the above
                         </div>
                         <div class="dropdown-menu w-56">
                             <ul class="dropdown-content bg-primary text-white">
+                                @if(empty($name))
+                                <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+
+                                <script>
+                                    var msg = 'log out';
+                                    alert(msg);
+                                    document.getElementById('logout-form').submit();
+                                </script>
+                                @else
                                 <li class="p-2">
                                     <div class="font-medium">{{$name}}</div>
                                     <div class="text-xs text-white/70 mt-0.5 dark:text-slate-500">@if($status==1) Super Admin @else Sub Admin @endif</div>
                                 </li>
+                                @endif
                                 <li>
                                     <hr class="dropdown-divider border-white/[0.08]">
                                 </li>

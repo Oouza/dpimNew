@@ -1,8 +1,6 @@
 <?php
     if(!empty(Auth::user()->status)){
         $status=Auth::user()->status;
-    }else{
-        $status=0;
     }
 ?> 
 <!-- BEGIN: Mobile Menu -->
@@ -817,7 +815,7 @@
                             </a>
                         </li>
                     @elseif($status==0)
-                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                        <!-- <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
 
@@ -825,7 +823,7 @@
                             var msg = 'log out';
                             alert(msg);
                             document.getElementById('logout-form').submit();
-                        </script>
+                        </script> -->
                     @endif
 
                     <li>

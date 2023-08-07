@@ -1,7 +1,7 @@
  <!-- BEGIN: Mobile Menu -->
  <?php
     // use Auth;
-    // $status=Auth::user()->status;
+    $status=Auth::user()->status;
 ?>
  <div class="mobile-menu md:hidden">
             <div class="mobile-menu-bar">
@@ -120,12 +120,13 @@
         <div class="flex">
             <!-- BEGIN: Side Menu -->
             <nav class="side-nav">
-                <a href="{{url('indexCompany')}}" class="intro-x flex items-center pl-5 pt-4">
+                <a href="{{url('/home')}}" class="intro-x flex items-center pl-5 pt-4">
                     <img alt="Midone - HTML Admin Template" class="w-6" src="{{ asset('dist/images/logo.svg') }}">
                     <span class="hidden xl:block text-white text-lg ml-3"> Local Admin </span> 
                 </a>
                 <div class="side-nav__devider my-6"></div>
-                <ul>  
+                <ul>
+                    @if($status==4)
                     <!-- <li>
                         <a href="javascript:;" <?php if ($activePage =="index") {?> class="side-menu side-menu--active" <?php }else{?> class="side-menu"<?php  } ?>>
                             <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
@@ -344,9 +345,18 @@
                         <a href="{{url('company/edit')}}" <?php if ($activePage =="setting") {?> class="side-menu side-menu--active" <?php }else{?> class="side-menu"<?php  } ?>
                             data-page="acct">
                             <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
-                            <div class="side-menu__title"> ประวัติส่วนตัว </div>
+                            <div class="side-menu__title"> แก้ไขข้อมูลสถานประกอบการ </div>
                         </a>
                     </li>
+                    @else
+                    <li>
+                        <a href="{{url('company/edit')}}" <?php if ($activePage =="setting") {?> class="side-menu side-menu--active" <?php }else{?> class="side-menu"<?php  } ?>
+                            data-page="acct">
+                            <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
+                            <div class="side-menu__title"> แก้ไขข้อมูลสถานประกอบการ </div>
+                        </a>
+                    </li>
+                    @endif
 
                 </ul>
 
