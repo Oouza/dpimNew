@@ -218,7 +218,7 @@ Route::get('backend/company/edit/{id}', [App\Http\Controllers\AdminCompanyContro
 Route::get('backend/company/detail', [App\Http\Controllers\AdminCompanyController::class, 'companyDetail']);
 Route::get('backend/company/file', [App\Http\Controllers\AdminCompanyController::class, 'companyFile']);
 Route::get('backend/company/delate', [App\Http\Controllers\AdminCompanyController::class, 'companyDel']);
-Route::get('backend/company/import', [App\Http\Controllers\AdminCompanyController::class, 'companyImport']);
+Route::post('backend/company/import', [App\Http\Controllers\AdminCompanyController::class, 'companyImport']);
 
 Route::get('backend/companyCf', [App\Http\Controllers\AdminCompanyController::class, 'companyCf']);
 Route::get('backend/companyCf/detail', [App\Http\Controllers\AdminCompanyController::class, 'companyCfDetail']);
