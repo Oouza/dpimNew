@@ -30,9 +30,6 @@ class HomeController extends Controller
         if(\Auth::user()->status == '1' || \Auth::user()->status == '2' ){  // แอดมินน
             return view('backend.graph.graph-job');
         }
-        else if(\Auth::user()->status == '3' ){  // สถานประกอบการ
-            return view('frontend.company.job.indexCompany');
-        }
         else if(\Auth::user()->status == '8' ){  // บุคลากร
             $user = User::join('employees','employees.FKe_userid','users.id')->find(\Auth::user()->id);
             return view('frontend.person.indexUser',compact('user'));
@@ -43,15 +40,28 @@ class HomeController extends Controller
             $amphures = DB::table('amphures')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
             $districts = DB::table('districts')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
             return view('frontend.person.userHistory',compact('user','provinces','amphures','districts'));
-        }else if(\Auth::user()->status == '4'){  // บุคลากร
+        }else if(\Auth::user()->status == '3'){  // HR+Manager
             $user = User::join('ceohrs','ceohrs.FKch_userid','users.id')
             ->join('companies','companies.c_id','ceohrs.FKch_company')
             ->join('provinces','provinces.id','companies.FKc_provinces')
             ->where('users.id',\Auth::user()->id)->first();
+            // dd($user->ch_position);
+
+            if($user->ch_position=='HR'){
+                return view('frontend.company.userHistory');
+            }else if($user->ch_position=='ผู้บริหาร'){
+                return view('frontend.manager.companySetting');
+            }
+        }else if(\Auth::user()->status == '4'){  // HR+Manager
+            $user = User::join('ceohrs','ceohrs.FKch_userid','users.id')
+            ->join('companies','companies.c_id','ceohrs.FKch_company')
+            ->join('provinces','provinces.id','companies.FKc_provinces')
+            ->where('users.id',\Auth::user()->id)->first();
+            // dd($user->ch_position);
 
             if($user->ch_position=='HR'){
                 return view('frontend.company.job.indexCompany',compact('user'));
-            }else{
+            }else if($user->ch_position=='ผู้บริหาร'){
                 return view('frontend.manager.scoreboard.indexManager',compact('user'));
             }
         }
