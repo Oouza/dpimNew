@@ -74,7 +74,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">
-                        เข้าสู่ระบบสำหรับบุคลากร
+                        เข้าสู่ระบบสำหรับบุคลากร 55555
                         </h2>
                         <div class="intro-x mt-2 text-slate-400 xl:hidden text-center"></div>
                         <div class="intro-x mt-8">
