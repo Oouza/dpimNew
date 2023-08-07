@@ -14,6 +14,7 @@ use App\Models\ceohr;
 use App\Models\typeMineral;
 use App\Exports\TypeMineralExport;
 use App\Imports\TypeMineralImport;
+use App\Imports\CEOhrImport;
 
 class AdminCompanyController extends Controller
 {
@@ -195,6 +196,13 @@ class AdminCompanyController extends Controller
 
     function companyCfDetail(){
         return view('backend.company.companyCf-detail');
+    }
+
+    function companyImport(Request $request){
+        Excel::import(new CEOhrImport, $request->file_ceoHr);
+        $mes = 'Success';
+        $yourURL= url('backend/company');
+        echo ("<script>alert('$mes'); location.href='$yourURL'; </script>");
     }
 
     function mineral(){
