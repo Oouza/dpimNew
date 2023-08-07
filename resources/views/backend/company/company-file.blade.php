@@ -34,7 +34,7 @@ $active = "manage";
                     <div class="font-medium text-center text-lg"> เพิ่มไฟล์ข้อมูลสถานประกอบการ </div>
                    
                 </div>
-                <form action="{{ url('backend/skills/add') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('backend/company/import') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-sl ate-200/60 dark:border-darkmode-400">
                     <div class="font-medium text-base">รายละเอียด</div>
@@ -56,7 +56,7 @@ $active = "manage";
                             <b><label for="horizontal-form-1" class="form-label "> ไฟล์ข้อมูลสถานประกอบการ </lable></b>
                         </div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                            <input class="form-control box-form-ct" name="news_name" type="file" id="formFile">
+                            <input class="form-control box-form-ct" name="file_ceoHr" type="file" id="formFile">
                         </div>
                     </div>
                             </div>
