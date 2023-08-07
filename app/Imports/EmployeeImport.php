@@ -29,7 +29,7 @@ class EmployeeImport implements ToModel, WithHeadingRow
         // ]);
         $date_b = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['birth_day'])->format('Y-m-d');
         // dd(Auth::user()->name);
-        if(empty($checkEmail)){
+        if(!empty($checkEmail)){
             $User           = new User;
             $User->name     = $name;
             $User->email    = $row['email'];
