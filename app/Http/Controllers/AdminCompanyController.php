@@ -45,7 +45,7 @@ class AdminCompanyController extends Controller
         $nameCompany = $request->name_company;
         $nocomapany = $request->no_company;
 
-        $chCompany = DB::table('companies')->where('c_nameCompany','like',$nameCompany)->where('c_licenseNo','like',$nocomapany)->first();
+        $chCompany = DB::table('companies')->where('c_nameCompany',$nameCompany)->where('c_licenseNo',$nocomapany)->first();
 
         if(!empty($chCompany->FKc_manager) && !empty($chCompany->FKc_hr)){
             return back()->with('success','สถานประกอบการ '.$nameCompany.' มี ผู้บริหาร  และ HR แล้ว',compact(('request')));        
