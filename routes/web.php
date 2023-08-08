@@ -215,6 +215,7 @@ Route::get('backend/company', [App\Http\Controllers\AdminCompanyController::clas
 Route::get('backend/company/form', [App\Http\Controllers\AdminCompanyController::class, 'companyForm']);
 Route::post('backend/company/add', [App\Http\Controllers\AdminCompanyController::class, 'companyAdd']);
 Route::get('backend/company/edit/{id}', [App\Http\Controllers\AdminCompanyController::class, 'companyEdit']);
+Route::post('backend/company/update/{id}', [App\Http\Controllers\AdminCompanyController::class, 'companyUpdate']);
 Route::get('backend/company/detail', [App\Http\Controllers\AdminCompanyController::class, 'companyDetail']);
 Route::get('backend/company/file', [App\Http\Controllers\AdminCompanyController::class, 'companyFile']);
 Route::get('backend/company/delate', [App\Http\Controllers\AdminCompanyController::class, 'companyDel']);
