@@ -1,8 +1,9 @@
 <?php
     if(!empty(Auth::user()->status)){
         $status=Auth::user()->status;
+    }else{        
     }
-?> 
+?>
 <!-- BEGIN: Mobile Menu -->
  <div class="mobile-menu md:hidden">
             <div class="mobile-menu-bar">
@@ -804,18 +805,20 @@
                                 </a>
                             </li> -->
                         </ul>
-                    </li>                    
+                    </li>       
 
-                    @if($status==1)
-                        <li>
-                            <a href="{{url('backend/Admin')}}" <?php if ($activePage =="admin") {?> class="side-menu side-menu--active" <?php }else{?> class="side-menu"<?php  } ?>
-                                data-page="acct">
-                                <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
-                                <div class="side-menu__title"> เพิ่มแอดมิน </div>
-                            </a>
-                        </li>
-                    @elseif($status==0)
-                        <!-- <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                    @if(!empty($status))
+                        @if($status==1)
+                            <li>
+                                <a href="{{url('backend/Admin')}}" <?php if ($activePage =="admin") {?> class="side-menu side-menu--active" <?php }else{?> class="side-menu"<?php  } ?>
+                                    data-page="acct">
+                                    <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
+                                    <div class="side-menu__title"> เพิ่มแอดมิน </div>
+                                </a>
+                            </li>
+                        @endif
+                    @else
+                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
 
@@ -823,7 +826,7 @@
                             var msg = 'log out';
                             alert(msg);
                             document.getElementById('logout-form').submit();
-                        </script> -->
+                        </script>
                     @endif
 
                     <li>
