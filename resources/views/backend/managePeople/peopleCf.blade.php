@@ -37,7 +37,7 @@ $i=1;
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
-                                <th><center>หมายเลขพนักงาน</center></th>
+                                <!-- <th><center>หมายเลขพนักงาน</center></th> -->
                                 <th><center>ชื่อ</center></th>
                                 <th><center>นามสกุล</center></th>
                                 <th><center>อีเมล</center></th>
@@ -47,19 +47,20 @@ $i=1;
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($user as $rs)
                             <tr>
-                                <td><center>001</center></td>
-                                <td><center>ชื่อ1</center></td>
-                                <td><center>นามสกุล1</center></td>
-                                <td><center>user1@gmail.com</center></td>
-                                <td><center>0998886666</center></td>
-                                <td><center>ชาย</center></td>
+                                <!-- <td><center>001</center></td> -->
+                                <td><center>{{$rs->e_fname}}</center></td>
+                                <td><center>{{$rs->e_fname}}</center></td>
+                                <td><center>{{$rs->email}}</center></td>
+                                <td><center>{{$rs->e_fname}}</center></td>
+                                <td><center>{{$rs->e_gender}}</center></td>
                                 <td><center>
-                                    <a href="{{ url ('backend/peopleCf/detail')}}"><button type="button" class="btn btn-success">แสดงประวัติ</button></a>
+                                    <a href="{{ url ('backend/peopleCf/detail/'.$rs->id)}}"><button type="button" class="btn btn-success">แสดงประวัติ</button></a>
                                 </center></td>
                             </tr>
-                            <tr>
-                                <td><center>002</center></td>
+                            @endforeach
+                            <!-- <tr>
                                 <td><center>ชื่อ2</center></td>
                                 <td><center>นามสกุล2</center></td>
                                 <td><center>user2@gmail.com</center></td>
@@ -68,7 +69,7 @@ $i=1;
                                 <td><center>
                                     <a href="{{ url ('backend/peopleCf/detail')}}"><button type="button" class="btn btn-success">แสดงประวัติ</button></a>
                                 </center></td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     
                     </table>
