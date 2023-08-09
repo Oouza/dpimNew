@@ -174,12 +174,108 @@ class AdminCompanyController extends Controller
         ->join('companies','companies.c_id','ceohrs.FKch_company')
         ->join('provinces','provinces.id','companies.FKc_provinces')
         ->where('users.id',$id)->first();
+        // dd($id);
         $provinces = DB::table('provinces')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
         $amphures = DB::table('amphures')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
         $districts = DB::table('districts')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
         $mineral = typeMineral::whereNull('tm_userDelete')->get();
         // dd($user);
         return view('backend.company.company-edit',compact('user','provinces','amphures','districts','mineral'));
+    }
+
+    function companyUpdate(Request $request, $id){
+        $user = User::join('ceohrs','ceohrs.FKch_userid','users.id')
+        ->join('companies','companies.c_id','ceohrs.FKch_company')
+        ->join('provinces','provinces.id','companies.FKc_provinces')
+        ->where('users.id',$id)->first();
+        // dd($request);
+        $name = $request->title.' '.$request->fname.' '.$request->lname;
+        $com_id = $user->c_id;
+        $email = $request->input('email');
+        $update = Company::find($com_id)->first();
+        $update = User::where('id',27)->first();
+        // $update = User::find($id)->first();
+        // dd($name);
+
+        $chemail = DB::table('users')->where('email',$email)->first();
+
+        if(!empty($chemail)){
+            $emailOld = $chemail->email;
+        }else{
+            $emailOld='';
+        }
+
+        if(!empty($chemail) && $email != $emailOld){
+            return back()->with('success',$email.' อีเมลนี้ลงทะเบียนแล้ว กรุณาเปลี่ยนอีเมลใหม่',compact(('request')));
+        }else if(empty($chemail) && $email != $emailOld){
+            $update = User::find($id)->update([
+                'email'         =>  $email,
+                'name'         =>  $name,
+            ]);
+        }
+
+        if(!empty($request->password)){
+            $update = User::find($id)->update([
+                'password'         =>  Hash::make($request->input('password')),
+            ]);
+        }
+
+        if (!empty($request->file('credit'))) {
+    
+            //ลบรูปเก่าเพื่ออัพโหลดรูปใหม่แทน
+            $path2 = 'public/upload/img/'.$request->credit;
+
+            if (file_exists($path2)) {
+                //dd($path2.$data->image_profile);
+                @unlink($path2);
+            }
+            $path = 'upload/img/';
+            $img = $request->file('credit');
+            $img_name = 'credit' . time() . '.' . $img->getClientOriginalExtension();
+            $save_path = $img->move(public_path($path), $img_name);
+            // dd($img_name);
+            $data2['ch_credit']=$img_name;
+            
+            DB::table('ceohrs')->where('FKch_userid',$id)->update($data2);    
+        }
+
+        $chMineral = DB::table('type_minerals')->where('tm_id',$request->typemineral)->first();
+        // DD($chMineral);
+
+        $update = User::find($id)->update([
+            'name'         =>  $name,
+        ]);
+
+        $update = Company::find($com_id)->update([
+            'c_nameCompany'     =>  $request->nameCompany,
+            'c_licenseNo'       =>  $request->licenseNo,
+            'c_startDate'       =>  $request->startDate,
+            'c_endDate'         =>  $request->endDate,
+            'FKc_typemineral'   =>  $request->typemineral,
+            'c_nameTypeMineral' =>  $chMineral->tm_name,
+            'c_typeMineralSub'  =>  $request->typeMineralSub,
+            'c_typeCompany'     =>  $request->type_company,
+            'c_phone'           =>  $request->c_phone,
+            'c_addressNo'       =>  $request->addressNo,
+            'FKc_provinces'     =>  $request->provinc,
+            'FKc_amphur'        =>  $request->amphur,
+            'FKc_tumbon'        =>  $request->tumbon,
+            'c_postCode'        =>  $request->postCode,
+            'c_userUpdate'      =>  Auth::user()->name,
+        ]);
+        $update = ceohr::where('FKch_userid',$id)->update([
+            'ch_title'      =>  $request->title,
+            'ch_fname'      =>  $request->fname,
+            'ch_lname'      =>  $request->lname,
+            'ch_phone'      =>  $request->ch_phone,
+            'ch_position'   =>  $request->position,
+            'ch_userUpdate' =>  Auth::user()->name,
+        ]);
+
+        $mes = 'Update Success';
+        $yourURL= url('backend/company');
+        echo ("<script>alert('$mes'); location.href='$yourURL'; </script>");
+        return view('backend.adnim.setting',compact('user'));
     }
 
     function companyDetail(){
@@ -191,11 +287,119 @@ class AdminCompanyController extends Controller
     }
 
     function companyCf(){
-        return view('backend.company.companyCf');
+        $provinces = DB::table('provinces')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
+        $mineral = typeMineral::whereNull('tm_userDelete')->get();
+        $user = User::join('ceohrs','ceohrs.FKch_userid','users.id')
+        ->join('companies','companies.c_id','ceohrs.FKch_company')
+        ->join('provinces','provinces.id','companies.FKc_provinces')
+        ->where('status',3)
+        ->whereNull('ch_userDelete')->get();
+        return view('backend.company.companyCf',compact('provinces','mineral','user'));
     }
 
-    function companyCfDetail(){
-        return view('backend.company.companyCf-detail');
+    function companyCfDetail($id){
+        $user = User::join('ceohrs','ceohrs.FKch_userid','users.id')
+        ->join('companies','companies.c_id','ceohrs.FKch_company')
+        ->join('provinces','provinces.id','companies.FKc_provinces')
+        ->where('users.id',$id)->first();
+        // dd($id);
+        $provinces = DB::table('provinces')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
+        $amphures = DB::table('amphures')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
+        $districts = DB::table('districts')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
+        $mineral = typeMineral::whereNull('tm_userDelete')->get();
+        // dd($user);
+        // return view('backend.company.company-edit',compact('user','provinces','amphures','districts','mineral'));
+        return view('backend.company.companyCf-detail',compact('user','provinces','amphures','districts','mineral'));
+    }
+
+    function companyCfConfirm(Request $request, $id){
+        $user = User::join('ceohrs','ceohrs.FKch_userid','users.id')
+        ->join('companies','companies.c_id','ceohrs.FKch_company')
+        ->join('provinces','provinces.id','companies.FKc_provinces')
+        ->where('users.id',$id)->first();
+        $test = User::where('id',12)->first();
+        // dd($test);
+        $com_id = $user->c_id;
+        $name = $request->title.' '.$request->fname.' '.$request->lname;
+        $email = $request->input('email');
+        $chemail = DB::table('users')->where('email',$email)->first();
+        // dd($request->status_button);
+
+        if(!empty($chemail)){
+            $emailOld = $chemail->email;
+        }else{
+            $emailOld='';
+        }
+
+        if(!empty($chemail) && $email != $emailOld){
+            return back()->with('success',$email.' อีเมลนี้ลงทะเบียนแล้ว กรุณาเปลี่ยนอีเมลใหม่',compact(('request')));
+        }else if(empty($chemail) && $email != $emailOld){
+            $update = User::find($id)->update([
+                'email'         =>  $email,
+                'name'         =>  $name,
+            ]);
+        }
+
+        $chMineral = DB::table('type_minerals')->where('tm_id',$request->typemineral)->first();
+        
+        $update = Company::find($com_id)->update([
+            'c_nameCompany'     =>  $request->nameCompany,
+            'c_licenseNo'       =>  $request->licenseNo,
+            'c_startDate'       =>  $request->startDate,
+            'c_endDate'         =>  $request->endDate,
+            'FKc_typemineral'   =>  $request->typemineral,
+            'c_nameTypeMineral' =>  $chMineral->tm_name,
+            'c_typeMineralSub'  =>  $request->typeMineralSub,
+            'c_typeCompany'     =>  $request->type_company,
+            'c_phone'           =>  $request->c_phone,
+            'c_addressNo'       =>  $request->addressNo,
+            'FKc_provinces'     =>  $request->provinc,
+            'FKc_amphur'        =>  $request->amphur,
+            'FKc_tumbon'        =>  $request->tumbon,
+            'c_postCode'        =>  $request->postCode,
+            'c_userUpdate'      =>  Auth::user()->name,
+        ]);
+        $update = ceohr::where('FKch_userid',$id)->update([
+            'ch_title'      =>  $request->title,
+            'ch_fname'      =>  $request->fname,
+            'ch_lname'      =>  $request->lname,
+            'ch_phone'      =>  $request->ch_phone,
+            'ch_position'   =>  $request->position,
+            'ch_userUpdate' =>  Auth::user()->name,
+        ]);
+
+        if($request->status_button == '1'){
+            $update = User::where('id',$id)->update([
+                'status'         =>  4,
+                'name'         =>  $name,
+            ]);
+
+            $update = ceohr::where('FKch_userid',$id)->update([
+                'ch_note' =>  '',
+            ]);
+        }elseif($request->status_button == '2'){
+            $updateUser = User::where('id',$id)->update([
+                'name'      =>  $name,
+                'status'    =>  5,
+            ]);
+            $update = ceohr::where('FKch_userid',$id)->update([
+                'ch_userDelete' =>  Auth::user()->name,
+                'ch_note'       =>  $request->company_note,
+            ]);
+        }else{
+            $updateUser = User::where('id',$id)->update([
+                'name'      =>  $name,
+                'status'    =>  10,
+            ]);
+            
+            $update = ceohr::where('FKch_userid',$id)->update([
+                'ch_userDelete' =>  Auth::user()->name,
+            ]);
+        }
+
+        $mes = 'Success';
+        $yourURL= url('backend/companyCf');
+        echo ("<script>alert('$mes'); location.href='$yourURL'; </script>");
     }
 
     function companyImport(Request $request){
