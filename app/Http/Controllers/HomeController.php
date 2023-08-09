@@ -40,17 +40,18 @@ class HomeController extends Controller
             $amphures = DB::table('amphures')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
             $districts = DB::table('districts')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
             return view('frontend.person.userHistory',compact('user','provinces','amphures','districts'));
-        }else if(\Auth::user()->status == '3'){  // HR+Manager
+        }else if(\Auth::user()->status == '3' ||\Auth::user()->status == '5'){  // HR+Manager
+            $id = \Auth::user()->id;
             $user = User::join('ceohrs','ceohrs.FKch_userid','users.id')
             ->join('companies','companies.c_id','ceohrs.FKch_company')
             ->join('provinces','provinces.id','companies.FKc_provinces')
-            ->where('users.id',\Auth::user()->id)->first();
-            // dd($user->ch_position);
+            ->where('users.id',$id)->first();
+            // dd($user->ch_note);
 
             if($user->ch_position=='HR'){
-                return view('frontend.company.userHistory');
+                return view('frontend.company.userHistory',compact('user'));
             }else if($user->ch_position=='ผู้บริหาร'){
-                return view('frontend.manager.companySetting');
+                return view('frontend.manager.companySetting',compact('user'));
             }
         }else if(\Auth::user()->status == '4'){  // HR+Manager
             $user = User::join('ceohrs','ceohrs.FKch_userid','users.id')
@@ -64,6 +65,9 @@ class HomeController extends Controller
             }else if($user->ch_position=='ผู้บริหาร'){
                 return view('frontend.manager.scoreboard.indexManager',compact('user'));
             }
+        }else{
+            \Auth::logout();
+            return redirect('/login')->with('message', 'You have been logged out.');
         }
         
     }
