@@ -34,23 +34,23 @@ $active = "cf";
                     <div class="font-medium text-center text-lg">รายละเอียดสถานประกอบการ</div>
                    
                 </div>
-                <form action="{{ url('backend/skills/update') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('backend/companyCf/CF/'.$user->FKch_userid) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-sl ate-200/60 dark:border-darkmode-400">
                     <div class="font-medium text-base">รายละเอียด</div>
 
                     <div class="grid grid-cols-12 gap-6 mt-5">
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                            <b><label for="horizontal-form-1" class="form-label "> ประเภทสถานประกอบการ </lable></b>
+                            <b><label for="horizontal-form-1" class="form-label "> ประเภทสถานประกอบการ</lable></b>
                         </div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                            <select name="" id="" class="form-control select2" required>
-                                <!-- <option value="" hidden>- กรุณาเลือกประเภทสถานประกอบการ -</option> -->
-                                <option value="" selected>เหมืองแร่</option>
-                                <option value="">โรงโม่หิน</option>
-                                <option value="">โรงแต่งแร่</option>
-                                <option value="">โรงประกอบโลหกรรม</option>
-                                <option value="">ผู้รับเหมางานเหมืองแร่</option>
+                            <select name="type_company" id="type_company" class="form-control select2" required>
+                                <option @if($user->c_typeCompany == 'เหมืองแร่') selected @endif value="เหมืองแร่">เหมืองแร่</option>
+                                <option @if($user->c_typeCompany == 'โรงโม่หิน') selected @endif value="โรงโม่หิน">โรงโม่หิน</option>
+                                <option @if($user->c_typeCompany == 'โรงแต่งแร่') selected @endif value="โรงแต่งแร่">โรงแต่งแร่</option>
+                                <option @if($user->c_typeCompany == 'โรงประกอบโลหกรรม') selected @endif value="โรงประกอบโลหกรรม">โรงประกอบโลหกรรม</option>
+                                <option @if($user->c_typeCompany == 'ผู้รับเหมางานเหมืองแร่') selected @endif value="ผู้รับเหมางานเหมืองแร่">ผู้รับเหมางานเหมืองแร่</option>
+                                <option @if($user->c_typeCompany == 'อื่นๆ') selected @endif value="อื่นๆ">อื่นๆ</option>
                             </select>
                         </div>
                     </div>
@@ -60,7 +60,7 @@ $active = "cf";
                             <b><label for="horizontal-form-1" class="form-label "> เลขที่หมายเลขประทานบัตร/ใบอนุญาต </lable></b>
                         </div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                            <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" value="001/852" required>
+                            <input class="form-control box-form-ct" name="licenseNo" type="text" id="licenseNo" value="{{$user->c_licenseNo}}" required>
                         </div>
                     </div>
 
@@ -69,7 +69,7 @@ $active = "cf";
                             <b><label for="horizontal-form-1" class="form-label "> วันที่ออกประทานบัตร/ใบอนุญาต </lable></b>
                         </div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                            <input class="form-control box-form-ct" name="news_name" type="date" id="formFile" value="2020-05-06" required>
+                            <input class="form-control box-form-ct" name="startDate" type="date" id="startDate" value="{{$user->c_startDate}}" required>
                         </div>
                     </div>
 
@@ -78,7 +78,7 @@ $active = "cf";
                             <b><label for="horizontal-form-1" class="form-label "> วันที่ประทานบัตร/ใบอนุญาตสิ้นอายุ </lable></b>
                         </div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                            <input class="form-control box-form-ct" name="news_name" type="date" id="formFile" value="2025-05-06" required>
+                            <input class="form-control box-form-ct" name="endDate" type="date" id="endDate" value="{{$user->c_endDate}}" required>
                         </div>
                     </div>
                     
@@ -87,39 +87,38 @@ $active = "cf";
                             <b><label for="horizontal-form-1" class="form-label "> ชื่อสถานประกอบการ </lable></b>
                         </div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                            <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" value="สถานประกอบการ 1" required>
+                            <input class="form-control box-form-ct" name="nameCompany" type="text" id="nameCompany" value="{{$user->c_nameCompany}}" required>
                         </div>
                     </div>
                     
                     <div class="grid grid-cols-12 gap-6 mt-5">
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                            <b><label for="horizontal-form-1" class="form-label "> ชนิดแร่หลัก </lable></b>
+                            <b><label for="horizontal-form-1" class="form-label "> ชนิดแร่หลัก {{$user->FKc_typemineral}}</lable></b>
                         </div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                            <select name="" id="" class="form-control select2" required>
-                                <!-- <option value="" hidden>- กรุณาเลือกชนิดแร่หลัก -</option> -->
-                                <option value="" selected>โลหะ</option>
-                                <option value="">ทอง</option>
-                                <option value="">หิน</option>
+                            <select name="typemineral" id="typemineral" class="form-control select2" required>
+                                @foreach($mineral as $rs)
+                                <option @if($user->FKc_typemineral == $rs->tm_id) selected @endif value="{{$rs->tm_id}}"> {{$rs->tm_name}} </option>
+                                @endforeach
                             </select>
                         </div>
-                    </div>                    
+                    </div>            
                     
                     <div class="grid grid-cols-12 gap-6 mt-5">
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                             <b><label for="horizontal-form-1" class="form-label "> ชนิดแร่รอง </lable></b>
                         </div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                            <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" value="ชนิดแร่รอง" required>
+                            <input type="text" class="form-control" name="typeMineralSub" id="typeMineralSub" @if(!empty($user->c_typeMineralSub)) value="{{$user->c_typeMineralSub}}" @endif>
                         </div>
                     </div>
-
+                    
                     <div class="grid grid-cols-12 gap-6 mt-5">
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                             <b><label for="horizontal-form-1" class="form-label "> หมายเลขโทรศัพท์ </lable></b>
                         </div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                            <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" value="0996663335" required>
+                            <input class="form-control box-form-ct" name="c_phone" type="text" id="c_phone" value="{{$user->c_phone}}" required>
                         </div>
                     </div>
 
@@ -135,7 +134,7 @@ $active = "cf";
                             <b><label for="horizontal-form-1" class="form-label "> ที่อยู่ </lable></b>
                         </div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                            <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" value="55/555" required>
+                            <input class="form-control box-form-ct" name="addressNo" type="text" id="addressNo" value="{{$user->c_addressNo}}" required>
                         </div>
                     </div>
 
@@ -145,13 +144,11 @@ $active = "cf";
                             <b><label for="horizontal-form-1" class="form-label "> จังหวัด </lable></b>
                         </div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                            <select name="" id="" class="form-control select2">
+                            <select name="provinc" id="provinc" class="form-control select2" onchange="provinceNow()">
                                 <!-- <option value="" hidden>- กรุณาเลือกจังหวัด -</option> -->
-                                <option value="" selected>กรุงเทพ</option>
-                                <option value="">กระบี่</option>
-                                <option value="">กาญจนบุรี</option>
-                                <option value="">กาฬสินธุ์</option>
-                                <option value="">กำแพงเพชร</option>
+                                @foreach($provinces as $rs)
+                                <option @if($user->FKc_provinces == $rs->id) selected @endif value="{{$rs->id}}">{{$rs->name_th}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -162,13 +159,11 @@ $active = "cf";
                             <b><label for="horizontal-form-1" class="form-label "> เขต/อำเภอ </lable></b>
                         </div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                            <select name="" id="" class="form-control select2">
+                            <select name="amphur" id="amphur" class="form-control select2" onchange="amphureNow()">
                                 <!-- <option value="" hidden>- กรุณาเลือกเขต/อำเภอ -</option> -->
-                                <option value="" selected>บางแค</option>
-                                <option value="">อำเภอ 2</option>
-                                <option value="">อำเภอ 3</option>
-                                <option value="">อำเภอ 4</option>
-                                <option value="">อำเภอ 5</option>
+                                @foreach($amphures as $rs)
+                                <option @if($user->FKc_amphur == $rs->id) selected @endif value="{{$rs->id}}">{{$rs->name_th}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -179,13 +174,11 @@ $active = "cf";
                             <b><label for="horizontal-form-1" class="form-label "> แขวง/ตำบล </lable></b>
                         </div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                            <select name="" id="" class="form-control select2">
+                            <select name="tumbon" id="tumbon" class="form-control select2">
                                 <!-- <option value="" hidden>- กรุณาเลือกแขวง/ตำบล -</option> -->
-                                <option value="" selected>บางแค</option>
-                                <option value="">ตำบล 2</option>
-                                <option value="">ตำบล 3</option>
-                                <option value="">ตำบล 4</option>
-                                <option value="">ตำบล 5</option>
+                                @foreach($districts as $rs)
+                                <option @if($user->FKc_tumbon == $rs->id) selected @endif value="{{$rs->id}}">{{$rs->name_th}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -196,7 +189,7 @@ $active = "cf";
                             <b><label for="horizontal-form-1" class="form-label "> รหัสไปรษณีย์ </lable></b>
                         </div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                            <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" value="25874" required>
+                            <input class="form-control box-form-ct" name="postCode" type="text" id="postCode" value="{{$user->c_postCode}}" required>
                         </div>
                     </div>
 
@@ -212,7 +205,7 @@ $active = "cf";
                             <b><label for="horizontal-form-1" class="form-label "> คำนำหน้าชื่อ </lable></b>
                         </div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                            <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" value="นาย" required>
+                            <input class="form-control box-form-ct" name="title" type="text" id="title" value="{{$user->ch_title}}" required>
                         </div>
                     </div>
                     
@@ -222,7 +215,7 @@ $active = "cf";
                             <b><label for="horizontal-form-1" class="form-label "> ชื่อ </lable></b>
                         </div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                            <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" value="ดีดี" required>
+                            <input class="form-control box-form-ct" name="fname" type="text" id="fname" value="{{$user->ch_fname}}" required>
                         </div>
                     </div>
                     
@@ -232,7 +225,7 @@ $active = "cf";
                             <b><label for="horizontal-form-1" class="form-label "> นามสกุล </lable></b>
                         </div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                            <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" value="ดีดีดี" required>
+                            <input class="form-control box-form-ct" name="lname" type="text" id="lname" value="{{$user->ch_lname}}" required>
                         </div>
                     </div>
 
@@ -242,7 +235,7 @@ $active = "cf";
                             <b><label for="horizontal-form-1" class="form-label "> หมายเลขโทรศัพท์ </lable></b>
                         </div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                            <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" value="0985556666" required>
+                            <input class="form-control box-form-ct" name="ch_phone" type="text" id="ch_phone" value="{{$user->ch_phone}}" required>
                         </div>
                     </div>
 
@@ -252,37 +245,40 @@ $active = "cf";
                             <b><label for="horizontal-form-1" class="form-label "> ตำแหน่ง </lable></b>
                         </div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                            <input name="news_name" type="radio" id="formFile" checked> ผู้บริหาร
+                            <input name="position" type="radio" id="position" value="ผู้บริหาร" @if($user->ch_position == 'ผู้บริหาร') checked @endif> ผู้บริหาร
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <input name="news_name" type="radio" id="formFile" > HR
+                            <input name="position" type="radio" id="position" value="HR" @if($user->ch_position == 'HR') checked @endif> HR
                         </div>
                     </div>
-                    
+
                     <div class="grid grid-cols-12 gap-6 mt-5">
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                             <b><label for="horizontal-form-1" class="form-label"> อีเมล </lable></b>
                         </div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                            <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" value="company@gmail.com" required>
+                            <input class="form-control box-form-ct" name="email" type="text" id="email" value="{{$user->email}}" required>
                         </div>
-                    </div>     
+                    </div>       
 
+                    @if(!empty($user->ch_credit))
                     <div class="grid grid-cols-12 gap-6 mt-5">
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                            <b><label for="horizontal-form-1" class="form-label "> หลักฐานฯ </lable></b>
+                            <b><label for="horizontal-form-1" class="form-label "> หลักฐานการเป็นสถานประกอบการ </lable></b>
                         </div>
-                        <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-4">
-                            <img src="{{ asset('dist/images/test.jpg') }}">
+                        <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                            <img src="{{asset('public/upload/img').'/'.$user->ch_credit}}">
+                            <!-- <img src="{{ asset('dist/images/test.jpg') }}"> -->
                         </div>
                     </div>
+                    @endif
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                     <b><label for="horizontal-form-1" class="form-label "> หมายเหตุแก้ไข </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <textarea cols="80" id="news_detail" name="news_detail" rows="10"></textarea>
+                                    <textarea cols="80" id="company_note" name="company_note" rows="10"></textarea>
                                 </div>
                             </div>
 
@@ -293,9 +289,9 @@ $active = "cf";
                                 
 
                             <a href="{{url('backend/companyCf')}}" class="btn btn-warning w-50">กลับหน้าหลัก</a>
-                            <a href="#" class="btn btn-success w-50"> ยืนยันการลงทะเบียน </a>        
-                            <a href="#" class="btn btn-primary w-50"> แก้ไขการลงทะเบียน </a>        
-                            <a href="#" class="btn btn-danger w-50"> ยกเลิกการลงทะเบียน </a>        
+                            <button type="submit" name="status_button" value="1" class="btn btn-success w-50"> ยืนยันการลงทะเบียน </button>        
+                            <button type="submit" name="status_button" value="2" class="btn btn-primary w-50"> แก้ไขการลงทะเบียน </button>        
+                            <button type="submit" name="status_button" value="3" class="btn btn-danger w-50"> ยกเลิกการลงทะเบียน </button>        
                             </center>
                       
                 </form>
@@ -312,7 +308,7 @@ $active = "cf";
 @section('javascripts')
 <script>
     ClassicEditor
-    .create( document.querySelector( '#news_detail' ) )
+    .create( document.querySelector( '#company_note' ) )
     .then( editor => {
         console.log( editor );
     } )
