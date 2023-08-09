@@ -222,7 +222,10 @@ Route::get('backend/company/delate', [App\Http\Controllers\AdminCompanyControlle
 Route::post('backend/company/import', [App\Http\Controllers\AdminCompanyController::class, 'companyImport']);
 
 Route::get('backend/companyCf', [App\Http\Controllers\AdminCompanyController::class, 'companyCf']);
-Route::get('backend/companyCf/detail', [App\Http\Controllers\AdminCompanyController::class, 'companyCfDetail']);
+Route::get('backend/companyCf/detail/{id}', [App\Http\Controllers\AdminCompanyController::class, 'companyCfDetail']);
+Route::post('backend/companyCf/CF/{id}', [App\Http\Controllers\AdminCompanyController::class, 'companyCfConfirm']);
+// Route::get('backend/companyCf/edit/{id}', [App\Http\Controllers\AdminCompanyController::class, 'companyCfEdit']);
+// Route::get('backend/companyCf/cancle/{id}', [App\Http\Controllers\AdminCompanyController::class, 'companyCfCancle']);
 
 Route::get('backend/mineral', [App\Http\Controllers\AdminCompanyController::class, 'mineral']);
 Route::get('backend/mineral/form', [App\Http\Controllers\AdminCompanyController::class, 'mineralForm']);
