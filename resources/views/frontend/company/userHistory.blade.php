@@ -41,6 +41,17 @@ $date_old = $date-60;
                 {{ csrf_field() }}
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-sl ate-200/60 dark:border-darkmode-400">
                     <div class="font-medium text-base">รายละเอียด</div>
+                    
+                    @if(!empty($user->ch_note))
+                    <div class="grid grid-cols-12 gap-6 mt-5">
+                        <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                            <b><label for="horizontal-form-1" class="form-label "> หมายเหตุแก้ไขข้อมูล </lable></b>
+                        </div>
+                        <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                            {!! asset($user->ch_note )?$user->ch_note :''!!}
+                        </div>
+                    </div>
+                    @endif
 
                     <div class="grid grid-cols-12 gap-6 mt-5">
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
