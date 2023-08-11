@@ -19,7 +19,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\FrontendController::class, 'loginUser']);
 Route::get('forgotPasswordUser', [App\Http\Controllers\FrontendController::class, 'forgotPasswordUser']);
+
 Route::get('regiterUser', [App\Http\Controllers\FrontendController::class, 'regiterUser']);
+Route::post('employee/add', [App\Http\Controllers\FrontendController::class, 'employAdd']);
+
 Route::get('successUser', [App\Http\Controllers\FrontendController::class, 'successUser']);
 Route::get('indexUser', [App\Http\Controllers\FrontendController::class, 'indexUser']); // แสดงสถิติ
 // Route::get('user/study', [App\Http\Controllers\FrontendController::class, 'userStudy']);
