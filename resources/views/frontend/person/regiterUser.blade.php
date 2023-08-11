@@ -62,11 +62,9 @@ License: You must have a valid license purchased only from themeforest(the above
                             <h2 class="intro-x font-bold text-2xl xl:text-2xl text-center xl:text-left" >
                             ลงทะเบียน บุคลากร รายใหม่
                             </h2>
-                            <center>
-                                @if(session("success"))
-                                    <b class="text-danger">{{session('success')}}</b>
-                                @endif
-                            </center>
+                            @if(session("success"))
+                                <b class="text-danger">{{session('success')}}</b>
+                            @endif
                             <div class="intro-x mt-2 text-slate-400 xl:hidden text-center"></div>
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
