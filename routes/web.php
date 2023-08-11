@@ -119,6 +119,7 @@ Route::get('search/course', [App\Http\Controllers\FrontendController::class, 'se
 
 Route::get('loginCompany', [App\Http\Controllers\ManagerController::class, 'loginCompany']);
 Route::get('regiterCompany', [App\Http\Controllers\ManagerController::class, 'regiterCompany']);
+Route::post('company/add', [App\Http\Controllers\ManagerController::class, 'companyAdd']);
 Route::get('success', [App\Http\Controllers\ManagerController::class, 'success']);
 Route::get('manager/edit', [App\Http\Controllers\ManagerController::class, 'setting']);
 

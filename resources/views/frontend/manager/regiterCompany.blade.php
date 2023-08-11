@@ -57,24 +57,28 @@ License: You must have a valid license purchased only from themeforest(the above
                 
                 <div class="content" style="background-color:#fff;margin-left:-10%; margin-right:-15%; height: 50px; overflow: auto;scrollbar-width: none;">              
                     <div class="my-auto mx-auto xl:ml-20 bg-white dark:bg-darkmode-600 xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto">
-                        <form method="get" action="{{ url('index') }}">
+                        <form method="post" action="{{ url('company/add') }}" enctype="multipart/form-data" onSubmit="return checkPassword(this)">
                         @csrf
                             <h2 class="intro-x font-bold text-2xl xl:text-2xl text-center xl:text-left" >
                             ลงทะเบียน บุคลากร รายใหม่
                             </h2>
+                            @if(session("success"))
+                                <b class="text-danger">{{session('success')}}</b>
+                            @endif
                             <div class="intro-x mt-2 text-slate-400 xl:hidden text-center"></div>
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                     <b><label for="horizontal-form-1" class="form-label "> ประเภทสถานประกอบการ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="" id="" class="form-control">
-                                        <option value="" hidden>- เลือก -</option>
-                                        <option value="">เหมืองแร่</option>
-                                        <option value="">โรงโม่หิน</option>
-                                        <option value="">โรงแต่งแร่</option>
-                                        <option value="">โรงประกอบโลหกรรม</option>
-                                        <option value="">ผู้รับเหมางานเหมืองแร่</option>
+                                    <select name="type_company" id="type_company" class="form-control">
+                                    <option value="" hidden>- กรุณาเลือกประเภทสถานประกอบการ -</option>
+                                    <option value="เหมืองแร่">เหมืองแร่</option>
+                                    <option value="โรงโม่หิน">โรงโม่หิน</option>
+                                    <option value="โรงแต่งแร่">โรงแต่งแร่</option>
+                                    <option value="โรงประกอบโลหกรรม">โรงประกอบโลหกรรม</option>
+                                    <option value="ผู้รับเหมางานเหมืองแร่">ผู้รับเหมางานเหมืองแร่</option>
+                                    <option value="อื่นๆ">อื่นๆ</option>
                                     </select>
                                 </div>
                             </div>
@@ -83,7 +87,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <b><label for="horizontal-form-1" class="form-label "> หมายเลขประทานบัตร/เลขที่ใบอนุญาต </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" required>
+                                    <input class="form-control box-form-ct" name="no_company" type="text" id="formFile" required>
                                 </div>
                             </div>
                             <div class="grid grid-cols-12 gap-6 mt-5">
@@ -91,7 +95,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <b><label for="horizontal-form-1" class="form-label "> วันที่ออกประทานบัตร/ใบอนุญาต </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="date" id="formFile" required>
+                                    <input class="form-control box-form-ct" name="date_start" type="date" id="formFile" required>
                                 </div>
                             </div>
                             <div class="grid grid-cols-12 gap-6 mt-5">
@@ -99,7 +103,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <b><label for="horizontal-form-1" class="form-label "> วันที่ประทานบัตร/ใบอนุญาตสิ้นอายุ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="date" id="formFile" required>
+                                    <input class="form-control box-form-ct" name="date_end" type="date" id="formFile" required>
                                 </div>
                             </div>
                             <div class="grid grid-cols-12 gap-6 mt-5">
@@ -107,7 +111,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <b><label for="horizontal-form-1" class="form-label "> ชื่อสถานประกอบการ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" required>
+                                    <input class="form-control box-form-ct" name="name_company" type="text" id="formFile" required>
                                 </div>
                             </div>
                             <div class="grid grid-cols-12 gap-6 mt-5">
@@ -115,7 +119,20 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <b><label for="horizontal-form-1" class="form-label "> ชนิดแร่หลัก </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" required>
+                                    <select name="mineral" id="mineral" class="form-control select2" required>
+                                        <option value="" hidden>- กรุณาเลือกชนิดแร่หลัก -</option>
+                                        @foreach($mineral as $rs)
+                                        <option value="{{$rs->tm_id}}"> {{$rs->tm_name}} </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-12 gap-6 mt-5">
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                    <b><label for="horizontal-form-1" class="form-label "> ชนิดแร่รอง </lable></b>
+                                </div>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                    <input class="form-control box-form-ct" name="mineralSub" type="text" id="mineralSub">
                                 </div>
                             </div>
                             <div class="grid grid-cols-12 gap-6 mt-5">
@@ -123,7 +140,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <b><label for="horizontal-form-1" class="form-label "> หมายเลขโทรศัพท์ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" required>
+                                    <input class="form-control box-form-ct" name="phone_company" type="text" id="phone_company" required>
                                 </div>
                             </div>
 
@@ -138,7 +155,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <b><label for="horizontal-form-1" class="form-label "> ที่อยู่ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" required>
+                                    <input class="form-control box-form-ct" name="address_no" type="text" id="address_no" required>
                                 </div>
                             </div>
                             <div class="grid grid-cols-12 gap-6 mt-5">
@@ -147,13 +164,11 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <b><label for="horizontal-form-1" class="form-label "> จังหวัด </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="" id="" class="form-control box-form-ct">
-                                        <option value="" hidden>- เลือกจังหวัด -</option>
-                                        <option value="">กรุงเทพ</option>
-                                        <option value="">กระบี่</option>
-                                        <option value="">กาญจนบุรี</option>
-                                        <option value="">กาฬสินธุ์</option>
-                                        <option value="">กำแพงเพชร</option>
+                                    <select name="povices_now" id="povices_now" class="form-control select2" onchange="provinceNow()" required>
+                                        <option value="" hidden>- กรุณาเลือกจังหวัด -</option>
+                                        @foreach($provinces as $rs)
+                                        <option value="{{$rs->id}}">{{$rs->name_th}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -163,13 +178,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <b><label for="horizontal-form-1" class="form-label "> เขต/อำเภอ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="" id="" class="form-control box-form-ct">
-                                        <option value="" hidden>- เลือกเขต/อำเภอ -</option>
-                                        <option value="">บางแค</option>
-                                        <option value="">อำเภอ 2</option>
-                                        <option value="">อำเภอ 3</option>
-                                        <option value="">อำเภอ 4</option>
-                                        <option value="">อำเภอ 5</option>
+                                    <select name="aumphur_now" id="aumphur_now" class="form-control select2" onchange="amphureNow()" required>
+                                        <option value="" hidden>- กรุณาเลือกเขต/อำเภอ -</option>
                                     </select>
                                 </div>
                             </div>
@@ -179,14 +189,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <b><label for="horizontal-form-1" class="form-label "> แขวง/ตำบล </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="" id="" class="form-control box-form-ct">
-                                        <option value="" hidden>- เลือกแขวง/ตำบล -</option>
-                                        <option value="">บางแค</option>
-                                        <option value="">ตำบล 1</option>
-                                        <option value="">ตำบล 2</option>
-                                        <option value="">ตำบล 3</option>
-                                        <option value="">ตำบล 4</option>
-                                        <option value="">ตำบล 5</option>
+                                    <select name="tumbon_now" id="tumbon_now" class="form-control select2">
+                                        <option value="" hidden>- กรุณาเลือกแขวง/ตำบล -</option>
                                     </select>
                                 </div>
                             </div>
@@ -196,7 +200,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <b><label for="horizontal-form-1" class="form-label "> รหัสไปรษณีย์ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" required>
+                                    <input class="form-control box-form-ct" name="postcode" type="text" id="postcode" required>
                                 </div>
                             </div>
                             <div class="grid grid-cols-12 gap-6 mt-5">
@@ -211,7 +215,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <b><label for="horizontal-form-1" class="form-label "> คำนำหน้าชื่อ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" required>
+                                    <input class="form-control box-form-ct" name="title" type="text" id="title" required>
                                 </div>
                             </div>
                             
@@ -221,7 +225,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <b><label for="horizontal-form-1" class="form-label "> ชื่อ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" required>
+                                    <input class="form-control box-form-ct" name="people_fname" type="text" id="people_fname" required>
                                 </div>
                             </div>
                             
@@ -231,7 +235,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <b><label for="horizontal-form-1" class="form-label "> นามสกุล </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" required>
+                                    <input class="form-control box-form-ct" name="people_lname" type="text" id="people_lname" required>
                                 </div>
                             </div>
                             
@@ -241,7 +245,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <b><label for="horizontal-form-1" class="form-label "> หมายเลขโทรศัพท์ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" required>
+                                    <input class="form-control box-form-ct" name="people_phone" type="text" id="people_phone" required>
                                 </div>
                             </div>
 
@@ -251,9 +255,9 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <b><label for="horizontal-form-1" class="form-label "> ตำแหน่ง </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input name="news_name" type="radio" id="formFile" required> ผู้บริหาร
+                                    <input name="position" type="radio" id="formFile" value="ผู้บริหาร" required> ผู้บริหาร
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input name="news_name" type="radio" id="formFile" required> HR
+                                    <input name="position" type="radio" id="formFile" value="HR" required> HR
                                 </div>
                             </div>
                             
@@ -263,7 +267,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <b><label for="horizontal-form-1" class="form-label "> อีเมล </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" required>
+                                    <input class="form-control box-form-ct" name="people_email" type="text" id="people_email" required>
                                 </div>
                             </div>
 
@@ -272,7 +276,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <b><label for="horizontal-form-1" class="form-label "> รหัสผ่าน </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="password" id="formFile" placeholder="" required>
+                                    <input class="form-control box-form-ct" name="pass" type="password" id="pass" placeholder="" required>
                                     <div class="text-danger mt-2">ต้องมีตัวหนังสือ 8-20 ตัว มีตัวอักษรใหญ่และเล็ก มีตัวเลข<br>และมีสัญลักษณ์</div>
                                 </div>
                             </div>
@@ -281,7 +285,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <b><label for="horizontal-form-1" class="form-label "> ยืนยันรหัสผ่าน </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="password" id="formFile" placeholder="" required>
+                                    <input class="form-control box-form-ct" name="passCf" type="password" id="passCf" placeholder="" required>
                                     <div class="text-danger mt-2">ต้องมีตัวหนังสือ 8-20 ตัว มีตัวอักษรใหญ่และเล็ก มีตัวเลข<br>และมีสัญลักษณ์</div>
                                 </div>
                             </div>
@@ -290,15 +294,21 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <b><label for="horizontal-form-1" class="form-label "> หลักฐานการเป็นสถานประกอบการ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="file" id="formFile" required>
+                                    <input class="form-control box-form-ct" name="credti" type="file" id="credti" required>
                                 </div>
                             </div>
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <a href="{{url('successUser')}}"> <button class="btn btn-primary py-3 px-4 w-full xl:w-36 xl:mr-3 align-top">ยืนยันการลงทะเบียน</button> </a>
+                                    <!-- <a href="{{url('successUser')}}"> -->
+                                        <button class="btn btn-primary py-3 px-4 w-full xl:w-36 xl:mr-3 align-top">ยืนยันการลงทะเบียน</button>
+                                    <!-- </a> -->
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <a href="{{url('/')}}"> <button class="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 mt-3 xl:mt-0 align-top">เข้าสู่ระบบ</button> </a>
+                                    <a href="{{url('loginCompany')}}" class="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 mt-3 xl:mt-0 align-top">
+                                        <!-- <button> -->
+                                            เข้าสู่ระบบ
+                                        <!-- </button> -->
+                                    </a>
                                 </div>
                             </div>
                             </div>
@@ -317,6 +327,103 @@ License: You must have a valid license purchased only from themeforest(the above
         
         <!-- BEGIN: JS Assets-->
         <script src="{{ asset('dist/js/app.js') }}"></script>
+        <script src="{{ asset('dist/js/app.js') }}"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+        <script src="//cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+        <script>
+            $(document).ready(function(){
+                $('#type_company').select2({
+                    placeholder: "- กรุณาเลือกประเภทสถานประกอบการ -",
+                    allowClear: true
+                });
+            });
+
+            $(document).ready(function(){
+                $('#mineral').select2({
+                    placeholder: "- กรุณาเลือกชนิดแร่หลัก -",
+                    allowClear: true
+                });
+            });
+
+            $(document).ready(function(){
+                $('#povices_now').select2({
+                    placeholder: "- กรุณาเลือกจังหวัด -",
+                    allowClear: true
+                });
+            });
+
+            $(document).ready(function(){
+                $('#aumphur_now').select2({
+                    placeholder: "- กรุณาเลือกเขต/อำเภอ -",
+                    allowClear: true
+                });
+            });
+
+            $(document).ready(function(){
+                $('#tumbon_now').select2({
+                    placeholder: "- กรุณาเลือกแขวง/ตำบล -",
+                    allowClear: true
+                });
+            });
+        </script>
+
+        <script> 
+            // Function เพื่อตรวจสอบรหัสผ่านว่าตรงกันหรือไม่
+            function checkPassword(form) { 
+                password1 = form.pass.value; 
+                password2 = form.passCf.value; 
+                if (password1 != password2) { 
+                    alert ("Password did not match: Please try again...") 
+                    return false; 
+                } 
+            } 
+        </script>
+
+<script>
+function provinceNow($id) {
+    var provice = $('#povices_now').val();
+    // alert('asd');
+    if(provice == ''){
+    }else{
+        $.ajax({
+            'type': 'post',
+            'url': "{{ url('searchProvice') }}",
+            'dataType': 'json',
+            'data': { 
+                'provice'            : provice,
+                '_token'        : "{{csrf_token()}}"  
+            },
+           'success': function (data){
+            $('#aumphur_now').html(data.html);
+                
+            } 
+        });  
+    }
+}
+function amphureNow() {
+    var amphure = $('#aumphur_now').val();
+    if(amphure == ''){
+    }else{
+        $.ajax({
+            'type': 'post',
+            'url': "{{ url('searchAmphure') }}",
+            'dataType': 'json',
+            'data': { 
+                'amphure'            : amphure,
+                '_token'        : "{{csrf_token()}}"  
+            },
+           'success': function (data){
+            $('#tumbon_now').html(data.html);
+                
+            } 
+        });  
+    }
+}
+</script>
         <!-- END: JS Assets-->
     </body>
 </html>
