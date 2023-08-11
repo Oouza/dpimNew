@@ -109,10 +109,8 @@ License: You must have a valid license purchased only from themeforest(the above
                             <!-- </a> -->
                         </center>
                         <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
-                            <a href="{{url('regiterUser')}}">
-                                <button class="btn btn-outline-secondary py-3 px-4 w-full xl:w-34 mt-3 xl:mt-0 align-top">
+                            <a href="{{url('regiterUser')}}" class="btn btn-outline-secondary py-3 px-4 w-full xl:w-34 mt-3 xl:mt-0 align-top">
                                     ลงทะเบียน &nbsp; <strong> บุคลากร </strong> &nbsp; รายใหม่
-                                </button>
                             </a>
                             <br><br>
                             <center> <a href="{{url('forgotPasswordUser')}}">ลืมรหัสผ่าน</a> </center>
