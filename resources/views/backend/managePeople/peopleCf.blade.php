@@ -51,9 +51,9 @@ $i=1;
                             <tr>
                                 <!-- <td><center>001</center></td> -->
                                 <td><center>{{$rs->e_fname}}</center></td>
-                                <td><center>{{$rs->e_fname}}</center></td>
+                                <td><center>{{$rs->e_lname}}</center></td>
                                 <td><center>{{$rs->email}}</center></td>
-                                <td><center>{{$rs->e_fname}}</center></td>
+                                <td><center>{{$rs->e_phone}}</center></td>
                                 <td><center>{{$rs->e_gender}}</center></td>
                                 <td><center>
                                     <a href="{{ url ('backend/peopleCf/detail/'.$rs->id)}}"><button type="button" class="btn btn-success">แสดงประวัติ</button></a>

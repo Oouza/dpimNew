@@ -37,26 +37,32 @@ $active = "peopleCF";
                     <div class="font-medium text-center text-lg">รายละเอียดบุคลากร</div>
                    
                 </div>
-                <form action="{{ url('backend/skills/add') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('backend/peopleCf/CF/'.$user->id) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-sl ate-200/60 dark:border-darkmode-400">
                     <div class="font-medium text-base">รายละเอียด</div>
+
+                    <center>
+                                @if(session("success"))
+                                    <b class="text-danger">{{session('success')}}</b>
+                                @endif
+                            </center>
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                     <b><label for="horizontal-form-1" class="form-label "> คำนำหน้า </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="" type="text" id="formFile" value="นาย">
+                                    <input class="form-control box-form-ct" name="title" type="text" id="formFile" Placeholder="คำนำหน้า" required value="{{$user->e_title}}">
                                 </div>
                             </div>
-                            
+
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                     <b><label for="horizontal-form-1" class="form-label "> ชื่อ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="" type="text" id="formFile" value="ชื่อ1">
+                                    <input class="form-control box-form-ct" name="fname" type="text" id="formFile" Placeholder="ชื่อ" required value="{{$user->e_fname}}">
                                 </div>
                             </div>
 
@@ -65,67 +71,16 @@ $active = "peopleCF";
                                     <b><label for="horizontal-form-1" class="form-label "> นามสกุล </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="" type="text" id="formFile" value="นามสกุล1">
+                                    <input class="form-control box-form-ct" name="lname" type="text" id="formFile" Placeholder="นามสกุล" required value="{{$user->e_lname}}">
                                 </div>
                             </div>
-
-                            <!-- <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> หมายเลขพนักงาน </lable></b>
-                                </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="" type="text" id="formFile" value="001">
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> แผนก </lable></b>
-                                </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="" id="" class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                        <option value="" hidden>-เลือก-</option>
-                                        <option value="">กลุ่มงาน 1</option>
-                                        <option value="" selected>กลุ่มงาน 2</option>
-                                        <option value="">กลุ่มงาน 3</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> แผนกย่อย </lable></b>
-                                </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="" id="" class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                        <option value="" hidden>-เลือก-</option>
-                                        <option value="">กลุ่มงาน 1</option>
-                                        <option value="">กลุ่มงาน 2</option>
-                                        <option value="" selected>กลุ่มงาน 3</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> ตำแหน่งปัจจุบัน </lable></b>
-                                </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="" id="" class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                        <option value="" hidden>-เลือก-</option>
-                                        <option value="" selected>ตำแหน่ง 1</option>
-                                        <option value="">ตำแหน่ง 2</option>
-                                        <option value="">ตำแหน่ง 3</option>
-                                    </select>
-                                </div>
-                            </div> -->
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                     <b><label for="horizontal-form-1" class="form-label "> อีเมล </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="" type="text" id="formFile" value="name1@gmail.com">
+                                    <input class="form-control box-form-ct" name="e_email" type="text" id="formFile" Placeholder="อีเมล" required value="{{$user->email}}">
                                 </div>
                             </div>
 
@@ -134,7 +89,7 @@ $active = "peopleCF";
                                     <b><label for="horizontal-form-1" class="form-label "> หมายเลขโทรศัพท์ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="" type="text" id="formFile" value="0999995555">
+                                    <input class="form-control box-form-ct" name="phone" type="text" id="formFile" Placeholder="หมายเลขโทรศัพท์" required value="{{$user->e_phone}}">
                                 </div>
                             </div>
 
@@ -143,7 +98,7 @@ $active = "peopleCF";
                                     <b><label for="horizontal-form-1" class="form-label "> รหัสผ่าน </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="" type="password" id="formFile">
+                                    <input class="form-control box-form-ct" name="pass" type="password" id="formFile" Placeholder="รหัสผ่าน">
                                 </div>
                             </div>
 
@@ -152,7 +107,7 @@ $active = "peopleCF";
                                     <b><label for="horizontal-form-1" class="form-label "> ยืนยันรหัสผ่าน </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="" type="password" id="formFile">
+                                    <input class="form-control box-form-ct" name="passCf" type="password" id="formFile" Placeholder="ยืนยันรหัสผ่าน">
                                 </div>
                             </div> -->
 
@@ -161,7 +116,7 @@ $active = "peopleCF";
                                     <b><label for="horizontal-form-1" class="form-label "> วันเกิด </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="" type="date" id="formFile" value="2001-06-06">
+                                    <input class="form-control box-form-ct" name="birthday" type="date" id="formFile" required value="{{$user->e_birth}}">
                                 </div>
                             </div>
 
@@ -177,7 +132,7 @@ $active = "peopleCF";
                                     <b><label for="horizontal-form-1" class="form-label "> ที่อยู่ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" value="25/558">
+                                    <input class="form-control box-form-ct" name="address_now" type="text" id="formFile" Placeholder="ที่อยู่" required value="{{$user->addressNO_now}}">
                                 </div>
                             </div>
 
@@ -187,13 +142,11 @@ $active = "peopleCF";
                                     <b><label for="horizontal-form-1" class="form-label "> จังหวัด </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="" id="" class="form-control select2">
-                                        <!-- <option value="" hidden>-เลือก-</option> -->
-                                        <option value="1" selected>กรุงเทพ</option>
-                                        <option value="2">กระบี่</option>
-                                        <option value="3">กาญจนบุรี</option>
-                                        <option value="4">กาฬสินธุ์</option>
-                                        <option value="5">กำแพงเพชร</option>
+                                    <select name="povices_now" id="povices_now" class="form-control select2" onchange="provinceNow()" required>
+                                        <option value="" hidden>- กรุณาเลือกจังหวัด -</option>
+                                        @foreach($provinces as $rs)
+                                        <option value="{{$rs->id}}" @if(!empty($user->FKe_province_now) && ($user->FKe_province_now == $rs->id)) selected @endif>{{$rs->name_th}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -204,13 +157,11 @@ $active = "peopleCF";
                                     <b><label for="horizontal-form-1" class="form-label "> เขต/อำเภอ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="" id="" class="form-control select2">
-                                        <!-- <option value="" hidden>-เลือก-</option> -->
-                                        <option value="1" selected>บางแค</option>
-                                        <option value="2">อำเภอ 2</option>
-                                        <option value="3">อำเภอ 3</option>
-                                        <option value="4">อำเภอ 4</option>
-                                        <option value="5">อำเภอ 5</option>
+                                    <select name="aumphur_now" id="aumphur_now" class="form-control select2" onchange="amphureNow()" required>
+                                        <option value="" hidden>- กรุณาเลือกเขต/อำเภอ -</option>
+                                        @foreach($amphures as $rs)
+                                        <option value="{{$rs->id}}" @if(!empty($user->FKe_amphur_now) && ($user->FKe_amphur_now == $rs->id)) selected @endif>{{$rs->name_th}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -218,16 +169,14 @@ $active = "peopleCF";
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> แขวง/ตำบล </lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> แขวง/ตำบล {{$user->FKe_tambon_now}}</lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="" id="" class="form-control select2">
-                                        <!-- <option value="" hidden>-เลือก-</option> -->
-                                        <option value="1" selected>บางแค</option>
-                                        <option value="2">ตำบล 2</option>
-                                        <option value="3">ตำบล 3</option>
-                                        <option value="4">ตำบล 4</option>
-                                        <option value="5">ตำบล 5</option>
+                                    <select name="tumbon_now" id="tumbon_now" class="form-control select2" required>
+                                        <option value="" hidden>- กรุณาเลือกแขวง/ตำบล -</option>
+                                        @foreach($districts as $rs)
+                                        <option value="{{$rs->id}}" @if(!empty($user->FKe_tambon_now) && ($user->FKe_tambon_now == $rs->id)) selected @endif>{{$rs->name_th}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -235,10 +184,10 @@ $active = "peopleCF";
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> รหัสไปรษณีย์ </lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> รหัสไปรษรีย์ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" value="11501">
+                                    <input class="form-control box-form-ct" name="postcode_now" type="text" id="formFile" Placeholder="รหัสไปรษรีย์" required value="{{$user->postcode_now}}">
                                 </div>
                             </div>
 
@@ -254,7 +203,7 @@ $active = "peopleCF";
                                     <b><label for="horizontal-form-1" class="form-label "> ที่อยู่ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" value="44/852">
+                                    <input class="form-control box-form-ct" name="address_past" type="text" id="formFile" Placeholder="ที่อยู่" required value="{{$user->addressNO_past}}">
                                 </div>
                             </div>
 
@@ -264,13 +213,11 @@ $active = "peopleCF";
                                     <b><label for="horizontal-form-1" class="form-label "> จังหวัด </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="" id="" class="form-control select2">
-                                        <!-- <option value="" hidden>-เลือก-</option> -->
-                                        <option value="1">กรุงเทพ</option>
-                                        <option value="2" selected>กระบี่</option>
-                                        <option value="3">กาญจนบุรี</option>
-                                        <option value="4">กาฬสินธุ์</option>
-                                        <option value="5">กำแพงเพชร</option>
+                                    <select name="povices_past" id="povices_past" class="form-control select2" onchange="provincepast()" required>
+                                        <option value="" hidden>- กรุณาเลือกจังหวัด -</option>
+                                        @foreach($provinces as $rs)
+                                        <option value="{{$rs->id}}" @if(!empty($user->FKe_province_past) && ($user->FKe_province_past == $rs->id)) selected @endif>{{$rs->name_th}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -281,13 +228,11 @@ $active = "peopleCF";
                                     <b><label for="horizontal-form-1" class="form-label "> เขต/อำเภอ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="" id="" class="form-control select2">
-                                        <!-- <option value="1" hidden>-เลือก-</option> -->
-                                        <option value="2">บางแค</option>
-                                        <option value="3" selected>อำเภอ 2</option>
-                                        <option value="4">อำเภอ 3</option>
-                                        <option value="5">อำเภอ 4</option>
-                                        <option value="6">อำเภอ 5</option>
+                                    <select name="aumphur_past" id="aumphur_past" class="form-control select2" onchange="amphurepast()" required>
+                                        <option value="" hidden>- กรุณาเลือกเขต/อำเภอ -</option>
+                                        @foreach($amphures as $rs)
+                                        <option value="{{$rs->id}}" @if(!empty($user->FKe_amphur_past) && ($user->FKe_amphur_past == $rs->id)) selected @endif>{{$rs->name_th}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -298,13 +243,11 @@ $active = "peopleCF";
                                     <b><label for="horizontal-form-1" class="form-label "> แขวง/ตำบล </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="" id="" class="form-control select2">
-                                        <!-- <option value="" hidden>-เลือก-</option> -->
-                                        <option value="1">บางแค</option>
-                                        <option value="2" selected>ตำบล 2</option>
-                                        <option value="3">ตำบล 3</option>
-                                        <option value="4">ตำบล 4</option>
-                                        <option value="5">ตำบล 5</option>
+                                    <select name="tumbon_past" id="tumbon_past" class="form-control select2" required>
+                                        <option value="" hidden>- กรุณาเลือกแขวง/ตำบล -</option>
+                                        @foreach($districts as $rs)
+                                        <option value="{{$rs->id}}" @if(!empty($user->FKe_tambon_past) && ($user->FKe_tambon_past == $rs->id)) selected @endif>{{$rs->name_th}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -312,10 +255,10 @@ $active = "peopleCF";
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> รหัสไปรษณีย์ </lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> รหัสไปรษรีย์ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" value="75889">
+                                    <input class="form-control box-form-ct" name="postcode_past" type="text" id="formFile" Placeholder="รหัสไปรษรีย์" required value="{{$user->postcode_past}}">
                                 </div>
                             </div>
 
@@ -324,9 +267,9 @@ $active = "peopleCF";
                                     <b><label for="horizontal-form-1" class="form-label "> เพศ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input type="radio"value="1" checked> ชาย
+                                    <input name="gender" type="radio" value="ชาย" @if(!empty($user->e_gender) && ($user->e_gender == 'ชาย')) checked @endif> ชาย
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input type="radio"value="2" > หญิง
+                                    <input name="gender" type="radio" value="หญิง" @if(!empty($user->e_gender) && ($user->e_gender == 'หญิง')) checked @endif> หญิง
                                 </div>
                             </div>
 
@@ -335,7 +278,7 @@ $active = "peopleCF";
                                     <b><label for="horizontal-form-1" class="form-label "> หมายเหตุการแก้ไข </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <textarea cols="80" id="news_detail" name="news_detail" rows="10"></textarea>
+                                    <textarea cols="80" id="employ_note" name="employ_note" rows="10"></textarea>
                                 </div>
                             </div>
 
@@ -345,10 +288,9 @@ $active = "peopleCF";
                             <center>
                                 
                                 <a href="{{url('backend/peopleCf')}}" class="btn btn-warning w-50">กลับหน้าหลัก</a>
-                                <a href="#" class="btn btn-success w-50">ยืนยันลงการทะเบียน</a>
-                                <a href="#" class="btn btn-primary w-50">แก้ไขลงการทะเบียน</a>
-                                <a href="#" class="btn btn-danger w-50">ยกเลิกลงการทะเบียน</a>
-                            
+                                <button type="submit" value="1" name="button_employee" class="btn btn-success w-50">ยืนยันลงการทะเบียน</button>
+                                <button type="submit" value="2" name="button_employee" class="btn btn-primary w-50">แก้ไขลงการทะเบียน</button>
+                                <button type="submit" value="3" name="button_employee" class="btn btn-danger w-50">ยกเลิกลงการทะเบียน</button>
                             </center>
                       
                 </form>
@@ -365,7 +307,7 @@ $active = "peopleCF";
 @section('javascripts')
 <script>
     ClassicEditor
-    .create( document.querySelector( '#news_detail' ) )
+    .create( document.querySelector( '#employ_note' ) )
     .then( editor => {
         console.log( editor );
     } )
@@ -378,6 +320,88 @@ $active = "peopleCF";
     $(document).ready(function(){
         $('.select2').select2();
     });
+</script>
+
+<script>
+function provinceNow($id) {
+    var provice = $('#povices_now').val();
+    // alert('asd');
+    if(provice == ''){
+    }else{
+        $.ajax({
+            'type': 'post',
+            'url': "{{ url('searchProvice') }}",
+            'dataType': 'json',
+            'data': { 
+                'provice'            : provice,
+                '_token'        : "{{csrf_token()}}"  
+            },
+           'success': function (data){
+            $('#aumphur_now').html(data.html);
+                
+            } 
+        });  
+    }
+}
+function amphureNow() {
+    var amphure = $('#aumphur_now').val();
+    if(amphure == ''){
+    }else{
+        $.ajax({
+            'type': 'post',
+            'url': "{{ url('searchAmphure') }}",
+            'dataType': 'json',
+            'data': { 
+                'amphure'            : amphure,
+                '_token'        : "{{csrf_token()}}"  
+            },
+           'success': function (data){
+            $('#tumbon_now').html(data.html);
+                
+            } 
+        });  
+    }
+}
+
+function provincepast($id) {
+    var provice = $('#povices_past').val();
+    // alert('asd');
+    if(provice == ''){
+    }else{
+        $.ajax({
+            'type': 'post',
+            'url': "{{ url('searchProvice') }}",
+            'dataType': 'json',
+            'data': { 
+                'provice'            : provice,
+                '_token'        : "{{csrf_token()}}"  
+            },
+           'success': function (data){
+            $('#aumphur_past').html(data.html);
+                
+            } 
+        });  
+    }
+}
+function amphurepast() {
+    var amphure = $('#aumphur_past').val();
+    if(amphure == ''){
+    }else{
+        $.ajax({
+            'type': 'post',
+            'url': "{{ url('searchAmphure') }}",
+            'dataType': 'json',
+            'data': { 
+                'amphure'            : amphure,
+                '_token'        : "{{csrf_token()}}"  
+            },
+           'success': function (data){
+            $('#tumbon_past').html(data.html);
+                
+            } 
+        });  
+    }
+}
 </script>
 @endsection
 

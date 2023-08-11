@@ -48,7 +48,8 @@ $date_old = $date-60;
                                     <b><label for="horizontal-form-1" class="form-label "> หมายเหตุแก้ไขข้อมูล </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <textarea name="e_note" id="e_note" cols="45" rows="10" disabled>{{$user->e_note}}</textarea>
+                                    <!-- <textarea name="e_note" id="e_note" cols="45" rows="10" disabled>{{$user->e_note}}</textarea> -->
+                                    {!! asset($user->e_note )?$user->e_note :''!!}
                                 </div>
                             </div>
                             @endif

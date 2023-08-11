@@ -383,7 +383,7 @@ class AdminCompanyController extends Controller
                 'status'    =>  5,
             ]);
             $update = ceohr::where('FKch_userid',$id)->update([
-                'ch_userDelete' =>  Auth::user()->name,
+                'ch_userUpdate' =>  Auth::user()->name,
                 'ch_note'       =>  $request->company_note,
             ]);
         }else{

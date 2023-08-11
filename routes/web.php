@@ -288,7 +288,8 @@ Route::post('backend/people/upload', [App\Http\Controllers\AdminEmployeeControll
 Route::get('backend/people/download', [App\Http\Controllers\AdminEmployeeController::class, 'peopleExport']);
 
 Route::get('backend/peopleCf', [App\Http\Controllers\AdminEmployeeController::class, 'peopleCf']);
-Route::get('backend/peopleCf/detail', [App\Http\Controllers\AdminEmployeeController::class, 'peopleCfDetail']);
+Route::get('backend/peopleCf/detail/{id}', [App\Http\Controllers\AdminEmployeeController::class, 'peopleCfDetail']);
+Route::post('backend/peopleCf/CF/{id}', [App\Http\Controllers\AdminEmployeeController::class, 'peopleCfConfirm']);
 
 Route::get('backend/people/manageskills', [App\Http\Controllers\AdminEmployeeController::class, 'peopleManageskills']);
 Route::get('backend/people/manageskills/form', [App\Http\Controllers\AdminEmployeeController::class, 'peopleManageskillsForm']);

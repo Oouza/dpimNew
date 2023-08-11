@@ -34,7 +34,7 @@ class HomeController extends Controller
             $user = User::join('employees','employees.FKe_userid','users.id')->find(\Auth::user()->id);
             return view('frontend.person.indexUser',compact('user'));
         }
-        else if(\Auth::user()->status == '7'){  // บุคลากร
+        else if(\Auth::user()->status == '7' || \Auth::user()->status == '9'){  // บุคลากร
             $user = User::join('employees','employees.FKe_userid','users.id')->find(\Auth::user()->id);
             $provinces = DB::table('provinces')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
             $amphures = DB::table('amphures')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();

@@ -183,11 +183,100 @@ class AdminEmployeeController extends Controller
     }
 
     function peopleCf(){
-        return view('backend.managePeople.peopleCf');
+        $user = User::join('employees','employees.FKe_userid','users.id')->where('status',7)->whereNull('e_userDelete')->get();
+        return view('backend.managePeople.peopleCf',compact('user'));
     }
 
-    function peopleCfDetail(){
-        return view('backend.managePeople.peopleCfDetail');
+    function peopleCfDetail($id){
+        $user = User::join('employees','employees.FKe_userid','users.id')->find($id);
+        // dd($user);
+        $provinces = DB::table('provinces')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
+        $amphures = DB::table('amphures')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
+        $districts = DB::table('districts')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
+        return view('backend.managePeople.peopleCfDetail',compact('user','provinces','amphures','districts'));
+    }
+
+    function peopleCfConfirm(Request $request, $id){
+        // dd($request);
+        $name = $request->title.' '.$request->fname.' '.$request->lname;
+        // dd($name);
+        $email = $request->input('e_email');
+
+        $chemail = DB::table('users')->where('email',$email)
+        ->first();
+        if(!empty($chemail)){
+            $emailOld = $chemail->email;
+        }else{
+            $emailOld='';
+        }
+
+        if(!empty($chemail) && $email != $emailOld){
+            $data = $email;
+            return back()->with('success',$email.' อีเมลนี้ลงทะเบียนแล้ว กรุณาเปลี่ยนอีเมลใหม่',compact(('request')));
+        }else if(empty($chemail) && $email != $emailOld){
+            $update = User::find($id)->update([
+                'email'         =>  $email,
+                'name'         =>  $name,
+            ]);
+        }
+
+        $updateUser = User::where('id',$id)->update([
+            'name'         =>  $name,
+        ]);
+
+        $update = employee::where('FKe_userid',$id)->update([
+            'e_title'           => $request->title,
+            'e_fname'           => $request->fname,
+            'e_lname'           => $request->lname,
+            'e_phone'           => $request->phone,
+            'e_birth'           => $request->birthday,
+            'e_gender'          => $request->gender,
+            'addressNO_now'     => $request->address_now,
+            'FKe_province_now'  => $request->povices_now,
+            'FKe_amphur_now'    => $request->aumphur_now,
+            'FKe_tambon_now'    => $request->tumbon_now,
+            'postcode_now'      => $request->postcode_now,
+            'addressNO_past'    => $request->address_past,
+            'FKe_province_past' => $request->povices_past,
+            'FKe_amphur_past'   => $request->aumphur_past,
+            'FKe_tambon_past'   => $request->tumbon_past,
+            'postcode_past'     => $request->postcode_past,
+            'e_userUpdate'      => Auth::user()->name,
+        ]);
+
+        if($request->button_employee == '1'){
+            $update = User::where('id',$id)->update([
+                'status'       =>  8,
+                'name'         =>  $name,
+            ]);
+
+            $update = employee::where('FKe_userid',$id)->update([
+                'e_note' =>  '',
+            ]);
+        }elseif($request->button_employee == '2'){
+            $updateUser = User::where('id',$id)->update([
+                'name'      =>  $name,
+                'status'    =>  9,
+            ]);
+            $update = employee::where('FKe_userid',$id)->update([
+                'e_userUpdate' =>  Auth::user()->name,
+                'e_note'       =>  $request->employ_note,
+            ]);
+        }else{
+            $updateUser = User::where('id',$id)->update([
+                'name'      =>  $name,
+                'status'    =>  12,
+            ]);
+            
+            $update = employee::where('FKe_userid',$id)->update([
+                'e_userDelete' =>  Auth::user()->name,
+            ]);
+        }
+
+        $mes = 'Update Success';
+        $yourURL= url('backend/peopleCf');
+        echo ("<script>alert('$mes'); location.href='$yourURL'; </script>");
+        return view('backend.adnim.setting',compact('user'));
     }
 
     function peopleManageskills(){
