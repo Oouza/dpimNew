@@ -33,7 +33,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div class="hidden xl:flex flex-col min-h-screen">
                     <a href="" class="-intro-x flex items-center pt-5">
                         <img alt="Midone - HTML Admin Template" class="w-6" src="dist/images/logo.svg">
-                        <span class="text-white text-lg ml-3"> DPIM </span> 
+                        <span class="text-white text-lg ml-3"> ระบบคลังข้อมูลสำหรับติดตามการพัฒนาทักษะ<br>ของบุคลากรในอุตสาหกรรมเหมืองแร่ </span> 
                     </a>
                     <div class="my-auto">
                         <img alt="Midone - HTML Admin Template" class="-intro-x w-1/2 -mt-16" src="dist/images/illustration.svg">
@@ -44,6 +44,10 @@ License: You must have a valid license purchased only from themeforest(the above
                         </div>
                         <div class="-intro-x mt-5 text-lg text-white text-opacity-70 dark:text-slate-400"></div>
                     </div>
+                    <a href="" class="-intro-x flex items-center pt-5">
+                    <img class="-intro-x w-1/2 -mt-16" style="width:60px;height:60px;margin-bottom:0px;margin-left:-50px;" src="dist/images/logo.png">
+                        <span class="text-white text-lg ml-3" style="margin-bottom:60px;"> กรมอุตสาหกรรมพื้นฐานและการเหมืองแร่ 0 2430 6847 ต่อ 4731 </span> 
+                    </a>
                 </div>
                 <!-- END: Login Info -->
                 <!-- BEGIN: Login Form -->
