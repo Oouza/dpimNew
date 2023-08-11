@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Models\employee;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class FrontendController extends Controller
 {
@@ -17,7 +20,58 @@ class FrontendController extends Controller
     }
 
     function regiterUser(){
-        return view('frontend.person.regiterUser');
+        $provinces = DB::table('provinces')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
+        return view('frontend.person.regiterUser',compact('provinces'));
+    }
+
+    function employAdd(Request $request){
+        // dd(Auth::user()->name);
+        $name = $request->e_title.' '.$request->e_fname.' '.$request->e_lname;
+
+        // dd(Auth::user()->name);
+        $email = $request->input('e_email');
+        $chemail = DB::table('users')->where('email',$email)->first();
+
+        if(!empty($chemail)){
+            $data = $email;
+            return back()->with('success',$email.' อีเมลนี้ลงทะเบียนแล้ว กรุณาเปลี่ยนอีเมลใหม่',compact(('request')));
+        }else{
+            $User = new User;
+            $User->name     = $name;
+            $User->email    = $email;
+            $User->password = Hash::make($request->input('pass'));
+            $User->status   = 7;
+            $User->save();
+            
+            $last = DB::table('users')->latest('id')->first();
+
+            $employee = new employee;
+            $employee->e_title              = $request->e_title;
+            $employee->e_fname              = $request->e_fname;
+            $employee->e_lname              = $request->e_lname;
+            $employee->e_phone              = $request->e_phone;
+            $employee->e_birth              = $request->birth;
+            $employee->e_gender             = $request->gender;
+            $employee->addressNO_now        = $request->address_now;
+            $employee->FKe_province_now     = $request->povices_now;
+            $employee->FKe_amphur_now       = $request->aumphur_now;
+            $employee->FKe_tambon_now       = $request->tumbon_now;
+            $employee->postcode_now         = $request->postcode_now;
+            $employee->addressNO_past       = $request->address_past;
+            $employee->FKe_province_past    = $request->povices_past;
+            $employee->FKe_amphur_past      = $request->aumphur_past;
+            $employee->FKe_tambon_past      = $request->tumbon_past;
+            $employee->postcode_past        = $request->postcode_past;
+            $employee->FKe_userid           = $last->id;
+            $employee->e_userCreate         = $name;
+            $employee->e_userUpdate         = $name;
+            $employee->save();
+
+            $mes = 'Success';
+            $yourURL= url('successUser');
+            echo ("<script>alert('$mes'); location.href='$yourURL'; </script>");
+        }
+        // return view('frontend.person.regiterUser');
     }
     
     function successUser(){
