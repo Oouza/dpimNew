@@ -97,8 +97,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <b><label for="horizontal-form-1" class="form-label "> เพศ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input type="radio" value="male" name="gender"> ชาย
-                                    <input type="radio" value="female" name="gender"> หญิง
+                                    <input type="radio" value="ชาย" name="gender"> ชาย
+                                    <input type="radio" value="หญิง" name="gender"> หญิง
                                 </div>
                             </div>
                             <div class="grid grid-cols-12 gap-6 mt-5">
