@@ -73,10 +73,12 @@ $active = "skills";
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select class="form-control select2" name="capacity" id="capacity" required>
                                         <option value="" hidden>- กรุณาเลือกสมรรถนะ -</option>
-                                        <option value="1111">สมรรถนะ 1</option>
-                                        <option value="222">สมรรถนะ 2</option>
+                                        @foreach($capacity as $rs)
+                                        <option value="{{$rs->cc_id}}">{{$rs->cc_no}} {{$rs->cc_name}}</option>
+                                        @endforeach
+                                        <!-- <option value="222">สมรรถนะ 2</option>
                                         <option value="333">สมรรถนะ 3</option>
-                                        <option value="4">สมรรถนะ 4</option>
+                                        <option value="4">สมรรถนะ 4</option> -->
                                     </select>
                                 </div>
                             </div>
@@ -87,8 +89,8 @@ $active = "skills";
                             <center>
                                 
                                 <a href="{{url('backend/skills')}}" class="btn btn-warning w-50">กลับหน้าหลัก</a>
-                                <!-- <button type="submit" class="btn btn-success w-24 ml-2">บันทึก</button>         -->
-                                <a href="#" class="btn btn-success w-50">บันทึก</a>
+                                <button type="submit" class="btn btn-success w-24 ml-2">บันทึก</button>        
+                                <!-- <a href="#" class="btn btn-success w-50">บันทึก</a> -->
                             
                             </center>
                       

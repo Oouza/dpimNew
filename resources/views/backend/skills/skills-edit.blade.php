@@ -34,7 +34,7 @@ $active = "skills";
                     <div class="font-medium text-center text-lg">แก้ไขทักษะ</div>
                    
                 </div>
-                <form action="{{ url('backend/skills/update') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('backend/skills/update/'.$skills->s_id) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-sl ate-200/60 dark:border-darkmode-400">
                     <div class="font-medium text-base">รายละเอียด</div>
@@ -44,7 +44,7 @@ $active = "skills";
                                     <b><label for="horizontal-form-1" class="form-label "> รหัสทักษะ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="skills_id" type="text" id="skills_id" value="001" required>
+                                    <input class="form-control box-form-ct" name="skills_id" type="text" id="skills_id" value="{{$skills->s_no}}" required>
                                 </div>
                             </div>
 
@@ -53,7 +53,7 @@ $active = "skills";
                                     <b><label for="horizontal-form-1" class="form-label "> ชื่อทักษะ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="skills_name" type="text" value="ทักษะ1" id="skills_name" required>
+                                    <input class="form-control box-form-ct" name="skills_name" type="text" value="{{$skills->s_name}}" id="skills_name" required>
                                 </div>
                             </div>
 
@@ -62,7 +62,7 @@ $active = "skills";
                                     <b><label for="horizontal-form-1" class="form-label "> คำอธิบาย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <textarea cols="80" id="skills_detail" name="skills_detail" rows="10">คำอธิบาย1</textarea>
+                                    <textarea cols="80" id="skills_detail" name="skills_detail" rows="10">{{$skills->s_detail}}</textarea>
                                 </div>
                             </div>
 
@@ -72,10 +72,9 @@ $active = "skills";
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="capacity" id="capacity" class="form-control select2">
-                                        <!-- <option value="" hidden>-เลือก-</option> -->
-                                        <option value="" selected>สมรรถนะ1</option>
-                                        <option value="">สมรรถนะ2</option>
-                                        <option value="">สมรรถนะ3</option>
+                                        @foreach($capacity as $rs)
+                                        <option @if($skills->FKs_capacity == $rs->cc_id) selected @endif value="{{$rs->cc_id}}">{{$rs->cc_no}} {{$rs->cc_name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -86,8 +85,8 @@ $active = "skills";
                             <center>
                                 
                                 <a href="{{url('backend/skills')}}" class="btn btn-warning w-50">กลับหน้าหลัก</a>
-                                <!-- <button type="submit" class="btn btn-success w-24 ml-2">บันทึก</button>         -->
-                                <a href="#" class="btn btn-success w-50">บันทึก</a>
+                                <button type="submit" class="btn btn-success w-24 ml-2">บันทึก</button>        
+                                <!-- <a href="#" class="btn btn-success w-50">บันทึก</a> -->
 
                             </center>
                       

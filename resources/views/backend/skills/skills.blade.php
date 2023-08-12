@@ -40,9 +40,12 @@ $i=1;
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-4">
                                         <select name="" id="">
                                             <option value="" hidden>-เลือกกลุ่มสมรรถนะ-</option>
-                                            <option value=""> กลุ่มสมรรถนะ 1</option>
+                                            @foreach($capacity as $rs)
+                                            <option value="{{$rs->cc_id}}">{{$rs->cc_name}}</option>
+                                            @endforeach
+                                            <!-- <option value=""> กลุ่มสมรรถนะ 1</option>
                                             <option value=""> กลุ่มสมรรถนะ 2</option>
-                                            <option value=""> กลุ่มสมรรถนะ 3</option>
+                                            <option value=""> กลุ่มสมรรถนะ 3</option> -->
                                         </select>
                                     </div>
                                 </div>
@@ -59,32 +62,35 @@ $i=1;
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($skills as $rs)
                             <tr>
-                                <td><center>01</center></td>
-                                <td><center>ทักษะ1</center></td>
-                                <td><center>คำอธิบาย1</center></td>
-                                <td><center>สมรรถนะ1</center></td>
+                                <td><center>{{$rs->s_no}}</center></td>
+                                <td><center>{{$rs->s_name}}</center></td>
+                                <td><center>{!! asset($rs->s_detail )?$rs->s_detail :''!!}</center></td>
+                                <td><center>{{$rs->cc_name}}</center></td>
                                 <!-- <td><center></center></td> -->
                                 <td><center>
-                                    <a href="{{ url ('backend/skills/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
-                                    <button type="button" class="btn btn-danger" onclick="del_value(1)">ลบ</button>
+                                    <a href="{{ url ('backend/skills/edit/'.$rs->s_id)}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
+                                    <button type="button" class="btn btn-danger" onclick="del_value({{$rs->s_id}})">ลบ</button>
                                 </center></td>
                             </tr>
-                            <tr>
+                            @endforeach
+                            <!-- <tr>
                                 <td><center>02</center></td>
                                 <td><center>ทักษะ2</center></td>
                                 <td><center>คำอธิบาย2</center></td>
                                 <td><center>สมรรถนะ1</center></td>
-                                <!-- <td><center><a href="{{ url ('backend/skills/edit')}}"  >  <button type="button" class="btn btn-warning"  >Edit</button></a></center></td> -->
                                 <td><center>
                                     <a href="{{ url ('backend/skills/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
                                     <button type="button" class="btn btn-danger" onclick="del_value(1)">ลบ</button>
                                 </center></td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                         <center>
-                            <button type="button" class="btn btn-secondary w-26 ml-2"> ดาวน์โหลดข้อมูลทักษะทั้งหมด (เป็น xlsx) </button>        
+                            <a href="{{ url('backend/skills/export') }}">
+                                <button type="button" class="btn btn-secondary w-26 ml-2"> ดาวน์โหลดข้อมูลทักษะทั้งหมด (เป็น xlsx) </button>        
+                            </a>
                         </center>
                 </div>
               
@@ -117,7 +123,7 @@ function del_value(id) {
                 if (result.value) {
                     $.ajax({
                         type:"GET",
-                        url:"{!! url('member/delete/"+id+"') !!}",
+                        url:"{!! url('backend/skills/delete/"+id+"') !!}",
                         success: function(data) {
                             console.log(data);
                         }   
