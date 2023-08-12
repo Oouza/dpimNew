@@ -34,7 +34,7 @@ $active = "capacity";
                     <div class="font-medium text-center text-lg">แก้ไขสมรรถนะ</div>
                    
                 </div>
-                <form action="{{ url('backend/capacity/add') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('backend/capacity/update/'.$capacity->cc_id) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-sl ate-200/60 dark:border-darkmode-400">
                     <div class="font-medium text-base">รายละเอียด</div>
@@ -44,7 +44,7 @@ $active = "capacity";
                                     <b><label for="horizontal-form-1" class="form-label "> รหัสสมรรถนะ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile"value="001" required>
+                                    <input class="form-control box-form-ct" name="cc_no" type="text" id="cc_no" value="{{$capacity->cc_no}}" required>
                                 </div>
                             </div>
                             
@@ -53,7 +53,7 @@ $active = "capacity";
                                     <b><label for="horizontal-form-1" class="form-label "> ชื่อสมรรถนะ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" value="สมรรถนะ1" type="text" id="formFile" required>
+                                    <input class="form-control box-form-ct" name="cc_name" value="{{$capacity->cc_name}}" type="text" id="cc_name" required>
                                 </div>
                             </div>
 
@@ -62,7 +62,7 @@ $active = "capacity";
                                     <b><label for="horizontal-form-1" class="form-label "> คำอธิบาย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <textarea cols="80" id="news_detail" name="news_detail" rows="10">คำอธิบาย1</textarea>
+                                    <textarea cols="80" id="cc_detail" name="cc_detail" rows="10">{{$capacity->cc_detail}}</textarea>
                                 </div>
                             </div>
 
@@ -90,7 +90,7 @@ $active = "capacity";
 @section('javascripts')
 <script>
     ClassicEditor
-    .create( document.querySelector( '#news_detail' ) )
+    .create( document.querySelector( '#cc_detail' ) )
     .then( editor => {
         console.log( editor );
     } )

@@ -44,7 +44,7 @@ $active = "capacity";
                                     <b><label for="horizontal-form-1" class="form-label "> รหัสสมรรถนะ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" placeholder="รหัสสมรรถนะ" required>
+                                    <input class="form-control box-form-ct" name="capa_no" type="text" id="capa_no" placeholder="รหัสสมรรถนะ" required>
                                 </div>
                             </div>
 
@@ -53,7 +53,7 @@ $active = "capacity";
                                     <b><label for="horizontal-form-1" class="form-label "> ชื่อสมรรถนะ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" placeholder="ชื่อสมรรถนะ" required>
+                                    <input class="form-control box-form-ct" name="capa_name" type="text" id="capa_name" placeholder="ชื่อสมรรถนะ" required>
                                 </div>
                             </div>
 
@@ -62,7 +62,7 @@ $active = "capacity";
                                     <b><label for="horizontal-form-1" class="form-label "> คำอธิบาย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <textarea cols="80" id="news_detail" name="news_detail" rows="10" placeholder="คำอธิบาย"></textarea>
+                                    <textarea cols="80" id="capa_detail" name="capa_detail" rows="10" placeholder="คำอธิบาย"></textarea>
                                 </div>
                             </div>
 
@@ -90,7 +90,7 @@ $active = "capacity";
 @section('javascripts')
 <script>
     ClassicEditor
-    .create( document.querySelector( '#news_detail' ) )
+    .create( document.querySelector( '#capa_detail' ) )
     .then( editor => {
         console.log( editor );
     } )

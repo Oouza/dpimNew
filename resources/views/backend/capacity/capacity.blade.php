@@ -43,17 +43,19 @@ $i=1;
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($capacity as $rs)
                             <tr>
-                                <td><center>01</center></td>
-                                <td><center>สมรรถนะ1</center></td>
-                                <td><center>คำอธิบาย1</center></td>
+                                <td><center>{{$rs->cc_no}}</center></td>
+                                <td><center>{{$rs->cc_name}}</center></td>
+                                <td><center>{!! asset($rs->cc_detail )?$rs->cc_detail :''!!}</center></td>
                                 <!-- <td><center></center></td> -->
                                 <td><center>
-                                    <a href="{{ url ('backend/capacity/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
-                                    <button type="button" class="btn btn-danger" onclick="del_value(1)">ลบ</button>
+                                    <a href="{{ url ('backend/capacity/edit/'.$rs->cc_id)}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
+                                    <button type="button" class="btn btn-danger" onclick="del_value({{$rs->cc_id}})">ลบ</button>
                                 </center></td>
                             </tr>
-                            <tr>
+                            @endforeach
+                            <!-- <tr>
                                 <td><center>02</center></td>
                                 <td><center>สมรรถนะ2</center></td>
                                 <td><center>คำอธิบาย2</center></td>
@@ -61,11 +63,13 @@ $i=1;
                                     <a href="{{ url ('backend/capacity/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
                                     <button type="button" class="btn btn-danger" onclick="del_value(1)">ลบ</button>
                                 </center></td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                         <center>
-                            <button type="button" class="btn btn-secondary w-26 ml-2"> ดาวน์โหลดข้อมูลสมรรถนะทั้งหมด (เป็น xlsx) </button>        
+                            <a href="{{ url('backend/capacity/export') }}">
+                                <button type="button" class="btn btn-secondary w-26 ml-2"> ดาวน์โหลดข้อมูลสมรรถนะทั้งหมด (เป็น xlsx) </button>
+                            </a>
                         </center>
                 </div>
               
@@ -98,7 +102,7 @@ function del_value(id) {
                 if (result.value) {
                     $.ajax({
                         type:"GET",
-                        url:"{!! url('member/delete/"+id+"') !!}",
+                        url:"{!! url('backend/capacity/delete/"+id+"') !!}",
                         success: function(data) {
                             console.log(data);
                         }   
