@@ -200,15 +200,27 @@ Route::get('backend/typeCourse/download', [App\Http\Controllers\AdminCourseContr
 
 Route::get('backend/capacity', [App\Http\Controllers\BackendController::class, 'capacity']);
 Route::get('backend/capacity/form', [App\Http\Controllers\BackendController::class, 'capacityForm']);
-Route::get('backend/capacity/edit', [App\Http\Controllers\BackendController::class, 'capacityEdit']);
+Route::post('backend/capacity/add', [App\Http\Controllers\BackendController::class, 'capacityAdd']);
+Route::get('backend/capacity/edit/{id}', [App\Http\Controllers\BackendController::class, 'capacityEdit']);
+Route::post('backend/capacity/update/{id}', [App\Http\Controllers\BackendController::class, 'capacityUpdate']);
+Route::get('backend/capacity/delete/{id}', [App\Http\Controllers\BackendController::class, 'capacityDelete']);
+Route::get('backend/capacity/export', [App\Http\Controllers\BackendController::class, 'exportCapacity']);
 
 Route::get('backend/skills', [App\Http\Controllers\BackendController::class, 'skills']);
 Route::get('backend/skills/form', [App\Http\Controllers\BackendController::class, 'skillsForm']);
-Route::get('backend/skills/edit', [App\Http\Controllers\BackendController::class, 'skillsEdit']);
+Route::post('backend/skills/add', [App\Http\Controllers\BackendController::class, 'skillsAdd']);
+Route::get('backend/skills/edit/{id}', [App\Http\Controllers\BackendController::class, 'skillsEdit']);
+Route::post('backend/skills/update/{id}', [App\Http\Controllers\BackendController::class, 'skillsUpdate']);
+Route::get('backend/skills/delete/{id}', [App\Http\Controllers\BackendController::class, 'skillsDelete']);
+Route::get('backend/skills/export', [App\Http\Controllers\BackendController::class, 'skillsExport']);
 
 Route::get('backend/skillsSub', [App\Http\Controllers\BackendController::class, 'skillsSub']);
 Route::get('backend/skillsSub/form', [App\Http\Controllers\BackendController::class, 'skillsSubForm']);
-Route::get('backend/skillsSub/edit', [App\Http\Controllers\BackendController::class, 'skillsSubEdit']);
+Route::post('backend/skillsSub/add', [App\Http\Controllers\BackendController::class, 'skillsSubAdd']);
+Route::get('backend/skillsSub/edit/{id}', [App\Http\Controllers\BackendController::class, 'skillsSubEdit']);
+Route::post('backend/skillsSub/update/{id}', [App\Http\Controllers\BackendController::class, 'skillsSubUpdate']);
+Route::get('backend/skillsSub/delete/{id}', [App\Http\Controllers\BackendController::class, 'skillsSubDelete']);
+Route::get('backend/skillsSub/export', [App\Http\Controllers\BackendController::class, 'skillsSubExport']);
 
 Route::get('backend/course', [App\Http\Controllers\BackendController::class, 'course']);
 Route::get('backend/course/form', [App\Http\Controllers\BackendController::class, 'courseForm']);
