@@ -38,8 +38,8 @@ $i=1;
                                 <div class="intro-y block sm:flex items-center h-10">
                                     <h3 class="text-lg font-medium truncate mr-5">เรียกดูตามหมวด</h3>
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-4">
-                                        <select name="" id="">
-                                            <option value="" hidden>-เลือกกลุ่มสมรรถนะ-</option>
+                                        <select name="capacity" id="capacity">
+                                            <option value="" hidden>- เลือกกลุ่มสมรรถนะ -</option>
                                             @foreach($capacity as $rs)
                                             <option value="{{$rs->cc_id}}">{{$rs->cc_name}}</option>
                                             @endforeach
@@ -140,5 +140,14 @@ function del_value(id) {
                 }
             })
         }
+</script>
+
+<script>
+$(document).ready(function(){
+        $('#capacity').select2({
+            placeholder: "- เลือกกลุ่มสมรรถนะ -",
+            allowClear: true
+        });
+    });
 </script>
 @endsection

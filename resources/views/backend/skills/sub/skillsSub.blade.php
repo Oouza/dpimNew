@@ -38,7 +38,7 @@ $i=1;
                                 <div class="intro-y block sm:flex items-center h-10">
                                     <h3 class="text-lg font-medium truncate mr-5">เรียกดูตามหมวด</h3>
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-4">
-                                        <select name="capacity" id="capacity">
+                                        <select name="skills" id="skills">
                                             <option value="" hidden>- เลือกกลุ่มทักษะ -</option>
                                             @foreach($skills as $rs)
                                             <option value="{{$rs->s_id}}">{{$rs->s_no}} {{$rs->s_name}}</option>
@@ -148,7 +148,7 @@ function del_value(id) {
 
 <script>
 $(document).ready(function(){
-        $('#capacity').select2({
+        $('#skills').select2({
             placeholder: "- เลือกกลุ่มทักษะ -",
             allowClear: true
         });
