@@ -34,17 +34,26 @@ $active = "skillsSub";
                     <div class="font-medium text-center text-lg">แก้ไขทักษะย่อย</div>
                    
                 </div>
-                <form action="{{ url('backend/skills/add') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('backend/skillsSub/update/'.$ss->ss_id) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-sl ate-200/60 dark:border-darkmode-400">
                     <div class="font-medium text-base">รายละเอียด</div>
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                    <b><label for="horizontal-form-1" class="form-label "> รหัสทักษะย่อย </lable></b>
+                                </div>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                    <input class="form-control box-form-ct" name="ss_no" value="{{$ss->ss_no}}" type="text" id="ss_no" required>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-12 gap-6 mt-5">
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                     <b><label for="horizontal-form-1" class="form-label "> ชื่อทักษะย่อย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" value="ทักษะย่อย 1" type="text" id="formFile" required>
+                                    <input class="form-control box-form-ct" name="ss_name" value="{{$ss->ss_name}}" type="text" id="ss_name" required>
                                 </div>
                             </div>
 
@@ -53,7 +62,7 @@ $active = "skillsSub";
                                     <b><label for="horizontal-form-1" class="form-label "> คำอธิบาย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <textarea cols="80" id="news_detail" name="news_detail" rows="10"> คำอธิบาย 1 </textarea>
+                                    <textarea cols="80" id="ss_detail" name="ss_detail" rows="10">{{$ss->ss_detail}}"</textarea>
                                 </div>
                             </div>
 
@@ -62,7 +71,7 @@ $active = "skillsSub";
                                     <b><label for="horizontal-form-1" class="form-label "> เกณฑ์ระดับที่ 1 </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <textarea cols="80" id="lavel1" name="lavel1" rows="10">คำอธิบายเกณฑ์ระดับที่ 1</textarea>
+                                    <textarea cols="80" id="lavel1" name="lavel1" rows="10">{{$ss->ss_standardOne}}</textarea>
                                 </div>
                             </div>
 
@@ -71,7 +80,7 @@ $active = "skillsSub";
                                     <b><label for="horizontal-form-1" class="form-label "> เกณฑ์ระดับที่ 2 </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <textarea cols="80" id="lavel2" name="lavel2" rows="10">คำอธิบายเกณฑ์ระดับที่ 2</textarea>
+                                    <textarea cols="80" id="lavel2" name="lavel2" rows="10">{{$ss->ss_standardTwo}}</textarea>
                                 </div>
                             </div>
 
@@ -80,7 +89,7 @@ $active = "skillsSub";
                                     <b><label for="horizontal-form-1" class="form-label "> เกณฑ์ระดับที่ 3 </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <textarea cols="80" id="lavel3" name="lavel3" rows="10">คำอธิบายเกณฑ์ระดับที่ 3</textarea>
+                                    <textarea cols="80" id="lavel3" name="lavel3" rows="10">{{$ss->ss_standardThree}}</textarea>
                                 </div>
                             </div>
 
@@ -91,9 +100,9 @@ $active = "skillsSub";
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="skills" id="skills" class="form-control select2">
                                         <!-- <option value="" hidden>-เลือก-</option> -->
-                                        <option value="1" selected> ทักษะ 1 </option>
-                                        <option value="2"> ทักษะ 2 </option>
-                                        <option value="3"> ทักษะ 3 </option>
+                                        @foreach($skills as $rs)
+                                        <option @if($ss->FKss_skills == $rs->s_id) selected @endif value="{{$rs->s_id}}">{{$rs->s_no}} {{$rs->s_name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -122,7 +131,7 @@ $active = "skillsSub";
 @section('javascripts')
 <script>
     ClassicEditor
-    .create( document.querySelector( '#news_detail' ) )
+    .create( document.querySelector( '#ss_detail' ) )
     .then( editor => {
         console.log( editor );
     } )

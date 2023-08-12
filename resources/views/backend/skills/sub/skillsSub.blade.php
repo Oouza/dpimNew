@@ -38,11 +38,11 @@ $i=1;
                                 <div class="intro-y block sm:flex items-center h-10">
                                     <h3 class="text-lg font-medium truncate mr-5">เรียกดูตามหมวด</h3>
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-4">
-                                        <select name="" id="">
-                                            <option value="" hidden>-เลือกกลุ่มสมรรถนะ-</option>
-                                            <option value=""> กลุ่มสมรรถนะ 1</option>
-                                            <option value=""> กลุ่มสมรรถนะ 2</option>
-                                            <option value=""> กลุ่มสมรรถนะ 3</option>
+                                        <select name="capacity" id="capacity">
+                                            <option value="" hidden>- เลือกกลุ่มทักษะ -</option>
+                                            @foreach($skills as $rs)
+                                            <option value="{{$rs->s_id}}">{{$rs->s_no}} {{$rs->s_name}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -62,19 +62,22 @@ $i=1;
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($skillsSubs as $rs)
                             <tr>
-                                <td><center>01</center></td>
-                                <td><center>ทักษะย่อย 1</center></td>
-                                <td><center>คำอธิบาย1</center></td>
-                                <td><center>ทักษะ1</center></td>
-                                <td><center>คำอธิบายเกณฑ์ระดับที่ 1</center></td>
-                                <td><center>คำอธิบายเกณฑ์ระดับที่ 2</center></td>
-                                <td><center>คำอธิบายเกณฑ์ระดับที่ 3</center></td>                                <td><center>
-                                    <a href="{{ url ('backend/skillsSub/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
-                                    <button type="button" class="btn btn-danger" onclick="del_value(1)">ลบ</button>
+                                <td><center>{{$rs->ss_no}}</center></td>
+                                <td><center>{{$rs->ss_name}}</center></td>
+                                <td><center>{!! asset($rs->ss_detail )?$rs->ss_detail :''!!}</center></td>
+                                <td><center>{{$rs->s_name}}</center></td>
+                                <td><center>{!! asset($rs->ss_standardOne )?$rs->ss_standardOne :''!!}</center></td>
+                                <td><center>{!! asset($rs->ss_standardTwo )?$rs->ss_standardTwo :''!!}</center></td>
+                                <td><center>{!! asset($rs->ss_standardThree )?$rs->ss_standardThree :''!!}</center></td>
+                                <td><center>
+                                    <a href="{{ url ('backend/skillsSub/edit/'.$rs->ss_id)}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
+                                    <button type="button" class="btn btn-danger" onclick="del_value({{$rs->ss_id}})">ลบ</button>
                                 </center></td>
                             </tr>
-                            <tr>
+                            @endforeach
+                            <!-- <tr>
                                 <td><center>02</center></td>
                                 <td><center>ทักษะย่อย 2</center></td>
                                 <td><center>คำอธิบาย2</center></td>
@@ -85,11 +88,13 @@ $i=1;
                                     <a href="{{ url ('backend/skillsSub/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
                                     <button type="button" class="btn btn-danger" onclick="del_value(2)">ลบ</button>
                                 </center></td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                         <center>
-                            <button type="button" class="btn btn-secondary w-26 ml-2"> ดาวน์โหลดข้อมูลทักษะย่อยทั้งหมด (เป็น xlsx) </button>        
+                            <a href="{{ url('backend/skillsSub/export') }}">
+                                <button type="button" class="btn btn-secondary w-26 ml-2"> ดาวน์โหลดข้อมูลทักษะย่อยทั้งหมด (เป็น xlsx) </button>        
+                            </a>
                         </center>
                 </div>
               
@@ -122,7 +127,7 @@ function del_value(id) {
                 if (result.value) {
                     $.ajax({
                         type:"GET",
-                        url:"{!! url('member/delete/"+id+"') !!}",
+                        url:"{!! url('backend/skillsSub/delete/"+id+"') !!}",
                         success: function(data) {
                             console.log(data);
                         }   
@@ -139,5 +144,14 @@ function del_value(id) {
                 }
             })
         }
+</script>
+
+<script>
+$(document).ready(function(){
+        $('#capacity').select2({
+            placeholder: "- เลือกกลุ่มทักษะ -",
+            allowClear: true
+        });
+    });
 </script>
 @endsection

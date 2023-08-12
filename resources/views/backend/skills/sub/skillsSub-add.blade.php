@@ -34,7 +34,7 @@ $active = "skillsSub";
                     <div class="font-medium text-center text-lg">เพิ่มทักษะย่อย</div>
                    
                 </div>
-                <form action="{{ url('backend/skills/add') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('backend/skillsSub/add') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-sl ate-200/60 dark:border-darkmode-400">
                     <div class="font-medium text-base">รายละเอียด</div>
@@ -44,7 +44,7 @@ $active = "skillsSub";
                                     <b><label for="horizontal-form-1" class="form-label "> รหัสทักษะย่อย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" placeholder="รหัสทักษะย่อย" required>
+                                    <input class="form-control box-form-ct" name="ss_no" type="text" id="ss_no" placeholder="รหัสทักษะย่อย" required>
                                 </div>
                             </div>
 
@@ -53,7 +53,7 @@ $active = "skillsSub";
                                     <b><label for="horizontal-form-1" class="form-label "> ชื่อทักษะย่อย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" placeholder="ชื่อทักษะย่อย" required>
+                                    <input class="form-control box-form-ct" name="ss_name" type="text" id="ss_name" placeholder="ชื่อทักษะย่อย" required>
                                 </div>
                             </div>
 
@@ -62,7 +62,7 @@ $active = "skillsSub";
                                     <b><label for="horizontal-form-1" class="form-label "> คำอธิบาย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <textarea cols="80" id="news_detail" name="news_detail" rows="10" placeholder="คำอธิบาย"></textarea>
+                                    <textarea cols="80" id="ss_detail" name="ss_detail" rows="10" placeholder="คำอธิบาย"></textarea>
                                 </div>
                             </div>
 
@@ -100,9 +100,9 @@ $active = "skillsSub";
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="skills" id="skills" class="form-control select2">
                                         <option value="" hidden>- กรุณาเลือกทักษะ -</option>
-                                        <option value="1"> ทักษะ 1 </option>
-                                        <option value="2"> ทักษะ 2 </option>
-                                        <option value="3"> ทักษะ 3 </option>
+                                        @foreach($skills as $rs)
+                                        <option value="{{$rs->s_id}}">{{$rs->s_no}} {{$rs->s_name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -113,8 +113,8 @@ $active = "skillsSub";
                             <center>
                                 
                                 <a href="{{url('backend/skillsSub')}}" class="btn btn-warning w-50">กลับหน้าหลัก</a>
-                                <!-- <button type="submit" class="btn btn-success w-24 ml-2">บันทึก</button>         -->
-                                <a href="#" class="btn btn-success w-50">บันทึก</a>
+                                <button type="submit" class="btn btn-success w-24 ml-2">บันทึก</button>        
+                                <!-- <a href="#" class="btn btn-success w-50">บันทึก</a> -->
                             
                             </center>
                       
@@ -132,7 +132,7 @@ $active = "skillsSub";
 @section('javascripts')
 <script>
     ClassicEditor
-    .create( document.querySelector( '#news_detail' ) )
+    .create( document.querySelector( '#ss_detail' ) )
     .then( editor => {
         console.log( editor );
     } )
@@ -149,7 +149,8 @@ $active = "skillsSub";
     .catch( error => {
         console.error( error );
     } );
-</script><script>
+</script>
+<script>
     ClassicEditor
     .create( document.querySelector( '#lavel2' ) )
     .then( editor => {
@@ -158,7 +159,7 @@ $active = "skillsSub";
     .catch( error => {
         console.error( error );
     } );
-</script><script>
+    
     ClassicEditor
     .create( document.querySelector( '#lavel3' ) )
     .then( editor => {
@@ -167,9 +168,7 @@ $active = "skillsSub";
     .catch( error => {
         console.error( error );
     } );
-</script>
 
-<script>
     $(document).ready(function(){
         $('#skills').select2({
             placeholder: "- กรุณาเลือกทักษะ -",
