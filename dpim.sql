@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 07, 2023 at 05:11 AM
+-- Generation Time: Aug 15, 2023 at 04:18 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 7.4.30
 
@@ -1042,6 +1042,33 @@ INSERT INTO `amphures` (`id`, `code`, `name_th`, `name_en`, `province_id`) VALUE
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `capacities`
+--
+
+CREATE TABLE `capacities` (
+  `cc_id` int(10) UNSIGNED NOT NULL,
+  `cc_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cc_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cc_detail` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `FKcc_Create` int(11) DEFAULT NULL,
+  `cc_userCreate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cc_userUpdate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cc_userDelete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `capacities`
+--
+
+INSERT INTO `capacities` (`cc_id`, `cc_no`, `cc_name`, `cc_detail`, `FKcc_Create`, `cc_userCreate`, `cc_userUpdate`, `cc_userDelete`, `created_at`, `updated_at`) VALUES
+(1, '001', 'สมรรถนะ', '<p>อธิบายสมรรถนะ</p>', 0, 'Super Admin', 'Super Admin', NULL, '2023-08-11 18:51:19', '2023-08-11 19:39:02'),
+(2, '0002', 'ชื่อสมรรถนะ2', '<p>คำอธิบายชื่อสมรรถนะ2</p>', 0, 'Super Admin', 'Super Admin', NULL, '2023-08-11 19:07:38', '2023-08-11 19:07:38');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ceohrs`
 --
 
@@ -1068,10 +1095,17 @@ CREATE TABLE `ceohrs` (
 --
 
 INSERT INTO `ceohrs` (`ch_id`, `ch_title`, `ch_fname`, `ch_lname`, `ch_phone`, `ch_position`, `ch_credit`, `FKch_userid`, `ch_note`, `FKch_company`, `ch_userCreate`, `ch_userUpdate`, `ch_userDelete`, `created_at`, `updated_at`) VALUES
-(1, 'นาย', 'ทำดี', 'บูญมาก', '0999999999', 'ผู้บริหาร', '2', '12', NULL, 1, 'Super Admin', 'Super Admin', NULL, '2023-08-05 03:37:27', '2023-08-05 03:37:27'),
-(5, 'นางสาว', 'สมใจ', 'บุญมาก', '0899885854', 'HR', '2', '16', NULL, 1, 'Super Admin', 'Super Admin', NULL, '2023-08-05 05:08:21', '2023-08-05 05:08:21'),
-(6, 'นาง', 'นก', 'แก้ว', '0856663336', 'ผู้บริหาร', 'credti1691237513.jpg', '17', NULL, 3, 'Super Admin', 'Super Admin', NULL, '2023-08-05 05:11:53', '2023-08-05 05:11:53'),
-(7, 'นางสาว', 'บุษบา', 'วงศ์ดี', '0885552226', 'HR', 'credti1691237696.jpg', '18', NULL, 3, 'Super Admin', 'Super Admin', NULL, '2023-08-05 05:14:56', '2023-08-05 05:14:56');
+(1, 'นาย', 'ทำดี', 'บูญมาก4444', '0999999999', 'ผู้บริหาร', '2', '12', NULL, 1, 'Super Admin', 'Super Admin', NULL, '2023-08-05 03:37:27', '2023-08-09 01:30:22'),
+(5, 'นางสาว', 'สมใจ', 'บุญมาก', '0899885854', 'HR', '2', '16', '<p>ส่งหลักฐานการเป็นสถานประกอบการมาให้</p>', 1, 'Super Admin', 'Super Admin', NULL, '2023-08-05 05:08:21', '2023-08-08 23:33:33'),
+(6, 'นาง', 'นก', 'แก้ว', '0856663336', 'ผู้บริหาร', 'ผู้บริหาร', '17', NULL, 3, 'Super Admin', 'Super Admin', NULL, '2023-08-05 05:11:53', '2023-08-08 19:42:47'),
+(7, 'นางสาว', 'บุษบา', 'วงศ์ดี', '0885552226', 'HR', 'credti1691237696.jpg', '18', NULL, 3, 'Super Admin', 'Super Admin', NULL, '2023-08-05 05:14:56', '2023-08-05 05:14:56'),
+(8, 'นาย', 'ทองคำ', 'ทองดี', '0885552222', 'ผู้บริหาร', NULL, '19', NULL, 4, 'Super Admin', 'Super Admin', NULL, '2023-08-07 03:31:13', '2023-08-07 03:31:13'),
+(9, 'นาย', 'ศักดิ์สิทธิ์', 'เจริญดี', '0998887777', 'ผู้บริหาร', NULL, '20', NULL, 5, 'Super Admin', 'Super Admin', NULL, '2023-08-07 03:31:13', '2023-08-07 03:31:13'),
+(14, 'นาย', 'ทองคำ', 'ทองดี', '0885552222', 'HR', NULL, '25', NULL, 6, 'Super Admin', 'Super Admin', NULL, '2023-08-07 03:57:28', '2023-08-07 03:57:28'),
+(15, 'นาย', 'ศักดิ์สิทธิ์', 'เจริญดี', '0998887777', 'HR', NULL, '26', NULL, 7, 'Super Admin', 'Super Admin', NULL, '2023-08-07 03:57:28', '2023-08-07 03:57:28'),
+(16, 'นาย', 'tset', 'ทองดี', '0885552222', 'ผู้บริหาร', NULL, '27', NULL, 6, 'Super Admin', 'Super Admin', NULL, '2023-08-07 20:12:30', '2023-08-07 20:12:30'),
+(17, 'นาย', 'ประยุทธ', 'จันทร์เจ้า', '0885552222', 'ผู้บริหาร', 'credti1691771706.jfif', '30', NULL, 8, 'นาย ประยุทธ จันทร์เจ้า', 'นาย ประยุทธ จันทร์เจ้า', NULL, '2023-08-11 09:35:06', '2023-08-11 09:35:06'),
+(18, 'นางสาว', 'บุษบา', 'ไม้งาม', '085255641', 'HR', 'credti1691771923.jpg', '31', NULL, 8, 'นางสาว บุษบา ไม้งาม', 'นางสาว บุษบา ไม้งาม', NULL, '2023-08-11 09:38:43', '2023-08-11 09:38:43');
 
 -- --------------------------------------------------------
 
@@ -1109,8 +1143,13 @@ CREATE TABLE `companies` (
 --
 
 INSERT INTO `companies` (`c_id`, `c_nameCompany`, `c_licenseNo`, `c_startDate`, `c_endDate`, `FKc_typemineral`, `c_nameTypeMineral`, `c_typeMineralSub`, `c_typeCompany`, `c_phone`, `c_addressNo`, `FKc_provinces`, `FKc_amphur`, `FKc_tumbon`, `c_postCode`, `FKc_manager`, `FKc_hr`, `c_userCreate`, `c_userUpdate`, `c_userDelete`, `created_at`, `updated_at`) VALUES
-(1, 'orange', '01/01', '2022-01-02', '2027-01-02', '2', 'ทองคำ', 'ทองคำขาว', 'เหมืองแร่', '0999999999', '8/8', '1', '50', '105001', '98985', 1, 5, 'Super Admin', 'Super Admin', NULL, '2023-08-05 03:37:27', '2023-08-05 05:08:21'),
-(3, 'โรงโม่หิน', '02/02', '2023-02-02', '2028-02-02', '3', 'ถ่านหิน', NULL, 'โรงโม่หิน', '0885558888', '58/85', '64', '869', '810604', '98986', 6, 7, 'Super Admin', 'Super Admin', NULL, '2023-08-05 05:11:53', '2023-08-05 05:14:56');
+(1, 'orange9999999', '01/01', '2022-01-02', '2027-01-02', '2', 'ทองคำ', 'ทองคำขาว', 'เหมืองแร่', '0999999999', '8/8', '1', '50', '105001', '98985', 1, 5, 'Super Admin', 'Super Admin', NULL, '2023-08-05 03:37:27', '2023-08-08 21:53:20'),
+(3, 'โรงโม่หินด้ทก้ท', '02/02', '2023-02-02', '2028-02-02', '3', 'ถ่านหิน', NULL, 'โรงแต่งแร่', '0885558888', '58/85', '64', '869', '810604', '98986', 6, 7, 'Super Admin', 'Super Admin', NULL, '2023-08-05 05:11:53', '2023-08-08 19:36:50'),
+(4, 'orange222', '03/03', '2023-05-25', '2030-05-25', '2', 'ทองคำ', 'ทองคำขาว', 'โรงโม่หิน', '0885552222', '8', '1', '40', '102203', '74551', 10, NULL, 'Super Admin', 'Super Admin', NULL, '2023-08-07 03:31:13', '2023-08-07 03:50:36'),
+(5, 'orange223', '03/03', '2023-05-25', '2030-05-25', '2', 'ทองคำ', 'ทองคำขาว', 'โรงโม่หิน', '0885552222', '8', '1', '40', '102203', '74551', 11, NULL, 'Super Admin', 'Super Admin', NULL, '2023-08-07 03:31:13', '2023-08-07 03:50:37'),
+(6, 'orangesrfg222', '03/03', '2023-05-25', '2030-05-25', '2', 'ทองคำ', 'ทองคำขาว', 'โรงโม่หิน', '0885552222', '8', '1', '40', '102203', '74551', 16, 14, 'Super Admin', 'Super Admin', NULL, '2023-08-07 03:57:28', '2023-08-07 20:12:30'),
+(7, 'orangebsdgb223', '03/03', '2023-05-25', '2030-05-25', '2', 'ทองคำ', 'ทองคำขาว', 'โรงโม่หิน', '0885552222', '8', '1', '40', '102203', '74551', NULL, 15, 'Super Admin', 'Super Admin', NULL, '2023-08-07 03:57:28', '2023-08-07 03:57:28'),
+(8, 'รับเหมางานเหมืองแร่', '05/05', '2023-08-11', '2033-08-11', '3', 'ถ่านหิน', NULL, 'ผู้รับเหมางานเหมืองแร่', '0885552654', '7/7', '49', '716', '620801', '65412', 17, 18, 'นาย ประยุทธ จันทร์เจ้า', 'นาย ประยุทธ จันทร์เจ้า', NULL, '2023-08-11 09:35:06', '2023-08-11 09:38:43');
 
 -- --------------------------------------------------------
 
@@ -10044,9 +10083,10 @@ CREATE TABLE `employees` (
 INSERT INTO `employees` (`e_id`, `e_title`, `e_fname`, `e_lname`, `e_phone`, `e_birth`, `e_gender`, `e_status`, `FKe_company`, `e_nameCompany`, `e_employeeNo`, `FKe_department`, `e_nameDepartment`, `FKe_departmentSub`, `e_nameDepartmentSub`, `FKe_position`, `e_namePosition`, `FKe_lavel`, `e_nameLavel`, `FKe_group`, `e_nameGroup`, `e_credit`, `addressNO_now`, `FKe_province_now`, `FKe_amphur_now`, `FKe_tambon_now`, `postcode_now`, `addressNO_past`, `FKe_province_past`, `FKe_amphur_past`, `FKe_tambon_past`, `postcode_past`, `FKe_userid`, `e_userCreate`, `e_userUpdate`, `e_userDelete`, `created_at`, `updated_at`, `e_note`) VALUES
 (1, 'นาย', 'ไก่', 'ไข่', '0984658888', '2000-03-03', 'ชาย', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '541', 1, 40, 104001, '10160', '65', 48, 706, 610601, '78645', 3, 'Super Admin', 'Super Admin', NULL, '2023-08-04 15:48:54', '2023-08-04 15:48:54', NULL),
 (2, 'นางสาว', 'ส้ม', 'เช้ง', '0996663333', '2000-03-05', 'หญิง', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '45/85', 1, 40, 102203, '78945', '52/85', 1, 40, 102203, '78945', 4, 'Super Admin', 'Super Admin', NULL, '2023-08-04 15:48:54', '2023-08-04 15:48:54', NULL),
-(3, 'นาย', 'สมชาย', 'ดีดีดี', '088559999', '0990-06-25', 'ชาย', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '78', 1, 50, 105001, '78965', '98/87', 58, 813, 730701, '65421', 6, 'Super Admin', 'Super Admin', NULL, '2023-08-04 15:56:06', '2023-08-04 15:56:06', 'asd'),
+(3, 'นาย', 'สมชาย', 'ดีดีดี', '088559999', '0990-06-25', 'ชาย', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '78', 1, 50, 105001, '78965', '98/87', 58, 813, 730701, '65421', 6, 'Super Admin', 'Super Admin', NULL, '2023-08-04 15:56:06', '2023-08-04 15:56:06', NULL),
 (4, 'นางสาว', 'สมหญิง', 'จริงๆ', '0996663358', '2000-03-05', 'หญิง', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '55/856', 1, 40, 102203, '78945', '52/85', 1, 40, 102203, '87456', 7, 'Super Admin', 'Super Admin', NULL, '2023-08-04 15:56:06', '2023-08-04 15:56:06', NULL),
-(5, 'นางสาว', 'ณิชากร', 'แห้วเพ็ชร', '0985563256', '1990-03-28', 'หญิง', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '87/98', 1, 40, 102203, '78945', '87/98', 1, 40, 102203, '78945', 8, 'Super Admin', 'Super Admin', NULL, '2023-08-04 16:01:06', '2023-08-04 16:01:06', NULL);
+(5, 'นางสาว', 'ณิชากร', 'แห้วเพ็ชร', '0985563256', '1990-03-28', 'หญิง', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '87/98', 1, 40, 102203, '78945', '87/98', 1, 40, 102203, '78945', 8, 'Super Admin', 'Sub Admin', NULL, '2023-08-04 16:01:06', '2023-08-09 07:53:43', NULL),
+(8, 'นางสาว', 'เจนขวัญ', 'วันดี', '0885554456', '1995-02-21', 'หญิง', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '85/85', 58, 807, 730101, '98745', '85/85', 58, 807, 730101, '98745', 29, 'นางสาว เจนขวัญ วันดี', 'นางสาว เจนขวัญ วันดี', NULL, '2023-08-11 01:12:59', '2023-08-11 01:12:59', NULL);
 
 -- --------------------------------------------------------
 
@@ -10141,7 +10181,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (97, '2023_07_22_102452_create_employees_table', 10),
 (98, '2023_08_05_025213_create_type_minerals_table', 11),
 (99, '2023_07_22_184100_create_ceohrs_table', 12),
-(101, '2023_07_22_183858_create_companies_table', 13);
+(101, '2023_07_22_183858_create_companies_table', 13),
+(102, '2023_08_12_012336_create_capacities_table', 14),
+(103, '2023_08_12_051041_create_skills_table', 15),
+(104, '2023_08_12_060707_create_skills_subs_table', 16);
 
 -- --------------------------------------------------------
 
@@ -10273,6 +10316,68 @@ INSERT INTO `provinces` (`id`, `code`, `name_th`, `name_en`, `geography_id`) VAL
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `skills`
+--
+
+CREATE TABLE `skills` (
+  `s_id` int(10) UNSIGNED NOT NULL,
+  `s_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `s_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `s_detail` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `FKs_capacity` int(11) DEFAULT NULL,
+  `FKs_Create` int(11) DEFAULT NULL,
+  `s_userCreate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `s_userUpdate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `s_userDelete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `skills`
+--
+
+INSERT INTO `skills` (`s_id`, `s_no`, `s_name`, `s_detail`, `FKs_capacity`, `FKs_Create`, `s_userCreate`, `s_userUpdate`, `s_userDelete`, `created_at`, `updated_at`) VALUES
+(1, '001', 'ชื่อทักษะ1', '<p>อธิบายชื่อทักษะ1</p>', 1, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-11 22:27:50', '2023-08-11 22:45:50'),
+(2, '002', 'ทักษะ2', '<p>อธิบายทักษะ2</p>', 1, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-11 22:32:33', '2023-08-11 22:32:33'),
+(3, '003', 'ชื่อทักษะ3', '<p>อธิบายชื่อทักษะ3</p>', 2, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-11 22:46:41', '2023-08-11 22:46:41'),
+(4, NULL, NULL, NULL, NULL, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-11 23:54:55', '2023-08-11 23:54:55');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `skills_subs`
+--
+
+CREATE TABLE `skills_subs` (
+  `ss_id` int(10) UNSIGNED NOT NULL,
+  `ss_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ss_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ss_detail` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ss_standardOne` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ss_standardTwo` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ss_standardThree` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `FKss_skills` int(11) DEFAULT NULL,
+  `FKss_capacity` int(11) DEFAULT NULL,
+  `FKss_Create` int(11) DEFAULT NULL,
+  `ss_userCreate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ss_userUpdate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ss_userDelete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `skills_subs`
+--
+
+INSERT INTO `skills_subs` (`ss_id`, `ss_no`, `ss_name`, `ss_detail`, `ss_standardOne`, `ss_standardTwo`, `ss_standardThree`, `FKss_skills`, `FKss_capacity`, `FKss_Create`, `ss_userCreate`, `ss_userUpdate`, `ss_userDelete`, `created_at`, `updated_at`) VALUES
+(1, '001', 'ทักษะย่อย1', '<p>คำอธิบายทักษะย่อย1</p><p>\"</p>', '<p>เกณฑ์ระดับที่ 1 ทักษะย่อย11</p>', '<p>เกณฑ์ระดับที่ 2 ทักษะย่อย11</p>', '<p>เกณฑ์ระดับที่ 3 ทักษะย่อย11</p>', 2, 1, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-11 23:35:54', '2023-08-11 23:59:45'),
+(2, '002', 'ทักษะย่อย2', '<p>อธิบายทักษะย่อย2</p>', '<p>เกณฑ์ระดับที่ 1 ทักษะย่อย2</p>', '<p>เกณฑ์ระดับที่ 2 ทักษะย่อย2</p>', '<p>เกณฑ์ระดับที่ 3 ทักษะย่อย2</p>', 1, 1, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-11 23:59:39', '2023-08-11 23:59:39');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `type_course`
 --
 
@@ -10386,11 +10491,19 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 (4, 'นางสาว ส้ม เช้ง', 'employee1@gmail.com', NULL, '$2y$10$QpXEdFvcCxrf8mDpFho21uJZ0U6DuWUF/Wi5L62VhjCKkldCWaihG', NULL, 8, NULL, '2023-08-03 10:29:09', '2023-08-03 10:29:09'),
 (6, 'นาย สมชาย ดีดีดี', 'user@gmail.com', NULL, '$2y$10$7abbeoupHGO4pSYg7IcL/OEFi6Uqvi5TuhB/1GYN8o87bqlpPAbiC', NULL, 7, NULL, '2023-08-03 03:46:10', '2023-08-03 03:46:10'),
 (7, 'นางสาว สมหญิง จริงๆ', 'user1@gmail.com', NULL, '$2y$10$jlc4ngm9J0X2Kczqkmp4/eMRkK5RhkmtcoWpxC9BZezlYiwAUrhF.', NULL, 8, NULL, '2023-08-03 06:06:44', '2023-08-03 06:06:44'),
-(8, 'นางสาว ณิชากร แห้วเพ็ชร', 'nichakon@gmail.com', NULL, '$2y$10$drhD3CKwmArzc6he2P2Qke6heEyYC8AckZCs0ghc8/wKy/i7IwcmG', NULL, 8, NULL, '2023-08-03 06:09:26', '2023-08-03 06:09:26'),
-(12, 'นาย ทำดี บูญมาก', 'ceo@gmail.com', NULL, '$2y$10$R.miCXwYF/Kr5oKg0v6IKOzjLBChDnXlCQHeYmCK9BLfC2fdRc2Fa', NULL, 4, NULL, '2023-08-05 03:33:43', '2023-08-05 03:33:43'),
-(16, 'นางสาว สมใจ บุญมาก', 'hr@gmail.com', NULL, '$2y$10$HLWrb9qR8Rdp.gRjftSBT.SJ9tWzZuC8NZtmAemBaJAG7ndCXYE7C', NULL, 4, NULL, '2023-08-05 05:08:21', '2023-08-05 05:08:21'),
-(17, 'นาง นก แก้ว', 'ceo1@gmail.com', NULL, '$2y$10$1yZNWFXxtbAxTM3UOuw/neNLJCJIm1dQzrf27o/3Sh6FHxyb8XoSy', NULL, 4, NULL, '2023-08-05 05:11:53', '2023-08-05 05:11:53'),
-(18, 'นางสาว บุษบา วงศ์ดี', 'hr1@gmail.com', NULL, '$2y$10$fuK0FCvmTHy.d4y0V9eleOQWCO0oyv2U8DNH/itnuaWKnVyuskvhi', NULL, 4, NULL, '2023-08-05 05:14:56', '2023-08-05 05:14:56');
+(8, 'นางสาว ณิชากร แห้วเพ็ชร', 'nichakon@gmail.com', NULL, '$2y$10$drhD3CKwmArzc6he2P2Qke6heEyYC8AckZCs0ghc8/wKy/i7IwcmG', NULL, 7, NULL, '2023-08-03 06:09:26', '2023-08-09 07:53:43'),
+(12, 'นาย ทำดี บูญมาก4444', 'ceo@gmail.com', NULL, '$2y$10$R.miCXwYF/Kr5oKg0v6IKOzjLBChDnXlCQHeYmCK9BLfC2fdRc2Fa', NULL, 3, NULL, '2023-08-05 03:33:43', '2023-08-09 01:30:22'),
+(16, 'นางสาว สมใจ บุญมาก', 'hr@gmail.com', NULL, '$2y$10$HLWrb9qR8Rdp.gRjftSBT.SJ9tWzZuC8NZtmAemBaJAG7ndCXYE7C', NULL, 3, NULL, '2023-08-05 05:08:21', '2023-08-08 23:33:33'),
+(17, 'นาง นก แก้ว', 'ceo10@gmail.com', NULL, '$2y$10$IT1P3S0fbMAKiO.jkPhA3uu5gRTclMo58l.Gpqk34EAXkbvE4.Sum', NULL, 4, NULL, '2023-08-05 05:11:53', '2023-08-08 19:42:47'),
+(18, 'นางสาว บุษบา วงศ์ดี', 'hr1@gmail.com', NULL, '$2y$10$fuK0FCvmTHy.d4y0V9eleOQWCO0oyv2U8DNH/itnuaWKnVyuskvhi', NULL, 4, NULL, '2023-08-05 05:14:56', '2023-08-05 05:14:56'),
+(19, 'นาย ทองคำ ทองดี', 'ceo2@gmail.com', NULL, '$2y$10$CFR4vBov8Nq0mGNGsS.8SeWWUlIsvRTF/IchGvj6EzuEJudmNCFpa', NULL, 4, NULL, '2023-08-07 03:31:13', '2023-08-07 03:31:13'),
+(20, 'นาย ศักดิ์สิทธิ์ เจริญดี', 'hr2@gmail.com', NULL, '$2y$10$tsCGyziLH0Ucg1pTcRtTXuqtyn6FBR/IQsuiCk7ZqsdeF8j1u0gaG', NULL, 4, NULL, '2023-08-07 03:31:13', '2023-08-07 03:31:13'),
+(25, 'นาย ทองคำ ทองดี', 'ceo3@gmail.com', NULL, '$2y$10$UsCKpAgEVB52vyZ0f4vg/O1116oCZXrE2e/WrKneWI.nsm6ZgETWK', NULL, 4, NULL, '2023-08-07 03:57:28', '2023-08-07 03:57:28'),
+(26, 'นาย ศักดิ์สิทธิ์ เจริญดี', 'hr3@gmail.com', NULL, '$2y$10$cAA4GJHfzi908pzbfL17HuovggsCpkLm2uVYogownUNMutVpGQFYO', NULL, 4, NULL, '2023-08-07 03:57:28', '2023-08-07 03:57:28'),
+(27, 'นาย tset ทองดี', 'ceo4@gmail.com', NULL, '$2y$10$mVPyUfuaLH9JrOtVzoQhIelGexW.jiwDM93CxvMK.VJLtm1IfMrXy', NULL, 4, NULL, '2023-08-07 20:12:30', '2023-08-07 20:12:30'),
+(29, 'นางสาว เจนขวัญ วันดี', 'employee2@gmail.com', NULL, '$2y$10$s0KHvySp9Syyxl/ggNtaAOJ61gT6ldPIUS9XzsGSPH0tLQKMiyIEa', NULL, 7, NULL, '2023-08-11 01:12:59', '2023-08-11 01:12:59'),
+(30, 'นาย ประยุทธ จันทร์เจ้า', 'ceo5@gmail.com', NULL, '$2y$10$sedTQ6EGtRmKhDazDLCrnecfMuhUd75xoT9vGlOSIvLqnAHB4dlka', NULL, 3, NULL, '2023-08-11 09:35:06', '2023-08-11 09:35:06'),
+(31, 'นางสาว บุษบา ไม้งาม', 'hr4@gmail.com', NULL, '$2y$10$EzQTGX5kdPaFcOVwfSgwNeReJwxW/Sxw/C5.P0ORPz9vqCpLuJ7fS', NULL, 3, NULL, '2023-08-11 09:38:43', '2023-08-11 09:38:43');
 
 --
 -- Indexes for dumped tables
@@ -10401,6 +10514,12 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 --
 ALTER TABLE `amphures`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `capacities`
+--
+ALTER TABLE `capacities`
+  ADD PRIMARY KEY (`cc_id`);
 
 --
 -- Indexes for table `ceohrs`
@@ -10472,6 +10591,18 @@ ALTER TABLE `provinces`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `skills`
+--
+ALTER TABLE `skills`
+  ADD PRIMARY KEY (`s_id`);
+
+--
+-- Indexes for table `skills_subs`
+--
+ALTER TABLE `skills_subs`
+  ADD PRIMARY KEY (`ss_id`);
+
+--
 -- Indexes for table `type_course`
 --
 ALTER TABLE `type_course`
@@ -10507,22 +10638,28 @@ ALTER TABLE `amphures`
   MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1007;
 
 --
+-- AUTO_INCREMENT for table `capacities`
+--
+ALTER TABLE `capacities`
+  MODIFY `cc_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `ceohrs`
 --
 ALTER TABLE `ceohrs`
-  MODIFY `ch_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ch_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `companies`
 --
 ALTER TABLE `companies`
-  MODIFY `c_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `c_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `e_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `e_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -10546,7 +10683,7 @@ ALTER TABLE `lavel_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -10559,6 +10696,18 @@ ALTER TABLE `personal_access_tokens`
 --
 ALTER TABLE `provinces`
   MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+
+--
+-- AUTO_INCREMENT for table `skills`
+--
+ALTER TABLE `skills`
+  MODIFY `s_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `skills_subs`
+--
+ALTER TABLE `skills_subs`
+  MODIFY `ss_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `type_course`
@@ -10582,7 +10731,7 @@ ALTER TABLE `type_minerals`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
