@@ -44,7 +44,7 @@ $active = "job";
                                     <b><label for="horizontal-form-1" class="form-label "> รหัสกลุ่มตำแหน่งงาน </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="job_name" type="text" id="formFile" placeholder="รหัสกลุ่มตำแหน่งงาน" required>
+                                    <input class="form-control box-form-ct" name="job_no" type="text" id="formFile" placeholder="รหัสกลุ่มตำแหน่งงาน" required>
                                 </div>
                             </div>
 
@@ -62,7 +62,7 @@ $active = "job";
                                     <b><label for="horizontal-form-1" class="form-label"> คำอธิบาย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <textarea cols="80" id="news_detail" name="news_detail" rows="10" placeholder="คำอธิบาย"></textarea>
+                                    <textarea cols="80" id="job_detail" name="job_detail" rows="10" placeholder="คำอธิบาย"></textarea>
                                 </div>
                             </div>
 
@@ -73,9 +73,12 @@ $active = "job";
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="job_type" id="job_type" class="form-control select2" required>
                                         <option value="" hidden>- กรุณาเลือกประเภทงาน -</option>
-                                        <option value="บริหาร">บริหาร</option>
+                                        @foreach($typeJob as $rs)
+                                        <option value="{{$rs->tj_id}}">{{$rs->tj_no}} {{$rs->tj_name}}</option>
+                                        @endforeach
+                                        <!-- <option value="บริหาร">บริหาร</option>
                                         <option value="เทคนิค">เทคนิค</option>
-                                        <option value="สนับสนุน">สนับสนุน</option>
+                                        <option value="สนับสนุน">สนับสนุน</option> -->
                                     </select>
                                 </div>
                             </div>
@@ -87,9 +90,12 @@ $active = "job";
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="job_lavel" id="job_lavel"class="form-control select2" required>
                                         <option value="" hidden>- กรุณาเลือกระดับงาน -</option>
-                                        <option value="1ผู้จัดการ">ผู้จัดการ</option>
+                                        @foreach($lavelJob as $rs)
+                                        <option value="{{$rs->lj_id}}">{{$rs->lj_no}} {{$rs->lj_name}}</option>
+                                        @endforeach
+                                        <!-- <option value="1ผู้จัดการ">ผู้จัดการ</option>
                                         <option value="หัวหน้างาน">หัวหน้างาน</option>
-                                        <option value="1ผู้ปฏิบัติ">ผู้ปฏิบัติ</option>
+                                        <option value="1ผู้ปฏิบัติ">ผู้ปฏิบัติ</option> -->
                                     </select>
                                 </div>
                             </div>
@@ -286,7 +292,7 @@ function del_skillsSub(count){
 
 <script>
     ClassicEditor
-    .create( document.querySelector( '#news_detail' ) )
+    .create( document.querySelector( '#job_detail' ) )
     .then( editor => {
         console.log( editor );
     } )
