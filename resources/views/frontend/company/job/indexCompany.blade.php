@@ -55,8 +55,8 @@ $i=1;
                                     <td><center>คำอธิบาย 1</center></td>
                                     <td><center>กลุ่มตำแหน่ง 1</center></td>
                                     <td><center>ระดับงาน 1</center></td>
-                                    <td><center><a href="{{url('company/job/capacity')}}"><button class="btn btn-outline-secondary">ตั้งค่าสมรรถนะและทักษะของตำแหน่งงาน</button></a></center></td>
-                                    <td><center><a href="{{url('company/job/detail')}}"><button type="button" class="btn btn-success"> สรุปข้อมูลสมรรถนะและทักษะของตำแหน่งงาน </button></a></center></td>
+                                    <td><center><a href="{{url('company/job/capacity')}}"><button class="btn btn-outline-secondary">ตั้งค่า</button></a></center></td>
+                                    <td><center><a href="{{url('company/job/detail')}}"><button type="button" class="btn btn-success"> สรุปข้อมูล </button></a></center></td>
                                     <td><center>
                                         <a href="{{ url ('company/job/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
                                         <button type="button" class="btn btn-danger" onclick="del_value(1)">ลบ</button>
@@ -69,8 +69,8 @@ $i=1;
                                     <td><center>คำอธิบาย 2</center></td>
                                     <td><center>กลุ่มตำแหน่ง 2</center></td>
                                     <td><center>ระดับงาน 2</center></td>
-                                    <td><center><a href="{{url('company/job/capacity')}}"><button class="btn btn-outline-secondary">ตั้งค่าสมรรถนะและทักษะของตำแหน่งงาน</button></a></center></td>
-                                    <td><center><a href="{{url('company/job/detail')}}"><button type="button" class="btn btn-success"> สรุปข้อมูลสมรรถนะและทักษะของตำแหน่งงาน </button></a></center></td>
+                                    <td><center><a href="{{url('company/job/capacity')}}"><button class="btn btn-outline-secondary">ตั้งค่า</button></a></center></td>
+                                    <td><center><a href="{{url('company/job/detail')}}"><button type="button" class="btn btn-success"> สรุปข้อมูล </button></a></center></td>
                                     <td><center>
                                         <a href="{{ url ('company/job/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
                                         <button type="button" class="btn btn-danger" onclick="del_value(2)">ลบ</button>
