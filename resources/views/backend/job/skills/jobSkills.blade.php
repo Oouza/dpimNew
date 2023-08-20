@@ -20,17 +20,17 @@ $i=1;
             <div class="intro-y box py-10 sm:py-20 mt-5">
                
                 <div class="px-5 mt-10">
-                    <div class="font-medium text-center text-lg">ข้อมูลทักษะในสมรรถนะ 1 ของกลุ่มตำแหน่งงาน 1</div>
+                    <div class="font-medium text-center text-lg">ข้อมูลทักษะใน{{$gj->cc_name}} ของ{{$gj->gj_name}}</div>
                    
                 </div>
          
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-slate-200/60 dark:border-darkmode-400">
                     <div class="intro-y block sm:flex items-center h-10">
                         <h2 class="text-lg font-medium truncate mr-5">
-                            รายละเอียดทักษะในสมรรถนะ 1 ของกลุ่มตำแหน่งงาน 1
+                            รายละเอียดทักษะใน{{$gj->cc_name}} ของ{{$gj->gj_name}}
                         </h2>
                         <div class="flex items-center sm:ml-auto mt-3 sm:mt-0">
-                            <a href="{{ url ('backend/job/skills/form')}}"  >   <button class="btn btn-elevated-primary w-24 mr-1 mb-2">เพิ่มข้อมูล</button></a>
+                            <a href="{{ url ('backend/job/skills/form/'.$gj->gjc_id)}}"  >   <button class="btn btn-elevated-primary w-24 mr-1 mb-2">เพิ่มข้อมูล</button></a>
                         </div>
                     </div>
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
@@ -44,21 +44,28 @@ $i=1;
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($gjskills as $rs)
                             <tr>
-                                <td><center>01</center></td>
-                                <td><center>ทักษะ1</center></td>
-                                <td><center>คำอธิบาย1</center></td>
+                                <td><center>{{$rs->s_no}}</center></td>
+                                <td><center>{{$rs->s_name}}</center></td>
+                                <td><center>{!! asset($rs->s_detail )?$rs->s_detail :''!!}</center></td>
                                 <td><center>
-                                    <a href="#" onclick="detail_skills(1)">ทักษะย่อย 1</a>
+                                @php $i=1; @endphp
+                                @foreach($gjSkillsSub as $row)
+                                    @if($row->FKgjss_gjskills == $rs->gjs_id)
+                                    <a href="#" onclick="detail_skills({{$row->FKgjss_skillsSub}})">{{$i++}}. {{$row->ss_name}}</a>
                                     <br>
-                                    <a href="#" onclick="detail_skills(1)">ทักษะย่อย 2</a>
+                                    <!-- <a href="#" onclick="detail_skills(1)">ทักษะย่อย 2</a> -->
+                                    @endif
+                                @endforeach
                                 </center></td>
                                 <td><center>
-                                    <a href="{{ url ('backend/job/skills/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
-                                    <button type="button" class="btn btn-danger" onclick="del_value(1)">ลบ</button>
+                                    <a href="{{ url ('backend/job/skills/edit/'.$rs->gjs_id)}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
+                                    <button type="button" class="btn btn-danger" onclick="del_value({{$rs->gjs_id}})">ลบ</button>
                                 </center></td>
                             </tr>
-                            <tr>
+                            @endforeach
+                            <!-- <tr>
                                 <td><center>02</center></td>
                                 <td><center>ทักษะ2</center></td>
                                 <td><center>คำอธิบาย2</center></td>
@@ -71,12 +78,12 @@ $i=1;
                                     <a href="{{ url ('backend/job/skills/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
                                     <button type="button" class="btn btn-danger" onclick="del_value(1)">ลบ</button>
                                 </center></td>
-                            </tr>
+                            </tr> -->
                         </tbody>
 
                     </table>
                         <center>
-                            <a href="{{ url ('backend/job/capacity')}}"><button type="button" class="btn btn-secondary w-26 ml-2"> กลับหน้าสมรรถนะ </button></a>
+                            <a href="{{ url ('backend/job/capacity/'.$gj->FKgjc_groupjob)}}"><button type="button" class="btn btn-secondary w-26 ml-2"> กลับหน้าสมรรถนะ </button></a>
                         </center>
                 </div>
               
@@ -109,7 +116,7 @@ function del_value(id) {
                 if (result.value) {
                     $.ajax({
                         type:"GET",
-                        url:"{!! url('member/delete/"+id+"') !!}",
+                        url:"{!! url('backend/job/skills/delete/"+id+"') !!}",
                         success: function(data) {
                             console.log(data);
                         }   
@@ -129,36 +136,60 @@ function del_value(id) {
 </script>
 
 <script>
-function detail_skills(id) {
-            Swal.fire({
-            // title: 'ต้องการลบข้อมูลใช่หรือไม่ ?',
-            text: "คำอธิบาย",
-            // icon: 'warning',
-            showCancelButton: false,
-            confirmButtonColor: '#d33',
-            // cancelButtonColor: '#d33',
-            confirmButtonText: 'ปิด',
-            // cancelButtonText: 'ปิด'
-            }).then((result) => {
-                if (result.value) {
-                    $.ajax({
-                        type:"GET",
-                        url:"{!! url('member/delete/"+id+"') !!}",
-                        success: function(data) {
-                            console.log(data);
-                        }   
-                    });
+    function detail_skillstest(id) {
+        Swal.fire({
+        text: "คำอธิบาย",
+        // icon: 'warning',
+        showCancelButton: false,
+        confirmButtonColor: '#d33',
+        // cancelButtonColor: '#d33',
+        confirmButtonText: 'ปิด',
+        // cancelButtonText: 'ปิด'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type:"GET",
+                    url:"{!! url('member/delete/"+id+"') !!}",
+                    success: function(data) {
+                        console.log(data);
+                    }   
+                });
+            }
+        })
+    }
+</script>
 
-                    // Swal.fire(
-                    //     'สำเร็จ!',
-                    //     'ข้อมูลถูกลบสำเร็จ',
-                    //     'success'
-                    // ).then(() => {
-                    //     location.reload();
-                    // })
-                   
-                }
-            })
+<script>
+    function detail_skills(id) {
+        // alert(id);
+
+        if(id == ''){
+        }else{
+            $.ajax({
+                'type': 'post',
+                'url': "{{ url('searchskillsSub') }}",
+                'dataType': 'json',
+                'data': { 
+                    'skillsSub'            : id,
+                    '_token'        : "{{csrf_token()}}"  
+                },
+                // success: function (response) {
+                //     var skillsDetail = $(`#skillsSub_detail\\[${$id}\\]`); // ใช้ $id ที่ส่งเข้ามาในฟังก์ชัน
+                //     var cleanedResponse = removeHtmlTagsSub(response);
+                //     skillsDetail.text(cleanedResponse); // ใช้ .text() แทน .innerText เนื่องจากใช้ jQuery
+                // }
+            'success': function (response){
+                Swal.fire({
+                    title: '<h4>คำอธิบาย</h4>',
+                    html:   response,
+                    showCloseButton: true,
+                    confirmButtonColor: '#d33',
+                    confirmButtonText: 'ปิด',
+                })
+                
+                } 
+            });  
         }
+    }
 </script>
 @endsection

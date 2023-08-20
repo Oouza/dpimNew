@@ -34,48 +34,49 @@ $i=1;
                                     </div>
                                 </div>
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
-                    <thead>
-                                <tr>
-                                    <th><center>รหัสกลุ่มตำแหน่ง</center></th>
-                                    <th><center>กลุ่มตำแหน่ง</center></th>
-                                    <th><center>คำอธิบาย</center></th>
-                                    <th><center>ประเภทงาน</center></th>
-                                    <th><center>ระดับงาน</center></th>
-                                    <th><center>สมรรถนะ</center></th>
-                                    <th><center>การตั้งค่า</center></th>
-                                    <th><center>รายละเอียด</center></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><center>01</center></td>
-                                    <td><center>กลุ่มตำแหน่ง1</center></td>
-                                    <td><center>คำอธิบาย1</center></td>
-                                    <td><center>ประเภทงาน1</center></td>
-                                    <td><center>ระดับงาน1</center></td>
-                                    <td><center><a href="{{ url ('backend/job/capacity')}}"><button class="btn btn-outline-secondary">สมรรถนะ</button></a></center></td>
-                                    <td><center>
-                                        <a href="{{ url ('backend/job/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
-                                        <button type="button" class="btn btn-danger" onclick="del_value(1)">ลบ</button>
-                                    </center></td>
-                                    <td><center><a href="{{url('backend/job/detail')}}"><button type="button" class="btn btn-success"> รายละเอียด </button></a></center></td>
-                                </tr>
-                                <tr>
-                                    <td><center>01</center></td>
-                                    <td><center>กลุ่มตำแหน่ง1</center></td>
-                                    <td><center>คำอธิบาย1</center></td>
-                                    <td><center>ประเภทงาน1</center></td>
-                                    <td><center>ระดับงาน1</center></td>
-                                    <td><center><a href="{{ url ('backend/job/capacity')}}"><button class="btn btn-outline-secondary">สมรรถนะ</button></a></center></td>
-                                    <td><center>
-                                        <a href="{{ url ('backend/job/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
-                                        <button type="button" class="btn btn-danger" onclick="del_value(1)">ลบ</button>
-                                    </center></td>
-                                    <td><center><a href="{{url('backend/job/detail')}}"><button type="button" class="btn btn-success"> รายละเอียด </button></a></center></td>
-                                </tr>
-                            </tbody>
-                        
-                        </table>
+                        <thead>
+                            <tr>
+                                <th><center>รหัสกลุ่มตำแหน่ง</center></th>
+                                <th><center>กลุ่มตำแหน่ง</center></th>
+                                <th><center>คำอธิบาย</center></th>
+                                <th><center>ประเภทงาน</center></th>
+                                <th><center>ระดับงาน</center></th>
+                                <th><center>สมรรถนะ</center></th>
+                                <th><center>การตั้งค่า</center></th>
+                                <th><center>รายละเอียด</center></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($groupjob as $rs)
+                            <tr>
+                                <td><center>{{$rs->gj_no}}</center></td>
+                                <td><center>{{$rs->gj_name}}</center></td>
+                                <td><center>{!! asset($rs->gj_detail )?$rs->gj_detail :''!!}</center></td>
+                                <td><center>{{$rs->gj_nametypeJob}}</center></td>
+                                <td><center>{{$rs->gj_namelavel}}</center></td>
+                                <td><center><a href="{{ url('backend/job/capacity/'.$rs->gj_id) }}"><button class="btn btn-outline-secondary">สมรรถนะ</button></a></center></td>
+                                <td><center>
+                                    <a href="{{ url('backend/job/edit/'.$rs->gj_id) }}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
+                                    <button type="button" class="btn btn-danger" onclick="del_value({{{$rs->gj_id}}})">ลบ</button>
+                                </center></td>
+                                <td><center><a href="{{url('backend/job/detail/'.$rs->gj_id)}}"><button type="button" class="btn btn-success"> รายละเอียด </button></a></center></td>
+                            </tr>
+                            @endforeach
+                            <!-- <tr>
+                                <td><center>01</center></td>
+                                <td><center>กลุ่มตำแหน่ง1</center></td>
+                                <td><center>คำอธิบาย1</center></td>
+                                <td><center>ประเภทงาน1</center></td>
+                                <td><center>ระดับงาน1</center></td>
+                                <td><center><a href="{{ url ('backend/job/capacity')}}"><button class="btn btn-outline-secondary">สมรรถนะ</button></a></center></td>
+                                <td><center>
+                                    <a href="{{ url ('backend/job/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
+                                    <button type="button" class="btn btn-danger" onclick="del_value(1)">ลบ</button>
+                                </center></td>
+                                <td><center><a href="{{url('backend/job/detail')}}"><button type="button" class="btn btn-success"> รายละเอียด </button></a></center></td>
+                            </tr> -->
+                        </tbody>
+                    </table>
                         <center>
                             <button type="button" class="btn btn-secondary w-26 ml-2"> ดาวน์โหลดข้อมูลกลุ่มตำแหน่งทั้งหมด (เป็น xlsx) </button>        
                         </center>
@@ -110,7 +111,7 @@ function del_value(id) {
                 if (result.value) {
                     $.ajax({
                         type:"GET",
-                        url:"{!! url('member/delete/"+id+"') !!}",
+                        url:"{!! url('backend/job/delete/"+id+"') !!}",
                         success: function(data) {
                             console.log(data);
                         }   
