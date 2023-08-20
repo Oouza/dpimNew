@@ -37,7 +37,7 @@ $date_old = $date-60;
                     <div class="font-medium text-center text-lg">แก้ไขแผนกย่อย</div>
                    
                 </div>
-                <form action="{{ url('backend/skills/add') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('company/departmentSub/update/'.$dpSub->ds_id) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-sl ate-200/60 dark:border-darkmode-400">
                     <div class="font-medium text-base">รายละเอียด</div>
@@ -47,7 +47,7 @@ $date_old = $date-60;
                                     <b><label for="horizontal-form-1" class="form-label "> ชื่อแผนกย่อย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="" type="text" id="formFile" value="แผนกย่อย 1" required>
+                                    <input class="form-control box-form-ct" name="subName" type="text" id="formFile" value="{{$dpSub->ds_name}}" required>
                                 </div>
                             </div>
 
@@ -56,11 +56,14 @@ $date_old = $date-60;
                                     <b><label for="horizontal-form-1" class="form-label "> แผนก </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="" id="" class="form-control select2">
-                                        <option value="" hidden>- เลือกแผนก -</option>
+                                    <select name="mainId" id="" class="form-control select2">
+                                        @foreach($dp as $rs)
+                                        <option value="{{$rs->d_id}}" @if($dpSub->FKds_department == $rs->d_id) selected @endif>{{$rs->d_name}}</option>
+                                        @endforeach
+                                        <!-- <option value="" hidden>- เลือกแผนก -</option>
                                         <option value="1" selected>แผนก 1</option>
                                         <option value="2">แผนก 2</option>
-                                        <option value="3">แผนก 3</option>
+                                        <option value="3">แผนก 3</option> -->
                                     </select>
                                 </div>
                             </div>
@@ -71,8 +74,8 @@ $date_old = $date-60;
                             <center>
                                 
                                 <a href="{{url('company/departmentSub')}}" class="btn btn-warning w-50">กลับหน้าหลัก</a>
-                                <!-- <button type="submit" class="btn btn-success w-24 ml-2">บันทึก</button>         -->
-                                <a href="#" class="btn btn-success w-50">บันทึก</a>
+                                <button type="submit" class="btn btn-success w-24 ml-2">บันทึก</button>        
+                                <!-- <a href="#" class="btn btn-success w-50">บันทึก</a> -->
                             
                             </center>
                       

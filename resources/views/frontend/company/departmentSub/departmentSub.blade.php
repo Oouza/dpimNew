@@ -42,22 +42,24 @@ $i=1;
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($dps as $rs)
                             <tr>
-                                <td><center>แผนกย่อย 1 </center></td>
-                                <td><center>แผนก 1</center></td>
+                                <td><center>{{$rs->ds_name}}</center></td>
+                                <td><center>{{$rs->d_name}}</center></td>
                                 <td><center>
-                                    <a href="{{ url ('company/departmentSub/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
-                                    <button type="button" class="btn btn-danger" onclick="del_value(1)">ลบ</button>
+                                    <a href="{{ url ('company/departmentSub/edit/'.$rs->ds_id)}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
+                                    <button type="button" class="btn btn-danger" onclick="del_value({{$rs->ds_id}})">ลบ</button>
                                 </center></td>
                             </tr>
-                            <tr>
+                            @endforeach
+                            <!-- <tr>
                                 <td><center>แผนกย่อย 2</center></td>
                                 <td><center>แผนก 1</center></td>
                                 <td><center>
                                     <a href="{{ url ('company/departmentSub/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
                                     <button type="button" class="btn btn-danger" onclick="del_value(1)">ลบ</button>
                                 </center></td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     
                     </table>
@@ -95,7 +97,7 @@ function del_value(id) {
                 if (result.value) {
                     $.ajax({
                         type:"GET",
-                        url:"{!! url('member/delete/"+id+"') !!}",
+                        url:"{!! url('company/departmentSub/delete/"+id+"') !!}",
                         success: function(data) {
                             console.log(data);
                         }   
