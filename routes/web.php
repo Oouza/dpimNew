@@ -101,17 +101,26 @@ Route::get('company/graph/sillks', [App\Http\Controllers\FrontendController::cla
 Route::get('company/score/job', [App\Http\Controllers\FrontendController::class, 'companyScoreJob']);
 Route::get('company/score/sillks', [App\Http\Controllers\FrontendController::class, 'companyscoreSillks']);
 
-Route::get('company/department', [App\Http\Controllers\FrontendController::class, 'department']);
-Route::get('company/department/form', [App\Http\Controllers\FrontendController::class, 'departmentForm']);
-Route::get('company/department/edit', [App\Http\Controllers\FrontendController::class, 'departmentFormEdit']);
+Route::get('company/department', [App\Http\Controllers\HrJobController::class, 'department']);
+Route::get('company/department/form', [App\Http\Controllers\HrJobController::class, 'departmentForm']);
+Route::post('company/department/add', [App\Http\Controllers\HrJobController::class, 'departmentAdd']);
+Route::get('company/department/edit/{id}', [App\Http\Controllers\HrJobController::class, 'departmentEdit']);
+Route::post('company/department/update/{id}', [App\Http\Controllers\HrJobController::class, 'departmentUpdate']);
+Route::get('company/department/delete/{id}', [App\Http\Controllers\HrJobController::class, 'departmentDelete']);
 
-Route::get('company/departmentSub', [App\Http\Controllers\FrontendController::class, 'departmentSub']);
-Route::get('company/departmentSub/form', [App\Http\Controllers\FrontendController::class, 'departmentSubForm']);
-Route::get('company/departmentSub/edit', [App\Http\Controllers\FrontendController::class, 'departmentSubEdit']);
+Route::get('company/departmentSub', [App\Http\Controllers\HrJobController::class, 'departmentSub']);
+Route::get('company/departmentSub/form', [App\Http\Controllers\HrJobController::class, 'departmentSubForm']);
+Route::post('company/departmentSub/add', [App\Http\Controllers\HrJobController::class, 'departmentSubAdd']);
+Route::get('company/departmentSub/edit/{id}', [App\Http\Controllers\HrJobController::class, 'departmentSubEdit']);
+Route::post('company/departmentSub/update/{id}', [App\Http\Controllers\HrJobController::class, 'departmentSubUpdate']);
+Route::get('company/departmentSub/delete/{id}', [App\Http\Controllers\HrJobController::class, 'departmentSubDelete']);
 
-Route::get('company/position', [App\Http\Controllers\FrontendController::class, 'position']);
-Route::get('company/position/form', [App\Http\Controllers\FrontendController::class, 'positionForm']);
-Route::get('company/position/edit', [App\Http\Controllers\FrontendController::class, 'positionEdit']);
+Route::get('company/position', [App\Http\Controllers\HrJobController::class, 'position']);
+Route::get('company/position/form', [App\Http\Controllers\HrJobController::class, 'positionForm']);
+Route::post('company/position/add', [App\Http\Controllers\HrJobController::class, 'positionAdd']);
+Route::get('company/position/edit/{id}', [App\Http\Controllers\HrJobController::class, 'positionEdit']);
+Route::post('company/position/update/{id}', [App\Http\Controllers\HrJobController::class, 'positionUpdate']);
+Route::get('company/position/delete/{id}', [App\Http\Controllers\HrJobController::class, 'positionDelete']);
 
 Route::get('search/course', [App\Http\Controllers\FrontendController::class, 'searchCourse']);
 
@@ -155,19 +164,31 @@ Route::get('regiter', [App\Http\Controllers\BackendController::class, 'regiter']
 Route::get('backend/job', [App\Http\Controllers\AdminJobController::class, 'job']);
 Route::get('backend/job/form', [App\Http\Controllers\AdminJobController::class, 'jobForm']);
 Route::post('backend/job/add', [App\Http\Controllers\AdminJobController::class, 'jobAdd']);
-Route::get('backend/job/edit', [App\Http\Controllers\AdminJobController::class, 'jobEdit']);
-Route::post('backend/job/update', [App\Http\Controllers\AdminJobController::class, 'jobUpdate']);
-Route::get('backend/job/detail', [App\Http\Controllers\AdminJobController::class, 'jobDetail']);
+Route::get('backend/job/edit/{id}', [App\Http\Controllers\AdminJobController::class, 'jobEdit']);
+Route::post('backend/job/update/{id}', [App\Http\Controllers\AdminJobController::class, 'jobUpdate']);
+Route::get('backend/job/delete/{id}', [App\Http\Controllers\AdminJobController::class, 'jobDelete']);
+Route::get('backend/job/detail/{id}', [App\Http\Controllers\AdminJobController::class, 'jobDetail']);
 
-Route::get('backend/job/capacity', [App\Http\Controllers\AdminJobController::class, 'jobCapacity']);
-Route::get('backend/job/capacity/form', [App\Http\Controllers\AdminJobController::class, 'jobCapacityForm']);
-Route::post('backend/job/capacity/add', [App\Http\Controllers\AdminJobController::class, 'jobCapacityAdd']);
-Route::get('backend/job/capacity/edit', [App\Http\Controllers\AdminJobController::class, 'jobCapacityEdit']);
-Route::post('backend/job/capacity/update', [App\Http\Controllers\AdminJobController::class, 'jobCapacityUpdate']);
+Route::get('backend/job/capacity/{id}', [App\Http\Controllers\AdminJobController::class, 'jobCapacity']);
+Route::get('backend/job/capacity/form/{id}', [App\Http\Controllers\AdminJobController::class, 'jobCapacityForm']);
+Route::post('backend/job/capacity/add/{id}', [App\Http\Controllers\AdminJobController::class, 'jobCapacityAdd']);
+Route::get('backend/job/capacity/edit/{id}', [App\Http\Controllers\AdminJobController::class, 'jobCapacityEdit']);
+Route::post('backend/job/capacity/update/{id}', [App\Http\Controllers\AdminJobController::class, 'jobCapacityUpdate']);
+Route::get('backend/job/capacity/delete/{id}', [App\Http\Controllers\AdminJobController::class, 'jobCapacityDelete']);
 
-Route::get('backend/job/skills', [App\Http\Controllers\AdminJobController::class, 'jobSkills']);
-Route::get('backend/job/skills/form', [App\Http\Controllers\AdminJobController::class, 'jobSkillsForm']);
-Route::get('backend/job/skills/edit', [App\Http\Controllers\AdminJobController::class, 'jobSkillsEdit']);
+Route::post('searchCapacity', [App\Http\Controllers\AdminJobController::class, 'searchCapacity']);
+Route::post('searchSkills', [App\Http\Controllers\AdminJobController::class, 'searchSkills']);
+Route::post('searchskillsSub', [App\Http\Controllers\AdminJobController::class, 'searchskillsSub']);
+Route::get('detailSkillsSub', [App\Http\Controllers\AdminJobController::class, 'detailSkillsSub']);
+
+Route::get('backend/job/skills/{id}', [App\Http\Controllers\AdminJobController::class, 'jobSkills']);
+Route::get('backend/job/skills/form/{id}', [App\Http\Controllers\AdminJobController::class, 'jobSkillsForm']);
+Route::post('backend/job/skills/add/{id}', [App\Http\Controllers\AdminJobController::class, 'jobSkillsAdd']);
+Route::get('backend/job/skills/edit/{id}', [App\Http\Controllers\AdminJobController::class, 'jobSkillsEdit']);
+Route::get('backend/job/skills/delete/{id}', [App\Http\Controllers\AdminJobController::class, 'jobSkillsDelete']);
+
+Route::post('backend/job/skillsSub/update/{id}', [App\Http\Controllers\AdminJobController::class, 'jobSkillsSubUpdate']);
+Route::get('backend/job/skillsSub/delete/{id}', [App\Http\Controllers\AdminJobController::class, 'jobSkillsSubDelete']);
 
 Route::get('backend/typeJob', [App\Http\Controllers\AdminJobController::class, 'typeJob']);
 Route::get('backend/typeJob/form', [App\Http\Controllers\AdminJobController::class, 'typeJobForm']);

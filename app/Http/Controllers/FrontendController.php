@@ -311,40 +311,4 @@ class FrontendController extends Controller
     function searchCourse(){
         return view('frontend.company.search-course');
     }
-
-    function department(){
-        return view('frontend.company.department.department');
-    }
-
-    function departmentForm(){
-        return view('frontend.company.department.department-add');
-    }
-
-    function departmentFormEdit(){
-        return view('frontend.company.department.department-edit');
-    }
-
-    function departmentSub(){
-        return view('frontend.company.departmentSub.departmentSub');
-    }
-
-    function departmentSubForm(){
-        return view('frontend.company.departmentSub.departmentSub-add');
-    }
-
-    function departmentSubEdit(){
-        return view('frontend.company.departmentSub.departmentSub-edit');
-    }
-
-    function position(){
-        return view('frontend.company.position.position');
-    }
-
-    function positionForm(){
-        return view('frontend.company.position.position-add');
-    }
-
-    function positionEdit(){
-        return view('frontend.company.position.position-edit');
-    }
 }

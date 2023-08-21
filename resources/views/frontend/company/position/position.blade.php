@@ -41,20 +41,22 @@ $i=1;
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($position as $rs)
                             <tr>
-                                <td><center>ตำแหน่ง 1 </center></td>
+                                <td><center>{{$rs->p_name}}</center></td>
                                 <td><center>
-                                    <a href="{{ url ('company/position/edit')}}"  >  <button type="button" class="btn btn-warning">แก้ไข</button></a>
-                                    <button type="button" class="btn btn-danger" onclick="del_value(1)">ลบ</button>
+                                    <a href="{{ url ('company/position/edit/'.$rs->p_id)}}"  >  <button type="button" class="btn btn-warning">แก้ไข</button></a>
+                                    <button type="button" class="btn btn-danger" onclick="del_value({{$rs->p_id}})">ลบ</button>
                                 </center></td>
                             </tr>
-                            <tr>
+                            @endforeach
+                            <!-- <tr>
                                 <td><center>ตำแหน่ง 2</center></td>
                                 <td><center>
                                     <a href="{{ url ('company/position/edit')}}"  >  <button type="button" class="btn btn-warning">แก้ไข</button></a>
                                     <button type="button" class="btn btn-danger" onclick="del_value(1)">ลบ</button>
                                 </center></td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     
                     </table>
@@ -92,7 +94,7 @@ function del_value(id) {
                 if (result.value) {
                     $.ajax({
                         type:"GET",
-                        url:"{!! url('member/delete/"+id+"') !!}",
+                        url:"{!! url('company/position/delete/"+id+"') !!}",
                         success: function(data) {
                             console.log(data);
                         }   

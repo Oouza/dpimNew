@@ -37,7 +37,7 @@ $date_old = $date-60;
                     <div class="font-medium text-center text-lg">แก้ไขตำแหน่ง</div>
                    
                 </div>
-                <form action="{{ url('backend/skills/add') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('company/position/update/'.$po->p_id) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-sl ate-200/60 dark:border-darkmode-400">
                     <div class="font-medium text-base">รายละเอียด</div>
@@ -47,7 +47,7 @@ $date_old = $date-60;
                                     <b><label for="horizontal-form-1" class="form-label "> ชื่อตำแหน่ง </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-4">
-                                    <input class="form-control box-form-ct" name="" type="text" id="formFile" value="ตำแหน่ง 1" required>
+                                    <input class="form-control box-form-ct" name="poName" type="text" id="formFile" value="{{$po->p_name}}" required>
                                 </div>
                             </div>
 
@@ -57,8 +57,8 @@ $date_old = $date-60;
                             <center>
                                 
                                 <a href="{{url('company/position')}}" class="btn btn-warning w-50">กลับหน้าหลัก</a>
-                                <!-- <button type="submit" class="btn btn-success w-24 ml-2">บันทึก</button>         -->
-                                <a href="#" class="btn btn-success w-50">บันทึก</a>
+                                <button type="submit" class="btn btn-success w-24 ml-2">บันทึก</button>        
+                                <!-- <a href="#" class="btn btn-success w-50">บันทึก</a> -->
                             
                             </center>
                       
