@@ -34,7 +34,7 @@ $active = "totalCourse";
                     <div class="font-medium text-center text-lg"> แก้ไขข้อมูลหลักสูตรพัฒนาบุคลากร </div>
                    
                 </div>
-                <form action="{{ url('backend/skills/add') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('backend/course/update/'.$cou->cou_id) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-sl ate-200/60 dark:border-darkmode-400">
                     <div class="font-medium text-base">รายละเอียด</div>
@@ -44,7 +44,7 @@ $active = "totalCourse";
                                     <b><label for="horizontal-form-1" class="form-label "> รหัสหลักสูตร </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" value="001" type="text" id="formFile" required>
+                                    <input class="form-control box-form-ct" name="no" value="{{$cou->cou_no}}" type="text" id="formFile" required>
                                 </div>
                             </div>
 
@@ -53,7 +53,7 @@ $active = "totalCourse";
                                     <b><label for="horizontal-form-1" class="form-label "> ชื่อหลักสูตร </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" value="หลักสูตร 1" type="text" id="formFile" required>
+                                    <input class="form-control box-form-ct" name="nameCourse" value="{{$cou->cou_name}}" type="text" id="formFile" required>
                                 </div>
                             </div>
 
@@ -62,7 +62,7 @@ $active = "totalCourse";
                                     <b><label for="horizontal-form-1" class="form-label "> ผู้จัด </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" value="ผู้จัด 1" type="text" id="formFile" required>
+                                    <input class="form-control box-form-ct" name="namePeople" value="{{$cou->cou_organizer}}" type="text" id="formFile" required>
                                 </div>
                             </div>
 
@@ -78,7 +78,7 @@ $active = "totalCourse";
                                     <b><label for="horizontal-form-1" class="form-label "> เริ่ม </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="address_no" type="date" id="formFile" value="2023-07-20" required>
+                                    <input class="form-control box-form-ct" name="start" type="date" id="formFile" value="{{$cou->cou_startTime}}" required>
                                 </div>
                             </div>
 
@@ -88,7 +88,7 @@ $active = "totalCourse";
                                     <b><label for="horizontal-form-1" class="form-label "> สิ้นสุด </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="address_no" type="date" id="formFile" value="2023-08-20" required>
+                                    <input class="form-control box-form-ct" name="end" type="date" id="formFile" value="{{$cou->cou_endTime}}" required>
                                 </div>
                             </div>
 
@@ -97,7 +97,7 @@ $active = "totalCourse";
                                     <b><label for="horizontal-form-1" class="form-label "> ระยะเวลาจัดอบรม (ชั่วโมง) </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" value="1" type="number" min="1" id="formFile" required>
+                                    <input class="form-control box-form-ct" name="period" value="{{$cou->cou_period}}" type="number" min="1" id="formFile" required>
                                 </div>
                             </div>
 
@@ -106,60 +106,48 @@ $active = "totalCourse";
                                     <b><label for="horizontal-form-1" class="form-label "> ประเภทหลักสูตร </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="" id="" class="form-control select2">
-                                        <!-- <option value="" hidden>-เลือก-</option> -->
-                                        <option value="" selected>ประเภทหลักสูตร 1</option>
-                                        <option value="">ประเภทหลักสูตร 2</option>
-                                        <option value="">ประเภทหลักสูตร 3</option>
+                                    <select name="typeCourse" id="typeCourse" class="form-control select2">
+                                        @foreach($typeCourse as $rs)
+                                        <option value="{{$rs->tc_id}}" @if($cou->FKcou_typeCourse == $rs->tc_id) selected @endif>{{$rs->tc_no}} {{$rs->tc_name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
 
+                            @php $i = 1; @endphp
+                            @foreach($cs as $rsc)
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> ทักษะ 1</lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> ทักษะ {{$i++}}</lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="news_type" id="news_type" class="form-control select2" required onchange="province()">
-                                        <option value="1" disabled>ทักษะ 1</option>
-                                        <option value="1">&nbsp;&nbsp;&nbsp;&nbsp;ทักษะย่อย 1</option>
-                                        <option value="2" selected>&nbsp;&nbsp;&nbsp;&nbsp;ทักษะย่อย 2</option>
-                                        <option value="3">&nbsp;&nbsp;&nbsp;&nbsp;ทักษะย่อย 3</option>
-                                        <option value="1" disabled>ทักษะ 2</option>
-                                        <option value="4">&nbsp;&nbsp;&nbsp;&nbsp;ทักษะย่อย 1</option>
-                                        <option value="5">&nbsp;&nbsp;&nbsp;&nbsp;ทักษะย่อย 2</option>
-                                        <option value="6">&nbsp;&nbsp;&nbsp;&nbsp;ทักษะย่อย 3</option>
+                                    <select name="skills[{{$i}}]" id="skills[{{$i}}]" class="form-control select2" required onchange="province()">
+                                        @foreach($skills as $row)
+                                            <option value="{{$row->s_id}}" disabled>{{$row->s_no}} {{$row->s_name}}</option>
+                                            @foreach($skillsSubs as $rs)
+                                            @if($rs->FKss_skills == $row->s_id)
+                                            <option value="{{$rs->ss_id}}" @if($rsc->FKcs_skills == $rs->ss_id) selected @endif>&nbsp;&nbsp;&nbsp;{{$rs->ss_no}} {{$rs->ss_name}}</option>
+                                            @endif
+                                            @endforeach
+                                        @endforeach
                                     </select>
                                 </div>
+                                <input type="hidden" name="conId[{{$i}}]" value="{{$rsc->cs_id}}">
+                                <button class="btn py-0 px-2 btn-outline-secondary" type="button" onclick="del_skills({{$rsc->cs_id}})">ลบ</button>
                             </div>
-
-                            <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> ทักษะ 2</lable></b>
-                                </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="skilllsTwo" id="skilllsTwo" class="form-control select2" required onchange="province()">
-                                        <option value="1" disabled>ทักษะ 1</option>
-                                        <option value="1">&nbsp;&nbsp;&nbsp;&nbsp;ทักษะย่อย 1</option>
-                                        <option value="2">&nbsp;&nbsp;&nbsp;&nbsp;ทักษะย่อย 2</option>
-                                        <option value="3">&nbsp;&nbsp;&nbsp;&nbsp;ทักษะย่อย 3</option>
-                                        <option value="1" disabled>ทักษะ 2</option>
-                                        <option value="4" selected>&nbsp;&nbsp;&nbsp;&nbsp;ทักษะย่อย 1</option>
-                                        <option value="5">&nbsp;&nbsp;&nbsp;&nbsp;ทักษะย่อย 2</option>
-                                        <option value="6">&nbsp;&nbsp;&nbsp;&nbsp;ทักษะย่อย 3</option>
-                                    </select>
-                                </div>
-                            </div>
+                            @endforeach
+                            <input type="hidden" name="num" id="num" value="{{$i-1}}">
 
                             <div id="form-container"></div>
-                            <br><button id="add-form-btn" type="button" class="btn btn-outline-secondary btn200 rounded-10" >เพิ่มทักษะ</button>
+                            <br><button id="add-form-btn" type="button" class="btn btn-outline-secondary btn200 rounded-10" onclick="add_fields()">เพิ่มทักษะ</button>
+                            <!-- <br><button id="add-form-btn" type="button" class="btn btn-outline-secondary btn200 rounded-10" >เพิ่มทักษะ</button> -->
                             
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                     <b><label for="horizontal-form-1" class="form-label "> ความถี่ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="text" min="1" id="formFile" value="2เดือน/ครั้ง" required>
+                                    <input class="form-control box-form-ct" name="frequency" type="text" min="1" id="formFile" value="{{$cou->cou_frequency}}" required>
                                 </div>
                             </div>
 
@@ -168,7 +156,7 @@ $active = "totalCourse";
                                     <b><label for="horizontal-form-1" class="form-label "> คำอธิบาย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <textarea cols="80" id="news_detail" name="news_detail" rows="10">คำอธิบาย</textarea>
+                                    <textarea cols="80" id="detail" name="detail" rows="10">{{$cou->cou_detail}}</textarea>
                                 </div>
                             </div>
 
@@ -177,7 +165,7 @@ $active = "totalCourse";
                                     <b><label for="horizontal-form-1" class="form-label "> หมายเหตุ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <textarea cols="80" id="course_note" name="course_note" rows="10">จัดครั้งล่าสุดเมื่อวันที่ 20 เดือนพฤษภา ปี 2023</textarea>
+                                    <textarea cols="80" id="course_note" name="course_note" rows="10">{{$cou->cou_note}}</textarea>
                                 </div>
                             </div>
 
@@ -205,7 +193,7 @@ $active = "totalCourse";
 @section('javascripts')
 <script>
     ClassicEditor
-    .create( document.querySelector( '#news_detail' ) )
+    .create( document.querySelector( '#detail' ) )
     .then( editor => {
         console.log( editor );
     } )
@@ -224,49 +212,74 @@ $active = "totalCourse";
 </script>
 
 <script>
-    const formContainer = document.getElementById("form-container");
-    const addFormBtn = document.getElementById("add-form-btn");
-    let formCount = 2;
+    function add_fields(){
+        const formContainer = document.getElementById("form-container");
+        var formCount = document.getElementById("num").value;
+        // var index = document.getElementById('select_id').value;
+        // let formCount = formCountElement.value.length - 1;
+        // alert(formCount);
 
-    addFormBtn.addEventListener("click", function() {
-    formCount++;
-    const div = document.createElement("div");
-    div.setAttribute("id", `study${formCount}`);
-    div.innerHTML = `
-    <div class="grid grid-cols-12 gap-6 mt-5">
-        <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-            <b><label for="horizontal-form-1" class="form-label "> ทักษะ ${formCount} </lable></b> 
+        const div = document.createElement("div");
+        formCount++;
+        div.setAttribute("id", `study${formCount}`);
+        div.innerHTML = `
+        <div class="grid grid-cols-12 gap-6 mt-5">
+            <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                <b><label for="horizontal-form-1" class="form-label "> ทักษะ ${formCount} </lable></b>
+            </div>
+            <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                <select name="skills_other[${formCount}]" id="skills_other[${formCount}]" class="form-control select2">
+                    <option value="" hidden>- กรุณาเลือกทักษะ -</option>
+                    @foreach($skills as $row)
+                    <option value="{{$row->s_id}}" disabled>{{$row->s_no}} {{$row->s_name}}</option>
+                        @foreach($skillsSubs as $rs)
+                        @if($rs->FKss_skills == $row->s_id)
+                        <option value="{{$rs->ss_id}}">&nbsp;&nbsp;&nbsp;{{$rs->ss_no}} {{$rs->ss_name}}</option>
+                        @endif
+                        @endforeach
+                    @endforeach
+                </select>
+            </div>
+            <button class="btn py-0 px-2 btn-outline-secondary" type="button" onclick="del_study(${formCount})">ลบ</button>
         </div>
-        <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-            <select name="job_type" id="job_type" class="form-control select2" required">
-                <option value="1" hidden>- กรุณาเลือกทักษะ -</option>
-                <option value="1" disabled>ทักษะ 1</option>
-                <option value="1">&nbsp;&nbsp;&nbsp;&nbsp;ทักษะย่อย 1</option>
-                <option value="2">&nbsp;&nbsp;&nbsp;&nbsp;ทักษะย่อย 2</option>
-                <option value="3">&nbsp;&nbsp;&nbsp;&nbsp;ทักษะย่อย 3</option>
-                <option value="1" disabled>ทักษะ 2</option>
-                <option value="4">&nbsp;&nbsp;&nbsp;&nbsp;ทักษะย่อย 1</option>
-                <option value="5">&nbsp;&nbsp;&nbsp;&nbsp;ทักษะย่อย 2</option>
-                <option value="6">&nbsp;&nbsp;&nbsp;&nbsp;ทักษะย่อย 3</option>
-            </select>
-        </div>
-        <button class="btn py-0 px-2 btn-outline-secondary" type="button" onclick="del_study(${formCount})">ลบ</button>
-    </div>
-    <div id="form-container-skills(${formCount})"></div>
-    `;
-    formContainer.appendChild(div);
-    });
+        `;
+        formContainer.appendChild(div);
+        document.getElementById("num").value = formCount;
 
-    function del_study(num){
+
+        $(document).ready(function(){
+            $(`#skills_other\\[${formCount}\\]`).select2({
+                placeholder: "- กรุณาเลือกทักษะ -",
+                allowClear: true
+            });
+        });
+
+        if (skills !== '') {
+            $.ajax({
+                type: 'post',
+                url: "{{ url('searchSkills') }}",
+                dataType: 'json',
+                data: {
+                    skills: skills,
+                    _token: "{{csrf_token()}}"
+                },
+                success: function (response) {
+                    let skillsSubSelect = $(`#skillsSub\\[${formCount}\\]`);
+                    skillsSubSelect.html(response.html);
+                }
+            });
+        }
+    }    
+
+    function del_study(num) {
         const div = document.getElementById(`study${num}`);
         if (div) {
-            if (confirm(`Are you sure you want to delete ?`)) {
-            formContainer.removeChild(div);
-            formCount--;
+            if (confirm(`คุณแน่ใจหรือไม่ว่าต้องการลบทักษะที่${num}?`)) {
+                div.parentNode.removeChild(div); // ใช้ parentNode.removeChild เพื่อลบองค์ประกอบ
+                formCount--;
             }
         }
-    }  
-
+    }
 </script>
 
 <script type="text/javascript">
@@ -284,6 +297,47 @@ $active = "totalCourse";
     $(document).ready(function(){
         $('.select2').select2();
     });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>  <!-- delete -->
+<script>
+    // function del_skills($id){}
+    $(document).ready(function() {
+        $('#example').DataTable({
+            responsive: true
+        });
+    } );
+    function del_skills(id) {
+        Swal.fire({
+            title: 'ต้องการลบข้อมูลใช่หรือไม่ ?',
+            text: "ข้อมูลจะลูกลบอย่างถาวร !",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ตกลง',
+            cancelButtonText: 'ยกเลิก'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type:"GET",
+                    url:"{!! url('backend/courseSkills/delete/"+id+"') !!}",
+                    success: function(data) {
+                        console.log(data);
+                    }   
+                });
+
+                Swal.fire(
+                    'สำเร็จ!',
+                    'ข้อมูลถูกลบสำเร็จ',
+                    'success'
+                ).then(() => {
+                    location.reload();
+                })
+               
+            }
+        })
+    }
 </script>
 @endsection
 

@@ -243,10 +243,16 @@ Route::post('backend/skillsSub/update/{id}', [App\Http\Controllers\BackendContro
 Route::get('backend/skillsSub/delete/{id}', [App\Http\Controllers\BackendController::class, 'skillsSubDelete']);
 Route::get('backend/skillsSub/export', [App\Http\Controllers\BackendController::class, 'skillsSubExport']);
 
-Route::get('backend/course', [App\Http\Controllers\BackendController::class, 'course']);
-Route::get('backend/course/form', [App\Http\Controllers\BackendController::class, 'courseForm']);
-Route::get('backend/course/edit', [App\Http\Controllers\BackendController::class, 'courseEdit']);
-Route::get('backend/course/form/file', [App\Http\Controllers\BackendController::class, 'courseFormFile']);
+Route::get('backend/course', [App\Http\Controllers\AdminCourseController::class, 'course']);
+Route::get('backend/course/form', [App\Http\Controllers\AdminCourseController::class, 'courseForm']);
+Route::post('backend/course/add', [App\Http\Controllers\AdminCourseController::class, 'courseAdd']);
+Route::get('backend/course/edit/{id}', [App\Http\Controllers\AdminCourseController::class, 'courseEdit']);
+Route::post('backend/course/update/{id}', [App\Http\Controllers\AdminCourseController::class, 'courseUpdate']);
+Route::get('backend/course/delete/{id}', [App\Http\Controllers\AdminCourseController::class, 'courseDelete']);
+
+Route::get('backend/course/form/file', [App\Http\Controllers\AdminCourseController::class, 'courseFormFile']);
+
+Route::get('backend/courseSkills/delete/{id}', [App\Http\Controllers\AdminCourseController::class, 'courseSkillsDelete']);
 
 Route::get('backend/company', [App\Http\Controllers\AdminCompanyController::class, 'company']);
 Route::get('backend/company/form', [App\Http\Controllers\AdminCompanyController::class, 'companyForm']);
