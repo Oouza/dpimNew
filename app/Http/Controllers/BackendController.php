@@ -247,22 +247,6 @@ class BackendController extends Controller
         return Excel::download(new SkilsSubExport, 'skillsSub.xlsx');
     }
 
-    function course(){
-        return view('backend.course.course');
-    }
-
-    function courseForm(){
-        return view('backend.course.course-add');
-    }
-
-    function courseEdit(){
-        return view('backend.course.course-edit');
-    }
-
-    function courseFormFile(){
-        return view('backend.course.course-file');
-    }
-
     function graphCapacity(){
         return view('backend.graph.graph-capacity');
     }
