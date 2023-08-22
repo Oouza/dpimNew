@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\employee;
 use App\Models\User;
+use App\Models\departmentSub;
+use App\Models\groupjob;
 use Illuminate\Support\Facades\Hash;
 
 class FrontendController extends Controller
@@ -141,29 +143,29 @@ class FrontendController extends Controller
         return view('frontend.company.job.indexCompany');
     }
 
-    function companyJobForm(){
-        return view('frontend.company.job.job-add');
-    }
+    // function companyJobForm(){
+    //     return view('frontend.company.job.job-add');
+    // }
 
-    function companyJobEdit(){
-        return view('frontend.company.job.job-edit');
-    }
+    // function companyJobEdit(){
+    //     return view('frontend.company.job.job-edit');
+    // }
 
-    function companyJobDetail(){
-        return view('frontend.company.job.job-detail');
-    }
+    // function companyJobDetail(){
+    //     return view('frontend.company.job.job-detail');
+    // }
 
-    function companyJobCapa(){
-        return view('frontend.company.job.capacity.capacity');
-    }
+    // function companyJobCapa(){
+    //     return view('frontend.company.job.capacity.capacity');
+    // }
 
-    function companyJobCapaForm(){
-        return view('frontend.company.job.capacity.capacity-add');
-    }
+    // function companyJobCapaForm(){
+    //     return view('frontend.company.job.capacity.capacity-add');
+    // }
 
-    function companyJobCapaEdit(){
-        return view('frontend.company.job.capacity.capacity-edit');
-    }
+    // function companyJobCapaEdit(){
+    //     return view('frontend.company.job.capacity.capacity-edit');
+    // }
 
     function companyJobSkills(){
         return view('frontend.company.job.skills.skills');
@@ -310,5 +312,27 @@ class FrontendController extends Controller
 
     function searchCourse(){
         return view('frontend.company.search-course');
+    }
+
+    function searchDepartment(Request $request){
+        $ds = departmentSub::where('FKds_department',$request->input('department'))->get();
+        $html = '<option value="">- กรุณาเลือกแผนกย่อย -</option>';
+        if(!empty($ds)){
+            foreach($ds as $_data){
+                $html .= '<option value="'.$_data->ds_id.'">'.$_data->ds_name.'</option>';
+               
+            }
+        }
+        $data["html"] = $html;
+        return json_encode($data);
+    }
+
+    function searchGroupJob(Request $request){
+        $job = groupjob::join('type_job','type_job.tj_id','groupjobs.FKgj_typeJob')
+        ->join('lavel_jobs','lavel_jobs.lj_id','groupjobs.FKgj_lavel')->where('gj_id',$request->job)->first();
+        $response["detail"] = $job->gj_detail;
+        $response["type"]   = $job->tj_name;
+        $response["lavel"]  = $job->lj_name;
+        return json_encode($response);      
     }
 }

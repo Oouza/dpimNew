@@ -39,7 +39,7 @@ $i=1;
                                     <th><center>แผนก</center></th>
                                     <th><center>แผนกย่อย</center></th>
                                     <th><center>ตำแหน่ง</center></th>
-                                    <th><center>คำอธิบาย</center></th>
+                                    <!-- <th><center>คำอธิบาย</center></th> -->
                                     <th><center>กลุ่มตำแหน่ง</center></th>
                                     <th><center>ระดับงาน</center></th>
                                     <th><center>ตั้งค่าสมรรถนะและทักษะของตำแหน่งงาน</center></th>
@@ -48,21 +48,23 @@ $i=1;
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($gj as $rs)
                                 <tr>
-                                    <td><center>แผนก 1</center></td>
-                                    <td><center>แผนกย่อย 1</center></td>
-                                    <td><center>ตำแหน่ง 1</center></td>
-                                    <td><center>คำอธิบาย 1</center></td>
-                                    <td><center>กลุ่มตำแหน่ง 1</center></td>
-                                    <td><center>ระดับงาน 1</center></td>
-                                    <td><center><a href="{{url('company/job/capacity')}}"><button class="btn btn-outline-secondary">ตั้งค่า</button></a></center></td>
-                                    <td><center><a href="{{url('company/job/detail')}}"><button type="button" class="btn btn-success"> สรุปข้อมูล </button></a></center></td>
+                                    <td><center>{{$rs->d_name}}</center></td>
+                                    <td><center>{{$rs->ds_name}}</center></td>
+                                    <td><center>{{$rs->p_name}}</center></td>
+                                    <!-- <td><center>{{$rs->gj_detail}}</center></td> -->
+                                    <td><center>{{$rs->gj_name}}</center></td>
+                                    <td><center>{{$rs->lj_name}}</center></td>
+                                    <td><center><a href="{{url('company/job/capacity/'.$rs->sp_id)}}"><button class="btn btn-outline-secondary">ตั้งค่า</button></a></center></td>
+                                    <td><center><a href="{{url('company/job/detail/'.$rs->sp_id)}}"><button type="button" class="btn btn-success"> สรุปข้อมูล </button></a></center></td>
                                     <td><center>
-                                        <a href="{{ url ('company/job/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
-                                        <button type="button" class="btn btn-danger" onclick="del_value(1)">ลบ</button>
+                                        <a href="{{ url ('company/job/edit/'.$rs->sp_id)}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
+                                        <button type="button" class="btn btn-danger" onclick="del_value({{$rs->sp_id}})">ลบ</button>
                                     </center></td>
                                 </tr>
-                                <tr>
+                                @endforeach
+                                <!-- <tr>
                                     <td><center>แผนก 2</center></td>
                                     <td><center>แผนกย่อย 2</center></td>
                                     <td><center>ตำแหน่ง 2</center></td>
@@ -75,7 +77,7 @@ $i=1;
                                         <a href="{{ url ('company/job/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
                                         <button type="button" class="btn btn-danger" onclick="del_value(2)">ลบ</button>
                                     </center></td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         
                         </table>
@@ -110,7 +112,7 @@ function del_value(id) {
                 if (result.value) {
                     $.ajax({
                         type:"GET",
-                        url:"{!! url('member/delete/"+id+"') !!}",
+                        url:"{!! url('company/job/delete/"+id+"') !!}",
                         success: function(data) {
                             console.log(data);
                         }   

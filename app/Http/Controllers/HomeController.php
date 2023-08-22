@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\ceohr;
+use App\Models\settingPosition;
 
 class HomeController extends Controller
 {
@@ -61,7 +64,16 @@ class HomeController extends Controller
             // dd($user->ch_position);
 
             if($user->ch_position=='HR'){
-                return view('frontend.company.job.indexCompany',compact('user'));
+
+                $hr = ceohr::where('FKch_userid',Auth::user()->id)->first();
+                $gj = settingPosition::join('departments','departments.d_id','setting_positions.FKgsp_department')
+                ->join('department_subs','department_subs.ds_id','setting_positions.FKgsp_departmentSub')
+                ->join('positions','positions.p_id','setting_positions.FKgsp_position')
+                ->join('lavel_jobs','lavel_jobs.lj_id','setting_positions.FKgsp_lavel')
+                ->join('groupjobs','groupjobs.gj_id','setting_positions.FKgsp_groupJob')
+                ->where('FKgsp_company',$hr->FKch_company)->whereNull('sp_delete')->get();
+                return view('frontend.company.job.indexCompany',compact('user','gj'));
+
             }else if($user->ch_position=='ผู้บริหาร'){
                 return view('frontend.manager.scoreboard.indexManager',compact('user'));
             }

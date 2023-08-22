@@ -9,6 +9,11 @@ use App\Models\departments;
 use App\Models\departmentSub;
 use App\Models\position;
 use App\Models\ceohr;
+use App\Models\groupjob;
+use App\Models\lavelJob;
+use App\Models\typeJob;
+use App\Models\settingPosition;
+use App\Models\gjcapacity;
 use Illuminate\Support\Facades\Hash;
 
 class HrJobController extends Controller
@@ -125,7 +130,7 @@ class HrJobController extends Controller
     
     function position(){
         $hr = ceohr::where('FKch_userid',Auth::user()->id)->first();
-        $position = position::where('FKp_company',$hr->FKch_company)->whereNull('p_delete')->get();
+        $position = position::where('FKp_company',$hr->FKch_company)->whereNull('p_delete')->orderBy('updated_at','desc')->get();
         return view('frontend.company.position.position',compact('position'));
     }    
 
@@ -169,5 +174,130 @@ class HrJobController extends Controller
         $mes = 'Success';
         $yourURL= url('company/position');
         echo ("<script>alert('$mes'); location.href='$yourURL'; </script>");
+    }
+
+    function companyJobForm(){
+        $hr = ceohr::where('FKch_userid',Auth::user()->id)->first();
+        $position = position::where('FKp_company',$hr->FKch_company)->whereNull('p_delete')->get();
+        $dp = departments::where('FKd_company',$hr->FKch_company)->whereNull('d_delete')->get();
+        $gj = groupjob::whereNull('gj_userDelete')->get();
+        $tj = typeJob::whereNull('tj_userDelete')->get();
+        $lj = lavelJob::whereNull('lj_userDelete')->get();
+        // dd($dp);
+        return view('frontend.company.job.job-add',compact('position','dp','gj','tj','lj'));
+    }
+
+    function companyJobAdd(Request $request){
+        // dd($reqsuest);
+        $hr = ceohr::where('FKch_userid',Auth::user()->id)->first();
+        $dp = departments::find($request->department);
+        $dpSub = departmentSub::find($request->departmentSub);
+        $pt = position::find($request->position);
+        $gj = groupjob::find($request->job);
+        $lj = lavelJob::find($gj->FKgj_lavel);
+        $tj = typeJob::find($gj->FKgj_typeJob);
+
+        $settingPosition = new settingPosition;
+        $settingPosition->FKgsp_department      = $request->department;
+        $settingPosition->sp_namedepartment     = $dp->d_name;
+        $settingPosition->FKgsp_departmentSub   = $request->departmentSub;
+        $settingPosition->sp_namedepartmentSub  = $dpSub->ds_name;
+        $settingPosition->FKgsp_position        = $request->position;
+        $settingPosition->sp_nameposition	    = $pt->p_name;
+        $settingPosition->FKgsp_groupJob        = $request->job;
+        $settingPosition->sp_namegroupJob       = $gj->gj_name;
+        $settingPosition->sp_detail             = $gj->gj_detail;
+        $settingPosition->FKgsp_typeJob         = $gj->FKgj_typeJob;
+        $settingPosition->sp_nametypeJob        = $tj->tj_name;
+        $settingPosition->FKgsp_lavel           = $gj->FKgj_lavel;
+        $settingPosition->sp_namelavel          = $lj->lj_name;
+        $settingPosition->FKgsp_company         = $hr->FKch_company;
+        $settingPosition->save();
+
+        $mes = 'Success';
+        $yourURL= url('/home');
+        echo ("<script>alert('$mes'); location.href='$yourURL'; </script>");
+    }
+
+    function companyJobEdit($id){
+        $hr = ceohr::where('FKch_userid',Auth::user()->id)->first();
+        $sp = settingPosition::join('departments','departments.d_id','setting_positions.FKgsp_department')
+        ->join('department_subs','department_subs.ds_id','setting_positions.FKgsp_departmentSub')
+        ->join('positions','positions.p_id','setting_positions.FKgsp_position')
+        ->join('lavel_jobs','lavel_jobs.lj_id','setting_positions.FKgsp_lavel')
+        ->join('type_job','type_job.tj_id','setting_positions.FKgsp_typeJob')
+        ->join('groupjobs','groupjobs.gj_id','setting_positions.FKgsp_groupJob')->find($id);
+        $dp = departments::where('FKd_company',$hr->FKch_company)->whereNull('d_delete')->get();
+        $dpSub = departmentSub::where('FKds_company',$hr->FKch_company)->whereNull('ds_delete')->get();
+        $gj = groupjob::whereNull('gj_userDelete')->get();
+        // $tj = typeJob::whereNull('tj_userDelete')->get();
+        // $lj = lavelJob::whereNull('lj_userDelete')->get();
+        $position = position::where('FKp_company',$hr->FKch_company)->whereNull('p_delete')->get();
+        // $gj = settingPosition::join('departments','departments.d_id','setting_positions.FKgsp_department')
+        // ->join('department_subs','department_subs.ds_id','setting_positions.FKgsp_departmentSub')
+        // ->join('positions','positions.p_id','setting_positions.FKgsp_position')
+        // ->join('lavel_jobs','lavel_jobs.lj_id','setting_positions.FKgsp_lavel')
+        // ->join('groupjobs','groupjobs.gj_id','setting_positions.FKgsp_groupJob')
+        // ->where('FKgsp_company',$hr->FKch_company)->whereNull('sp_delete')->get();
+        return view('frontend.company.job.job-edit',compact('sp','position','dp','dpSub','gj',));
+    }
+
+    function companyJobDetail(){
+        return view('frontend.company.job.job-detail');
+    }
+
+    function companyJobUpdate(Request $request, $id){
+        // dd($request);
+
+        $dp = departments::find($request->department);
+        $dpSub = departmentSub::find($request->departmentSub);
+        $pt = position::find($request->position);
+        $gj = groupjob::find($request->job);
+        $lj = lavelJob::find($gj->FKgj_lavel);
+        $tj = typeJob::find($gj->FKgj_typeJob);
+
+        $update = settingPosition::find($id)->update([
+            'FKgsp_department'      => $request->department,
+            'sp_namedepartment'     => $dp->d_name,
+            'FKgsp_departmentSub'   => $request->departmentSub,
+            'sp_namedepartmentSub'  => $dpSub->ds_name,
+            'FKgsp_position'        => $request->position,
+            'sp_nameposition'       => $pt->p_name,
+            'FKgsp_groupJob'        => $request->job,
+            'sp_namegroupJob'       => $gj->gj_name,
+            'sp_detail'             => $gj->gj_detail,
+            'FKgsp_typeJob'         => $gj->FKgj_typeJob,
+            'sp_nametypeJob'        => $tj->tj_name,
+            'FKgsp_lavel'           => $gj->FKgj_lavel,
+            'sp_namelavel'          => $lj->lj_name,
+        ]);
+
+        $mes = 'Success';
+        $yourURL= url('/home');
+        echo ("<script>alert('$mes'); location.href='$yourURL'; </script>");
+    }
+
+    function companyJobDelete($id){
+        $update = settingPosition::find($id)->update([
+            'sp_delete'      => Auth::user()->name,
+        ]);
+    }
+
+    function companyJobCapa($id){
+        $gj = settingPosition::join('positions','positions.p_id','setting_positions.FKgsp_position')->find($id);
+        $gjc = gjcapacity::join('capacities','capacities.cc_id','gjcapacities.FKgjc_capacity')
+        ->where('FKgjc_groupjob',$gj->FKgsp_groupJob)
+        ->where('FKgjc_userCreate',0)->orWhere('FKgjc_userCreate',$gj->FKgsp_groupJob)
+        ->get();
+        return view('frontend.company.job.capacity.capacity',compact('gjc','gj'));
+    }
+
+    function companyJobCapaForm($id){
+        dd($id);
+        return view('frontend.company.job.capacity.capacity-add');
+    }
+
+    function companyJobCapaEdit(){
+        return view('frontend.company.job.capacity.capacity-edit');
     }
 }
