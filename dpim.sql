@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 15, 2023 at 04:18 AM
+-- Generation Time: Aug 22, 2023 at 05:24 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 7.4.30
 
@@ -1047,13 +1047,13 @@ INSERT INTO `amphures` (`id`, `code`, `name_th`, `name_en`, `province_id`) VALUE
 
 CREATE TABLE `capacities` (
   `cc_id` int(10) UNSIGNED NOT NULL,
-  `cc_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cc_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cc_detail` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `FKcc_Create` int(11) DEFAULT NULL,
-  `cc_userCreate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cc_userUpdate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cc_userDelete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cc_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'รหัสสมรรถนะ',
+  `cc_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อสมรรถนะ',
+  `cc_detail` text COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'คำอธิบายสมมรถนะ',
+  `FKcc_Create` int(11) DEFAULT NULL COMMENT '0=ADminสร้าง id ผู้สร้างจาก companies',
+  `cc_userCreate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน สร้าง',
+  `cc_userUpdate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน แก้ไข',
+  `cc_userDelete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน ลบ',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1063,8 +1063,9 @@ CREATE TABLE `capacities` (
 --
 
 INSERT INTO `capacities` (`cc_id`, `cc_no`, `cc_name`, `cc_detail`, `FKcc_Create`, `cc_userCreate`, `cc_userUpdate`, `cc_userDelete`, `created_at`, `updated_at`) VALUES
-(1, '001', 'สมรรถนะ', '<p>อธิบายสมรรถนะ</p>', 0, 'Super Admin', 'Super Admin', NULL, '2023-08-11 18:51:19', '2023-08-11 19:39:02'),
-(2, '0002', 'ชื่อสมรรถนะ2', '<p>คำอธิบายชื่อสมรรถนะ2</p>', 0, 'Super Admin', 'Super Admin', NULL, '2023-08-11 19:07:38', '2023-08-11 19:07:38');
+(1, '001', 'มีใบอนุญาตควบคุมวัตถุระเบิด', '<p>อธิบายมีใบอนุญาตควบคุมวัตถุระเบิด</p>', 0, 'Super Admin', 'Super Admin', NULL, '2023-08-11 18:51:19', '2023-08-19 07:10:35'),
+(2, '002', 'ความเป็นมืออาชีพ/ มีความชำนาญการ', '<p>อธิบายความเป็นมืออาชีพ/&nbsp;มีความชำนาญการ</p>', 0, 'Super Admin', 'Super Admin', NULL, '2023-08-11 19:07:38', '2023-08-19 07:17:14'),
+(3, '003', 'ความรู้ด้านเครื่องมือเครื่องจักร', '<p>อธิบายความรู้ด้านเครื่องมือเครื่องจักร</p>', 0, 'Super Admin', 'Super Admin', NULL, '2023-08-14 20:42:44', '2023-08-19 07:17:22');
 
 -- --------------------------------------------------------
 
@@ -1074,18 +1075,18 @@ INSERT INTO `capacities` (`cc_id`, `cc_no`, `cc_name`, `cc_detail`, `FKcc_Create
 
 CREATE TABLE `ceohrs` (
   `ch_id` int(10) UNSIGNED NOT NULL,
-  `ch_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ch_fname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ch_lname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ch_phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ch_position` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ch_credit` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `FKch_userid` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ch_note` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `FKch_company` int(11) DEFAULT NULL,
-  `ch_userCreate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ch_userUpdate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ch_userDelete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ch_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'คำนำหน้าชื่อ',
+  `ch_fname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อจริง',
+  `ch_lname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'นามสกุล',
+  `ch_phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'เบอร์โทรส่วนตัว',
+  `ch_position` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ผู้บริหาร,HR',
+  `ch_credit` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'หลักฐานเป็นHR,CEO',
+  `FKch_userid` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'id ผู้ใช้ จาก users',
+  `ch_note` text COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'โน้ตแก้ไขจากแอดมิน',
+  `FKch_company` int(11) DEFAULT NULL COMMENT 'id บริษัท จาก companies',
+  `ch_userCreate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อผู้ สร้าง',
+  `ch_userUpdate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อผู้ แก้ไข',
+  `ch_userDelete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อผู้ ลบ',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1115,25 +1116,25 @@ INSERT INTO `ceohrs` (`ch_id`, `ch_title`, `ch_fname`, `ch_lname`, `ch_phone`, `
 
 CREATE TABLE `companies` (
   `c_id` int(10) UNSIGNED NOT NULL,
-  `c_nameCompany` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `c_licenseNo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `c_startDate` date DEFAULT NULL,
-  `c_endDate` date DEFAULT NULL,
-  `FKc_typemineral` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `c_nameTypeMineral` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `c_typeMineralSub` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `c_typeCompany` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `c_phone` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `c_addressNo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `FKc_provinces` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `FKc_amphur` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `FKc_tumbon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `c_postCode` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `FKc_manager` int(11) DEFAULT NULL,
-  `FKc_hr` int(11) DEFAULT NULL,
-  `c_userCreate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `c_userUpdate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `c_userDelete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `c_nameCompany` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อบริษัท',
+  `c_licenseNo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'เลขที่ใบอนุญาต',
+  `c_startDate` date DEFAULT NULL COMMENT 'วันที่ได้ใบอนุญาต',
+  `c_endDate` date DEFAULT NULL COMMENT 'วันที่สิ้นสุดใบอนุญาต',
+  `FKc_typemineral` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'id ชนิดแร่หลัก จาก type_minerals',
+  `c_nameTypeMineral` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อชนิดแร่หลัก',
+  `c_typeMineralSub` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชนิดแร่รอง',
+  `c_typeCompany` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'เหมืองแร่,โรงโม่หิน,โรงแต่งแร่,โรงประกอบโลหกรรม,ผู้รับเหมาเหมืองแร่,อื่นๆ',
+  `c_phone` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'เบอร์โทรบริษัท',
+  `c_addressNo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'เลขที่อยู่',
+  `FKc_provinces` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'id จังหวัด จาก provinces',
+  `FKc_amphur` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'id เขต จาก amphures',
+  `FKc_tumbon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'id แขวง จาก districts',
+  `c_postCode` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ไปรษณีย์',
+  `FKc_manager` int(11) DEFAULT NULL COMMENT 'id ผู้บริหาร จาก ceohrs',
+  `FKc_hr` int(11) DEFAULT NULL COMMENT 'id HR จาก ceohrs',
+  `c_userCreate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน เพิ่ม',
+  `c_userUpdate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน แก้ไข',
+  `c_userDelete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน ลบ',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1150,6 +1151,124 @@ INSERT INTO `companies` (`c_id`, `c_nameCompany`, `c_licenseNo`, `c_startDate`, 
 (6, 'orangesrfg222', '03/03', '2023-05-25', '2030-05-25', '2', 'ทองคำ', 'ทองคำขาว', 'โรงโม่หิน', '0885552222', '8', '1', '40', '102203', '74551', 16, 14, 'Super Admin', 'Super Admin', NULL, '2023-08-07 03:57:28', '2023-08-07 20:12:30'),
 (7, 'orangebsdgb223', '03/03', '2023-05-25', '2030-05-25', '2', 'ทองคำ', 'ทองคำขาว', 'โรงโม่หิน', '0885552222', '8', '1', '40', '102203', '74551', NULL, 15, 'Super Admin', 'Super Admin', NULL, '2023-08-07 03:57:28', '2023-08-07 03:57:28'),
 (8, 'รับเหมางานเหมืองแร่', '05/05', '2023-08-11', '2033-08-11', '3', 'ถ่านหิน', NULL, 'ผู้รับเหมางานเหมืองแร่', '0885552654', '7/7', '49', '716', '620801', '65412', 17, 18, 'นาย ประยุทธ จันทร์เจ้า', 'นาย ประยุทธ จันทร์เจ้า', NULL, '2023-08-11 09:35:06', '2023-08-11 09:38:43');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `courses`
+--
+
+CREATE TABLE `courses` (
+  `cou_id` int(10) UNSIGNED NOT NULL,
+  `cou_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'รหัสหลักสูตร',
+  `cou_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อหลักสูตร',
+  `cou_organizer` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อผู้จัด',
+  `cou_startTime` date DEFAULT NULL COMMENT 'วันเริ่มอบรม',
+  `cou_endTime` date DEFAULT NULL COMMENT 'วันสิ้นสุดอบรม',
+  `FKcou_typeCourse` int(11) DEFAULT NULL COMMENT 'id ประเภทหลักสูตร จาก type_course',
+  `cou_nametypeCourse` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อประเภทหลักสูตร',
+  `cou_period` int(11) DEFAULT NULL COMMENT 'ระยะเวลาอบรม(ชม.)',
+  `cou_frequency` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ความถี่ในการจัด',
+  `cou_detail` text COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'รายละเอียหลักสูตร',
+  `cou_note` text COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'โน้ตหลักสูตร เช่น จัดครั้งล่าสุด (ไม่จำเป็นต้องใส่)',
+  `FKcou_userCreate` int(11) DEFAULT NULL COMMENT '0=admin idคนสร้าง จาก companies',
+  `cou_userCreate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน สร้าง',
+  `cou_userUpdate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน แก้',
+  `cou_userDelete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน ลบ',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `courses`
+--
+
+INSERT INTO `courses` (`cou_id`, `cou_no`, `cou_name`, `cou_organizer`, `cou_startTime`, `cou_endTime`, `FKcou_typeCourse`, `cou_nametypeCourse`, `cou_period`, `cou_frequency`, `cou_detail`, `cou_note`, `FKcou_userCreate`, `cou_userCreate`, `cou_userUpdate`, `cou_userDelete`, `created_at`, `updated_at`) VALUES
+(1, '001', 'การจัดทำข้อมูลงานรังวัดด้วยอากาศยานไร้คนขับในพื้นที่ประกอบการเหมืองแร่  (กลุ่มภาคใต้)', 'กลุ่มพัฒนาการสำรวจและรังวัดขั้นสูง กวบ. กพร.', '2023-07-31', '2023-08-02', 1, 'หลักสูตรเสริมสร้างทักษะ', 17, '1 ครั้ง/ปี', '<ul><li>จัดทำแผนที่</li><li>ประมวลผลข้อมูล</li><li>คำนวณปริมาตรกองแร่</li></ul>', '<p>จัดครั้งล่าสุด 31/07/2565 - 02/08/2565</p>', 0, 'Sub Admin', 'Sub Admin', NULL, '2023-08-20 23:24:31', '2023-08-21 03:11:51'),
+(2, '002', 'การประยุกต์ใช้ข้อมูลงานรังวัดด้วยอากาศยานไร้คนขับพัฒนาการประกอบการเหมืองแร่  (กลุ่มภาคใต้)', 'กลุ่มพัฒนาการสำรวจและรังวัดขั้นสูง กวบ. กพร.', '2023-08-03', '2023-08-04', 1, 'หลักสูตรเสริมสร้างทักษะ', 12, '1 ครั้ง/ปี', '<ul><li>ตรวจสอบความถูกต้องของข้อมูล</li><li>ประมวลผลข้อมูลงานรังวัด</li></ul>', '<p>จัดครั้งล่าสุด &nbsp;03/08/2565 - 04/08/2565</p>', 0, 'Sub Admin', 'Sub Admin', NULL, '2023-08-20 23:59:06', '2023-08-20 23:59:06'),
+(3, '003', 'โครงการอบรมทบทวนความรู้เพื่อการต่ออายุใบรับรองการผ่านการฝึกอบรมเป็นผู้ควบคุมการใช้วัตถุระเบิดในงานเหมืองแร่', 'กลุ่มวิจัยและการพัฒนาประกอบการ กวบ. กพร.', '2023-08-01', '2023-08-31', 2, 'หลักสูตรขอต่อใบอนุญาต', 2, '3 ครั้ง/ปี', '<p>ทบทวนความรู้</p>', '<p>จัดครั้งล่าสุด 01/03/2565 - 31/03/2565</p>', 0, 'Sub Admin', 'Sub Admin', NULL, '2023-08-21 03:13:58', '2023-08-21 03:19:19');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `course_skills`
+--
+
+CREATE TABLE `course_skills` (
+  `cs_id` int(10) UNSIGNED NOT NULL,
+  `FKcs_skills` int(11) DEFAULT NULL COMMENT 'id ทักษะ จาก skills_subs',
+  `cs_nameskills` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อทักษะ',
+  `FKcs_course` int(11) DEFAULT NULL COMMENT 'id หลักสูตร จาก courses',
+  `cs_namecourse` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อหลักสูตร',
+  `FKcs_userCreate` int(11) DEFAULT NULL COMMENT '0=admin idคนสร้าง จาก companies',
+  `cou_userCreate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน สร้าง',
+  `cou_userUpdate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน แก้ไข',
+  `cou_userDelete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคนลบ',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `course_skills`
+--
+
+INSERT INTO `course_skills` (`cs_id`, `FKcs_skills`, `cs_nameskills`, `FKcs_course`, `cs_namecourse`, `FKcs_userCreate`, `cou_userCreate`, `cou_userUpdate`, `cou_userDelete`, `created_at`, `updated_at`) VALUES
+(1, 1, 'สามารถจำแนกประเภทและลักษณะของวัตถุระเบิด', 1, 'ชชชชชช', 0, 'Sub Admin', 'Sub Admin', NULL, '2023-08-20 23:24:31', '2023-08-21 03:11:51'),
+(2, 2, 'รายงานความเสี่ยง และแนวโน้มที่ก่อให้เกิดสภาพความเสี่ยงต่อผู้ควบคุมงาน', 1, 'ชชชชชช', 0, 'Sub Admin', 'Sub Admin', NULL, '2023-08-20 23:24:31', '2023-08-21 03:11:51'),
+(3, 7, 'สามารถหยุดการทำงานของเครื่องจักร (สภาวะปกติและสถานการณ์ฉุกเฉิน)', 1, 'การจัดทำข้อมูลงานรังวัดด้วยอากาศยานไร้คนขับในพื้นที่ประกอบการเหมืองแร่  (กลุ่มภาคใต้)', 0, 'Sub Admin', 'Sub Admin', 'Sub Admin', '2023-08-20 23:24:31', '2023-08-21 01:46:57'),
+(4, 1, 'สามารถจำแนกประเภทและลักษณะของวัตถุระเบิด', 2, 'การประยุกต์ใช้ข้อมูลงานรังวัดด้วยอากาศยานไร้คนขับพัฒนาการประกอบการเหมืองแร่  (กลุ่มภาคใต้)', 0, 'Sub Admin', 'Sub Admin', NULL, '2023-08-20 23:59:06', '2023-08-20 23:59:06'),
+(5, 3, 'สามารถดำเนินการมาตรการอพยพ', 1, 'ชชชชชช', 0, 'Sub Admin', 'Sub Admin', NULL, '2023-08-21 03:08:12', '2023-08-21 03:11:51'),
+(6, 4, 'การคุ้มกันพื้นที่งานระเบิด', 1, 'ชชชชชช', 0, 'Sub Admin', 'Sub Admin', NULL, '2023-08-21 03:08:12', '2023-08-21 03:11:51'),
+(7, 1, 'สามารถจำแนกประเภทและลักษณะของวัตถุระเบิด', 3, 'โครงการอบรมทบทวนความรู้เพื่อการต่ออายุใบรับรองการผ่านการฝึกอบรมเป็นผู้ควบคุมการใช้วัตถุระเบิดในงานเหมืองแร่', 0, 'Sub Admin', 'Sub Admin', NULL, '2023-08-21 03:13:58', '2023-08-21 03:13:58');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `departments`
+--
+
+CREATE TABLE `departments` (
+  `d_id` int(10) UNSIGNED NOT NULL,
+  `d_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อแผนก',
+  `FKd_company` int(11) DEFAULT NULL COMMENT 'id บริษัท จาก companies',
+  `d_delete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน ลบ',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `departments`
+--
+
+INSERT INTO `departments` (`d_id`, `d_name`, `FKd_company`, `d_delete`, `created_at`, `updated_at`) VALUES
+(1, 'การเงิน', 3, NULL, '2023-08-20 01:01:29', '2023-08-20 01:29:09'),
+(2, 'วางระเบิด', 3, NULL, '2023-08-20 01:01:37', '2023-08-20 01:26:08');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `department_subs`
+--
+
+CREATE TABLE `department_subs` (
+  `ds_id` int(10) UNSIGNED NOT NULL,
+  `ds_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อแผนกย่อย',
+  `FKds_department` int(11) DEFAULT NULL COMMENT 'id แผนก จาก departments',
+  `ds_namedepartment` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อแผนก',
+  `FKds_company` int(11) DEFAULT NULL COMMENT 'id บริษัท จาก companies',
+  `ds_delete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน ลบ',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `department_subs`
+--
+
+INSERT INTO `department_subs` (`ds_id`, `ds_name`, `FKds_department`, `ds_namedepartment`, `FKds_company`, `ds_delete`, `created_at`, `updated_at`) VALUES
+(1, 'hjkbiujg', 1, 'การเงิน', 3, NULL, '2023-08-20 02:33:21', '2023-08-20 02:58:37'),
+(2, 'fghjdrtyhj', 2, 'วางระเบิด', 3, NULL, '2023-08-20 02:35:18', '2023-08-20 02:35:18'),
+(3, 'วางแผนซื้อระเบิด', 1, 'การเงิน', 3, NULL, '2023-08-20 02:44:30', '2023-08-20 02:54:46');
 
 -- --------------------------------------------------------
 
@@ -10036,44 +10155,44 @@ INSERT INTO `districts` (`id`, `zip_code`, `name_th`, `name_en`, `amphure_id`) V
 
 CREATE TABLE `employees` (
   `e_id` int(10) UNSIGNED NOT NULL,
-  `e_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `e_fname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `e_lname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `e_phone` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `e_birth` date DEFAULT NULL,
-  `e_gender` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `e_status` int(11) DEFAULT NULL,
-  `FKe_company` int(11) DEFAULT NULL,
-  `e_nameCompany` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `e_employeeNo` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `FKe_department` int(11) DEFAULT NULL,
-  `e_nameDepartment` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `FKe_departmentSub` int(11) DEFAULT NULL,
-  `e_nameDepartmentSub` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `FKe_position` int(11) DEFAULT NULL,
-  `e_namePosition` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `FKe_lavel` int(11) DEFAULT NULL,
-  `e_nameLavel` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `FKe_group` int(11) DEFAULT NULL,
-  `e_nameGroup` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `e_credit` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `addressNO_now` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `FKe_province_now` int(11) DEFAULT NULL,
-  `FKe_amphur_now` int(11) DEFAULT NULL,
-  `FKe_tambon_now` int(11) DEFAULT NULL,
-  `postcode_now` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `addressNO_past` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `FKe_province_past` int(11) DEFAULT NULL,
-  `FKe_amphur_past` int(11) DEFAULT NULL,
-  `FKe_tambon_past` int(11) DEFAULT NULL,
-  `postcode_past` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `FKe_userid` int(11) DEFAULT NULL,
-  `e_userCreate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `e_userUpdate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `e_userDelete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `e_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'คำนำหน้าชื่อ',
+  `e_fname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อจริง',
+  `e_lname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'นามสกลุ',
+  `e_phone` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'เบอร์โทร',
+  `e_birth` date DEFAULT NULL COMMENT 'วันเกิด',
+  `e_gender` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'เพศ',
+  `e_status` int(11) DEFAULT NULL COMMENT 'สถานะการทำงาน ทำงานหรือว่างงาน',
+  `FKe_company` int(11) DEFAULT NULL COMMENT 'id จาก companies',
+  `e_nameCompany` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อบริษัท',
+  `e_employeeNo` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'รหัสพนักงาน',
+  `FKe_department` int(11) DEFAULT NULL COMMENT 'id แผนก จาก departments',
+  `e_nameDepartment` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อแผนก',
+  `FKe_departmentSub` int(11) DEFAULT NULL COMMENT 'id แผนกย่อย จาก department_subs',
+  `e_nameDepartmentSub` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อแผนกย่อย',
+  `FKe_position` int(11) DEFAULT NULL COMMENT 'id ตำแหน่ง จาก positions',
+  `e_namePosition` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อตำแหน่ง',
+  `FKe_lavel` int(11) DEFAULT NULL COMMENT 'id ระดับงาน จาก lavel_jobs',
+  `e_nameLavel` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'id ระดับงาน จาก lavel_jobs',
+  `FKe_group` int(11) DEFAULT NULL COMMENT 'id กลุ่มตำแหน่งงาน จาก lavel_jobs',
+  `e_nameGroup` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อกลุ่มตำแหน่งงาน',
+  `e_credit` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'หลักฐานการเป็นพนักงาน',
+  `addressNO_now` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'เลขที่บ้านปัจจุบัน',
+  `FKe_province_now` int(11) DEFAULT NULL COMMENT 'id จังหวัด ปัจจุบัน',
+  `FKe_amphur_now` int(11) DEFAULT NULL COMMENT 'id เขต/อำเภอ ปัจจุบัน',
+  `FKe_tambon_now` int(11) DEFAULT NULL COMMENT 'id แขวง/ตำบล ปัจจุบัน',
+  `postcode_now` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'รหัสไปรษณีย์ปัจจุบัน',
+  `addressNO_past` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'เลขที่บ้านตามทะเบียนบ้าน',
+  `FKe_province_past` int(11) NOT NULL COMMENT 'id จังหวัดตามทะเบียนบ้าน จาก provinces ',
+  `FKe_amphur_past` int(11) DEFAULT NULL COMMENT 'id เขตตามทะเบียนบ้าน จาก amphures',
+  `FKe_tambon_past` int(11) DEFAULT NULL COMMENT 'id แขวงตามทะเบียนบ้าน จาก districts',
+  `postcode_past` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ไปรษณีย์ตามทะเบียนบ้าน',
+  `FKe_userid` int(11) DEFAULT NULL COMMENT 'id ผู้ใช้ จาก users',
+  `e_userCreate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน สร้าง',
+  `e_userUpdate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน แก้ไข',
+  `e_userDelete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน ลบ',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `e_note` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `e_note` text COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'โน้ตแก้ไขจากแอดมิน'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -10130,16 +10249,151 @@ INSERT INTO `geographies` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `gjcapacities`
+--
+
+CREATE TABLE `gjcapacities` (
+  `gjc_id` int(10) UNSIGNED NOT NULL,
+  `FKgjc_capacity` int(11) DEFAULT NULL COMMENT 'id สมรรถนะ จาก capacities',
+  `gjc_namecapacity` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อสมรรถนะ',
+  `gjc_important` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'จำเป็น,ไม่จำเป็น',
+  `FKgjc_groupjob` int(11) DEFAULT NULL COMMENT 'id กลุ่มตำแหน่ง จาก groupjobs',
+  `gjc_namegroupjob` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อกลุ่มตำแหน่ง',
+  `FKgjc_userCreate` int(11) DEFAULT NULL COMMENT '0=admin id บริษัท จาก companies',
+  `gjc_userCreate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน สร้าง',
+  `gjc_userUpdate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน แก้ไข',
+  `gjc_userDelete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน ลบ',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `gjcapacities`
+--
+
+INSERT INTO `gjcapacities` (`gjc_id`, `FKgjc_capacity`, `gjc_namecapacity`, `gjc_important`, `FKgjc_groupjob`, `gjc_namegroupjob`, `FKgjc_userCreate`, `gjc_userCreate`, `gjc_userUpdate`, `gjc_userDelete`, `created_at`, `updated_at`) VALUES
+(1, 1, 'มีใบอนุญาตควบคุมวัตถุระเบิด', 'จำเป็น', 1, 'งานระเบิดผู้ปฎิบัติการ', 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:05:09', '2023-08-19 09:05:09'),
+(2, 2, 'ความเป็นมืออาชีพ/ มีความชำนาญการ', 'ไม่จำเป็น', 1, 'งานระเบิดผู้ปฎิบัติการ', 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:05:23', '2023-08-19 09:05:23'),
+(3, 3, 'ความรู้ด้านเครื่องมือเครื่องจักร', 'จำเป็น', 1, 'งานระเบิดผู้ปฎิบัติการ', 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:05:38', '2023-08-19 09:05:38'),
+(4, 2, 'ความเป็นมืออาชีพ/ มีความชำนาญการ', 'จำเป็น', 3, 'งานบริหารของผู้บริหาร', 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:05:58', '2023-08-19 09:05:58'),
+(5, 3, 'ความรู้ด้านเครื่องมือเครื่องจักร', 'ไม่จำเป็น', 3, 'งานบริหารของผู้บริหาร', 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:06:08', '2023-08-19 09:06:08');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `gjskills`
+--
+
+CREATE TABLE `gjskills` (
+  `gjs_id` int(10) UNSIGNED NOT NULL,
+  `FKgjs_skills` int(11) DEFAULT NULL COMMENT 'id ทักษะ จาก skills',
+  `gjs_nameskills` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อทักษะ',
+  `FKgjs_gjcapacity` int(11) DEFAULT NULL COMMENT 'id จาก gjcapacities',
+  `FKgjs_groupjob` int(11) DEFAULT NULL COMMENT 'id จาก groupjobs',
+  `FKgjs_userCreate` int(11) DEFAULT NULL COMMENT '0=admin id จาก companies',
+  `gjs_userCreate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน สร้าง',
+  `gjs_userUpdate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน แก้ไข',
+  `gjs_userDelete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน ลบ',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `gjskills`
+--
+
+INSERT INTO `gjskills` (`gjs_id`, `FKgjs_skills`, `gjs_nameskills`, `FKgjs_gjcapacity`, `FKgjs_groupjob`, `FKgjs_userCreate`, `gjs_userCreate`, `gjs_userUpdate`, `gjs_userDelete`, `created_at`, `updated_at`) VALUES
+(1, 1, 'การจำแนกประเภทวัตถุระเบิดและสารระเบิด', 1, 1, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:06:47', '2023-08-19 09:06:47'),
+(2, 2, 'การควบคุมและเฝ้าระวังการระเบิด', 1, 1, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:08:37', '2023-08-19 09:08:37'),
+(4, 5, 'ความสามารถในการทำงานเป็นทีม', 4, 3, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:09:58', '2023-08-19 09:09:58'),
+(5, 5, 'ความสามารถในการทำงานเป็นทีม', 4, 3, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:10:17', '2023-08-19 09:10:17'),
+(6, 3, 'การอบรม/สาธิต/มีความรู้ด้านเครื่องมือเครื่องจักร', 5, 3, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:10:42', '2023-08-19 09:10:42'),
+(7, 3, 'การอบรม/สาธิต/มีความรู้ด้านเครื่องมือเครื่องจักร', 3, 1, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:11:56', '2023-08-19 19:01:58');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `gj_skills_subs`
+--
+
+CREATE TABLE `gj_skills_subs` (
+  `gjss_id` int(10) UNSIGNED NOT NULL,
+  `FKgjss_skillsSub` int(11) DEFAULT NULL COMMENT 'id ทักษะย่อย จาก skills_subs',
+  `gjss_nameskillsSub` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อทักษะย่อย',
+  `FKgjss_gjskills` int(11) DEFAULT NULL COMMENT 'id จาก gjskills',
+  `FKgjss_gjcapacity` int(11) DEFAULT NULL COMMENT 'id จาก gjcapacities',
+  `FKgjss_groupjob` int(11) DEFAULT NULL COMMENT 'id จาก groupjobs',
+  `FKgjss_userCreate` int(11) DEFAULT NULL COMMENT '0=admin id บริษัท จาก companies',
+  `gjss_userCreate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน สร้าง',
+  `gjss_userUpdate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน แก้ไข',
+  `gjss_userDelete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน ลบ',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `gj_skills_subs`
+--
+
+INSERT INTO `gj_skills_subs` (`gjss_id`, `FKgjss_skillsSub`, `gjss_nameskillsSub`, `FKgjss_gjskills`, `FKgjss_gjcapacity`, `FKgjss_groupjob`, `FKgjss_userCreate`, `gjss_userCreate`, `gjss_userUpdate`, `gjss_userDelete`, `created_at`, `updated_at`) VALUES
+(1, 1, 'สามารถจำแนกประเภทและลักษณะของวัตถุระเบิด', 1, 1, 1, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:06:47', '2023-08-19 09:06:47'),
+(2, 2, 'รายงานความเสี่ยง และแนวโน้มที่ก่อให้เกิดสภาพความเสี่ยงต่อผู้ควบคุมงาน', 1, 1, 1, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:06:47', '2023-08-19 10:50:15'),
+(3, 3, 'สามารถดำเนินการมาตรการอพยพ', 2, 1, 1, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:08:37', '2023-08-19 09:08:37'),
+(5, 8, 'เคารพและให้เกียรติผู้ร่วมงาน', 4, 4, 3, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:09:58', '2023-08-19 09:09:58'),
+(6, 9, 'มีความเป็นมืออาชีพ', 5, 4, 3, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:10:17', '2023-08-19 09:10:17'),
+(7, 5, 'ผ่านการอบรม คุณสมบัติในการควบคุมและใช้เครื่องจักรได้อย่างเหมาะสม', 6, 5, 3, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:10:42', '2023-08-19 09:10:42'),
+(8, 6, 'ตรวจสอบความพร้อมของเครื่องจักรก่อน-หลังใช้งาน', 6, 5, 3, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:10:42', '2023-08-19 09:10:42'),
+(9, 7, 'สามารถหยุดการทำงานของเครื่องจักร (สภาวะปกติและสถานการณ์ฉุกเฉิน)', 6, 5, 3, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:10:42', '2023-08-19 09:10:42'),
+(10, 5, 'ผ่านการอบรม คุณสมบัติในการควบคุมและใช้เครื่องจักรได้อย่างเหมาะสม', 7, 3, 1, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:11:56', '2023-08-19 18:58:19'),
+(11, 6, 'ตรวจสอบความพร้อมของเครื่องจักรก่อน-หลังใช้งาน', 7, 3, 1, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:11:56', '2023-08-19 09:11:56'),
+(12, 5, 'ผ่านการอบรม คุณสมบัติในการควบคุมและใช้เครื่องจักรได้อย่างเหมาะสม', 7, 3, 1, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 18:56:18', '2023-08-19 18:56:18'),
+(13, 5, 'ผ่านการอบรม คุณสมบัติในการควบคุมและใช้เครื่องจักรได้อย่างเหมาะสม', 7, 3, 1, 0, 'Super Admin', 'Super Admin', 'Super Admin', '2023-08-19 18:56:51', '2023-08-19 18:58:37'),
+(14, 5, 'ผ่านการอบรม คุณสมบัติในการควบคุมและใช้เครื่องจักรได้อย่างเหมาะสม', 7, 3, 1, 0, 'Super Admin', 'Super Admin', 'Super Admin', '2023-08-19 18:56:51', '2023-08-19 18:58:30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `groupjobs`
+--
+
+CREATE TABLE `groupjobs` (
+  `gj_id` int(10) UNSIGNED NOT NULL,
+  `gj_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'รหัสกลุ่มตำแหน่งงาน',
+  `gj_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อกลุ่มตำแหน่งงาน',
+  `gj_detail` text COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'คำอธิบาย',
+  `FKgj_typeJob` int(11) DEFAULT NULL COMMENT 'id ประเภทงาน จาก type_job',
+  `gj_nametypeJob` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อประเภทงาน',
+  `FKgj_lavel` int(11) DEFAULT NULL COMMENT 'id ระดับงาน จาก lavel_jobs',
+  `gj_namelavel` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อระดับงาน',
+  `FKgj_userCreate` int(11) DEFAULT NULL COMMENT '0=admin id บริษัท จาก companies',
+  `gj_userCreate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน สร้าง',
+  `gj_userUpdate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน แก้ไข',
+  `gj_userDelete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน ลบ',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `groupjobs`
+--
+
+INSERT INTO `groupjobs` (`gj_id`, `gj_no`, `gj_name`, `gj_detail`, `FKgj_typeJob`, `gj_nametypeJob`, `FKgj_lavel`, `gj_namelavel`, `FKgj_userCreate`, `gj_userCreate`, `gj_userUpdate`, `gj_userDelete`, `created_at`, `updated_at`) VALUES
+(1, '001', 'งานระเบิดผู้ปฎิบัติการ', '<p>สมรรถนะ ทักษะ และทักษะย่อยของ งานระเบิดผู้ปฎิบัติการ</p>', 14, 'งานระเบิด', 4, 'ผู้ปฏิบัติการ', 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:02:52', '2023-08-19 19:02:33'),
+(3, '002', 'งานบริหารของผู้บริหาร', '<p>สมรรถนะ ทักษะ และทักษะย่อย ของ งานบริหารของผู้บริหาร</p>', 1, 'งานบริหาร', 1, 'ผู้บริหาร', 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:03:38', '2023-08-19 09:04:44');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `lavel_jobs`
 --
 
 CREATE TABLE `lavel_jobs` (
   `lj_id` int(10) UNSIGNED NOT NULL,
-  `lj_no` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `lj_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `lj_userCreate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `lj_userUpdate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `lj_userDelete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lj_no` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'รหัสระดับงาน',
+  `lj_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อระดับงาน',
+  `lj_userCreate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน สร้าง',
+  `lj_userUpdate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน แก้ไข',
+  `lj_userDelete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน ลบ',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -10149,10 +10403,10 @@ CREATE TABLE `lavel_jobs` (
 --
 
 INSERT INTO `lavel_jobs` (`lj_id`, `lj_no`, `lj_name`, `lj_userCreate`, `lj_userUpdate`, `lj_userDelete`, `created_at`, `updated_at`) VALUES
-(1, '001', 'ชื่อระดับงาน 1', 'Sub Admin', 'Super  Admin', 'Super  Admin', '2023-07-21 10:53:46', '2023-08-02 21:52:41'),
-(2, 'dftghsdghs', 'rthsdfhsfgfh', 'Sub Admin', 'Sub Admin', 'Super  Admin', '2023-07-21 10:56:54', '2023-08-02 08:41:13'),
-(3, '002', 'หัวหน้า', 'Super  Admin', 'Super  Admin', NULL, '2023-08-02 08:32:11', '2023-08-02 08:32:11'),
-(4, '005', 'ลูกน้อง', 'Super  Admin', 'Super  Admin', NULL, '2023-08-02 21:50:18', '2023-08-02 21:52:13');
+(1, '001', 'ผู้บริหาร', 'Sub Admin', 'Super  Admin', NULL, '2023-07-21 10:53:46', '2023-08-02 21:52:41'),
+(2, '002', 'ผู้จัดการ', 'Sub Admin', 'Sub Admin', NULL, '2023-07-21 10:56:54', '2023-08-02 08:41:13'),
+(3, '003', 'ผู้ควบคุม/หัวหน้างาน', 'Super  Admin', 'Super Admin', NULL, '2023-08-02 08:32:11', '2023-08-19 08:57:20'),
+(4, '004', 'ผู้ปฏิบัติการ', 'Super  Admin', 'Super Admin', NULL, '2023-08-02 21:50:18', '2023-08-19 08:57:33');
 
 -- --------------------------------------------------------
 
@@ -10184,7 +10438,16 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (101, '2023_07_22_183858_create_companies_table', 13),
 (102, '2023_08_12_012336_create_capacities_table', 14),
 (103, '2023_08_12_051041_create_skills_table', 15),
-(104, '2023_08_12_060707_create_skills_subs_table', 16);
+(104, '2023_08_12_060707_create_skills_subs_table', 16),
+(113, '2023_08_18_024504_create_gj_skills_subs_table', 21),
+(114, '2023_08_18_024433_create_gjskills_table', 22),
+(115, '2023_08_16_041940_create_gjcapacities_table', 23),
+(116, '2023_08_16_024008_create_groupjobs_table', 24),
+(121, '2023_08_20_061335_create_departments_table', 27),
+(122, '2023_08_20_061856_create_department_subs_table', 28),
+(123, '2023_08_20_061931_create_positions_table', 29),
+(125, '2023_08_21_025327_create_course_skills_table', 30),
+(126, '2023_08_21_025259_create_courses_table', 31);
 
 -- --------------------------------------------------------
 
@@ -10215,6 +10478,28 @@ CREATE TABLE `personal_access_tokens` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `positions`
+--
+
+CREATE TABLE `positions` (
+  `p_id` int(10) UNSIGNED NOT NULL,
+  `p_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อตำแหน่ง',
+  `FKp_company` int(11) DEFAULT NULL COMMENT 'id บริษัท จาก companies',
+  `p_delete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน ลบ',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `positions`
+--
+
+INSERT INTO `positions` (`p_id`, `p_name`, `FKp_company`, `p_delete`, `created_at`, `updated_at`) VALUES
+(1, 'ชื่อตำแหน่ง', 3, NULL, '2023-08-20 03:20:28', '2023-08-20 03:36:32');
 
 -- --------------------------------------------------------
 
@@ -10321,14 +10606,14 @@ INSERT INTO `provinces` (`id`, `code`, `name_th`, `name_en`, `geography_id`) VAL
 
 CREATE TABLE `skills` (
   `s_id` int(10) UNSIGNED NOT NULL,
-  `s_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `s_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `s_detail` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `FKs_capacity` int(11) DEFAULT NULL,
-  `FKs_Create` int(11) DEFAULT NULL,
-  `s_userCreate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `s_userUpdate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `s_userDelete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `s_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'รหัสทักษะ',
+  `s_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อทักษะ',
+  `s_detail` text COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'คำอธิบายทักษะ',
+  `FKs_capacity` int(11) DEFAULT NULL COMMENT 'id สมรรถนะ จาก capacities',
+  `FKs_Create` int(11) DEFAULT NULL COMMENT '0=admin id บริษัท จาก companies ',
+  `s_userCreate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน สร้าง',
+  `s_userUpdate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน แก้ไข',
+  `s_userDelete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน ลบ',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -10338,10 +10623,11 @@ CREATE TABLE `skills` (
 --
 
 INSERT INTO `skills` (`s_id`, `s_no`, `s_name`, `s_detail`, `FKs_capacity`, `FKs_Create`, `s_userCreate`, `s_userUpdate`, `s_userDelete`, `created_at`, `updated_at`) VALUES
-(1, '001', 'ชื่อทักษะ1', '<p>อธิบายชื่อทักษะ1</p>', 1, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-11 22:27:50', '2023-08-11 22:45:50'),
-(2, '002', 'ทักษะ2', '<p>อธิบายทักษะ2</p>', 1, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-11 22:32:33', '2023-08-11 22:32:33'),
-(3, '003', 'ชื่อทักษะ3', '<p>อธิบายชื่อทักษะ3</p>', 2, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-11 22:46:41', '2023-08-11 22:46:41'),
-(4, NULL, NULL, NULL, NULL, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-11 23:54:55', '2023-08-11 23:54:55');
+(1, '001', 'การจำแนกประเภทวัตถุระเบิดและสารระเบิด', '<p>อธิบายการจำแนกประเภทวัตถุระเบิดและสารระเบิด</p>', 1, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-11 22:27:50', '2023-08-19 07:19:56'),
+(2, '002', 'การควบคุมและเฝ้าระวังการระเบิด', '<p>อธิบายการควบคุมและเฝ้าระวังการระเบิด</p>', 1, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-11 22:32:33', '2023-08-19 07:20:23'),
+(3, '003', 'การอบรม/สาธิต/มีความรู้ด้านเครื่องมือเครื่องจักร', '<p>อธิบายการอบรม/สาธิต/มีความรู้ด้านเครื่องมือเครื่องจักร</p>', 3, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-11 22:46:41', '2023-08-19 07:21:12'),
+(5, '004', 'ความสามารถในการทำงานเป็นทีม', '<p>อธิบายความสามารถในการทำงานเป็นทีม</p>', 2, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 08:48:05', '2023-08-19 08:48:05'),
+(6, '005', 'ความสามารถในการทำงานภายใต้สภาพแวดล้อมที่หลากหลายทางวัฒนธรรม', '<p>อธิบายความสามารถในการทำงานภายใต้สภาพแวดล้อมที่หลากหลายทางวัฒนธรรม</p>', 2, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 08:49:12', '2023-08-19 08:49:12');
 
 -- --------------------------------------------------------
 
@@ -10351,18 +10637,18 @@ INSERT INTO `skills` (`s_id`, `s_no`, `s_name`, `s_detail`, `FKs_capacity`, `FKs
 
 CREATE TABLE `skills_subs` (
   `ss_id` int(10) UNSIGNED NOT NULL,
-  `ss_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ss_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ss_detail` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ss_standardOne` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ss_standardTwo` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ss_standardThree` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `FKss_skills` int(11) DEFAULT NULL,
-  `FKss_capacity` int(11) DEFAULT NULL,
-  `FKss_Create` int(11) DEFAULT NULL,
-  `ss_userCreate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ss_userUpdate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ss_userDelete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ss_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'รหัสทักษะย่อย',
+  `ss_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อทักษะย่อย',
+  `ss_detail` text COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'คำอธิบายทักษะย่อย',
+  `ss_standardOne` text COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'เกณฑ์ระดับที่ 1 ทักษะย่อย',
+  `ss_standardTwo` text COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'เกณฑ์ระดับที่ 2 ทักษะย่อย',
+  `ss_standardThree` text COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'เกณฑ์ระดับที่ 3 ทักษะย่อย',
+  `FKss_skills` int(11) DEFAULT NULL COMMENT 'id ทักษะ จาก skills',
+  `FKss_capacity` int(11) DEFAULT NULL COMMENT 'id สมรรถนะ จาก capacities',
+  `FKss_Create` int(11) DEFAULT NULL COMMENT '0=admin id บริษัท จาก companies ',
+  `ss_userCreate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน สร้าง',
+  `ss_userUpdate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน แก้ไข',
+  `ss_userDelete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน ลบ',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -10372,8 +10658,17 @@ CREATE TABLE `skills_subs` (
 --
 
 INSERT INTO `skills_subs` (`ss_id`, `ss_no`, `ss_name`, `ss_detail`, `ss_standardOne`, `ss_standardTwo`, `ss_standardThree`, `FKss_skills`, `FKss_capacity`, `FKss_Create`, `ss_userCreate`, `ss_userUpdate`, `ss_userDelete`, `created_at`, `updated_at`) VALUES
-(1, '001', 'ทักษะย่อย1', '<p>คำอธิบายทักษะย่อย1</p><p>\"</p>', '<p>เกณฑ์ระดับที่ 1 ทักษะย่อย11</p>', '<p>เกณฑ์ระดับที่ 2 ทักษะย่อย11</p>', '<p>เกณฑ์ระดับที่ 3 ทักษะย่อย11</p>', 2, 1, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-11 23:35:54', '2023-08-11 23:59:45'),
-(2, '002', 'ทักษะย่อย2', '<p>อธิบายทักษะย่อย2</p>', '<p>เกณฑ์ระดับที่ 1 ทักษะย่อย2</p>', '<p>เกณฑ์ระดับที่ 2 ทักษะย่อย2</p>', '<p>เกณฑ์ระดับที่ 3 ทักษะย่อย2</p>', 1, 1, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-11 23:59:39', '2023-08-11 23:59:39');
+(1, '001', 'สามารถจำแนกประเภทและลักษณะของวัตถุระเบิด', '<p>คำอธิบายสามารถจำแนกประเภทและลักษณะของวัตถุระเบิด</p>', '<p>เกณฑ์ระดับที่ 1 สามารถจำแนกประเภทและลักษณะของวัตถุระเบิด</p>', '<p>เกณฑ์ระดับที่ 2 สามารถจำแนกประเภทและลักษณะของวัตถุระเบิด</p>', '<p>เกณฑ์ระดับที่ 3 สามารถจำแนกประเภทและลักษณะของวัตถุระเบิด</p>', 1, 1, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-11 23:35:54', '2023-08-19 08:42:40'),
+(2, '002', 'รายงานความเสี่ยง และแนวโน้มที่ก่อให้เกิดสภาพความเสี่ยงต่อผู้ควบคุมงาน', '<p>อธิบายรายงานความเสี่ยง และแนวโน้มที่ก่อให้เกิดสภาพความเสี่ยงต่อผู้ควบคุมงาน</p>', '<p>เกณฑ์ระดับที่ 1 รายงานความเสี่ยง และแนวโน้มที่ก่อให้เกิดสภาพความเสี่ยงต่อผู้ควบคุมงาน</p>', '<p>เกณฑ์ระดับที่ 2 รายงานความเสี่ยง และแนวโน้มที่ก่อให้เกิดสภาพความเสี่ยงต่อผู้ควบคุมงาน</p>', '<p>เกณฑ์ระดับที่ 3 รายงานความเสี่ยง และแนวโน้มที่ก่อให้เกิดสภาพความเสี่ยงต่อผู้ควบคุมงาน</p>', 1, 1, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-11 23:59:39', '2023-08-19 08:43:21'),
+(3, '003', 'สามารถดำเนินการมาตรการอพยพ', '<p>คำอธิบายสามารถดำเนินการมาตรการอพยพ</p>', '<p>เกณฑ์ระดับที่ 1 สามารถดำเนินการมาตรการอพยพ</p>', '<p>เกณฑ์ระดับที่ 2 สามารถดำเนินการมาตรการอพยพ</p>', '<p>เกณฑ์ระดับที่ 3 สามารถดำเนินการมาตรการอพยพ</p>', 2, 1, 0, 'Sub Admin', 'Super Admin', NULL, '2023-08-17 23:14:35', '2023-08-19 08:43:54'),
+(4, '004', 'การคุ้มกันพื้นที่งานระเบิด', '<p>อธิบายการคุ้มกันพื้นที่งานระเบิด</p>', '<p>เกณฑ์ระดับที่ 1 การคุ้มกันพื้นที่งานระเบิด</p>', '<p>เกณฑ์ระดับที่ 2 การคุ้มกันพื้นที่งานระเบิด</p>', '<p>เกณฑ์ระดับที่ 3 การคุ้มกันพื้นที่งานระเบิด</p>', 2, 1, 0, 'Sub Admin', 'Super Admin', NULL, '2023-08-17 23:15:32', '2023-08-19 08:44:31'),
+(5, '005', 'ผ่านการอบรม คุณสมบัติในการควบคุมและใช้เครื่องจักรได้อย่างเหมาะสม', '<p>อธิบายผ่านการอบรม คุณสมบัติในการควบคุมและใช้เครื่องจักรได้อย่างเหมาะสม</p>', '<p>เกณฑ์ระดับที่ 1 ผ่านการอบรม คุณสมบัติในการควบคุมและใช้เครื่องจักรได้อย่างเหมาะสม</p>', '<p>เกณฑ์ระดับที่ 2 ผ่านการอบรม คุณสมบัติในการควบคุมและใช้เครื่องจักรได้อย่างเหมาะสม</p>', '<p>เกณฑ์ระดับที่ 3 ผ่านการอบรม คุณสมบัติในการควบคุมและใช้เครื่องจักรได้อย่างเหมาะสม</p>', 3, 3, 0, 'Sub Admin', 'Super Admin', NULL, '2023-08-17 23:16:20', '2023-08-19 08:45:20'),
+(6, '006', 'ตรวจสอบความพร้อมของเครื่องจักรก่อน-หลังใช้งาน', '<p>อธิบายตรวจสอบความพร้อมของเครื่องจักรก่อน-หลังใช้งาน</p>', '<p>เกณฑ์ระดับที่ 1 ตรวจสอบความพร้อมของเครื่องจักรก่อน-หลังใช้งาน</p>', '<p>เกณฑ์ระดับที่ 2 ตรวจสอบความพร้อมของเครื่องจักรก่อน-หลังใช้งาน</p>', '<p>เกณฑ์ระดับที่ 3 ตรวจสอบความพร้อมของเครื่องจักรก่อน-หลังใช้งาน</p>', 3, 3, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 08:46:20', '2023-08-19 08:46:20'),
+(7, '007', 'สามารถหยุดการทำงานของเครื่องจักร (สภาวะปกติและสถานการณ์ฉุกเฉิน)', '<p>อธิบายสามารถหยุดการทำงานของเครื่องจักร (สภาวะปกติและสถานการณ์ฉุกเฉิน)</p>', '<p>เกณฑ์ระดับที่ 1<strong> </strong>สามารถหยุดการทำงานของเครื่องจักร (สภาวะปกติและสถานการณ์ฉุกเฉิน)</p>', '<p>เกณฑ์ระดับที่ 2<strong> </strong>สามารถหยุดการทำงานของเครื่องจักร (สภาวะปกติและสถานการณ์ฉุกเฉิน)</p>', '<p>เกณฑ์ระดับที่ 3<strong> </strong>สามารถหยุดการทำงานของเครื่องจักร (สภาวะปกติและสถานการณ์ฉุกเฉิน)</p>', 3, 3, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 08:47:15', '2023-08-19 08:47:15'),
+(8, '008', 'เคารพและให้เกียรติผู้ร่วมงาน', '<p>อธิบายเคารพและให้เกียรติผู้ร่วมงาน</p>', '<p>เกณฑ์ระดับที่ 1 เคารพและให้เกียรติผู้ร่วมงาน</p>', '<p>เกณฑ์ระดับที่ 2 เคารพและให้เกียรติผู้ร่วมงาน</p>', '<p>เกณฑ์ระดับที่ 3 เคารพและให้เกียรติผู้ร่วมงาน</p>', 5, 2, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 08:50:26', '2023-08-19 08:50:26'),
+(9, '009', 'มีความเป็นมืออาชีพ', '<p>อธิบายมีความเป็นมืออาชีพ</p>', '<p>เกณฑ์ระดับที่ 1<strong> </strong>มีความเป็นมืออาชีพ</p>', '<p>เกณฑ์ระดับที่ 2<strong> </strong>มีความเป็นมืออาชีพ</p>', '<p>เกณฑ์ระดับที่ 3<strong> </strong>มีความเป็นมืออาชีพ</p>', 5, 2, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 08:51:33', '2023-08-19 08:51:33'),
+(10, '010', 'เคารพและให้เกียรติหลักปฏิบัติของเพื่อนร่วมงานและคนรอบข้าง', '<p>อธิบายเคารพและให้เกียรติหลักปฏิบัติของเพื่อนร่วมงานและคนรอบข้าง</p>', '<p>เกณฑ์ระดับที่ 1<strong> </strong>เคารพและให้เกียรติหลักปฏิบัติของเพื่อนร่วมงานและคนรอบข้าง</p>', '<p>เกณฑ์ระดับที่ 2<strong> </strong>เคารพและให้เกียรติหลักปฏิบัติของเพื่อนร่วมงานและคนรอบข้าง</p>', '<p>เกณฑ์ระดับที่ 3<strong> </strong>เคารพและให้เกียรติหลักปฏิบัติของเพื่อนร่วมงานและคนรอบข้าง</p>', 6, 2, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 08:52:32', '2023-08-19 08:52:32'),
+(11, '011', 'เคารพและให้เกียรติสังคมและวัฒนธรรมที่หลากหลาย', '<p>อธิบายเคารพและให้เกียรติสังคมและวัฒนธรรมที่หลากหลาย</p>', '<p>เกณฑ์ระดับที่ 1<strong> </strong>เคารพและให้เกียรติสังคมและวัฒนธรรมที่หลากหลาย</p>', '<p>เกณฑ์ระดับที่ 2<strong> </strong>เคารพและให้เกียรติสังคมและวัฒนธรรมที่หลากหลาย</p>', '<p>เกณฑ์ระดับที่ 3<strong> </strong>เคารพและให้เกียรติสังคมและวัฒนธรรมที่หลากหลาย</p>', 6, 2, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 08:53:27', '2023-08-19 08:53:27');
 
 -- --------------------------------------------------------
 
@@ -10383,11 +10678,11 @@ INSERT INTO `skills_subs` (`ss_id`, `ss_no`, `ss_name`, `ss_detail`, `ss_standar
 
 CREATE TABLE `type_course` (
   `tc_id` int(10) UNSIGNED NOT NULL,
-  `tc_no` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tc_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tc_userCreate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tc_userUpdate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tc_userDelete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tc_no` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'รหัสประเภทหลักสูตร',
+  `tc_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อประเภทหลักสูตร',
+  `tc_userCreate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน สร้าง',
+  `tc_userUpdate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน แก้ไข',
+  `tc_userDelete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน ลบ',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -10397,11 +10692,11 @@ CREATE TABLE `type_course` (
 --
 
 INSERT INTO `type_course` (`tc_id`, `tc_no`, `tc_name`, `tc_userCreate`, `tc_userUpdate`, `tc_userDelete`, `created_at`, `updated_at`) VALUES
-(1, '001', 'เทคโนโลยี', 'Sub Admin', 'Sub Admin', NULL, '2023-07-21 10:19:29', '2023-07-21 10:43:41'),
-(2, '002', 'ความยั่งยืน', 'Sub Admin', 'Super  Admin', NULL, '2023-07-21 10:20:13', '2023-08-02 09:04:59'),
+(1, '001', 'หลักสูตรเสริมสร้างทักษะ', 'Sub Admin', 'Sub Admin', NULL, '2023-07-21 10:19:29', '2023-08-20 19:28:15'),
+(2, '002', 'หลักสูตรขอต่อใบอนุญาต', 'Sub Admin', 'Sub Admin', NULL, '2023-07-21 10:20:13', '2023-08-20 19:28:31'),
 (3, 'dsrfgsd', 'sedthsdgf', 'Sub Admin', 'Sub Admin', 'Sub Admin', '2023-07-21 10:46:18', '2023-07-21 13:18:31'),
 (4, 'ggg', 'zfdgdfg', 'Super  Admin', 'Super  Admin', 'Super  Admin', '2023-08-02 08:59:15', '2023-08-02 09:09:31'),
-(5, '003', 'ความปลอดภัย', 'Super  Admin', 'Super  Admin', NULL, '2023-08-02 23:09:59', '2023-08-02 23:10:50');
+(5, '003', 'หลักสูตรขอขึ้นทะเบียนใบอนุญาตใหม่', 'Super  Admin', 'Sub Admin', NULL, '2023-08-02 23:09:59', '2023-08-20 19:28:46');
 
 -- --------------------------------------------------------
 
@@ -10411,11 +10706,11 @@ INSERT INTO `type_course` (`tc_id`, `tc_no`, `tc_name`, `tc_userCreate`, `tc_use
 
 CREATE TABLE `type_job` (
   `tj_id` int(10) UNSIGNED NOT NULL,
-  `tj_no` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tj_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tj_userCreate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tj_userUpdate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tj_userDelete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tj_no` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'รหัสประเภทงาน',
+  `tj_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อประเภทงาน',
+  `tj_userCreate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน สร้าง',
+  `tj_userUpdate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน แก้ไข',
+  `tj_userDelete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน ลบ',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -10425,12 +10720,12 @@ CREATE TABLE `type_job` (
 --
 
 INSERT INTO `type_job` (`tj_id`, `tj_no`, `tj_name`, `tj_userCreate`, `tj_userUpdate`, `tj_userDelete`, `created_at`, `updated_at`) VALUES
-(1, '001', 'ชื่อประเภทงาน 1', 'Super Admin ', 'Super  Admin', NULL, '2023-07-19 07:11:52', '2023-08-02 08:22:19'),
+(1, '001', 'งานบริหาร', 'Super Admin ', 'Super Admin', NULL, '2023-07-19 07:11:52', '2023-08-19 08:56:08'),
 (2, 'fsdfs', 'dfsdfsdf', 'Super Admin ', 'Super Admin ', 'Sub Admin', '2023-07-19 07:12:30', '2023-07-21 13:17:19'),
-(4, '002', 'ชื่อประเภทงาน2', 'Super Admin ', 'Super Admin ', NULL, '2023-07-19 07:13:31', '2023-07-19 08:01:02'),
-(5, '003', 'ชื่อประเภทงาน3', 'Super Admin ', 'Super Admin ', NULL, '2023-07-19 07:14:12', '2023-07-19 08:06:05'),
-(12, '004', 'ประเภทงาน 4', 'Super Admin ', 'Super Admin ', NULL, '2023-07-21 04:09:16', '2023-07-21 04:09:16'),
-(14, '005', 'ประเภทงาน 5555', 'Super Admin ', 'Super  Admin', NULL, '2023-07-21 04:10:26', '2023-08-02 21:40:18'),
+(4, '002', 'งานวางแผน', 'Super Admin ', 'Super Admin', NULL, '2023-07-19 07:13:31', '2023-08-19 08:56:20'),
+(5, '003', 'งานพัฒนา', 'Super Admin ', 'Super Admin', NULL, '2023-07-19 07:14:12', '2023-08-19 08:56:31'),
+(12, '004', 'งานผลิต', 'Super Admin ', 'Super Admin', NULL, '2023-07-21 04:09:16', '2023-08-19 08:56:51'),
+(14, '005', 'งานระเบิด', 'Super Admin ', 'Super Admin', NULL, '2023-07-21 04:10:26', '2023-08-19 08:57:00'),
 (15, '006', 'ชื่อประเภทงาน 6', 'Super  Admin', 'Super  Admin', 'Super  Admin', '2023-08-02 08:12:28', '2023-08-02 08:23:56'),
 (16, '006', 'ประเภทงาน6', 'Super  Admin', 'Super  Admin', 'Super  Admin', '2023-08-02 20:53:51', '2023-08-02 20:55:09');
 
@@ -10442,11 +10737,11 @@ INSERT INTO `type_job` (`tj_id`, `tj_no`, `tj_name`, `tj_userCreate`, `tj_userUp
 
 CREATE TABLE `type_minerals` (
   `tm_id` int(10) UNSIGNED NOT NULL,
-  `tm_no` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tm_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tm_userCreate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tm_userUpdate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tm_userDelete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tm_no` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'รหัสชนิดแร่',
+  `tm_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อชนิดแร่',
+  `tm_userCreate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน สร้าง',
+  `tm_userUpdate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน  แก้ไข',
+  `tm_userDelete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อคน ลบ',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -10474,8 +10769,8 @@ CREATE TABLE `users` (
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  `FK_company` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL COMMENT '1=admin 2=subAdmin 3=manger+hr not Cf 4=manger+hr Cf 5=manager+hr edit 6=manager+hr editCF 10=Del manager+hr ',
+  `FK_company` int(11) DEFAULT NULL COMMENT 'ID companies',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -10534,6 +10829,30 @@ ALTER TABLE `companies`
   ADD PRIMARY KEY (`c_id`);
 
 --
+-- Indexes for table `courses`
+--
+ALTER TABLE `courses`
+  ADD PRIMARY KEY (`cou_id`);
+
+--
+-- Indexes for table `course_skills`
+--
+ALTER TABLE `course_skills`
+  ADD PRIMARY KEY (`cs_id`);
+
+--
+-- Indexes for table `departments`
+--
+ALTER TABLE `departments`
+  ADD PRIMARY KEY (`d_id`);
+
+--
+-- Indexes for table `department_subs`
+--
+ALTER TABLE `department_subs`
+  ADD PRIMARY KEY (`ds_id`);
+
+--
 -- Indexes for table `districts`
 --
 ALTER TABLE `districts`
@@ -10557,6 +10876,30 @@ ALTER TABLE `failed_jobs`
 --
 ALTER TABLE `geographies`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `gjcapacities`
+--
+ALTER TABLE `gjcapacities`
+  ADD PRIMARY KEY (`gjc_id`);
+
+--
+-- Indexes for table `gjskills`
+--
+ALTER TABLE `gjskills`
+  ADD PRIMARY KEY (`gjs_id`);
+
+--
+-- Indexes for table `gj_skills_subs`
+--
+ALTER TABLE `gj_skills_subs`
+  ADD PRIMARY KEY (`gjss_id`);
+
+--
+-- Indexes for table `groupjobs`
+--
+ALTER TABLE `groupjobs`
+  ADD PRIMARY KEY (`gj_id`);
 
 --
 -- Indexes for table `lavel_jobs`
@@ -10583,6 +10926,12 @@ ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indexes for table `positions`
+--
+ALTER TABLE `positions`
+  ADD PRIMARY KEY (`p_id`);
 
 --
 -- Indexes for table `provinces`
@@ -10641,7 +10990,7 @@ ALTER TABLE `amphures`
 -- AUTO_INCREMENT for table `capacities`
 --
 ALTER TABLE `capacities`
-  MODIFY `cc_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `cc_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ceohrs`
@@ -10654,6 +11003,30 @@ ALTER TABLE `ceohrs`
 --
 ALTER TABLE `companies`
   MODIFY `c_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `courses`
+--
+ALTER TABLE `courses`
+  MODIFY `cou_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `course_skills`
+--
+ALTER TABLE `course_skills`
+  MODIFY `cs_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `departments`
+--
+ALTER TABLE `departments`
+  MODIFY `d_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `department_subs`
+--
+ALTER TABLE `department_subs`
+  MODIFY `ds_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `employees`
@@ -10674,6 +11047,30 @@ ALTER TABLE `geographies`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `gjcapacities`
+--
+ALTER TABLE `gjcapacities`
+  MODIFY `gjc_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `gjskills`
+--
+ALTER TABLE `gjskills`
+  MODIFY `gjs_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `gj_skills_subs`
+--
+ALTER TABLE `gj_skills_subs`
+  MODIFY `gjss_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `groupjobs`
+--
+ALTER TABLE `groupjobs`
+  MODIFY `gj_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `lavel_jobs`
 --
 ALTER TABLE `lavel_jobs`
@@ -10683,13 +11080,19 @@ ALTER TABLE `lavel_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `positions`
+--
+ALTER TABLE `positions`
+  MODIFY `p_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `provinces`
@@ -10701,13 +11104,13 @@ ALTER TABLE `provinces`
 -- AUTO_INCREMENT for table `skills`
 --
 ALTER TABLE `skills`
-  MODIFY `s_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `s_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `skills_subs`
 --
 ALTER TABLE `skills_subs`
-  MODIFY `ss_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ss_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `type_course`
