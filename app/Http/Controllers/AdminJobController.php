@@ -115,17 +115,17 @@ class AdminJobController extends Controller
         $gjs = gjskills::join('skills','skills.s_id','gjskills.FKgjs_skills')
         ->where('FKgjs_groupjob',$id)->whereNull('gjs_userDelete')->get();
 
-        $gjSub = gjSkillsSub::join('skills_subs','skills_subs.ss_id','gj_skills_subs.FKgjss_skillsSub')
-        ->where('FKgjss_groupjob',$id)->whereNull('gjss_userDelete')->get();
+        // $gjSub = gjSkillsSub::join('skills_subs','skills_subs.ss_id','gj_skills_subs.FKgjss_skillsSub')
+        // ->where('FKgjss_groupjob',$id)->whereNull('gjss_userDelete')->get();
 
-        // $gjt = gjcapacity::
-        // join('capacities','capacities.cc_id','gjcapacities.FKgjc_capacity')
-        // ->join('gjskills','gjskills.FKgjs_gjcapacity','gjcapacities.gjc_id')
-        // ->join('skills','skills.s_id','gjskills.FKgjs_skills')
-        // ->join('gj_skills_subs','gj_skills_subs.FKgjss_gjcapacity','gjcapacities.gjc_id')
-        // ->join('skills_subs','skills_subs.ss_id','gj_skills_subs.FKgjss_skillsSub')
-        // ->where('FKgjc_groupjob',$id)
-        // ->whereNull('gjc_userDelete')->groupBy('gjcapacities.gjc_id', 'gj_skills_subs.FKgjss_gjcapacity')->get();
+        $gjSub = gjSkillsSub::join('skills_subs','skills_subs.ss_id','gj_skills_subs.FKgjss_skillsSub')
+            ->join('gjskills','gjskills.gjs_id','gj_skills_subs.FKgjss_gjskills')
+            ->join('skills','skills.s_id','gjskills.FKgjs_skills')
+            ->join('gjcapacities','gjcapacities.gjc_id','gj_skills_subs.FKgjss_gjcapacity')            
+            ->join('capacities','capacities.cc_id','gjcapacities.FKgjc_capacity')            
+            ->where('FKgjss_groupjob',$id)
+            ->where('FKgjss_userCreate',0)
+            ->whereNull('gjss_userDelete')->get();
         // dd($gjt);
 
         return view('backend.job.job-detail',compact('gj','gjc','gjs','gjSub'));

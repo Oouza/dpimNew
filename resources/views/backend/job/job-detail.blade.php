@@ -31,7 +31,7 @@ $active = "job";
             <div class="intro-y box py-10 sm:py-20 mt-5">
                
                 <div class="px-5 mt-10">
-                    <div class="font-medium text-center text-lg">รายละเอียดกลุ่มตำแหน่งงาน</div>
+                    <div class="font-medium text-center text-lg">รายละเอียดกลุ่มตำแหน่งงาน {{$gj->gj_name}}</div>
                    
                 </div>
                 <form action="{{ url('backend/news/add') }}" method="post" enctype="multipart/form-data">
@@ -44,7 +44,7 @@ $active = "job";
                                     <b><label for="horizontal-form-1" class="form-label "> รหัสกลุ่มตำแหน่งงาน </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="job_name" type="text" id="formFile" value="001" disabled="disabled">
+                                    <input class="form-control box-form-ct" name="job_name" type="text" id="formFile" value="{{$gj->gj_no}}" disabled="disabled">
                                 </div>
                             </div>
                             
@@ -53,7 +53,7 @@ $active = "job";
                                     <b><label for="horizontal-form-1" class="form-label "> ชื่อกลุ่มตำแหน่งงาน </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" value="ตำแหน่ง1" disabled="disabled">
+                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" value="{{$gj->gj_name}}" disabled="disabled">
                                 </div>
                             </div>
 
@@ -62,7 +62,7 @@ $active = "job";
                                     <b><label for="horizontal-form-1" class="form-label">คำอธิบาย</label></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <textarea cols="55" id="" name="" rows="10" disabled>คำอธิบาย</textarea>
+                                    <textarea cols="55" id="" name="" rows="10" class="form-control" disabled>{{ isset($gj->gj_detail) ? strip_tags($gj->gj_detail) : '' }}</textarea>
                                 </div>
                             </div>
 
@@ -71,7 +71,7 @@ $active = "job";
                                     <b><label for="horizontal-form-1" class="form-label "> ประเภทงาน </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_img"  type="text" id="formFile" value="ประเภทงาน1" disabled="disabled">
+                                    <input class="form-control box-form-ct" name="news_img"  type="text" id="formFile" value="{{$gj->tj_name}}" disabled="disabled">
                                 </div>
                             </div>
 
@@ -80,7 +80,7 @@ $active = "job";
                                     <b><label for="horizontal-form-1" class="form-label "> ระดับงาน </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_img"  type="text" id="formFile" value="ระดับงาน1" disabled="disabled">
+                                    <input class="form-control box-form-ct" name="news_img"  type="text" id="formFile" value="{{$gj->lj_name}}" disabled="disabled">
                                 </div>
                             </div>
 
@@ -154,58 +154,63 @@ $active = "job";
                                         <th><center>สมรรถนะ</center></th>
                                         <th><center>ทักษะ/ความรู้</center></th>
                                         <th><center>ทักษะย่อย</center></th>
-                                        <!-- <th><center>ระดับ 1</center></th>
-                                        <th><center>ระดับ 2</center></th>
-                                        <th><center>ระดับ 3</center></th> -->
                                     </tr>
+                                    
+                                    @php 
+                                        $capacity = "";
+                                        $skills = "";
+                                    @endphp
+                                    @foreach($gjSub as $rs)
                                     <tr>
+                                        <td><center>
+                                            @if($capacity != $rs->cc_name) 
+                                                {{$rs->cc_name}}
+                                                @php 
+                                                    $capacity = $rs->cc_name;
+                                                @endphp
+                                            @endif
+                                        </center></td>
+                                        <td><center>
+                                            @if($skills != $rs->s_name) 
+                                                {{$rs->s_name}}
+                                                @php 
+                                                    $skills = $rs->s_name;
+                                                @endphp
+                                            @endif
+                                        </center></td>
+                                        <td><center>{{$rs->ss_name}}</center></td>
+                                    </tr>
+                                    @endforeach
+                                    <!-- <tr>
                                         <td><center>สมรรถนะ 1</center></td>
                                         <td><center>ทักษะ 1</center></td>
                                         <td><center>ทักษะย่อย 1</center></td>
-                                        <!-- <th><center><input type="radio" checked> </center></th>
-                                        <th><center><input type="radio" checked> </center></th>
-                                        <th><center><input type="radio" checked> </center></th> -->
                                     </tr>
                                     <tr>
                                         <td><center></center></td>
                                         <td><center></center></td>
                                         <td><center>ทักษะย่อย 2</center></td>
-                                        <!-- <th><center><input type="radio" checked> </center></th>
-                                        <th><center><input type="radio" disabled> </center></th>
-                                        <th><center><input type="radio" disabled> </center></th> -->
                                     </tr>
                                     <tr>
                                         <td><center></center></td>
                                         <td><center>ทักษะ 2</center></td>
                                         <td><center>ทักษะย่อย 1</center></td>
-                                        <!-- <th><center><input type="radio" disabled> </center></th>
-                                        <th><center></center></th>
-                                        <th><center></center></th> -->
                                     </tr>
                                     <tr>
                                         <td><center></center></td>
                                         <td><center></center></td>
                                         <td><center>ทักษะย่อย 2</center></td>
-                                        <!-- <th><center><input type="radio" checked> </center></th>
-                                        <th><center></center></th>
-                                        <th><center></center></th> -->
                                     </tr>
                                     <tr>
                                         <td><center>สมรรถนะ 2</center></td>
                                         <td><center>ทักษะ 1</center></td>
                                         <td><center>ทักษะย่อย 1</center></td>
-                                        <!-- <th><center><input type="radio" checked> </center></th>
-                                        <th><center><input type="radio" checked> </center></th>
-                                        <th><center><input type="radio" disabled> </center></th> -->
                                     </tr>
                                     <tr>
                                         <td><center></center></td>
                                         <td><center>ทักษะ 2</center></td>
                                         <td><center>ทักษะย่อย 1</center></td>
-                                        <!-- <th><center><input type="radio" disabled> </center></th>
-                                        <th><center></th>
-                                        <th><center></th> -->
-                                    </tr>
+                                    </tr> -->
                                 </table>
                             </div>
 
@@ -215,9 +220,9 @@ $active = "job";
                             <center>
                                 
 
-                            <a href="{{url('backend/job')}}" class="btn btn-warning w-50">กลับหน้าหลัก</a>
+                                <a href="{{url('backend/job')}}" class="btn btn-warning w-50">กลับหน้าหลัก</a>
                                 <button type="button" class="btn btn-success w-26 ml-2">ส่งออกเป็น PDF</button>        
-                                <button type="button" class="btn btn-primary w-24 ml-2">พิมพ์</button>        
+                                <button type="button" class="btn btn-primary w-24 ml-2" onclick="printPage()">พิมพ์</button>        
                             </center>
                       
                 </form>
@@ -233,6 +238,10 @@ $active = "job";
 
 @section('javascripts')
 <script>
+    function printPage() {
+        window.print();
+    }
+
 function showdetail(id) {
     var skillsDiv = document.getElementById('skills(' + id + ')');
     var button = document.getElementById('button' + id);
