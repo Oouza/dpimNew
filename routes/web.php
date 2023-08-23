@@ -225,34 +225,37 @@ Route::post('backend/capacity/update/{id}', [App\Http\Controllers\BackendControl
 Route::get('backend/capacity/delete/{id}', [App\Http\Controllers\BackendController::class, 'capacityDelete']);
 Route::get('backend/capacity/export', [App\Http\Controllers\BackendController::class, 'exportCapacity']);
 
-Route::get('backend/skills', [App\Http\Controllers\BackendController::class, 'skills']);
+Route::get('backend/skills', [App\Http\Controllers\BackendController::class, 'skills'])->name('adminSkills');
 Route::get('backend/skills/form', [App\Http\Controllers\BackendController::class, 'skillsForm']);
 Route::post('backend/skills/add', [App\Http\Controllers\BackendController::class, 'skillsAdd']);
 Route::get('backend/skills/edit/{id}', [App\Http\Controllers\BackendController::class, 'skillsEdit']);
 Route::post('backend/skills/update/{id}', [App\Http\Controllers\BackendController::class, 'skillsUpdate']);
 Route::get('backend/skills/delete/{id}', [App\Http\Controllers\BackendController::class, 'skillsDelete']);
 Route::get('backend/skills/export', [App\Http\Controllers\BackendController::class, 'skillsExport']);
+Route::get('resultSkills/{id}', [App\Http\Controllers\BackendController::class, 'resultSkills'])->name('resultSkills');
 
-Route::get('backend/skillsSub', [App\Http\Controllers\BackendController::class, 'skillsSub']);
+Route::get('backend/skillsSub', [App\Http\Controllers\BackendController::class, 'skillsSub'])->name('adminSkillsSub');
 Route::get('backend/skillsSub/form', [App\Http\Controllers\BackendController::class, 'skillsSubForm']);
 Route::post('backend/skillsSub/add', [App\Http\Controllers\BackendController::class, 'skillsSubAdd']);
 Route::get('backend/skillsSub/edit/{id}', [App\Http\Controllers\BackendController::class, 'skillsSubEdit']);
 Route::post('backend/skillsSub/update/{id}', [App\Http\Controllers\BackendController::class, 'skillsSubUpdate']);
 Route::get('backend/skillsSub/delete/{id}', [App\Http\Controllers\BackendController::class, 'skillsSubDelete']);
 Route::get('backend/skillsSub/export', [App\Http\Controllers\BackendController::class, 'skillsSubExport']);
+Route::get('resultSkillsSub/{id}', [App\Http\Controllers\BackendController::class, 'resultSkillsSub'])->name('resultSkillsSub');
 
-Route::get('backend/course', [App\Http\Controllers\AdminCourseController::class, 'course']);
+Route::get('backend/course', [App\Http\Controllers\AdminCourseController::class, 'course'])->name('adminCourse');
 Route::get('backend/course/form', [App\Http\Controllers\AdminCourseController::class, 'courseForm']);
 Route::post('backend/course/add', [App\Http\Controllers\AdminCourseController::class, 'courseAdd']);
 Route::get('backend/course/edit/{id}', [App\Http\Controllers\AdminCourseController::class, 'courseEdit']);
 Route::post('backend/course/update/{id}', [App\Http\Controllers\AdminCourseController::class, 'courseUpdate']);
 Route::get('backend/course/delete/{id}', [App\Http\Controllers\AdminCourseController::class, 'courseDelete']);
+Route::get('resultCourse', [App\Http\Controllers\AdminCourseController::class, 'resultCourse'])->name('resultCourse');
 
 Route::get('backend/course/form/file', [App\Http\Controllers\AdminCourseController::class, 'courseFormFile']);
 
 Route::get('backend/courseSkills/delete/{id}', [App\Http\Controllers\AdminCourseController::class, 'courseSkillsDelete']);
 
-Route::get('backend/company', [App\Http\Controllers\AdminCompanyController::class, 'company']);
+Route::get('backend/company', [App\Http\Controllers\AdminCompanyController::class, 'company'])->name('adminCompany');
 Route::get('backend/company/form', [App\Http\Controllers\AdminCompanyController::class, 'companyForm']);
 Route::post('backend/company/add', [App\Http\Controllers\AdminCompanyController::class, 'companyAdd']);
 Route::get('backend/company/edit/{id}', [App\Http\Controllers\AdminCompanyController::class, 'companyEdit']);
@@ -261,10 +264,12 @@ Route::get('backend/company/detail', [App\Http\Controllers\AdminCompanyControlle
 Route::get('backend/company/file', [App\Http\Controllers\AdminCompanyController::class, 'companyFile']);
 Route::get('backend/company/delate', [App\Http\Controllers\AdminCompanyController::class, 'companyDel']);
 Route::post('backend/company/import', [App\Http\Controllers\AdminCompanyController::class, 'companyImport']);
+Route::get('resultCompany', [App\Http\Controllers\AdminCompanyController::class, 'resultCompany'])->name('resultCompany');
 
-Route::get('backend/companyCf', [App\Http\Controllers\AdminCompanyController::class, 'companyCf']);
+Route::get('backend/companyCf', [App\Http\Controllers\AdminCompanyController::class, 'companyCf'])->name('adminCompanyCF');
 Route::get('backend/companyCf/detail/{id}', [App\Http\Controllers\AdminCompanyController::class, 'companyCfDetail']);
 Route::post('backend/companyCf/CF/{id}', [App\Http\Controllers\AdminCompanyController::class, 'companyCfConfirm']);
+Route::get('resultCompanyCF', [App\Http\Controllers\AdminCompanyController::class, 'resultCompanyCF'])->name('resultCompanyCF');
 // Route::get('backend/companyCf/edit/{id}', [App\Http\Controllers\AdminCompanyController::class, 'companyCfEdit']);
 // Route::get('backend/companyCf/cancle/{id}', [App\Http\Controllers\AdminCompanyController::class, 'companyCfCancle']);
 
@@ -315,7 +320,7 @@ Route::get('backend/admin/delete/{id}', [App\Http\Controllers\BackendController:
 Route::get('backend/setting', [App\Http\Controllers\BackendController::class, 'adminStting']);
 Route::post('backend/setting/update/{id}', [App\Http\Controllers\BackendController::class, 'adminSttingUpdate']);
 
-Route::get('backend/people', [App\Http\Controllers\AdminEmployeeController::class, 'people']);
+Route::get('backend/people', [App\Http\Controllers\AdminEmployeeController::class, 'people'])->name('adminPeople');
 Route::get('backend/people/form', [App\Http\Controllers\AdminEmployeeController::class, 'peopleForm']);
 Route::post('backend/people/add', [App\Http\Controllers\AdminEmployeeController::class, 'peopleAdd']);
 Route::get('backend/people/edit/{id}', [App\Http\Controllers\AdminEmployeeController::class, 'peopleEdit']);
@@ -327,6 +332,7 @@ Route::get('backend/people/detail/{id}', [App\Http\Controllers\AdminEmployeeCont
 Route::get('backend/people/file', [App\Http\Controllers\AdminEmployeeController::class, 'peopleFile']);
 Route::post('backend/people/upload', [App\Http\Controllers\AdminEmployeeController::class, 'peopleUp']);
 Route::get('backend/people/download', [App\Http\Controllers\AdminEmployeeController::class, 'peopleExport']);
+Route::get('resultPeople/{id}', [App\Http\Controllers\AdminEmployeeController::class, 'resultPeople'])->name('resultPeople');
 
 Route::get('backend/peopleCf', [App\Http\Controllers\AdminEmployeeController::class, 'peopleCf']);
 Route::get('backend/peopleCf/detail/{id}', [App\Http\Controllers\AdminEmployeeController::class, 'peopleCfDetail']);

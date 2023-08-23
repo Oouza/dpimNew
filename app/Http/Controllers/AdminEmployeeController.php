@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\employee;
+use App\Models\course;
+use App\Models\groupjob;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\EmployeeImport;
 use App\Exports\PeopleExport;
@@ -280,7 +282,9 @@ class AdminEmployeeController extends Controller
     }
 
     function peopleManageskills(){
-        return view('backend.manageSkills.peopleManageSkills');
+        $course = course::whereNull('cou_userDelete')->get();
+        $groupJob = groupjob::whereNull('gj_userDelete')->get();
+        return view('backend.manageSkills.peopleManageSkills',compact('course','groupJob'));
     }
     
     function peopleManageskillsForm(){
@@ -311,5 +315,19 @@ class AdminEmployeeController extends Controller
     {
         // $countries = typeJob::select('tj_no','tj_name')->get();
         return Excel::download(new UsersExport, 'users.xlsx');
+    }
+
+    function resultPeople($id){
+        if($id == "ว่างงาน"){
+            $user = User::join('employees','employees.FKe_userid','users.id')
+            ->where('e_status',2)->orWhere('e_status',Null)->where('status',8)->whereNull('e_userDelete')->get();
+            return view('backend.managePeople.people',compact('user','id'));
+        }else{
+            $user = User::join('employees','employees.FKe_userid','users.id')
+            ->leftjoin('companies','companies.c_id','employees.FKe_company')
+            ->where('c_typeCompany',$id)->where('status',8)->whereNull('e_userDelete')->get();
+            return view('backend.managePeople.people',compact('user','id'));
+        }
+        
     }
 }

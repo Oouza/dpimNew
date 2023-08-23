@@ -38,10 +38,10 @@ $i=1;
                                 <div class="intro-y block sm:flex items-center h-10">
                                     <h3 class="text-lg font-medium truncate mr-5">เรียกดูตามหมวด</h3>
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-4">
-                                        <select name="capacity" id="capacity">
-                                            <option value="" hidden>- เลือกกลุ่มสมรรถนะ -</option>
+                                        <select name="capacity" id="capacity" class="select2" onchange="searchSkills()">
+                                            <option value="">กลุ่มสมรรถนะทั้งหมด</option>
                                             @foreach($capacity as $rs)
-                                            <option value="{{$rs->cc_id}}">{{$rs->cc_name}}</option>
+                                            <option @if(!empty($search) && $search == $rs->cc_id) selected @endif value="{{$rs->cc_id}}">{{$rs->cc_name}}</option>
                                             @endforeach
                                             <!-- <option value=""> กลุ่มสมรรถนะ 1</option>
                                             <option value=""> กลุ่มสมรรถนะ 2</option>
@@ -143,11 +143,28 @@ function del_value(id) {
 </script>
 
 <script>
-$(document).ready(function(){
-        $('#capacity').select2({
-            placeholder: "- เลือกกลุ่มสมรรถนะ -",
-            allowClear: true
-        });
+    $(document).ready(function(){
+        $('.select2').select2();
     });
+</script>
+
+<script>
+function searchSkills() {
+    var capacity = $('#capacity').val();
+    if(capacity == ''){
+        var url = '{!! route('adminSkills') !!}';
+        window.location.href = url;
+
+    }else{
+        var encodedCapacity = encodeURIComponent(capacity);
+
+        var url = '{!! route('resultSkills', ['id' => '__id__']) !!}';
+        url = url.replace('__id__', encodedCapacity);
+
+        // เปิดหน้าใหม่หรือรีเฟรชหน้าโดยใช้ URL ที่สร้างข้างบน
+        window.location.href = url;
+    }
+    
+}
 </script>
 @endsection

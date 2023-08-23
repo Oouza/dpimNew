@@ -38,10 +38,11 @@ $i=1;
                                 <div class="intro-y block sm:flex items-center h-10">
                                     <h3 class="text-lg font-medium truncate mr-5">เรียกดูตามหมวด</h3>
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-4">
-                                        <select name="skills" id="skills">
-                                            <option value="" hidden>- เลือกกลุ่มทักษะ -</option>
+                                        <select name="skills" id="skills" class="select2" onchange="searchSkillsSub()">
+                                            <!-- <option value="" hidden>- เลือกกลุ่มทักษะ -</option> -->
+                                            <option value="">กลุ่มทักษะทั้งหมด</option>
                                             @foreach($skills as $rs)
-                                            <option value="{{$rs->s_id}}">{{$rs->s_no}} {{$rs->s_name}}</option>
+                                            <option value="{{$rs->s_id}}" @if(!empty($search) && $search == $rs->s_id) selected @endif>{{$rs->s_no}} {{$rs->s_name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -147,11 +148,29 @@ function del_value(id) {
 </script>
 
 <script>
-$(document).ready(function(){
-        $('#skills').select2({
-            placeholder: "- เลือกกลุ่มทักษะ -",
-            allowClear: true
-        });
+    $(document).ready(function(){
+        $('.select2').select2();
     });
+</script>
+
+<script>
+function searchSkillsSub() {
+    var skills = $('#skills').val();
+    if(skills == ''){
+        var url = '{!! route('adminSkillsSub') !!}';
+        window.location.href = url;
+
+    }else{
+        var encodedSkills = encodeURIComponent(skills);
+
+        var url = '{!! route('resultSkillsSub', ['id' => '__id__']) !!}';
+        url = url.replace('__id__', encodedSkills);
+
+        // เปิดหน้าใหม่หรือรีเฟรชหน้าโดยใช้ URL ที่สร้างข้างบน
+        window.location.href = url;
+    }
+    
+}
+
 </script>
 @endsection

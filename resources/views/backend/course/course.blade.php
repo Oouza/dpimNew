@@ -37,51 +37,36 @@ $i=1;
                                 <br>
                                 <div class="intro-y block sm:flex items-center h-10">
                                     <h3 class="text-lg font-medium truncate mr-5">เรียกดูตามหมวด</h3>
-                                    <!-- <br> -->
-                                    <select name="skills" id="skills" class="form-control select2">
-                                        <!-- <option value="" hidden>- เลือกทักษะ -</option> -->
+                                </div>
+                                <div class="intro-y block sm:flex items-center h-10">
+                                    <select name="skills" id="skills" class="form-control select2" onchange="searchCourse()">
                                         @foreach($skills as $row)
                                         <option value="" >ทักษะทั้งหมด</option>
                                         <option value="{{$row->s_id}}" disabled>{{$row->s_no}} {{$row->s_name}}</option>
                                             @foreach($skillsSubs as $rs)
                                             @if($rs->FKss_skills == $row->s_id)
-                                            <option value="{{$rs->ss_id}}">&nbsp;&nbsp;&nbsp;{{$rs->ss_no}} {{$rs->ss_name}}</option>
+                                            <option @if(!empty($Sskills) && $Sskills == $rs->ss_id) selected @endif value="{{$rs->ss_id}}">&nbsp;&nbsp;&nbsp;{{$rs->ss_no}} {{$rs->ss_name}}</option>
                                             @endif
                                             @endforeach
                                         @endforeach
                                     </select>
-                                    <!-- &nbsp; &nbsp; &nbsp; &nbsp; -->
-                                    <!-- <br> -->
-                                    <select name="course" id="course" class="form-control select2">
-                                        <!-- <option value="" hidden>- เลือกประเภทหลักสูตร -</option> -->
-                                        @foreach($typeCourse as $rs)
+                                    <select name="course" id="course" class="form-control select2" onchange="searchCourse()">
                                         <option value="" >ประเภทหลักสูตรทั้งหมด</option>
-                                        <option value="{{$rs->tc_id}}">{{$rs->tc_no}} {{$rs->tc_name}}</option>
+                                        @foreach($typeCourse as $rs)
+                                        <option @if(!empty($type) && $type == $rs->tc_id) selected @endif value="{{$rs->tc_id}}">{{$rs->tc_no}} {{$rs->tc_name}}</option>
                                         @endforeach
                                     </select>
-                                    <!-- &nbsp; &nbsp; &nbsp; &nbsp; -->
-                                    <!-- <br> -->
-                                    <select name="people" id="people" class="form-control select2">
-                                        <!-- <option value="" hidden>- เลือกผู้จัด -</option> -->
+                                    <select name="people" id="people" class="form-control select2" onchange="searchCourse()">
                                         <option value="" >ผู้จัดทั้งหมด</option>
                                         @foreach($pp as $rs)
-                                        <option value="{{$rs->cou_organizer}}">{{$rs->cou_organizer}}</option>
+                                        <option @if(!empty($people) && $people == $rs->cou_organizer) selected @endif value="{{$rs->cou_organizer}}">{{$rs->cou_organizer}}</option>
                                         @endforeach
-                                        <!-- <option value=""> ผู้จัด 1</option>
-                                        <option value=""> ผู้จัด 2</option>
-                                        <option value=""> ผู้จัด 3</option> -->
                                     </select>
-                                    <!-- &nbsp; &nbsp; &nbsp; &nbsp; -->
-                                    <!-- <br> -->
-                                    <select name="time" id="time" class="form-control select2">
-                                        <!-- <option value="" hidden>- เลือกระยะเวลา -</option> -->
+                                    <select name="time" id="time" class="form-control select2" onchange="searchCourse()">
                                         <option value="" >ระยะเวลาทั้งหมด</option>
                                         @foreach($time as $rs)
-                                        <option value="{{$rs->cou_period}}">{{$rs->cou_period}} ชม.</option>
+                                        <option @if(!empty($Stime) && $Stime == $rs->cou_period) selected @endif value="{{$rs->cou_period}}">{{$rs->cou_period}} ชม.</option>
                                         @endforeach
-                                        <!-- <option value=""> ระยะเวลา 1</option>
-                                        <option value=""> ระยะเวลา 2</option>
-                                        <option value=""> ระยะเวลา 3</option> -->
                                     </select>
                                 </div>
                                 <br>
@@ -189,5 +174,35 @@ function del_value(id) {
                 }
             })
         }
+</script>
+
+<script>
+function searchCourse() {
+    var skills = $('#skills').val();
+    var course = $('#course').val();
+    var people = $('#people').val();
+    var time = $('#time').val();
+    if(skills == '' && course == '' && people == '' && time == ''){
+        var url = '{!! route('adminCourse') !!}';
+        window.location.href = url;
+
+    }else{
+        var data = {
+        data: null,
+        skills: skills,
+        course: course,
+        people: people,
+        time: time,
+        _token: '{{ csrf_token() }}'
+    };
+    var params = $.param(data);
+
+    var url = '{{ route('resultCourse', ['data' => '']) }}' +  params;
+
+    window.location.href = url;
+    }
+    
+}
+
 </script>
 @endsection

@@ -248,4 +248,60 @@ class AdminCourseController extends Controller
             'cou_userDelete' =>  Auth::user()->name
         ]);
     }
+
+    function resultCourse(Request $request){
+        $Sskills = $request->skills;
+        $type = $request->course;
+        $people = $request->people;
+        $Stime = $request->time;
+        
+        // $course = courseSkills::join('courses','courses.cou_id','course_skills.FKcs_course')
+        //     ->join('type_course','type_course.tc_id','courses.FKcou_typeCourse')
+        //     ->when(!empty($skills), function ($query) use ($skills) { $query->where('FKcs_skills', $skills);})
+        //     ->when(!empty($type), function ($query) use ($type) { $query->where('FKcou_typeCourse', $type); })
+        //     ->when(!empty($people), function ($query) use ($people) { $query->where('cou_organizer', $people); })
+        //     ->when(!empty($Stime), function ($query) use ($Stime) { $query->where('cou_period', $Stime); })
+        //     ->whereNull('course_skills.cou_userDelete')
+        //     ->whereNull('courses.cou_userDelete')
+        //     ->select('course_skills.FKcs_course', 'courses.cou_id', DB::raw('MAX(courses.cou_no) as cou_no')) // เพิ่มคอลัมน์ที่ต้องการดึงข้อมูล
+        //     ->groupBy('course_skills.FKcs_course', 'courses.cou_id')
+        //     ->get();
+            // ->select('courses.cou_id', 'courses.cou_no', 'courses.cou_name', 'courses.cou_organizer', 'courses.cou_period',
+            // 'courses.cou_frequency', 'type_course.tc_name', 'course_skills.FKcs_course')
+
+            $course = course::join('type_course', 'type_course.tc_id', 'courses.FKcou_typeCourse')
+            ->leftjoin('course_skills', 'course_skills.FKcs_course', 'courses.cou_id')
+            ->when(!empty($Sskills), function ($query) use ($Sskills) { $query->where('FKcs_skills', $Sskills); })
+            ->when(!empty($type), function ($query) use ($type) { $query->where('FKcou_typeCourse', $type); })
+            ->when(!empty($people), function ($query) use ($people) { $query->where('cou_organizer', $people); })
+            ->when(!empty($Stime), function ($query) use ($Stime) { $query->where('cou_period', $Stime); })
+            ->whereNull('course_skills.cou_userDelete')
+            ->whereNull('courses.cou_userDelete')
+            ->select(
+                'course_skills.FKcs_course',
+                'courses.cou_id',
+                'type_course.tc_id', // เพิ่มคอลัมน์ที่ต้องการจาก type_course
+                DB::raw('MAX(courses.cou_no) as cou_no'),
+                DB::raw('MAX(courses.cou_name) as cou_name'),
+                DB::raw('MAX(courses.cou_organizer) as cou_organizer'),
+                DB::raw('MAX(courses.cou_period) as cou_period'),
+                DB::raw('MAX(courses.cou_frequency) as cou_frequency'),
+                DB::raw('MAX(type_course.tc_name) as tc_name'),
+            )
+            ->groupBy(
+                'course_skills.FKcs_course',
+                'courses.cou_id',
+                'type_course.tc_id', // เพิ่มคอลัมน์ที่ต้องการจาก type_course
+            )
+            ->get();
+
+        $typeCourse = typeCourse::whereNull('tc_userDelete')->get();
+        $skills = skills::join('capacities','capacities.cc_id','skills.FKs_capacity')->where('FKs_Create',0)->whereNull('s_userDelete')->get();
+        $skillsSubs = skillsSubs::where('FKss_Create',0)->whereNull('ss_userDelete')->get();
+        // $pp = course::groupBy('cou_organizer')->get();
+        $pp = DB::table('courses')->select('cou_organizer')->whereNull('cou_userDelete')->groupBy('cou_organizer')->get();
+        $time = DB::table('courses')->select('cou_period')->whereNull('cou_userDelete')->groupBy('cou_period')->get();
+        // dd(count($pp));
+        return view('backend.course.course',compact('course','typeCourse','skills','skillsSubs','pp','time','Sskills','type','people','Stime'));
+    }
 }

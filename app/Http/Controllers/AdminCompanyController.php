@@ -480,4 +480,42 @@ class AdminCompanyController extends Controller
         $yourURL= url('backend/mineral');
         echo ("<script>alert('$mes'); location.href='$yourURL'; </script>");
     }
+
+    function resultCompany(Request $request){
+        $typeCompany = $request->typeCompany;
+        $Smineral = $request->mineral;
+        $Sprovinces = $request->provinces;
+
+        $provinces = DB::table('provinces')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
+        $mineral = typeMineral::whereNull('tm_userDelete')->get();
+
+        $user = User::join('ceohrs','ceohrs.FKch_userid','users.id')
+            ->join('companies','companies.c_id','ceohrs.FKch_company')
+            ->join('provinces','provinces.id','companies.FKc_provinces')
+            ->when(!empty($typeCompany), function ($query) use ($typeCompany) { $query->where('c_typeCompany', $typeCompany); })
+            ->when(!empty($Smineral), function ($query) use ($Smineral) { $query->where('FKc_typemineral', $Smineral); })
+            ->when(!empty($Sprovinces), function ($query) use ($Sprovinces) { $query->where('FKc_provinces', $Sprovinces); })
+            ->where('status',4)
+            ->whereNull('ch_userDelete')->get();
+        
+        return view('backend.company.company',compact('provinces','mineral','user','typeCompany','Smineral','Sprovinces'));
+    }
+
+    function resultCompanyCF(Request $request){
+        $typeCompany = $request->typeCompany;
+        $Smineral = $request->mineral;
+        $Sprovinces = $request->provinces;
+        
+        $provinces = DB::table('provinces')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
+        $mineral = typeMineral::whereNull('tm_userDelete')->get();
+        $user = User::join('ceohrs','ceohrs.FKch_userid','users.id')
+            ->join('companies','companies.c_id','ceohrs.FKch_company')
+            ->join('provinces','provinces.id','companies.FKc_provinces')
+            ->when(!empty($typeCompany), function ($query) use ($typeCompany) { $query->where('c_typeCompany', $typeCompany); })
+            ->when(!empty($Smineral), function ($query) use ($Smineral) { $query->where('FKc_typemineral', $Smineral); })
+            ->when(!empty($Sprovinces), function ($query) use ($Sprovinces) { $query->where('FKc_provinces', $Sprovinces); })
+            ->where('status',3)
+            ->whereNull('ch_userDelete')->get();
+        return view('backend.company.companyCf',compact('provinces','mineral','user','typeCompany','Smineral','Sprovinces'));
+    }
 }

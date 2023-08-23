@@ -38,11 +38,15 @@ $i=1;
                                 <br>
                                 <div class="intro-y block sm:flex items-center h-10">
                                     <h3 class="text-lg font-medium truncate mr-5">เรียกดูตามหมวด</h3>
-                                    <select name="" id="">
-                                        <option value="" hidden>-เลือกประเภทสถานประกอบการ-</option>
-                                        <option value=""> ทั้งหมด</option>
-                                        <option value=""> ประเภทสถานประกอบการ 2</option>
-                                        <option value=""> ประเภทสถานประกอบการ 3</option>
+                                    <select name="type" id="type" class="select2" onchange="searchPeople()">
+                                    <option value=""> ประเภทสถานประกอบการทั้งหมด </option>
+                                        <option @if(!empty($id) && $id == "เหมืองแร่") selected @endif value="เหมืองแร่"> เหมืองแร่ </option>
+                                        <option @if(!empty($id) && $id == "โรงโม่หิน") selected @endif value="โรงโม่หิน"> โรงโม่หิน </option>
+                                        <option @if(!empty($id) && $id == "โรงแต่งแร่") selected @endif value="โรงแต่งแร่"> โรงแต่งแร่ </option>
+                                        <option @if(!empty($id) && $id == "โรงประกอบโลหกรรม") selected @endif value="โรงประกอบโลหกรรม"> โรงประกอบโลหกรรม </option>
+                                        <option @if(!empty($id) && $id == "ผู้รับเหมางานเหมืองแร่") selected @endif value="ผู้รับเหมางานเหมืองแร่"> ผู้รับเหมาเหมืองแร่ </option>
+                                        <option @if(!empty($id) && $id == "อื่นๆ") selected @endif value="อื่นๆ"> อื่นๆ </option>
+                                        <option @if(!empty($id) && $id == "ว่างงาน") selected @endif value="ว่างงาน"> ว่างงาน </option>
                                     </select>
                                 </div>
                                 <br>
@@ -143,5 +147,25 @@ function del_value(id) {
                 }
             })
         }
+</script>
+
+<script>
+function searchPeople() {
+    var type = $('#type').val();
+    if(type == ''){
+        var url = '{!! route('adminPeople') !!}';
+        window.location.href = url;
+
+    }else{
+        var encodedType = encodeURIComponent(type);
+
+        var url = '{!! route('resultPeople', ['id' => '__id__']) !!}';
+        url = url.replace('__id__', encodedType);
+
+        // เปิดหน้าใหม่หรือรีเฟรชหน้าโดยใช้ URL ที่สร้างข้างบน
+        window.location.href = url;
+    }
+    
+}
 </script>
 @endsection

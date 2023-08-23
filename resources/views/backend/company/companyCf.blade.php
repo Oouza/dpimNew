@@ -38,31 +38,30 @@ $i=1;
                                 <br>
                                 <div class="intro-y block sm:flex items-center h-10">
                                     <h3 class="text-lg font-medium truncate mr-5">เรียกดูตามหมวด</h3>
-                                    <select name="typeCompany" id="typeCompany" class="select2">
-                                        <option value="" hidden>- เลือกประเภทสถานประกอบการ -</option>
-                                        <option value=""> ทั้งหมด </option>
-                                        <option value="เหมืองแร่"> เหมืองแร่ </option>
-                                        <option value="โรงโม่หิน"> โรงโม่หิน </option>
-                                        <option value="โรงแต่งแร่"> โรงแต่งแร่ </option>
-                                        <option value="โรงประกอบโลหกรรม"> โรงประกอบโลหกรรม </option>
-                                        <option value="ผู้รับเหมาเหมืองแร่"> ผู้รับเหมาเหมืองแร่ </option>
-                                        <option value="อื่นๆ"> อื่นๆ </option>
+                                    <select name="typeCompany" id="typeCompany" class="select2" onchange="searchCompany()">
+                                        <option value=""> ประเภทสถานประกอบการทั้งหมด </option>
+                                        <option @if(!empty($typeCompany) && $typeCompany == "เหมืองแร่") selected @endif value="เหมืองแร่"> เหมืองแร่ </option>
+                                        <option @if(!empty($typeCompany) && $typeCompany == "โรงโม่หิน") selected @endif value="โรงโม่หิน"> โรงโม่หิน </option>
+                                        <option @if(!empty($typeCompany) && $typeCompany == "โรงแต่งแร่") selected @endif value="โรงแต่งแร่"> โรงแต่งแร่ </option>
+                                        <option @if(!empty($typeCompany) && $typeCompany == "โรงประกอบโลหกรรม") selected @endif value="โรงประกอบโลหกรรม"> โรงประกอบโลหกรรม </option>
+                                        <option @if(!empty($typeCompany) && $typeCompany == "ผู้รับเหมางานเหมืองแร่") selected @endif value="ผู้รับเหมางานเหมืองแร่"> ผู้รับเหมาเหมืองแร่ </option>
+                                        <option @if(!empty($typeCompany) && $typeCompany == "อื่นๆ") selected @endif value="อื่นๆ"> อื่นๆ </option>
                                     </select>
                                     &nbsp; &nbsp; &nbsp; &nbsp;
-                                    <select name="mineral" id="mineral" class="select2">
-                                        <option value="" hidden>- เลือกชนิดแร่ -</option>
-                                        <option value=""> ทั้งหมด </option>
+                                    <select name="mineral" id="mineral" class="select2" onchange="searchCompany()">
+                                        <!-- <option value="" hidden>- เลือกชนิดแร่ -</option> -->
+                                        <option value=""> ชนิดแร่ทั้งหมด </option>
                                         @foreach($mineral as $rs)
-                                        <option value="{{$rs->tm_id}}"> {{$rs->tm_name}} </option>
+                                        <option @if(!empty($Smineral) && $Smineral == $rs->tm_id) selected @endif value="{{$rs->tm_id}}"> {{$rs->tm_name}} </option>
                                         @endforeach
                                         <!-- <option value=""> ประเภทแร่ 3</option> -->
                                     </select>
                                     &nbsp; &nbsp; &nbsp; &nbsp;
-                                    <select name="provinces" id="provinces" class="select2">
-                                        <option value="" hidden>- เลือกจังหวัด -</option>
-                                        <option value=""> ทั้งหมด </option>
+                                    <select name="provinces" id="provinces" class="select2" onchange="searchCompany()">
+                                        <!-- <option value="" hidden>- เลือกจังหวัด -</option> -->
+                                        <option value=""> จังหวัดทั้งหมด </option>
                                         @foreach($provinces as $rs)
-                                        <option value="{{$rs->id}}"> {{$rs->name_th}} </option>
+                                        <option @if(!empty($Sprovinces) && $Sprovinces == $rs->id) selected @endif value="{{$rs->id}}"> {{$rs->name_th}} </option>
                                         @endforeach
                                         <!-- <option value=""> จังหวัด 3</option> -->
                                     </select>
@@ -125,6 +124,33 @@ $i=1;
 @section('javascripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>  <!-- delete -->
 
+<script>
+function searchCompany() {
+    var typeCompany = $('#typeCompany').val();
+    var mineral = $('#mineral').val();
+    var provinces = $('#provinces').val();
+    if(typeCompany == '' && mineral == '' && provinces == ''){
+        var url = '{!! route('adminCompanyCF') !!}';
+        window.location.href = url;
+
+    }else{
+        var data = {
+        data: null,
+        typeCompany: typeCompany,
+        mineral: mineral,
+        provinces: provinces,
+        _token: '{{ csrf_token() }}'
+    };
+    var params = $.param(data);
+
+    var url = '{{ route('resultCompanyCF', ['data' => '']) }}' +  params;
+
+    window.location.href = url;
+    }
+    
+}
+
+</script>
 
 <script>
     $(document).ready(function() {
@@ -165,25 +191,25 @@ $i=1;
         })
     }
 
-    $(document).ready(function(){
-        $('#typeCompany').select2({
-            placeholder: "- เลือกประเภทสถานประกอบการ -",
-            allowClear: true
-        });
-    });
+    // $(document).ready(function(){
+    //     $('#typeCompany').select2({
+    //         placeholder: "- เลือกประเภทสถานประกอบการ -",
+    //         allowClear: true
+    //     });
+    // });
 
-    $(document).ready(function(){
-        $('#mineral').select2({
-            placeholder: "- เลือกชนิดแร่ -",
-            allowClear: true
-        });
-    });
+    // $(document).ready(function(){
+    //     $('#mineral').select2({
+    //         placeholder: "- เลือกชนิดแร่ -",
+    //         allowClear: true
+    //     });
+    // });
 
-    $(document).ready(function(){
-        $('#provinces').select2({
-            placeholder: "- เลือกจังหวัด -",
-            allowClear: true
-        });
-    });
+    // $(document).ready(function(){
+    //     $('#provinces').select2({
+    //         placeholder: "- เลือกจังหวัด -",
+    //         allowClear: true
+    //     });
+    // });
 </script>
 @endsection

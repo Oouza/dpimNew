@@ -486,4 +486,24 @@ class BackendController extends Controller
         $data["html"] = $html;
         return json_encode($data);
     }
+
+    function resultSkills($id){
+        $search = $id;
+        $skills = skills::join('capacities','capacities.cc_id','skills.FKs_capacity')->where('FKs_capacity',$search)
+        ->where('FKs_Create',0)->whereNull('s_userDelete')->get();
+        $capacity = capacity::where('FKcc_Create',0)->whereNull('cc_userDelete')->get();
+        return view('backend.skills.skills',compact('skills','capacity','search'));
+    }
+
+    function resultSkillsSub($id){
+        $search = $id;
+        $skillsSubs = skillsSubs::join('capacities', 'capacities.cc_id', '=', 'skills_subs.FKss_capacity')
+        ->join('skills', 'skills.s_id', '=', 'skills_subs.FKss_skills')
+        ->where('FKss_skills', $search)
+        ->where('FKss_Create', 0)
+        ->whereNull('ss_userDelete')
+        ->get();
+        $skills = skills::where('FKs_Create',0)->whereNull('s_userDelete')->get();
+        return view('backend.skills.sub.skillsSub',compact('skills','skillsSubs','search'));
+    }    
 }
