@@ -38,18 +38,24 @@ $i=1;
                                 <br>
                                 <div class="intro-y block sm:flex items-center h-10">
                                     <h3 class="text-lg font-medium truncate mr-5">เรียกดูตามหมวด</h3>
-                                    <select name="" id="">
-                                        <option value="" hidden>-เลือกหลักสูตรอบรม-</option>
-                                        <option value=""> หลักสูตรอบรม 1</option>
-                                        <option value=""> หลักสูตรอบรม 2</option>
-                                        <option value=""> หลักสูตรอบรม 3</option>
+                                </div>
+                                <div class="intro-y block sm:flex items-center h-10">
+                                    <select name="coures" id="coures" class="select2" onchange="searchTrain()">
+                                        <option value="" > หลักสูตรอบรมทั้งหมด </option>
+                                        @foreach($course as $rs)
+                                        <option value="{{$rs->cou_id}}">{{$rs->cou_no}} {{$rs->cou_name}}</option>
+                                        @endforeach
+                                        <!-- <option value=""> หลักสูตรอบรม 2</option>
+                                        <option value=""> หลักสูตรอบรม 3</option> -->
                                     </select>
                                     &nbsp; &nbsp; &nbsp; &nbsp;
-                                    <select name="" id="">
-                                        <option value="" hidden>-เลือกกลุ่มตำแหน่ง-</option>
-                                        <option value=""> กลุ่มตำแหน่ง 1</option>
-                                        <option value=""> กลุ่มตำแหน่ง 2</option>
-                                        <option value=""> กลุ่มตำแหน่ง 3</option>
+                                    <select name="GJ" id="GJ" class="select2" onchange="searchTrain()">
+                                        <option value="" hidden> กลุ่มตำแหน่งทั้งหมด </option>
+                                        @foreach($groupJob as $rs)
+                                        <option value="{{$rs->gj_id}}">{{$rs->gj_no}} {{$rs->gj_name}}</option>
+                                        @endforeach
+                                        <!-- <option value=""> กลุ่มตำแหน่ง 2</option>
+                                        <option value=""> กลุ่มตำแหน่ง 3</option> -->
                                     </select>
                                 </div>
                                 <br>
