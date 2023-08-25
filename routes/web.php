@@ -171,6 +171,9 @@ Route::get('backend/job/edit/{id}', [App\Http\Controllers\AdminJobController::cl
 Route::post('backend/job/update/{id}', [App\Http\Controllers\AdminJobController::class, 'jobUpdate']);
 Route::get('backend/job/delete/{id}', [App\Http\Controllers\AdminJobController::class, 'jobDelete']);
 Route::get('backend/job/detail/{id}', [App\Http\Controllers\AdminJobController::class, 'jobDetail']);
+Route::get('backend/job/pdf', [App\Http\Controllers\AdminJobController::class, 'jobTotalPDF']);
+Route::get('backend/job/pdf/{id}', [App\Http\Controllers\AdminJobController::class, 'jobPDF']);
+// Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
 
 Route::get('backend/job/capacity/{id}', [App\Http\Controllers\AdminJobController::class, 'jobCapacity']);
 Route::get('backend/job/capacity/form/{id}', [App\Http\Controllers\AdminJobController::class, 'jobCapacityForm']);

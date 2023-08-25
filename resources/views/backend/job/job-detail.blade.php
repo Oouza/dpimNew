@@ -31,7 +31,7 @@ $active = "job";
             <div class="intro-y box py-10 sm:py-20 mt-5">
                
                 <div class="px-5 mt-10">
-                    <div class="font-medium text-center text-lg">รายละเอียดกลุ่มตำแหน่งงาน {{$gj->gj_name}}</div>
+                    <div class="font-medium text-center text-lg">รายละเอียดกลุ่มตำแหน่ง {{$gj->gj_name}}</div>
                    
                 </div>
                 <form action="{{ url('backend/news/add') }}" method="post" enctype="multipart/form-data">
@@ -221,7 +221,7 @@ $active = "job";
                                 
 
                                 <a href="{{url('backend/job')}}" class="btn btn-warning w-50">กลับหน้าหลัก</a>
-                                <button type="button" class="btn btn-success w-26 ml-2">ส่งออกเป็น PDF</button>        
+                                <a href="{{ url('backend/job/pdf/'.$gj->gj_id) }}"><button type="button" class="btn btn-success w-26 ml-2">ส่งออกเป็น PDF</button></a>
                                 <button type="button" class="btn btn-primary w-24 ml-2" onclick="printPage()">พิมพ์</button>        
                             </center>
                       

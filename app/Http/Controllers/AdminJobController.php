@@ -20,6 +20,7 @@ use App\Exports\TypeJobExport;
 use App\Exports\LavelJobExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\typeJobImport;
+use PDF;
 
 class AdminJobController extends Controller
 {
@@ -107,16 +108,6 @@ class AdminJobController extends Controller
     function jobDetail($id){
         $gj = groupjob::join('lavel_jobs','lavel_jobs.lj_id','groupjobs.FKgj_lavel')
         ->join('type_job','type_job.tj_id','groupjobs.FKgj_typeJob')->find($id);
-        // dd($gj);
-
-        $gjc = gjcapacity::join('capacities','capacities.cc_id','gjcapacities.FKgjc_capacity')->where('FKgjc_groupjob',$id)
-        ->whereNull('gjc_userDelete')->get();
-
-        $gjs = gjskills::join('skills','skills.s_id','gjskills.FKgjs_skills')
-        ->where('FKgjs_groupjob',$id)->whereNull('gjs_userDelete')->get();
-
-        // $gjSub = gjSkillsSub::join('skills_subs','skills_subs.ss_id','gj_skills_subs.FKgjss_skillsSub')
-        // ->where('FKgjss_groupjob',$id)->whereNull('gjss_userDelete')->get();
 
         $gjSub = gjSkillsSub::join('skills_subs','skills_subs.ss_id','gj_skills_subs.FKgjss_skillsSub')
             ->join('gjskills','gjskills.gjs_id','gj_skills_subs.FKgjss_gjskills')
@@ -126,16 +117,54 @@ class AdminJobController extends Controller
             ->where('FKgjss_groupjob',$id)
             ->where('FKgjss_userCreate',0)
             ->whereNull('gjss_userDelete')->get();
-        // dd($gjt);
 
-        return view('backend.job.job-detail',compact('gj','gjc','gjs','gjSub'));
-        // use App\Models\capacity;
-        // use App\Models\skills;
-        // use App\Models\skillsSubs;
-        // use App\Models\groupjob;
-        // use App\Models\gjcapacity;
-        // use App\Models\gjskills;
-        // use App\Models\gjSkillsSub;
+        return view('backend.job.job-detail',compact('gj','gjSub'));
+    }
+
+    function jobPDF($id){
+        $gj = groupjob::join('lavel_jobs','lavel_jobs.lj_id','groupjobs.FKgj_lavel')
+        ->join('type_job','type_job.tj_id','groupjobs.FKgj_typeJob')->find($id);
+
+        $gjSub = gjSkillsSub::join('skills_subs','skills_subs.ss_id','gj_skills_subs.FKgjss_skillsSub')
+            ->join('gjskills','gjskills.gjs_id','gj_skills_subs.FKgjss_gjskills')
+            ->join('skills','skills.s_id','gjskills.FKgjs_skills')
+            ->join('gjcapacities','gjcapacities.gjc_id','gj_skills_subs.FKgjss_gjcapacity')            
+            ->join('capacities','capacities.cc_id','gjcapacities.FKgjc_capacity')            
+            ->where('FKgjss_groupjob',$id)
+            ->where('FKgjss_userCreate',0)
+            ->whereNull('gjss_userDelete')->get();
+
+        $data = [
+            'gj' => $gj,
+            'gjSub' => $gjSub
+        ];
+          
+        $pdf = PDF::loadView('backend.job.jobPDF', $data);
+    
+        return $pdf->download('itsolutionstuff.pdf');
+    }
+
+    function jobTotalPDF(){
+        $gj = groupjob::join('lavel_jobs','lavel_jobs.lj_id','groupjobs.FKgj_lavel')
+            ->join('type_job','type_job.tj_id','groupjobs.FKgj_typeJob')
+            ->where('FKgj_userCreate',0)->whereNull('gj_userDelete')->get();
+
+        $gjSub = gjSkillsSub::join('skills_subs','skills_subs.ss_id','gj_skills_subs.FKgjss_skillsSub')
+            ->join('gjskills','gjskills.gjs_id','gj_skills_subs.FKgjss_gjskills')
+            ->join('skills','skills.s_id','gjskills.FKgjs_skills')
+            ->join('gjcapacities','gjcapacities.gjc_id','gj_skills_subs.FKgjss_gjcapacity')            
+            ->join('capacities','capacities.cc_id','gjcapacities.FKgjc_capacity')            
+            ->where('FKgjss_userCreate',0)
+            ->whereNull('gjss_userDelete')->get();
+
+        $data = [
+            'gj' => $gj,
+            'gjSub' => $gjSub
+        ];
+          
+        $pdf = PDF::loadView('backend.job.jobTotalPDF', $data);
+    
+        return $pdf->download('itsolutionstuff.pdf');
     }
 
     function jobCapacity($id){
