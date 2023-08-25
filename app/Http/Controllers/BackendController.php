@@ -174,14 +174,15 @@ class BackendController extends Controller
     }
 
     function skillsSubForm(){
-        $skills = skills::where('FKs_Create',0)->whereNull('s_userDelete')->get();
-        return view('backend.skills.sub.skillsSub-add',compact('skills'));
+        $capacity = capacity::where('FKcc_Create',0)->whereNull('cc_userDelete')->get();
+        // $skills = skills::where('FKs_Create',0)->whereNull('s_userDelete')->get();
+        return view('backend.skills.sub.skillsSub-add',compact('capacity'));
     }
 
     function skillsSubAdd(Request $request){
         // dd($request);
 
-        $skills = skills::where('s_id',$request->skills)->first();
+        // $skills = skills::where('s_id',$request->skills)->first();
 
         $skillsSubs                   = new skillsSubs;
         $skillsSubs->ss_no            = $request->ss_no;
@@ -191,7 +192,7 @@ class BackendController extends Controller
         $skillsSubs->ss_standardTwo   = $request->lavel2;
         $skillsSubs->ss_standardThree = $request->lavel3;
         $skillsSubs->FKss_skills      = $request->skills;
-        $skillsSubs->FKss_capacity    = $skills->FKs_capacity;
+        $skillsSubs->FKss_capacity    = $request->capacity;
         $skillsSubs->FKss_Create      = 0;
         $skillsSubs->ss_userCreate    = Auth::user()->name;
         $skillsSubs->ss_userUpdate    = Auth::user()->name;
@@ -204,14 +205,15 @@ class BackendController extends Controller
 
     function skillsSubEdit($id){
         $ss = skillsSubs::find($id);
+        $capacity = capacity::where('FKcc_Create',0)->whereNull('cc_userDelete')->get();
         $skills = skills::where('FKs_Create',0)->whereNull('s_userDelete')->get();
-        return view('backend.skills.sub.skillsSub-edit',compact('ss','skills'));
+        return view('backend.skills.sub.skillsSub-edit',compact('ss', 'capacity', 'skills'));
     }
 
     function skillsSubUpdate(Request $request, $id){
         // dd($request);
 
-        $skills = skills::where('s_id',$request->skills)->first();
+        // $skills = skills::where('s_id',$request->skills)->first();
 
         $update = skillsSubs::find($id)->update([
             'ss_no'             =>  $request->ss_no,
@@ -221,7 +223,7 @@ class BackendController extends Controller
             'ss_standardTwo'    =>  $request->lavel2,
             'ss_standardThree'  =>  $request->lavel3,
             'FKss_skills'       =>  $request->skills,
-            'FKss_capacity'     =>  $skills->FKs_capacity,
+            'FKss_capacity'     =>  $request->capacity,
             'ss_userUpdate'     =>  Auth::user()->name
         ]);
 
@@ -506,4 +508,17 @@ class BackendController extends Controller
         $skills = skills::where('FKs_Create',0)->whereNull('s_userDelete')->get();
         return view('backend.skills.sub.skillsSub',compact('skills','skillsSubs','search'));
     }    
+
+    function capacitySkills(Request $request){
+        $skills = skills::where('FKs_capacity',$request->capacity)->where('FKs_Create',0)->whereNull('s_userDelete')->get();
+        $html = '<option value="">- กรุณาเลือกทักษะ -</option>';
+        if(!empty($skills)){
+            foreach($skills as $_data){
+                $html .= '<option value="'.$_data->s_id.'">'.$_data->s_no.' '.$_data->s_name.'</option>';
+               
+            }
+        }
+        $response["html"] = $html;
+        return json_encode($response);      
+    }
 }

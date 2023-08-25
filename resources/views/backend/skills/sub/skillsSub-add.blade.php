@@ -95,14 +95,25 @@ $active = "skillsSub";
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                    <b><label for="horizontal-form-1" class="form-label "> สมรรถนะ </lable></b>
+                                </div>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                    <select name="capacity" id="capacity" class="form-control select2" onchange="selectSkills()">
+                                        <option value="" hidden>- กรุณาเลือกสมรรถนะ -</option>
+                                        @foreach($capacity as $rs)
+                                        <option value="{{$rs->cc_id}}">{{$rs->cc_no}} {{$rs->cc_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-12 gap-6 mt-5">
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                     <b><label for="horizontal-form-1" class="form-label "> ทักษะ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="skills" id="skills" class="form-control select2">
                                         <option value="" hidden>- กรุณาเลือกทักษะ -</option>
-                                        @foreach($skills as $rs)
-                                        <option value="{{$rs->s_id}}">{{$rs->s_no}} {{$rs->s_name}}</option>
-                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -131,6 +142,35 @@ $active = "skillsSub";
 
 @section('javascripts')
 <script>
+    function selectSkills() {
+        var capacity = $('#capacity').val();
+        // alert(skills);
+        if (skills == '') {
+            // Do something if skills is empty
+        } else {
+            $.ajax({
+                type: 'post',
+                url: "{{ url('capacitySkills') }}",
+                dataType: 'json',
+                data: {
+                    capacity: capacity,
+                    _token: "{{csrf_token()}}"
+                },
+                success: function (response) {
+                    // Assuming response is a string containing the description
+                    $('#skills').html(response.html);
+                }
+            });
+        }
+        
+        $(document).ready(function(){
+            $('#skills').select2({
+                placeholder: "- กรุณาเลือกทักษะ -",
+                allowClear: true
+            });
+        });
+    }
+
     ClassicEditor
     .create( document.querySelector( '#ss_detail' ) )
     .then( editor => {
@@ -170,8 +210,8 @@ $active = "skillsSub";
     } );
 
     $(document).ready(function(){
-        $('#skills').select2({
-            placeholder: "- กรุณาเลือกทักษะ -",
+        $('#capacity').select2({
+            placeholder: "- กรุณาเลือกสมรรถนะ -",
             allowClear: true
         });
     });

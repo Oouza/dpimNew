@@ -353,6 +353,7 @@ Route::get('backend/people/cfSkills/detail', [App\Http\Controllers\AdminEmployee
 // Ajax
 Route::post('searchProvice', [App\Http\Controllers\BackendController::class, 'searchProvice']);
 Route::post('searchAmphure', [App\Http\Controllers\BackendController::class, 'searchAmphure']);
+Route::post('capacitySkills', [App\Http\Controllers\BackendController::class, 'capacitySkills']);
 
 Route::post('searchCapacity', [App\Http\Controllers\AdminJobController::class, 'searchCapacity']);
 Route::post('searchSkills', [App\Http\Controllers\AdminJobController::class, 'searchSkills']);
@@ -361,6 +362,7 @@ Route::get('detailSkillsSub', [App\Http\Controllers\AdminJobController::class, '
 
 Route::post('searchDepartment', [App\Http\Controllers\FrontendController::class, 'searchDepartment']);
 Route::post('searchGroupJob', [App\Http\Controllers\FrontendController::class, 'searchGroupJob']);
+
 
 // Auth::routes();
 
