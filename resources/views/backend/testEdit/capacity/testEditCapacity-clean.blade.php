@@ -20,14 +20,14 @@ $i=1;
             <div class="intro-y box py-10 sm:py-20 mt-5">
                
                 <div class="px-5 mt-10">
-                    <div class="font-medium text-center text-lg">ข้อมูลสมรรถนะที่ถูกคลีน</div>
+                    <div class="font-medium text-center text-lg">ข้อมูลสมรรถนะที่ถูกรวมกลุ่มแล้ว</div>
                    
                 </div>
          
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-slate-200/60 dark:border-darkmode-400">
                     <h2 class="text-lg font-medium truncate mr-5">
                         กลุ่มตำแหน่ง
-                        <select name="" id="">
+                        <select name="" id="" class="select2">
                             <option value="">กลุ่มตำแหน่ง 1</option>
                             <option value="">กลุ่มตำแหน่ง 2</option>
                             <option value="">กลุ่มตำแหน่ง 3</option>

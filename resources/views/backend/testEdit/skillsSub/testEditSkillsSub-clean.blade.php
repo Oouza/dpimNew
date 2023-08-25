@@ -20,7 +20,7 @@ $i=1;
             <div class="intro-y box py-10 sm:py-20 mt-5">
                
                 <div class="px-5 mt-10">
-                    <div class="font-medium text-center text-lg">ข้อมูลทักษะที่ถูกคลีน</div>
+                    <div class="font-medium text-center text-lg">ข้อมูลทักษะย่อยที่ถูกคลีน</div>
                    
                 </div>
          
@@ -41,7 +41,7 @@ $i=1;
                         </select>
                         &nbsp; &nbsp; &nbsp; &nbsp; -->
                         ทักษะ
-                        <select name="" id="">
+                        <select name="" id="" class="select2">
                             <option value="">ทักษะ 1</option>
                             <option value="">ทักษะ 2</option>
                             <option value="">ทักษะ 3</option>

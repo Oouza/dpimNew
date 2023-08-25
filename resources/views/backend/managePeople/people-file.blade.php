@@ -31,7 +31,7 @@ $active = "managePeople";
             <div class="intro-y box py-10 sm:py-20 mt-5">
                
                 <div class="px-5 mt-10">
-                    <div class="font-medium text-center text-lg"> เพิ่มไฟล์ข้อมูลบุลคากร </div>
+                    <div class="font-medium text-center text-lg"> เพิ่มไฟล์ข้อมูลบุคลากร </div>
                 </div>
                 <form action="{{ url('backend/people/upload') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
