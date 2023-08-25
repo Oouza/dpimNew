@@ -26,7 +26,7 @@
     <table border="1">
         <tr>
            <th><center>สมรรถนะ</center></th>
-           <th><center>ทักษะ/ความรู้</center></th>
+           <th><center>ทักษะ</center></th>
            <th><center>ทักษะย่อย</center></th>
         </tr>
         @php 

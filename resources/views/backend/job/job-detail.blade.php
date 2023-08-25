@@ -88,7 +88,7 @@ $active = "job";
                             <table id="example" class="table table-striped table-bordered" style="width:100%">
                                 <tr>
                                     <th><center>สมรรถนะ</center></th>
-                                    <th><center>ทักษะ/ความรู้</center></th>
+                                    <th><center>ทักษะ</center></th>
                                     <th><center>ทักษะย่อย</center></th>
                                     <th><center>ระดับ 1</center></th>
                                     <th><center>ระดับ 2</center></th>
@@ -152,7 +152,7 @@ $active = "job";
                                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                                     <tr>
                                         <th><center>สมรรถนะ</center></th>
-                                        <th><center>ทักษะ/ความรู้</center></th>
+                                        <th><center>ทักษะ</center></th>
                                         <th><center>ทักษะย่อย</center></th>
                                     </tr>
                                     
