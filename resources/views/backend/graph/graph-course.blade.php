@@ -38,17 +38,17 @@ $i=1;
                                 <div class="intro-y block sm:flex items-center h-10">
                                     <h3 class="text-lg font-medium truncate mr-5">เรียกดูตามหมวด</h3>
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-4">
-                                        <select name="" id="">
-                                            <option value="" hidden>- เลือกปี -</option>
-                                            <option value=""> ทั้งหมด  </option>
+                                        <select name="" id="" class="select2">
+                                            <!-- <option value="" hidden>- เลือกปี -</option> -->
+                                            <option value=""> ปีทั้งหมด  </option>
                                             <option value=""> 2566 </option>
                                             <option value=""> 2565 </option>
                                             <option value=""> 2564 </option>
                                         </select>
                                         &nbsp; &nbsp; &nbsp; &nbsp;
-                                        <select name="" id="">
-                                            <option value="" hidden>- เลือกกลุ่มตำแหน่ง -</option>
-                                            <option value=""> ทั้งหมด  </option>
+                                        <select name="" id="" class="select2">
+                                            <!-- <option value="" hidden>- เลือกกลุ่มตำแหน่ง -</option> -->
+                                            <option value=""> กลุ่มตำแหน่งทั้งหมด  </option>
                                             <option value=""> กลุ่มตำแหน่ง1  </option>
                                             <option value=""> กลุ่มตำแหน่ง2  </option>
                                             <option value=""> กลุ่มตำแหน่ง3  </option>
@@ -127,7 +127,7 @@ function del_value(id) {
         align: 'left'
     },
     xAxis: {
-        categories: ['สมรรถนะ1', 'สมรรถนะ2', 'สมรรถนะ3', 'สมรรถนะ4'],
+        categories: ['สมรรถนะ1', 'สมรรถนะ2', 'สมรรถนะ3', 'สมรรถนะ4', 'สมรรถนะอื่นๆ', 'สมรรถนะอื่นๆ'],
         crosshair: true,
         accessibility: {
             description: 'Countries'
@@ -151,31 +151,31 @@ function del_value(id) {
     series: [
         {
             name: 'ทักษะ1',
-            data: [100, 110, 50, 40]
+            data: [100, 110, 50, 40, 50]
         },
         {
             name: 'ทักษะ2',
-            data: [50, 90, 60, 80]
+            data: [50, 90, 60, 80, 60]
         },
         {
             name: 'ทักษะ3',
-            data: [60, 40, 84, 33]
+            data: [60, 40, 84, 33, 20]
         },
         {
             name: 'ทักษะ4',
-            data: [90, 70, 98, 65]
+            data: [90, 70, 98, 65, 25]
         },
         {
             name: 'ทักษะ5',
-            data: [20, 30, 70, 52]
+            data: [20, 30, 70, 52, 77]
         },
         {
             name: 'ทักษะ6',
-            data: [30, 50, 45, 39]
+            data: [30, 50, 45, 39, 10]
         },
         {
             name: 'ทักษะอื่นๆ',
-            data: [10, 5, 15, 30]
+            data: [10, 5, 15, 30, 30]
         }
     ]
 });

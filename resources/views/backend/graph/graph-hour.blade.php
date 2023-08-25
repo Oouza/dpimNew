@@ -39,23 +39,23 @@ $i=1;
                     <div class="intro-y block sm:flex items-center h-10">
                         <h3 class="text-lg font-medium truncate mr-5">เรียกดูตามหมวด</h3>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-4">
-                            <select name="" id="">
-                                <option value="" hidden>- เลือกปี -</option>
-                                <option value=""> ทั้งหมด  </option>
+                            <select name="year" id="year" class="select2">
+                                <!-- <option value="" hidden>- เลือกปี -</option> -->
+                                <option value=""> ปีทั้งหมด  </option>
                                 <option value=""> 2566 </option>
                                 <option value=""> 2565 </option>
                                 <option value=""> 2564 </option>
                             </select>
                             &nbsp; &nbsp; &nbsp; &nbsp;
-                            <select name="" id="">
-                                <option value="" hidden>- เลือกประเภทสถานประกอบการ -</option>
-                                <option value="">เหมืองแร่</option>
-                                <option value="">โรงโม่หิน</option>
-                                <option value="">โรงแต่งแร่</option>
-                                <option value="">โรงประกอบโลหกรรม</option>
-                                <option value="">ผู้รับเหมาเหมืองแร่</option>
-                                <option value="">อื่นๆ</option>
-                                <option value="">อิสระ</option>
+                            <select name="typeCom" id="typeCom" class="select2">
+                                <option value=""> ประเภทสถานประกอบการทั้งหมด </option>
+                                <option value="เหมืองแร่">เหมืองแร่</option>
+                                <option value="โรงโม่หิน">โรงโม่หิน</option>
+                                <option value="โรงแต่งแร่">โรงแต่งแร่</option>
+                                <option value="โรงประกอบโลหกรรม">โรงประกอบโลหกรรม</option>
+                                <option value="ผู้รับเหมาเหมืองแร่">ผู้รับเหมาเหมืองแร่</option>
+                                <option value="อื่นๆ">อื่นๆ</option>
+                                <option value="อิสระ">อิสระ</option>
                             </select>
                         </div>
                     </div>
@@ -64,46 +64,60 @@ $i=1;
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
-                                <th><center>ลำดับ</center></th>
+                                <!-- <th><center>ลำดับ</center></th> -->
                                 <th><center>กลุ่มตำแหน่ง</center></th>
                                 <th><center>จำนวนบุคลากร</center></th>
                                 <th><center>จำนวนชั่วโมงที่ได้รับการพัฒนาเฉลี่ยต่อคน - สมรรถนะ1</center></th>
                                 <th><center>จำนวนชั่วโมงที่ได้รับการพัฒนาเฉลี่ยต่อคน – สมรรถนะ2</center></th>
                                 <th><center>จำนวนชั่วโมงที่ได้รับการพัฒนาเฉลี่ยต่อคน - รวม</center></th>
                                 <th><center>หมายเหตุ</center></th>
-                                <!-- <th><center>ความถี่/การจัดครั้งล่าสุด</center></th>
-                                <th><center>คำอธิบาย</center></th>
-                                <th><center>ตั้งค่า</center></th> -->
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><center>01</center></td>
+                                <!-- <td><center>01</center></td> -->
                                 <td><center>กลุ่มตำแหน่ง 1</center></td>
                                 <td><center>100</center></td>
                                 <td><center>4</center></td>
                                 <td><center>6</center></td>
                                 <td><center>10</center></td>
                                 <th><center></center></th>
-                                <!-- <td><center><a href="{{ url ('backend/dpim/edit')}}"  >  <button type="button" class="btn btn-warning"  >Edit</button></a></center></td> -->
-                                <!-- <td><center>
-                                    <a href="{{ url ('backend/dpim/edit')}}"  >  <button type="button" class="btn btn-warning"  >Edit</button></a>
-                                    <button type="button" class="btn btn-danger" onclick="del_value(1)">Delete</button>
-                                </center></td> -->
                             </tr>
                             <tr>
-                                <td><center>02</center></td>
+                                <!-- <td><center>01</center></td> -->
+                                <td><center>สมรรถนะ1</center></td>
+                                <td><center>100</center></td>
+                                <td><center>4</center></td>
+                                <td><center>6</center></td>
+                                <td><center>10</center></td>
+                                <th><center></center></th>
+                            </tr>
+                            <tr>
+                                <!-- <td><center>01</center></td> -->
+                                <td><center>สมรรถนะ2</center></td>
+                                <td><center>100</center></td>
+                                <td><center>4</center></td>
+                                <td><center>6</center></td>
+                                <td><center>10</center></td>
+                                <th><center></center></th>
+                            </tr>
+                            <tr>
+                                <!-- <td><center>02</center></td> -->
                                 <td><center>กลุ่มตำแหน่ง 2</center></td>
                                 <td><center>100</center></td>
                                 <td><center>5</center></td>
                                 <td><center>3</center></td>
                                 <td><center>6</center></td>
                                 <th><center></center></th>
-                                <!-- <td><center><a href="{{ url ('backend/dpim/edit')}}"  >  <button type="button" class="btn btn-warning"  >Edit</button></a></center></td> -->
-                                <!-- <td><center>
-                                    <a href="{{ url ('backend/dpim/edit')}}"  >  <button type="button" class="btn btn-warning"  >Edit</button></a>
-                                    <button type="button" class="btn btn-danger" onclick="del_value(2)">Delete</button>
-                                </center></td> -->
+                            </tr>
+                            <tr>
+                                <!-- <td><center>01</center></td> -->
+                                <td><center>สมรรถนะ1</center></td>
+                                <td><center>100</center></td>
+                                <td><center>4</center></td>
+                                <td><center>6</center></td>
+                                <td><center>10</center></td>
+                                <th><center></center></th>
                             </tr>
                         </tbody>
                     </table>
@@ -121,6 +135,14 @@ $i=1;
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>  <!-- delete -->
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>  <!-- delete -->
 <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.select2').select2();
+    });
+</script>
 
 <script>
     $(document).ready(function() {

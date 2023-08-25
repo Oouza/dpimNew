@@ -38,25 +38,25 @@ $i=1;
                                 <div class="intro-y block sm:flex items-center h-10">
                                     <h3 class="text-lg font-medium truncate mr-5">เรียกดูตามหมวด</h3>
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-4">
-                                        <select name="" id="">
-                                          <option value="" hidden>- เลือกปี -</option>
-                                          <option value=""> ทั้งหมด  </option>
+                                        <select name="" id="" class="select2">
+                                          <!-- <option value="" hidden>- เลือกปี -</option> -->
+                                          <option value=""> ปีทั้งหมด  </option>
                                           <option value=""> 2566 </option>
                                           <option value=""> 2565 </option>
                                           <option value=""> 2564 </option>
                                         </select>
                                         &nbsp; &nbsp; &nbsp; &nbsp;
-                                        <select name="" id="">
-                                          <option value="" hidden>- เลือกกลุ่มตำแหน่ง -</option>
-                                          <option value=""> ทั้งหมด  </option>
+                                        <select name="" id="" class="select2">
+                                          <!-- <option value="" hidden>- เลือกกลุ่มตำแหน่ง -</option> -->
+                                          <option value=""> กลุ่มตำแหน่งทั้งหมด  </option>
                                           <option value=""> กลุ่มตำแหน่ง1  </option>
                                           <option value=""> กลุ่มตำแหน่ง2  </option>
                                           <option value=""> กลุ่มตำแหน่ง3  </option>
                                         </select>
                                         &nbsp; &nbsp; &nbsp; &nbsp;
-                                        <select name="" id="">
-                                          <option value="">- เลือกประเภทสถานประกอบการ -</option>
-                                          <option value=""> ทั้งหมด  </option>
+                                        <select name="" id="" class="select2">
+                                          <!-- <option value="">- เลือกประเภทสถานประกอบการ -</option> -->
+                                          <option value=""> ประเภทสถานประกอบการทั้งหมด  </option>
                                           <option value="">เหมืองแร่</option>
                                           <option value="">โรงโม่หิน</option>
                                           <option value="">โรงแต่งแร่</option>
