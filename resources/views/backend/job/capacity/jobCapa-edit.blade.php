@@ -66,9 +66,9 @@ $active = "job";
                                     <b><label for="horizontal-form-1" class="form-label "> ระดับความจำเป็น </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input name="important" type="radio" value="จำเป็น" checked> จำเป็น
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input name="important" type="radio" value="ไม่จำเป็น"> ไม่จำเป็น
+                                    <input name="important" type="checkbox" value="จำเป็น" @if($gjc->gjc_important == "จำเป็น") checked @endif>&nbsp;&nbsp;จำเป็น
+                                    <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input name="important" type="radio" value="ไม่จำเป็น"> ไม่จำเป็น -->
                                 </div>
                             </div>
 
