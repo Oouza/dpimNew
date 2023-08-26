@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\ceohr;
 use App\Models\settingPosition;
+use App\Models\employee;
+use App\Models\lavelJob;
+use App\Models\groupjob;
 
 class HomeController extends Controller
 {
@@ -31,7 +34,14 @@ class HomeController extends Controller
         //     return view('home');
         
         if(\Auth::user()->status == '1' || \Auth::user()->status == '2' ){  // แอดมินน
-            return view('backend.graph.graph-job');
+            $user = User::join('employees','employees.FKe_userid','users.id')
+            ->leftjoin('companies','companies.c_id','employees.FKe_company')->where('status',8)
+            ->groupBy('c_typeCompany')->select('companies.c_typeCompany')->get();
+
+            $lj = lavelJob::whereNull('lj_userDelete')->get();
+            $groupjob = groupjob::whereNull('gj_userDelete')->get();
+            
+            return view('backend.graph.graph-job',compact('user','lj','groupjob'));
         }
         else if(\Auth::user()->status == '8' ){  // บุคลากร
             $user = User::join('employees','employees.FKe_userid','users.id')->find(\Auth::user()->id);

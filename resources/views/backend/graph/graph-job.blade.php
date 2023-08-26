@@ -33,6 +33,13 @@ $i=1;
                                     <a href="{{ url('backend/skills/form' )}}"  >   <button class="btn btn-elevated-primary w-24 mr-1 mb-2">เพิ่มข้อมูล</button></a>
                                     </div>
                                 </div> -->
+                                @foreach($user as $rs)
+                                    @if($rs->c_typeCompany == '')
+                                        อิสระ
+                                    @else
+                                        {{$rs->c_typeCompany}}
+                                    @endif
+                                @endforeach
                                 <br>
                                 <br>
                                 <div class="intro-y block sm:flex items-center h-10">
@@ -49,9 +56,12 @@ $i=1;
                                         <select name="" id="" class="select2">
                                             <!-- <option value="" hidden>- เลือกกลุ่มตำแหน่ง -</option> -->
                                             <option value=""> กลุ่มตำแหน่งทั้งหมด  </option>
-                                            <option value=""> กลุ่มตำแหน่ง1  </option>
+                                            @foreach($groupjob as $rs)
+                                            <option value="{{$rs->gj_id}}">{{$rs->gj_no}} {{$rs->gj_name}}</option>
+                                            @endforeach
+                                            <!-- <option value=""> กลุ่มตำแหน่ง1  </option>
                                             <option value=""> กลุ่มตำแหน่ง2  </option>
-                                            <option value=""> กลุ่มตำแหน่ง3  </option>
+                                            <option value=""> กลุ่มตำแหน่ง3  </option> -->
                                         </select>
                                     </div>
                                 </div>
