@@ -167,17 +167,17 @@ class FrontendController extends Controller
     //     return view('frontend.company.job.capacity.capacity-edit');
     // }
 
-    function companyJobSkills(){
-        return view('frontend.company.job.skills.skills');
-    }
+    // function companyJobSkills(){
+    //     return view('frontend.company.job.skills.skills');
+    // }
 
-    function companyJobSkillsForm(){
-        return view('frontend.company.job.skills.skills-add');
-    }
+    // function companyJobSkillsForm(){
+    //     return view('frontend.company.job.skills.skills-add');
+    // }
 
-    function companyJobSkillsEdit(){
-        return view('frontend.company.job.skills.skills-edit');
-    }
+    // function companyJobSkillsEdit(){
+    //     return view('frontend.company.job.skills.skills-edit');
+    // }
     // function companyCapacity(){
     //     return view('frontend.company.capacity.capacity');
     // }

@@ -38,6 +38,7 @@ $i=1;
                                 <tr>
                                     <th><center>สมรรถนะ</center></th>
                                     <th><center>คำอธิบาย</center></th>
+                                    <th><center>ระดับความจำเป็น</center></th>
                                     <th><center>ทักษะ</center></th>
                                     <th><center>แก้ไข/ลบ</center></th>
                                 </tr>
@@ -47,11 +48,12 @@ $i=1;
                                 <tr>
                                     <td><center>{{$rs->gjc_id}} {{$rs->cc_name}} @if($rs->FKgjc_userCreate == 0) <br> (พื้นฐาน) @endif</center></td>
                                     <td><center>{!! asset($rs->cc_detail )?$rs->cc_detail :''!!}</center></td>
-                                    <td><center><a href="{{url('company/job/skills')}}"><button class="btn btn-outline-secondary">ทักษะ</button></a></center></td>
+                                    <th><center>{{$rs->gjc_important}}</center></th>
+                                    <td><center><a href="{{url('company/job/skills/'.$rs->gjc_id.'/'.$gj->sp_id)}}"><button class="btn btn-outline-secondary">ทักษะ</button></a></center></td>
                                     <td><center>
                                         @if($rs->FKgjc_userCreate != 0)
-                                        <a href="{{ url ('company/job/capacity/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
-                                        <button type="button" class="btn btn-danger" onclick="del_value(1)">ลบ</button>
+                                        <a href="{{ url ('company/job/capacity/edit/'.$rs->gjc_id.'/'.$gj->sp_id)}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
+                                        <button type="button" class="btn btn-danger" onclick="del_value({{$gj->gjc_id}})">ลบ</button>
                                         @endif
                                     </center></td>
                                 </tr>

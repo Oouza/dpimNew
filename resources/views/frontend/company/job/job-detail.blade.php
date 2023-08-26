@@ -34,23 +34,34 @@ $active = "job";
                     <div class="font-medium text-center text-lg">สรุปข้อมูลสมรรถนะและทักษะของตำแหน่งงาน</div>
                    
                 </div>
-                <form action="{{ url('backend/news/add') }}" method="post" enctype="multipart/form-data">
-                {{ csrf_field() }}
+                <!-- <form action="{{ url('backend/news/add') }}" method="post" enctype="multipart/form-data">
+                {{ csrf_field() }} -->
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-sl ate-200/60 dark:border-darkmode-400">
                     <div class="font-medium text-base">รายละเอียด</div>
 
-                        <div class="grid grid-cols-12 gap-6 mt-5">
+                            <div class="grid grid-cols-12 gap-6 mt-5">
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                    <b><label for="horizontal-form-1" class="form-label "> แผนก </lable></b>
+                                </div>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" value="{{$sp->d_name}}" disabled>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-12 gap-6 mt-5">
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                    <b><label for="horizontal-form-1" class="form-label "> แผนกย่อย </lable></b>
+                                </div>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" value="{{$sp->ds_name}}" disabled>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                     <b><label for="horizontal-form-1" class="form-label "> ตำแหน่ง </lable></b>
                                 </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-4">
-                                    <!-- <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" value="ตำแหน่ง1" required> -->
-                                    <select name="" id="" class="form-control" disabled>
-                                        <option value="" hidden>- กรุณาเลือกตำแหน่ง -</option>
-                                        <option value="" selected>ตำแหน่ง 1</option>
-                                        <option value="">ตำแหน่ง 2</option>
-                                        <option value="">ตำแหน่ง 3</option>
-                                    </select>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" value="{{$sp->p_name}}" disabled>
                                 </div>
                             </div>
 
@@ -58,13 +69,13 @@ $active = "job";
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                     <b><label for="horizontal-form-1" class="form-label "> กลุ่มตำแหน่ง </lable></b>
                                 </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-4">
-                                    <!-- <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" value="ตำแหน่ง1" required> -->
-                                    <select name="" id="" class="form-control" disabled>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" value="{{$sp->gj_name}}" disabled>
+                                    <!-- <select name="" id="" class="form-control" disabled>
                                         <option value="" hidden>- กรุณาเลือกกลุ่มตำแหน่ง -</option>
                                         <option value=""> เลือกกลุ่มตำแหน่ง 1 </option>
                                         <option value="" selected> เลือกกลุ่มตำแหน่ง 2 </option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
 
@@ -73,7 +84,7 @@ $active = "job";
                                     <b><label for="horizontal-form-1" class="form-label "> คำอธิบาย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <textarea cols="80" id="news_detail" name="news_detail" rows="10" disabled>คำอธิบาย1</textarea>
+                                    <textarea cols="60" id="news_detail" name="news_detail" rows="10" disabled>{{ isset($sp->gj_detail) ? strip_tags($sp->gj_detail) : '' }}</textarea>
                                 </div>
                             </div>
 
@@ -81,13 +92,14 @@ $active = "job";
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                     <b><label for="horizontal-form-1" class="form-label "> ประเภทงาน </lable></b>
                                 </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-4">
-                                    <select name="" id="" class="form-control" disabled>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" value="{{$sp->tj_name}}" disabled>
+                                    <!-- <select name="" id="" class="form-control" disabled>
                                         <option value="" hidden>- กรุณาเลือกประเภทงาน -</option>
                                         <option value="" selected>ประเภทงาน 1</option>
                                         <option value="">ประเภทงาน 2</option>
                                         <option value="">ประเภทงาน 3</option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
 
@@ -95,13 +107,14 @@ $active = "job";
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                     <b><label for="horizontal-form-1" class="form-label "> ระดับงาน </lable></b>
                                 </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-4">
-                                    <select name="" id="" class="form-control" disabled>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" value="{{$sp->lj_name}}" disabled>
+                                    <!-- <select name="" id="" class="form-control" disabled>
                                         <option value="" hidden>- กรุณาเลือกระดับงาน -</option>
                                         <option value="" selected>ระดับงาน 1</option>
                                         <option value="">ระดับงาน 2</option>
                                         <option value="">ระดับงาน 3</option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
 
@@ -109,39 +122,45 @@ $active = "job";
                             <table id="example" class="table table-striped table-bordered" style="width:100%">
                                 <tr>
                                     <th><center>สมรรถนะ</center></th>
-                                    <th><center>ทักษะ/ความรู้</center></th>
+                                    <th><center>ทักษะ</center></th>
                                     <th><center>ทักษะย่อย</center></th>
                                 </tr>
-                                <tr>
-                                    <td><center>สมรรถนะ 1 (พื้นฐาน)</center></td>
-                                    <td><center>ทักษะ 1 (พื้นฐาน)</center></td>
-                                    <td><center>ทักษะย่อย 1 (พื้นฐาน)</center></td>
-                                </tr>
-                                <tr>
-                                    <td><center></center></td>
-                                    <td><center></center></td>
-                                    <td><center>ทักษะย่อย 2 (เพิ่มเติม)</center></td>
-                                </tr>
-                                <tr>
-                                    <td><center></center></td>
-                                    <td><center>ทักษะ 2 (พื้นฐาน)</center></td>
-                                    <td><center>ทักษะย่อย 1 (พื้นฐาน)</center></td>
-                                </tr>
-                                <tr>
-                                    <td><center></center></td>
-                                    <td><center></center></td>
-                                    <td><center>ทักษะย่อย 2 (เพิ่มเติม)</center></td>
-                                </tr>
-                                <tr>
-                                    <td><center>สมรรถนะ 2 (เพิ่มเติม)</center></td>
-                                    <td><center>ทักษะ 1 (เพิ่มเติม)</center></td>
-                                    <td><center>ทักษะย่อย 1 (เพิ่มเติม)</center></td>
-                                </tr>
-                                <tr>
-                                    <td><center></center></td>
-                                    <td><center>ทักษะ 2 (เพิ่มเติม)</center></td>
-                                    <td><center>ทักษะย่อย 1 (เพิ่มเติม)</center></td>
-                                </tr>
+                                @php 
+                                        $capacity = "";
+                                        $skills = "";
+                                    @endphp
+                                    @foreach($gjSub as $rs)
+                                    <tr>
+                                        <td><center>
+                                            @if($capacity != $rs->cc_name) 
+                                                {{$rs->cc_name}}
+                                                @php 
+                                                    $capacity = $rs->cc_name;
+                                                @endphp
+                                                @if($rs->FKgjc_userCreate == 0)
+                                                    <br> (พื้นฐาน)
+                                                @endif
+                                            @endif
+                                        </center></td>
+                                        <td><center>
+                                            @if($skills != $rs->s_name) 
+                                                {{$rs->s_name}}
+                                                @php 
+                                                    $skills = $rs->s_name;
+                                                @endphp
+                                                @if($rs->FKgjs_userCreate == 0)
+                                                    <br> (พื้นฐาน)
+                                                @endif
+                                            @endif
+                                        </center></td>
+                                        <td><center>
+                                            {{$rs->ss_name}}
+                                            @if($rs->FKgjss_userCreate == 0)
+                                                <br> (พื้นฐาน)
+                                            @endif
+                                        </center></td>
+                                    </tr>
+                                    @endforeach
                             </table>
 
                             </div>
@@ -155,7 +174,7 @@ $active = "job";
                                 <a href="#" class="btn btn-success">ส่งออกเป็น xls</a>
                             </center>
                       
-                </form>
+                <!-- </form> -->
             </div>
             
             <!-- END: Wizard Layout -->

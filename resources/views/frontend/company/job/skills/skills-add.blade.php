@@ -31,7 +31,7 @@ $active = "job";
             <div class="intro-y box py-10 sm:py-20 mt-5">
                
                 <div class="px-5 mt-10">
-                    <div class="font-medium text-center text-lg">เพิ่ม ทักษะ ในสมรรถนะ 1 ของกลุ่มตำแหน่งงาน 1</div>
+                    <div class="font-medium text-center text-lg">เพิ่ม ทักษะ ในสมรรถนะ{{$gjc->cc_name}} ของตำแหน่งงาน {{$sp->p_name}}</div>
                    
                 </div>
                 <form action="{{ url('backend/job/add') }}" method="post" enctype="multipart/form-data">
@@ -41,17 +41,19 @@ $active = "job";
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> ทักษะ 1 </lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> ทักษะ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="skills" id="skills" class="form-control select2" onchange="sselect()" required>
                                         <option value="" hidden>- กรุณาเลือกทักษะ -</option>
                                         <option value="0">อื่นๆ</option>
-                                        <option value="1">ทักษะ 1</option>
-                                        <option value="2">ทักษะ 2</option>
+                                        @foreach($skills as $rs)
+                                        <option value="{{$rs->s_id}}">{{$rs->s_no}} {{$rs->s_name}}</option>
+                                        @endforeach
+                                        <!-- <option value="2">ทักษะ 2</option>
                                         <option value="3">ทักษะ 3</option>
                                         <option value="4">ทักษะ 4</option>
-                                        <option value="5">ทักษะ 5</option>
+                                        <option value="5">ทักษะ 5</option> -->
                                     </select>
                                 </div>
                             </div>

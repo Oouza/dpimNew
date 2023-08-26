@@ -20,17 +20,17 @@ $i=1;
             <div class="intro-y box py-10 sm:py-20 mt-5">
                
                 <div class="px-5 mt-10">
-                    <div class="font-medium text-center text-lg">ตั้งค่าสมรรถนะและทักษะของตำแหน่งงาน</div>
+                    <div class="font-medium text-center text-lg">ตั้งค่าสมรรถนะและทักษะของตำแหน่งงาน {{$sp->p_name}}</div>
                    
                 </div>
          
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-slate-200/60 dark:border-darkmode-400">
                 <div class="intro-y block sm:flex items-center h-10">
                                     <h2 class="text-lg font-medium truncate mr-5">
-                                    รายละเอียดทักษะ ในสมรรถนะ 1 ของตำแหน่งงาน 1
+                                    รายละเอียดทักษะ ใน{{$gjc->cc_name}} ของตำแหน่งงาน {{$sp->p_name}}
                                     </h2>
                                     <div class="flex items-center sm:ml-auto mt-3 sm:mt-0">
-                                    <a href="{{ url ('company/job/skills/form')}}"  >   <button class="btn btn-elevated-primary w-24 mr-1 mb-2">เพิ่มข้อมูล</button></a>
+                                    <a href="{{ url ('company/job/skills/form/'.$gjc->gjc_id.'/'.$sp->sp_id)}}"  >   <button class="btn btn-elevated-primary w-24 mr-1 mb-2">เพิ่มข้อมูล</button></a>
                                     </div>
                                 </div>
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
@@ -43,16 +43,36 @@ $i=1;
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($gjskills as $rs)
                                 <tr>
-                                    <td><center>ทักษะ 1</center></td>
-                                    <td><center>คำอธิบาย 1</center></td>
-                                    <td><center>ทักษะย่อย 1 <br> ทักษะย่อย 2</center></td>
+                                    <td><center>
+                                        {{$rs->s_name}}
+                                        @if($rs->FKs_Create == 0)
+                                            <br>
+                                            (พื้นฐาน)
+                                        @endif
+                                    </center></td>
+                                    <td><center>{!! asset($rs->s_detail )?$rs->s_detail :''!!}</center></td>
+                                    <td><center>
+                                    @php $i=1; @endphp
+                                    @foreach($gjSkillsSub as $row)
+                                        @if($row->FKgjss_gjskills == $rs->gjs_id)
+                                        <a href="#" onclick="detail_skills({{$row->FKgjss_skillsSub}})">{{$i++}}. {{$row->ss_name}}</a>
+                                        @if($rs->FKs_Create == 0)
+                                            <br>
+                                            (พื้นฐาน)
+                                        @endif
+                                        <br>
+                                        @endif
+                                    @endforeach
+                                    </center></td>
                                     <td><center>
                                         <a href="{{ url ('company/job/skills/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
                                         <button type="button" class="btn btn-danger" onclick="del_value(1)">ลบ</button>
                                     </center></td>
                                 </tr>
-                                <tr>
+                                @endforeach
+                                <!-- <tr>
                                     <td><center>ทักษะ 2</center></td>
                                     <td><center>คำอธิบาย 2</center></td>
                                     <td><center>ทักษะย่อย 1 <br> ทักษะย่อย 2</center></td>
@@ -65,20 +85,14 @@ $i=1;
                                     <td><center>ทักษะ 3 (พื้นฐาน)</center></td>
                                     <td><center>คำอธิบาย 1</center></td>
                                     <td><center>ทักษะย่อย 1 <br> ทักษะย่อย 2</center></td>
-                                    <td><center>
-                                        <!-- <a href="{{ url ('company/job/skills/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
-                                        <button type="button" class="btn btn-danger" onclick="del_value(1)">ลบ</button> -->
-                                    </center></td>
+                                    <td><center></center></td>
                                 </tr>
                                 <tr>
                                     <td><center>ทักษะ 4 (พื้นฐาน)</center></td>
                                     <td><center>คำอธิบาย 2</center></td>
                                     <td><center>ทักษะย่อย 1 <br> ทักษะย่อย 2</center></td>
-                                    <td><center>
-                                        <!-- <a href="{{ url ('company/job/skills/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
-                                        <button type="button" class="btn btn-danger" onclick="del_value(2)">ลบ</button> -->
-                                    </center></td>
-                                </tr>
+                                    <td><center></center></td>
+                                </tr> -->
                             </tbody>
                         
                         </table>
@@ -130,5 +144,39 @@ function del_value(id) {
                 }
             })
         }
+</script>
+
+<script>
+    function detail_skills(id) {
+        // alert(id);
+
+        if(id == ''){
+        }else{
+            $.ajax({
+                'type': 'post',
+                'url': "{{ url('searchskillsSub') }}",
+                'dataType': 'json',
+                'data': { 
+                    'skillsSub'            : id,
+                    '_token'        : "{{csrf_token()}}"  
+                },
+                // success: function (response) {
+                //     var skillsDetail = $(`#skillsSub_detail\\[${$id}\\]`); // ใช้ $id ที่ส่งเข้ามาในฟังก์ชัน
+                //     var cleanedResponse = removeHtmlTagsSub(response);
+                //     skillsDetail.text(cleanedResponse); // ใช้ .text() แทน .innerText เนื่องจากใช้ jQuery
+                // }
+            'success': function (response){
+                Swal.fire({
+                    title: '<h4>คำอธิบาย</h4>',
+                    html:   response,
+                    showCloseButton: true,
+                    confirmButtonColor: '#d33',
+                    confirmButtonText: 'ปิด',
+                })
+                
+                } 
+            });  
+        }
+    }
 </script>
 @endsection

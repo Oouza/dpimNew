@@ -31,10 +31,10 @@ $active = "job";
             <div class="intro-y box py-10 sm:py-20 mt-5">
                
                 <div class="px-5 mt-10">
-                    <div class="font-medium text-center text-lg">เพิ่มสมรรถนะกลุ่มตำแหน่ง 1</div>
+                    <div class="font-medium text-center text-lg">แก้ไขสมรรถนะ{{$sp->sp_name}}</div>
                    
                 </div>
-                <form action="{{ url('backend/news/add') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('company/job/capacity/update/'.$id.'/'.$spId) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-sl ate-200/60 dark:border-darkmode-400">
                     <div class="font-medium text-base">รายละเอียด</div>
@@ -43,24 +43,36 @@ $active = "job";
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                     <b><label for="horizontal-form-1" class="form-label "> สมรรถนะ </lable></b>
                                 </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-4">
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="capacity_select" id="capacity_select" class="form-control select2" onchange="sSelect()">
                                         <!-- <option value="" hidden>- เลือกสมรรถนะ -</option> -->
                                         <option value="0" selected>อื่นๆ</option>
-                                        <option value="1" >สมรรถนะ 1</option>
-                                        <option value="2">สมรรถนะ 2</option>
-                                        <option value="3">สมรรถนะ 3</option>
+                                        @foreach($capacity as $rs)
+                                        <option @if($gjc->FKgjc_capacity == $rs->cc_id) selected @endif value="{{$rs->cc_id}}" >{{$rs->cc_no}} {{$rs->cc_name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
-                                
-                                <div id="capacity_new" style="display:none;">
+
+                            @if($gjc->FKcc_Create ==0)
+                            <div id="detail">
+                                <div class="grid grid-cols-12 gap-6 mt-5">
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                        <b><label for="horizontal-form-1" class="form-label"> คำอธิบาย </lable></b>
+                                    </div>
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                        <textarea class="form-control" cols="55" id="capa_detail" name="capa_detail" rows="10" disabled>{{ strip_tags($gjc->cc_detail ?: '') }}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            @else
+                            <div id="capacity_new">
                                 <div class="grid grid-cols-12 gap-6 mt-5">
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                         <b><label for="horizontal-form-1" class="form-label "> รหัสสมรรถนะ </lable></b>
                                     </div>
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                        <input class="form-control" type="text" name="capacity_code" id="capacity_code" value="001" disabled>
+                                        <input class="form-control" type="text" name="capacity_code" id="capacity_code" value="{{$gjc->cc_no}}" disabled>
                                     </div>
                                 </div>
 
@@ -69,7 +81,7 @@ $active = "job";
                                         <b><label for="horizontal-form-1" class="form-label "> ชื่อสมรรถนะ </lable></b>
                                     </div>
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                        <input class="form-control" type="text" name="capacity_code" id="capacity_code" placeholder="ชื่อสมรรถนะ" value="ชื่อสมรรถนะ1" required>
+                                        <input class="form-control" type="text" name="capacity_code" id="capacity_code" placeholder="ชื่อสมรรถนะ" value="{{$gjc->cc_name}}" required>
                                     </div>
                                 </div>
 
@@ -78,19 +90,20 @@ $active = "job";
                                         <b><label for="horizontal-form-1" class="form-label"> คำอธิบาย </lable></b>
                                     </div>
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                        <textarea cols="55" id="capacity_detail" name="capacity_detail" rows="10" placeholder="คำอธิบาย">คำอธิบายสมรรถนะ</textarea>
+                                        <textarea cols="55" id="capacity_detail" name="capacity_detail" rows="10" placeholder="คำอธิบาย">{{ isset($gjs->cc_detail) ? strip_tags($gjs->cc_detail) : '' }}</textarea>
                                     </div>
                                 </div>
+                            <!-- </div> -->
+                            @endif
 
-                                <div class="grid grid-cols-12 gap-6 mt-5">
-                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                        <b><label for="horizontal-form-1" class="form-label "> ระดับความจำเป็น </lable></b>
-                                    </div>
-                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                        <input name="gender" type="radio" value="จำเป็น"> จำเป็น
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input name="gender" type="radio" value="ไม่จำเป็น" checked> ไม่จำเป็น
-                                    </div>
+                            <div class="grid grid-cols-12 gap-6 mt-5">
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                    <b><label for="horizontal-form-1" class="form-label "> ระดับความจำเป็น </lable></b>
+                                </div>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                    <input name="important" type="checkbox" value="จำเป็น" @if($gjc->gjc_important == "จำเป็น") checked @endif> จำเป็น
+                                    <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input name="gender" type="radio" value="ไม่จำเป็น" checked> ไม่จำเป็น -->
                                 </div>
                             </div>
 
@@ -99,9 +112,9 @@ $active = "job";
                            <br><br><br>
                             <center>
 
-                                <a href="{{url('company/job/capacity')}}" class="btn btn-warning w-50">กลับหน้าหลัก</a>
-                                <!-- <button type="submit" class="btn btn-success w-24 ml-2">บันทึก</button>         -->
-                                <a href="#" class="btn btn-success w-24 ml-2">บันทึก</a>
+                                <a href="{{url('company/job/capacity/'.$spId)}}" class="btn btn-warning w-50">กลับหน้าหลัก</a>
+                                <button type="submit" class="btn btn-success w-24 ml-2">บันทึก</button>        
+                                <!-- <a href="#" class="btn btn-success w-24 ml-2">บันทึก</a> -->
 
                             </center>
                       
@@ -119,11 +132,34 @@ $active = "job";
 @section('javascripts')
 <script type="text/javascript">
 	function sSelect(){
-		index = document.getElementById('capacity_select').value;
-		if(index == '0'){
+        var capacity = $('#capacity_select').val();
+		// index = document.getElementById('capacity_select').value;
+		if(capacity == '0'){
 			document.getElementById('capacity_new').style.display='';
+			document.getElementById('detail').style.display='none';
 		}else{
 			document.getElementById('capacity_new').style.display='none';
+			document.getElementById('detail').style.display='';
+
+            $.ajax({
+                type: 'post',
+                url: "{{ url('searchCapacity') }}",
+                dataType: 'json',
+                data: {
+                    capacity: capacity,
+                    _token: "{{csrf_token()}}"
+                },
+                success: function (response) {
+                    // Assuming response is a string containing the description
+                    var capacityDetail = document.getElementById('capa_detail');
+                    var cleanedResponse = removeHtmlTags(response);
+                    capacityDetail.innerText = cleanedResponse;
+                },
+                error: function (xhr, status, error) {
+                    console.log("Error:", error);
+                    // Handle error cases here
+                }
+            });
         }
 	}
 </script>
@@ -131,7 +167,7 @@ $active = "job";
 
 <script>
     ClassicEditor
-    .create( document.querySelector( '#news_detail' ) )
+    .create( document.querySelector( '#capacity_detail' ) )
     .then( editor => {
         console.log( editor );
     } )

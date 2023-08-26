@@ -48,15 +48,17 @@ Route::post('company/job/add', [App\Http\Controllers\HrJobController::class, 'co
 Route::get('company/job/edit/{id}', [App\Http\Controllers\HrJobController::class, 'companyJobEdit']);
 Route::post('company/job/update/{id}', [App\Http\Controllers\HrJobController::class, 'companyJobUpdate']);
 Route::get('company/job/delete/{id}', [App\Http\Controllers\HrJobController::class, 'companyJobDelete']);
-Route::get('company/job/detail', [App\Http\Controllers\HrJobController::class, 'companyJobDetail']);
+Route::get('company/job/detail/{id}', [App\Http\Controllers\HrJobController::class, 'companyJobDetail']);
 
 Route::get('company/job/capacity/{id}', [App\Http\Controllers\HrJobController::class, 'companyJobCapa']);
 Route::get('company/job/capacity/form/{id}', [App\Http\Controllers\HrJobController::class, 'companyJobCapaForm']);
-Route::get('company/job/capacity/edit', [App\Http\Controllers\HrJobController::class, 'companyJobCapaEdit']);
+Route::post('company/job/capacity/add/{id}', [App\Http\Controllers\HrJobController::class, 'companyJobCapaAdd']);
+Route::get('company/job/capacity/edit/{id}/{spId}', [App\Http\Controllers\HrJobController::class, 'companyJobCapaEdit']);
+Route::get('company/job/capacity/update/{id}/{spId}', [App\Http\Controllers\HrJobController::class, 'companyJobCapaUpdate']);
 
-Route::get('company/job/skills', [App\Http\Controllers\FrontendController::class, 'companyJobSkills']);
-Route::get('company/job/skills/form', [App\Http\Controllers\FrontendController::class, 'companyJobSkillsForm']);
-Route::get('company/job/skills/edit', [App\Http\Controllers\FrontendController::class, 'companyJobSkillsEdit']);
+Route::get('company/job/skills/{id}/{spId}', [App\Http\Controllers\HrJobController::class, 'companyJobSkills']);
+Route::get('company/job/skills/form/{id}/{spId}', [App\Http\Controllers\HrJobController::class, 'companyJobSkillsForm']);
+Route::get('company/job/skills/edit', [App\Http\Controllers\HrJobController::class, 'companyJobSkillsEdit']);
 
 // Route::get('company/capacity', [App\Http\Controllers\FrontendController::class, 'companyCapacity']);
 // Route::get('company/capacity/form', [App\Http\Controllers\FrontendController::class, 'companyCapacityForm']);
