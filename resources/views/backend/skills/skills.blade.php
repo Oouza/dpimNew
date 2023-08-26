@@ -58,6 +58,7 @@ $i=1;
                                 <th><center>ชื่อทักษะ</center></th>
                                 <th><center>คำอธิบาย</center></th>
                                 <th><center>สมรรถนะ</center></th>
+                                <th><center>ผู้เพิ่มข้อมูล</center></th>
                                 <th><center>ตั้งค่า</center></th>
                             </tr>
                         </thead>
@@ -68,7 +69,13 @@ $i=1;
                                 <td><center>{{$rs->s_name}}</center></td>
                                 <td><center>{!! asset($rs->s_detail )?$rs->s_detail :''!!}</center></td>
                                 <td><center>{{$rs->cc_name}}</center></td>
-                                <!-- <td><center></center></td> -->
+                                <td><center>
+                                    @if($rs->FKs_Create == 0)
+                                        กพร.
+                                    @else
+                                        {{$rs->c_nameCompany}}
+                                    @endif
+                                </center></td>
                                 <td><center>
                                     <a href="{{ url ('backend/skills/edit/'.$rs->s_id)}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
                                     <button type="button" class="btn btn-danger" onclick="del_value({{$rs->s_id}})">ลบ</button>

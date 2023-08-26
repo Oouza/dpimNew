@@ -39,6 +39,7 @@ $i=1;
                                 <th><center>รหัสสมรรถนะ</center></th>
                                 <th><center>ชื่อสมรรถนะ</center></th>
                                 <th><center>คำอธิบาย</center></th>
+                                <th><center>ผู้เพิ่มข้อมูล</center></th>
                                 <th><center>ตั้งค่า</center></th>
                             </tr>
                         </thead>
@@ -48,7 +49,13 @@ $i=1;
                                 <td><center>{{$rs->cc_no}}</center></td>
                                 <td><center>{{$rs->cc_name}}</center></td>
                                 <td><center>{!! asset($rs->cc_detail )?$rs->cc_detail :''!!}</center></td>
-                                <!-- <td><center></center></td> -->
+                                <td><center>
+                                    @if($rs->FKcc_Create == 0)
+                                        กพร.
+                                    @else
+                                        {{$rs->c_nameCompany}}
+                                    @endif
+                                </center></td>
                                 <td><center>
                                     <a href="{{ url ('backend/capacity/edit/'.$rs->cc_id)}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
                                     <button type="button" class="btn btn-danger" onclick="del_value({{$rs->cc_id}})">ลบ</button>

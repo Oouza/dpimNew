@@ -59,6 +59,7 @@ $i=1;
                                 <th><center>เกณฑ์ระดับที่ 1</center></th>
                                 <th><center>เกณฑ์ระดับที่ 2</center></th>
                                 <th><center>เกณฑ์ระดับที่ 3</center></th>
+                                <th><center>ผู้เพิ่มข้อมูล</center></th>
                                 <th><center>ตั้งค่า</center></th>
                             </tr>
                         </thead>
@@ -72,6 +73,13 @@ $i=1;
                                 <td><center>{!! asset($rs->ss_standardOne )?$rs->ss_standardOne :''!!}</center></td>
                                 <td><center>{!! asset($rs->ss_standardTwo )?$rs->ss_standardTwo :''!!}</center></td>
                                 <td><center>{!! asset($rs->ss_standardThree )?$rs->ss_standardThree :''!!}</center></td>
+                                <td><center>
+                                    @if($rs->FKss_Create == 0)
+                                        กพร.
+                                    @else
+                                        {{$rs->c_nameCompany}}
+                                    @endif
+                                </center></td>
                                 <td><center>
                                     <a href="{{ url ('backend/skillsSub/edit/'.$rs->ss_id)}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
                                     <button type="button" class="btn btn-danger" onclick="del_value({{$rs->ss_id}})">ลบ</button>

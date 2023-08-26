@@ -36,7 +36,7 @@ class BackendController extends Controller
     }
 
     function capacity(){
-        $capacity = capacity::where('FKcc_Create',0)->whereNull('cc_userDelete')->get();
+        $capacity = capacity::leftJoin('companies','companies.c_id','FKcc_Create')->whereNull('capacities.cc_userDelete')->get();
         return view('backend.capacity.capacity',compact('capacity'));
     }
 
@@ -100,7 +100,7 @@ class BackendController extends Controller
     }
 
     function skills(){
-        $skills = skills::join('capacities','capacities.cc_id','skills.FKs_capacity')->where('FKs_Create',0)->whereNull('s_userDelete')->get();
+        $skills = skills::join('capacities','capacities.cc_id','skills.FKs_capacity')->leftJoin('companies','companies.c_id','FKs_Create')->whereNull('s_userDelete')->get();
         $capacity = capacity::where('FKcc_Create',0)->whereNull('cc_userDelete')->get();
         return view('backend.skills.skills',compact('skills','capacity'));
     }
@@ -168,7 +168,7 @@ class BackendController extends Controller
     function skillsSub(){
         $skillsSubs = skillsSubs::join('capacities','capacities.cc_id','skills_subs.FKss_capacity')
         ->join('skills','skills.s_id','skills_subs.FKss_skills')
-        ->where('FKss_Create',0)->whereNull('ss_userDelete')->get();
+        ->leftJoin('companies','companies.c_id','skills_subs.FKss_Create')->whereNull('ss_userDelete')->get();
         $skills = skills::where('FKs_Create',0)->whereNull('s_userDelete')->get();
         return view('backend.skills.sub.skillsSub',compact('skills','skillsSubs'));
     }
