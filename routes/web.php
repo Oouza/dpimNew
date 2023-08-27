@@ -127,7 +127,8 @@ Route::get('company/position/edit/{id}', [App\Http\Controllers\HrJobController::
 Route::post('company/position/update/{id}', [App\Http\Controllers\HrJobController::class, 'positionUpdate']);
 Route::get('company/position/delete/{id}', [App\Http\Controllers\HrJobController::class, 'positionDelete']);
 
-Route::get('search/course', [App\Http\Controllers\FrontendController::class, 'searchCourse']);
+Route::get('search/course', [App\Http\Controllers\FrontendController::class, 'searchCourse'])->name('hrCourse');
+Route::get('resultHrCourse', [App\Http\Controllers\FrontendController::class, 'resultHrCourse'])->name('resultHrCourse');
 
 
 

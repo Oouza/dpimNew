@@ -9,6 +9,11 @@ use App\Models\employee;
 use App\Models\User;
 use App\Models\departmentSub;
 use App\Models\groupjob;
+use App\Models\course;
+use App\Models\courseSkills;
+use App\Models\typeCourse;
+use App\Models\skills;
+use App\Models\skillsSubs;
 use Illuminate\Support\Facades\Hash;
 
 class FrontendController extends Controller
@@ -311,7 +316,59 @@ class FrontendController extends Controller
     }
 
     function searchCourse(){
-        return view('frontend.company.search-course');
+        $course = course::join('type_course','type_course.tc_id','courses.FKcou_typeCourse')->whereNull('cou_userDelete')->get();
+        $courseSkills = courseSkills::leftjoin('skills_subs','skills_subs.ss_id','course_skills.FKcs_skills')->whereNull('cou_userDelete')->get();
+        $typeCourse = typeCourse::whereNull('tc_userDelete')->get();
+        $skills = skills::join('capacities','capacities.cc_id','skills.FKs_capacity')->where('FKs_Create',0)->whereNull('s_userDelete')->get();
+        $skillsSubs = skillsSubs::where('FKss_Create',0)->whereNull('ss_userDelete')->get();
+        $pp = DB::table('courses')->select('cou_organizer')->whereNull('cou_userDelete')->groupBy('cou_organizer')->get();
+        $time = DB::table('courses')->select('cou_period')->whereNull('cou_userDelete')->groupBy('cou_period')->get();
+        return view('frontend.company.search-course',compact('course','courseSkills','typeCourse','skills','skillsSubs','pp','time'));
+    }
+
+    function resultHrCourse(Request $request){
+        $Sskills = $request->skills;
+        $type = $request->course;
+        $people = $request->people;
+        $Stime = $request->time;
+        
+        $course = course::join('type_course', 'type_course.tc_id', 'courses.FKcou_typeCourse')
+            ->leftjoin('course_skills', 'course_skills.FKcs_course', 'courses.cou_id')
+            ->when(!empty($Sskills), function ($query) use ($Sskills) { $query->where('FKcs_skills', $Sskills); })
+            ->when(!empty($type), function ($query) use ($type) { $query->where('FKcou_typeCourse', $type); })
+            ->when(!empty($people), function ($query) use ($people) { $query->where('cou_organizer', $people); })
+            ->when(!empty($Stime), function ($query) use ($Stime) { $query->where('cou_period', $Stime); })
+            ->whereNull('course_skills.cou_userDelete')
+            ->whereNull('courses.cou_userDelete')
+            ->select(
+                'course_skills.FKcs_course',
+                'courses.cou_id',
+                'type_course.tc_id', // เพิ่มคอลัมน์ที่ต้องการจาก type_course
+                DB::raw('MAX(courses.cou_no) as cou_no'),
+                DB::raw('MAX(courses.cou_name) as cou_name'),
+                DB::raw('MAX(courses.cou_organizer) as cou_organizer'),
+                DB::raw('MAX(courses.cou_period) as cou_period'),
+                DB::raw('MAX(courses.cou_frequency) as cou_frequency'),
+                DB::raw('MAX(type_course.tc_name) as tc_name'),
+            )
+            ->groupBy(
+                'course_skills.FKcs_course',
+                'courses.cou_id',
+                'type_course.tc_id', // เพิ่มคอลัมน์ที่ต้องการจาก type_course
+            )
+            ->get();
+        $courseSkills = courseSkills::leftjoin('skills_subs','skills_subs.ss_id','course_skills.FKcs_skills')->whereNull('cou_userDelete')->get();
+
+        $typeCourse = typeCourse::whereNull('tc_userDelete')->get();
+        $skills = skills::join('capacities','capacities.cc_id','skills.FKs_capacity')->where('FKs_Create',0)->whereNull('s_userDelete')->get();
+        $skillsSubs = skillsSubs::where('FKss_Create',0)->whereNull('ss_userDelete')->get();
+        // $pp = course::groupBy('cou_organizer')->get();
+        $pp = DB::table('courses')->select('cou_organizer')->whereNull('cou_userDelete')->groupBy('cou_organizer')->get();
+        $time = DB::table('courses')->select('cou_period')->whereNull('cou_userDelete')->groupBy('cou_period')->get();
+        // dd(count($pp));
+        // return view('frontend.company.search-course',compact('course','typeCourse','skills','skillsSubs','pp','time','Sskills','type','people','Stime','courseSkills'));
+        return view('frontend.company.search-course',compact('course','courseSkills','typeCourse','skills','skillsSubs','pp','time','Sskills','type','people','Stime','courseSkills'));
+
     }
 
     function searchDepartment(Request $request){
