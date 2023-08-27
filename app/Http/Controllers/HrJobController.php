@@ -20,6 +20,10 @@ use App\Models\capacity;
 use App\Models\skills;
 use App\Models\skillsSubs;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\DepartmentExport;
+use App\Exports\DepartmentSubExport;
+use App\Exports\PositionExport;
 
 class HrJobController extends Controller
 {
@@ -69,6 +73,12 @@ class HrJobController extends Controller
         $mes = 'Success';
         $yourURL= url('company/department');
         echo ("<script>alert('$mes'); location.href='$yourURL'; </script>");
+    }
+
+    function exportDepartment() 
+    {
+        // $countries = typeJob::select('tj_no','tj_name')->get();
+        return Excel::download(new DepartmentExport, 'department.xlsx');
     }
 
     function departmentSub(){
@@ -132,6 +142,11 @@ class HrJobController extends Controller
         $yourURL= url('company/departmentSub');
         echo ("<script>alert('$mes'); location.href='$yourURL'; </script>");
     }
+
+    function exportDepartmentSub(){
+        // $countries = typeJob::select('tj_no','tj_name')->get();
+        return Excel::download(new DepartmentSubExport, 'departmentSub.xlsx');
+    }
     
     function position(){
         $hr = ceohr::where('FKch_userid',Auth::user()->id)->first();
@@ -179,6 +194,10 @@ class HrJobController extends Controller
         $mes = 'Success';
         $yourURL= url('company/position');
         echo ("<script>alert('$mes'); location.href='$yourURL'; </script>");
+    }
+
+    function exportPosition(){
+        return Excel::download(new PositionExport, 'position.xlsx');
     }
 
     function companyJobForm(){

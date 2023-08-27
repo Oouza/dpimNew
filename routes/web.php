@@ -112,6 +112,7 @@ Route::post('company/department/add', [App\Http\Controllers\HrJobController::cla
 Route::get('company/department/edit/{id}', [App\Http\Controllers\HrJobController::class, 'departmentEdit']);
 Route::post('company/department/update/{id}', [App\Http\Controllers\HrJobController::class, 'departmentUpdate']);
 Route::get('company/department/delete/{id}', [App\Http\Controllers\HrJobController::class, 'departmentDelete']);
+Route::get('company/department/export', [App\Http\Controllers\HrJobController::class, 'exportDepartment']);
 
 Route::get('company/departmentSub', [App\Http\Controllers\HrJobController::class, 'departmentSub']);
 Route::get('company/departmentSub/form', [App\Http\Controllers\HrJobController::class, 'departmentSubForm']);
@@ -119,6 +120,7 @@ Route::post('company/departmentSub/add', [App\Http\Controllers\HrJobController::
 Route::get('company/departmentSub/edit/{id}', [App\Http\Controllers\HrJobController::class, 'departmentSubEdit']);
 Route::post('company/departmentSub/update/{id}', [App\Http\Controllers\HrJobController::class, 'departmentSubUpdate']);
 Route::get('company/departmentSub/delete/{id}', [App\Http\Controllers\HrJobController::class, 'departmentSubDelete']);
+Route::get('company/departmentSub/export', [App\Http\Controllers\HrJobController::class, 'exportDepartmentSub']);
 
 Route::get('company/position', [App\Http\Controllers\HrJobController::class, 'position']);
 Route::get('company/position/form', [App\Http\Controllers\HrJobController::class, 'positionForm']);
@@ -126,6 +128,7 @@ Route::post('company/position/add', [App\Http\Controllers\HrJobController::class
 Route::get('company/position/edit/{id}', [App\Http\Controllers\HrJobController::class, 'positionEdit']);
 Route::post('company/position/update/{id}', [App\Http\Controllers\HrJobController::class, 'positionUpdate']);
 Route::get('company/position/delete/{id}', [App\Http\Controllers\HrJobController::class, 'positionDelete']);
+Route::get('company/position/export', [App\Http\Controllers\HrJobController::class, 'exportPosition']);
 
 Route::get('search/course', [App\Http\Controllers\FrontendController::class, 'searchCourse'])->name('hrCourse');
 Route::get('resultHrCourse', [App\Http\Controllers\FrontendController::class, 'resultHrCourse'])->name('resultHrCourse');

@@ -61,7 +61,9 @@ $i=1;
                     
                     </table>
                         <center>
-                            <button type="button" class="btn btn-secondary w-26 ml-2"> ดาวน์โหลดข้อมูลแผนกทั้งหมด (เป็น xlsx) </button>        
+                            <a href="{{ url('company/department/export') }}">
+                                <button type="button" class="btn btn-secondary w-26 ml-2"> ดาวน์โหลดข้อมูลแผนกทั้งหมด (เป็น xlsx) </button>        
+                            </a>
                         </center>
                 </div>
               
