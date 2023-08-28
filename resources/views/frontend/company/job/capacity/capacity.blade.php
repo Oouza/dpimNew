@@ -53,7 +53,7 @@ $i=1;
                                     <td><center>
                                         @if($rs->FKgjc_userCreate != 0)
                                         <a href="{{ url ('company/job/capacity/edit/'.$rs->gjc_id.'/'.$gj->sp_id)}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
-                                        <button type="button" class="btn btn-danger" onclick="del_value({{$gj->gjc_id}})">ลบ</button>
+                                        <button type="button" class="btn btn-danger" onclick="del_value({{$rs->gjc_id}})">ลบ</button>
                                         @endif
                                     </center></td>
                                 </tr>
@@ -115,7 +115,8 @@ function del_value(id) {
                 if (result.value) {
                     $.ajax({
                         type:"GET",
-                        url:"{!! url('member/delete/"+id+"') !!}",
+                        // url:"{!! url('company/job/delete/"+id+"') !!}",
+                        url:"{!! url('company/job/capacity/delete/"+id+"') !!}",
                         success: function(data) {
                             console.log(data);
                         }   

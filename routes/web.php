@@ -55,6 +55,7 @@ Route::get('company/job/capacity/form/{id}', [App\Http\Controllers\HrJobControll
 Route::post('company/job/capacity/add/{id}', [App\Http\Controllers\HrJobController::class, 'companyJobCapaAdd']);
 Route::get('company/job/capacity/edit/{id}/{spId}', [App\Http\Controllers\HrJobController::class, 'companyJobCapaEdit']);
 Route::get('company/job/capacity/update/{id}/{spId}', [App\Http\Controllers\HrJobController::class, 'companyJobCapaUpdate']);
+Route::get('company/job/capacity/delete/{id}', [App\Http\Controllers\HrJobController::class, 'companyJobCapaDel']);
 
 Route::get('company/job/skills/{id}/{spId}', [App\Http\Controllers\HrJobController::class, 'companyJobSkills']);
 Route::get('company/job/skills/form/{id}/{spId}', [App\Http\Controllers\HrJobController::class, 'companyJobSkillsForm']);

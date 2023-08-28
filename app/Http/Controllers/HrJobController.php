@@ -331,6 +331,7 @@ class HrJobController extends Controller
                 $query->where('FKgjc_userCreate', 0)
                     ->orWhere('FKgjc_userCreate', $hr->FKch_company);
             })
+        ->whereNull('gjc_userDelete')
         ->get();
         return view('frontend.company.job.capacity.capacity',compact('gjc','gj'));
     }
@@ -425,6 +426,18 @@ class HrJobController extends Controller
 
     function companyJobCapaUpdate(Request $request, $id, $spId){
         dd($request);
+    }
+
+    function companyJobCapaDel($id){
+        $gjc = gjcapacity::find($id);
+
+        $update = gjcapacity::find($id)->update([
+            'gjc_userDelete'      => Auth::user()->name,
+        ]);
+
+        $mes = 'Success';
+        $yourURL= url('company/job/capacity/'.$gjc->FKgjc_groupjob);
+        echo ("<script>alert('$mes'); location.href='$yourURL'; </script>");
     }
 
     function companyJobSkills($id, $spId){
