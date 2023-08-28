@@ -82,8 +82,10 @@ $i=1;
                                     </center></td>
                                 </tr> -->
                             </tbody>
-                        
                         </table>
+                        <center>
+                            <a href="{{ url ('/home')}}"><button type="button" class="btn btn-secondary w-26 ml-2"> กลับหน้าตำแหน่งงาน </button></a>
+                        </center>
                 </div>
               
             </div>

@@ -291,9 +291,9 @@ class HrJobController extends Controller
         $dp = departments::find($request->department);
         $dpSub = departmentSub::find($request->departmentSub);
         $pt = position::find($request->position);
-        $gj = groupjob::find($request->job);
-        $lj = lavelJob::find($gj->FKgj_lavel);
-        $tj = typeJob::find($gj->FKgj_typeJob);
+        // $gj = groupjob::find($request->job);
+        // $lj = lavelJob::find($gj->FKgj_lavel);
+        // $tj = typeJob::find($gj->FKgj_typeJob);
 
         $update = settingPosition::find($id)->update([
             'FKgsp_department'      => $request->department,
@@ -302,13 +302,13 @@ class HrJobController extends Controller
             'sp_namedepartmentSub'  => $dpSub->ds_name,
             'FKgsp_position'        => $request->position,
             'sp_nameposition'       => $pt->p_name,
-            'FKgsp_groupJob'        => $request->job,
-            'sp_namegroupJob'       => $gj->gj_name,
-            'sp_detail'             => $gj->gj_detail,
-            'FKgsp_typeJob'         => $gj->FKgj_typeJob,
-            'sp_nametypeJob'        => $tj->tj_name,
-            'FKgsp_lavel'           => $gj->FKgj_lavel,
-            'sp_namelavel'          => $lj->lj_name,
+            // 'FKgsp_groupJob'        => $request->job,
+            // 'sp_namegroupJob'       => $gj->gj_name,
+            // 'sp_detail'             => $gj->gj_detail,
+            // 'FKgsp_typeJob'         => $gj->FKgj_typeJob,
+            // 'sp_nametypeJob'        => $tj->tj_name,
+            // 'FKgsp_lavel'           => $gj->FKgj_lavel,
+            // 'sp_namelavel'          => $lj->lj_name,
         ]);
 
         $mes = 'Success';

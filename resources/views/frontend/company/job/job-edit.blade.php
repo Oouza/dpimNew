@@ -92,7 +92,7 @@ $active = "job";
                                     <b><label for="horizontal-form-1" class="form-label "> กลุ่มตำแหน่ง </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="job" id="job" class="form-control select2" onchange="selectGJ()" required>
+                                    <select name="job" id="job" class="form-control select2" onchange="selectGJ()" disabled>
                                         @foreach($gj as $rs)
                                         <option value="{{$rs->gj_id}}" @if($sp->FKgsp_groupJob == $rs->gj_id) selected @endif>{{$rs->gj_name}}</option>
                                         @endforeach
