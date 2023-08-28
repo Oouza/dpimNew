@@ -411,6 +411,7 @@ class HrJobController extends Controller
 
     function companyJobCapaEdit($id, $spId){
         $hr = ceohr::where('FKch_userid',Auth::user()->id)->first();
+        $ct = capacity::all();
         $sp = settingPosition::find($spId);
         $gjc = gjcapacity::join('groupjobs','groupjobs.gj_id','gjcapacities.FKgjc_groupjob')
         ->join('capacities','capacities.cc_id','gjcapacities.FKgjc_capacity')->find($id);
@@ -421,11 +422,71 @@ class HrJobController extends Controller
         })
         ->whereNull('cc_userDelete')
         ->get();
-        return view('frontend.company.job.capacity.capacity-edit',compact('gjc','capacity','sp','id','spId'));
+        return view('frontend.company.job.capacity.capacity-edit',compact('gjc','capacity','sp','id','spId','ct'));
     }
 
     function companyJobCapaUpdate(Request $request, $id, $spId){
-        dd($request);
+        // dd($request);
+        if($request->capacity_select == 0){
+            $hr = ceohr::where('FKch_userid',Auth::user()->id)->first();
+            $ct = capacity::all();
+            $number = count($ct)+1;
+            $no = str_pad($number, 3, "0", STR_PAD_LEFT);
+            // dd('Add Capacity');
+            $capacity                   = new capacity;
+            $capacity->cc_no            = $no;
+            $capacity->cc_name          = $request->name;
+            $capacity->cc_detail        = $request->capacity_detail;
+            $capacity->FKcc_Create      = $hr->FKch_company;
+            $capacity->cc_userCreate    = Auth::user()->name;
+            $capacity->cc_userUpdate    = Auth::user()->name;
+            $capacity->save();
+
+            $last = DB::table('capacities')->latest('cc_id')->first();
+
+            $update = gjcapacity::find($id)->update([
+                'FKgjc_capacity'      => $last->cc_id,
+                'gjc_namecapacity'    => $request->name,
+                'gjc_important'       => $request->important,
+                'gjc_userUpdate'      => Auth::user()->name,
+            ]);
+            $mes = 'Success';
+            $yourURL= url('company/job/capacity/'.$spId);
+            echo ("<script>alert('$mes'); location.href='$yourURL'; </script>");
+        }
+        else{
+            $ct = capacity::find($request->capacity_select);
+
+            if($ct->FKcc_Create == 0){
+                // dd('update capacity from admin');
+                $update = gjcapacity::find($id)->update([
+                    'FKgjc_capacity'      => $request->capacity_select,
+                    'gjc_namecapacity'    => $ct->cc_name,
+                    'gjc_important'       => $request->important,
+                    'gjc_userUpdate'      => Auth::user()->name,
+                ]);
+                $mes = 'Success';
+                $yourURL= url('company/job/capacity/'.$spId);
+                echo ("<script>alert('$mes'); location.href='$yourURL'; </script>");
+            }else{
+                // dd('update capacity from company');
+                $update = capacity::find($request->capacity_select)->update([
+                    'cc_name'       =>  $request->capacity_name,
+                    'cc_detail'     =>  $request->HRcapacity_detail,
+                    'cc_userUpdate' =>  Auth::user()->name
+                ]);
+
+                $update = gjcapacity::find($id)->update([
+                    'FKgjc_capacity'      => $request->capacity_select,
+                    'gjc_namecapacity'    => $ct->capacity_name,
+                    'gjc_important'       => $request->important,
+                    'gjc_userUpdate'      => Auth::user()->name,
+                ]);
+                $mes = 'Success';
+                $yourURL= url('company/job/capacity/'.$spId);
+                echo ("<script>alert('$mes'); location.href='$yourURL'; </script>");
+            }
+        }
     }
 
     function companyJobCapaDel($id){
@@ -479,5 +540,14 @@ class HrJobController extends Controller
 
     function companyJobSkillsEdit(){
         return view('frontend.company.job.skills.skills-edit');
+    }
+
+    function searchHrCapacity(Request $request){
+        $capacity = capacity::find($request->capacity);
+        $response["detail"]  = $capacity->cc_detail;
+        $response["no"]  = $capacity->cc_no;
+        $response["name"]  = $capacity->cc_name;
+        $response["user"]  = $capacity->FKcc_Create;
+        return json_encode($response);      
     }
 }

@@ -33,6 +33,16 @@ $i=1;
                             <a href="{{ url ('backend/job/capacity/form/'.$gj->gj_id)}}"  >   <button class="btn btn-elevated-primary w-24 mr-1 mb-2">เพิ่มข้อมูล</button></a>
                         </div>
                     </div>
+                    <br>
+                        <br>
+                        <div class="intro-y block sm:flex items-center h-10">
+                            <h3 class="text-lg font-medium truncate mr-5">เรียกดูตามความจำเป็น</h3>
+                        <!-- </div>
+                        <div class="intro-y block sm:flex items-center h-10"> -->
+                            <input type="radio" name="important" id="important" value="" onclick="important()">&nbsp;ทั้งหมด
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio" name="important" id="important" value="จำเป็น" onclick="important()">&nbsp;จำเป็น
+                        </div>
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
                     <thead>
                             <tr>
@@ -84,7 +94,12 @@ $i=1;
 @endsection
 @section('javascripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>  <!-- delete -->
-
+<script>
+    function important (){
+        var important = $('#important').val();
+        alert(important);
+    }
+</script>
 
 <script>
     $(document).ready(function() {

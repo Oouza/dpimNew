@@ -34,7 +34,7 @@ $active = "job";
                     <div class="font-medium text-center text-lg">แก้ไขสมรรถนะ{{$sp->sp_name}}</div>
                    
                 </div>
-                <form action="{{ url('company/job/capacity/update/'.$id.'/'.$spId) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('company/job/capacity/update/'.$id.'/'.$spId) }}" method="post" enctype="multipart/form-data" onSubmit="return checkPassword(this)">
                 {{ csrf_field() }}
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-sl ate-200/60 dark:border-darkmode-400">
                     <div class="font-medium text-base">รายละเอียด</div>
@@ -54,8 +54,50 @@ $active = "job";
                                 </div>
                             </div>
 
-                            @if($gjc->FKcc_Create ==0)
-                            <div id="detail">
+                            @if($gjc->FKcc_Create == 0)
+                            <div id="detailAdmin" style="display:block;">
+                                <div class="grid grid-cols-12 gap-6 mt-5">
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                        <b><label for="horizontal-form-1" class="form-label"> คำอธิบาย </lable></b>
+                                    </div>
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                        <textarea cols="45" id="capa_detail" name="capa_detail" rows="10" disabled>{{ strip_tags(str_replace('&nbsp;', ' ', $gjc->cc_detail ?: '')) }}</textarea>
+                                        <!-- <textarea class="form-control" cols="55" id="capa_detail" name="capa_detail" rows="10" disabled>{!! asset($gjc->cc_detail )?$gjc->cc_detail :''!!}</textarea> -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="detailHr" style="display:none;">
+                                <div class="grid grid-cols-12 gap-6 mt-5">
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                        <b><label for="horizontal-form-1" class="form-label "> รหัสสมรรถนะ </lable></b>
+                                    </div>
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                        <input class="form-control" type="text" name="capacity_code" id="capacity_code" value="" disabled>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-12 gap-6 mt-5">
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                        <b><label for="horizontal-form-1" class="form-label "> ชื่อสมรรถนะ </lable></b>
+                                    </div>
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                        <input class="form-control" type="text" name="capacity_name" id="capacity_name" placeholder="ชื่อสมรรถนะ" value="">
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-12 gap-6 mt-5">
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                        <b><label for="horizontal-form-1" class="form-label"> คำอธิบาย </lable></b>
+                                    </div>
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                        <textarea cols="55" id="HRcapacity_detail" name="HRcapacity_detail" rows="10" placeholder="คำอธิบาย"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @else
+                            <div id="detailAdmin" style="display:none;">
                                 <div class="grid grid-cols-12 gap-6 mt-5">
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                         <b><label for="horizontal-form-1" class="form-label"> คำอธิบาย </lable></b>
@@ -65,8 +107,8 @@ $active = "job";
                                     </div>
                                 </div>
                             </div>
-                            @else
-                            <div id="capacity_new">
+
+                            <div id="detailHr" style="display:block;">
                                 <div class="grid grid-cols-12 gap-6 mt-5">
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                         <b><label for="horizontal-form-1" class="form-label "> รหัสสมรรถนะ </lable></b>
@@ -81,7 +123,7 @@ $active = "job";
                                         <b><label for="horizontal-form-1" class="form-label "> ชื่อสมรรถนะ </lable></b>
                                     </div>
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                        <input class="form-control" type="text" name="capacity_code" id="capacity_code" placeholder="ชื่อสมรรถนะ" value="{{$gjc->cc_name}}" required>
+                                        <input class="form-control" type="text" name="capacity_name" id="capacity_name" placeholder="ชื่อสมรรถนะ" value="{{$gjc->cc_name}}">
                                     </div>
                                 </div>
 
@@ -90,11 +132,44 @@ $active = "job";
                                         <b><label for="horizontal-form-1" class="form-label"> คำอธิบาย </lable></b>
                                     </div>
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                        <textarea cols="55" id="capacity_detail" name="capacity_detail" rows="10" placeholder="คำอธิบาย">{{ isset($gjs->cc_detail) ? strip_tags($gjs->cc_detail) : '' }}</textarea>
+                                        <textarea cols="55" id="HRcapacity_detail" name="HRcapacity_detail" rows="10" placeholder="คำอธิบาย">{{ isset($gjc->cc_detail) ? strip_tags($gjc->cc_detail) : '' }}</textarea>
                                     </div>
                                 </div>
-                            <!-- </div> -->
-                            @endif
+                            </div>
+                            @endif                            
+
+                            <div id="capacity_new" style="display:none;">
+                                <div class="grid grid-cols-12 gap-6 mt-5">
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                        <b><label for="horizontal-form-1" class="form-label "> รหัสสมรรถนะ </lable></b>
+                                    </div>
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                        @php
+                                            $number = count($ct)+1;
+                                            $num = str_pad($number, 3, "0", STR_PAD_LEFT);
+                                        @endphp
+                                        <input class="form-control" type="text" name="no" id="no" value="{{$num}}" disabled>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-12 gap-6 mt-5">
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                        <b><label for="horizontal-form-1" class="form-label "> ชื่อสมรรถนะ </lable></b>
+                                    </div>
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                        <input class="form-control" type="text" name="name" id="name" placeholder="ชื่อสมรรถนะ">
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-12 gap-6 mt-5">
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                        <b><label for="horizontal-form-1" class="form-label"> คำอธิบาย </lable></b>
+                                    </div>
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                        <textarea cols="55" id="capacity_detail" name="capacity_detail" rows="10" placeholder="คำอธิบาย"></textarea>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
@@ -130,40 +205,86 @@ $active = "job";
 
 
 @section('javascripts')
+<script>
+    function checkPassword(form) { 
+    var capacity = document.getElementById('capacity_select').value;
+    var name = document.getElementById('name').value;
+    var capacity_detail = document.getElementById('capacity_detail').value;
+    
+    if (capacity == 0) { // ใช้เครื่องหมาย == ในการเปรียบเทียบค่า
+        if (name == '') { 
+            alert('กรุณากรอกชื่อสมรรถนะ');
+            return false;
+        }
+    }
+}
+</script>
+
 <script type="text/javascript">
+    var editor = null;
+    ClassicEditor
+        .create(document.querySelector('#HRcapacity_detail'))
+        .then(ckEditorInstance => {
+            editor = ckEditorInstance;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    function removeHtmlTags(input) {
+        var div = document.createElement('div');
+        div.innerHTML = input;
+        return div.textContent || div.innerText || '';
+    }
+
 	function sSelect(){
         var capacity = $('#capacity_select').val();
-		// index = document.getElementById('capacity_select').value;
+        // alert(capacity);
 		if(capacity == '0'){
-			document.getElementById('capacity_new').style.display='';
-			document.getElementById('detail').style.display='none';
+			document.getElementById('capacity_new').style.display = 'block';
+            document.getElementById('detailHr').style.display = 'none';
+            document.getElementById('detailAdmin').style.display = 'none';
 		}else{
 			document.getElementById('capacity_new').style.display='none';
-			document.getElementById('detail').style.display='';
-
             $.ajax({
                 type: 'post',
-                url: "{{ url('searchCapacity') }}",
+                url: "{{ url('searchHrCapacity') }}",
                 dataType: 'json',
                 data: {
                     capacity: capacity,
                     _token: "{{csrf_token()}}"
                 },
                 success: function (response) {
-                    // Assuming response is a string containing the description
-                    var capacityDetail = document.getElementById('capa_detail');
-                    var cleanedResponse = removeHtmlTags(response);
-                    capacityDetail.innerText = cleanedResponse;
+                    if (response && response.user == 0) {
+                        $('#detailAdmin').show();
+                        $('#detailHr').hide();
+
+                        var capacityDetail = $('#capa_detail');
+                        var cleanedResponse = removeHtmlTags(response.detail);
+                        capacityDetail.val(cleanedResponse);
+                    } else {
+                        $('#detailAdmin').hide();
+                        $('#detailHr').show();
+
+                        // Update CKEditor content
+                        if (editor) {
+                            var cleanedResponse = removeHtmlTags(response.detail);
+                            editor.setData(cleanedResponse);
+                        }
+
+                        $('#capacity_code').val(response.no);
+                        $('#capacity_name').val(response.name);
+                    }
                 },
                 error: function (xhr, status, error) {
                     console.log("Error:", error);
                     // Handle error cases here
                 }
             });
+            
         }
 	}
 </script>
-
 
 <script>
     ClassicEditor
