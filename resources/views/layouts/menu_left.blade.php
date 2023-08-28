@@ -575,7 +575,7 @@
                         </a>
                         <ul <?php if ($activePage =="scoreboard") {?> class="side-menu__sub-open" <?php }else{?> class=""<?php  } ?>>
                             <li>
-                                <a href="{{ url('index' )}}" <?php if ($active =="sJob") {?> class="side-menu side-menu--active" <?php }else{?> class="side-menu"<?php  } ?>
+                                <a href="{{ url('/home' )}}" <?php if ($active =="sJob") {?> class="side-menu side-menu--active" <?php }else{?> class="side-menu"<?php  } ?>
                                     data-page="acct">
                                 <!-- <a href="{{ url('/home' )}}" <?php if ($active =="sJob") {?> class="side-menu side-menu--active" <?php }else{?> class="side-menu"<?php  } ?>
                                     data-page="acct"> -->
