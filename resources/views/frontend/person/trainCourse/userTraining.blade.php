@@ -29,38 +29,38 @@ $i=1;
                                     <h2 class="text-lg font-medium truncate mr-5">
                                     รายละเอียดหลักสูตรพัฒนาบุคลากร
                                     </h2>
-                                    <div class="flex items-center sm:ml-auto mt-3 sm:mt-0">
+                                    <!-- <div class="flex items-center sm:ml-auto mt-3 sm:mt-0">
                                     <a href="{{ url ('backend/course/form') }}"  >   <button class="btn btn-elevated-primary w-24 mr-1 mb-2">เพิ่มข้อมูล</button></a>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <br>
                                 <br>
                                 <div class="intro-y block sm:flex items-center h-10">
                                     <h3 class="text-lg font-medium truncate mr-5">ค้นหาโดย</h3>
-                                    <input type="text" placeholder="ชื่อหลักสูตร(คีย์เวิร์ด)">
+                                    <input type="text" placeholder="ชื่อหลักสูตร(คีย์เวิร์ด)" class="form-control" style="width:30%;">
                                     &nbsp; &nbsp; &nbsp; &nbsp;
-                                    <select name="" id="">
-                                        <option value="" hidden>- ผู้จัด -</option>
+                                    <select name="" id="" class="select2">
+                                        <option value="" hidden>ผู้จัดทั้งหมด</option>
                                         <option value=""> ผู้จัด 1</option>
                                         <option value=""> ผู้จัด 2</option>
                                         <option value=""> ผู้จัด 3</option>
                                     </select>
                                     &nbsp; &nbsp; &nbsp; &nbsp;
-                                    <select name="" id="">
-                                        <option value="" hidden>- สมรรถนะ -</option>
+                                    <select name="" id="" class="select2">
+                                        <option value="" hidden>สมรรถนะทั้งหมด</option>
                                         <option value=""> สมรรถนะ 1</option>
                                         <option value=""> สมรรถนะ 2</option>
                                         <option value=""> สมรรถนะ 3</option>
                                     </select>
                                     &nbsp; &nbsp; &nbsp; &nbsp;
-                                    <select name="" id="">
-                                        <option value="" hidden>- ทักษะ -</option>
+                                    <select name="" id="" class="select2">
+                                        <option value="" hidden>ทักษะทั้งหมด</option>
                                         <option value=""> ทักษะ 1</option>
                                         <option value=""> ทักษะ 2</option>
                                         <option value=""> ทักษะ 3</option>
                                     </select>
-                                    &nbsp; &nbsp; &nbsp; &nbsp;
-                                    <button type="button" class="btn btn-primary" onclick="del_value(1)">ค้นหา</button>
+                                    <!-- &nbsp; &nbsp; &nbsp; &nbsp; -->
+                                    <!-- <button type="button" class="btn btn-primary" onclick="del_value(1)">ค้นหา</button> -->
                                 </div>
                                 <br>
                                 <br>
@@ -116,8 +116,13 @@ $i=1;
 @endsection
 @section('javascripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>  <!-- delete -->
-
-
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.select2').select2();
+    });
+</script>
 <script>
     $(document).ready(function() {
     $('#example').DataTable({
