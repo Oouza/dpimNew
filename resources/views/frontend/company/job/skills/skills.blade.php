@@ -20,14 +20,14 @@ $i=1;
             <div class="intro-y box py-10 sm:py-20 mt-5">
                
                 <div class="px-5 mt-10">
-                    <div class="font-medium text-center text-lg">ตั้งค่าสมรรถนะและทักษะของตำแหน่งงาน {{$sp->p_name}}</div>
+                    <div class="font-medium text-center text-lg">ตั้งค่าสมรรถนะและทักษะของ {{$sp->p_name}}</div>
                    
                 </div>
          
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-slate-200/60 dark:border-darkmode-400">
                 <div class="intro-y block sm:flex items-center h-10">
                                     <h2 class="text-lg font-medium truncate mr-5">
-                                    รายละเอียดทักษะ ใน{{$gjc->cc_name}} ของตำแหน่งงาน {{$sp->p_name}}
+                                    รายละเอียดทักษะ ใน {{$gjc->cc_name}}
                                     </h2>
                                     <div class="flex items-center sm:ml-auto mt-3 sm:mt-0">
                                     <a href="{{ url ('company/job/skills/form/'.$gjc->gjc_id.'/'.$sp->sp_id)}}"  >   <button class="btn btn-elevated-primary w-24 mr-1 mb-2">เพิ่มข้อมูล</button></a>
@@ -47,14 +47,17 @@ $i=1;
                                 <tr>
                                     <td><center>
                                         {{$rs->s_name}}
-                                        @if($rs->FKs_Create == 0)
+                                        @if($rs->FKgjs_userCreate == 0)
                                             <br>
                                             (พื้นฐาน)
                                         @endif
                                     </center></td>
                                     <td><center>{!! asset($rs->s_detail )?$rs->s_detail :''!!}</center></td>
                                     <td><center>
-                                    @php $i=1; @endphp
+                                    <a href="{{url('company/job/skillsSub/'.$rs->gjs_id.'/'.$sp->sp_id)}}">
+                                        <button class="btn btn-outline-secondary">ทักษะย่อย</button>
+                                    </a>
+                                    <!-- @php $i=1; @endphp
                                     @foreach($gjSkillsSub as $row)
                                         @if($row->FKgjss_gjskills == $rs->gjs_id)
                                         <a href="#" onclick="detail_skills({{$row->FKgjss_skillsSub}})">{{$i++}}. {{$row->ss_name}}</a>
@@ -64,11 +67,13 @@ $i=1;
                                         @endif
                                         <br>
                                         @endif
-                                    @endforeach
+                                    @endforeach -->
                                     </center></td>
                                     <td><center>
-                                        <a href="{{ url ('company/job/skills/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
-                                        <button type="button" class="btn btn-danger" onclick="del_value(1)">ลบ</button>
+                                        @if($rs->FKgjs_userCreate != 0)
+                                            <a href="{{ url ('company/job/skills/edit/'.$rs->gjs_id.'/'.$sp->sp_id)}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
+                                            <button type="button" class="btn btn-danger" onclick="del_value({{$rs->gjs_id}})">ลบ</button>
+                                        @endif
                                     </center></td>
                                 </tr>
                                 @endforeach
@@ -94,8 +99,12 @@ $i=1;
                                     <td><center></center></td>
                                 </tr> -->
                             </tbody>
-                        
                         </table>
+                        <center>
+                            <a href="{{ url ('company/job/capacity/'.$sp->sp_id)}}">
+                                <button type="button" class="btn btn-secondary w-26 ml-2"> กลับหน้าสมรรถนะ </button>
+                            </a>
+                        </center>
                 </div>
               
             </div>
@@ -105,7 +114,6 @@ $i=1;
 @endsection
 @section('javascripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>  <!-- delete -->
-
 
 <script>
     $(document).ready(function() {
@@ -127,7 +135,7 @@ function del_value(id) {
                 if (result.value) {
                     $.ajax({
                         type:"GET",
-                        url:"{!! url('member/delete/"+id+"') !!}",
+                        url:"{!! url('hr/job/skills/delete/"+id+"') !!}",
                         success: function(data) {
                             console.log(data);
                         }   
@@ -144,39 +152,5 @@ function del_value(id) {
                 }
             })
         }
-</script>
-
-<script>
-    function detail_skills(id) {
-        // alert(id);
-
-        if(id == ''){
-        }else{
-            $.ajax({
-                'type': 'post',
-                'url': "{{ url('searchskillsSub') }}",
-                'dataType': 'json',
-                'data': { 
-                    'skillsSub'            : id,
-                    '_token'        : "{{csrf_token()}}"  
-                },
-                // success: function (response) {
-                //     var skillsDetail = $(`#skillsSub_detail\\[${$id}\\]`); // ใช้ $id ที่ส่งเข้ามาในฟังก์ชัน
-                //     var cleanedResponse = removeHtmlTagsSub(response);
-                //     skillsDetail.text(cleanedResponse); // ใช้ .text() แทน .innerText เนื่องจากใช้ jQuery
-                // }
-            'success': function (response){
-                Swal.fire({
-                    title: '<h4>คำอธิบาย</h4>',
-                    html:   response,
-                    showCloseButton: true,
-                    confirmButtonColor: '#d33',
-                    confirmButtonText: 'ปิด',
-                })
-                
-                } 
-            });  
-        }
-    }
 </script>
 @endsection

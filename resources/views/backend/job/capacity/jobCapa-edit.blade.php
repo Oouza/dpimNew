@@ -57,7 +57,7 @@ $active = "job";
                                     <b><label for="horizontal-form-1" class="form-label"> คำอธิบาย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                <textarea cols="45" id="capacity_detail" name="capacity_detail" rows="10" disabled>{{ strip_tags($gjc->cc_detail ?: '') }}</textarea>
+                                <textarea cols="45" id="capacity_detail" name="capacity_detail" rows="10" class="form-control" disabled>{{ strip_tags($gjc->cc_detail ?: '') }}</textarea>
                                 </div>
                             </div>
 

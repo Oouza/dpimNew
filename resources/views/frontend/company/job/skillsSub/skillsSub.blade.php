@@ -20,40 +20,38 @@ $i=1;
             <div class="intro-y box py-10 sm:py-20 mt-5">
                
                 <div class="px-5 mt-10">
-                    <div class="font-medium text-center text-lg">ตั้งค่าสมรรถนะและทักษะของ{{$gj->p_name}}</div>
+                    <div class="font-medium text-center text-lg">ตั้งค่าสมรรถนะและทักษะของ {{$sp->p_name}}</div>
                    
                 </div>
          
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-slate-200/60 dark:border-darkmode-400">
                 <div class="intro-y block sm:flex items-center h-10">
                                     <h2 class="text-lg font-medium truncate mr-5">
-                                    รายละเอียดสมรรถนะ ใน {{$gj->p_name}}
+                                    รายละเอียดทักษะย่อย ใน {{$gjs->s_name}}
                                     </h2>
                                     <div class="flex items-center sm:ml-auto mt-3 sm:mt-0">
-                                    <a href="{{ url ('company/job/capacity/form/'.$gj->sp_id) }}"  >   <button class="btn btn-elevated-primary w-24 mr-1 mb-2">เพิ่มข้อมูล</button></a>
+                                    <a href="{{ url ('company/job/skillsSub/form/'.$gjs->gjs_id.'/'.$sp->sp_id)}}"  >   <button class="btn btn-elevated-primary w-24 mr-1 mb-2">เพิ่มข้อมูล</button></a>
                                     </div>
                                 </div>
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                                 <tr>
-                                    <th><center>สมรรถนะ</center></th>
+                                    <th><center>ทักษะย่อย</center></th>
                                     <th><center>คำอธิบาย</center></th>
-                                    <th><center>ระดับความจำเป็น</center></th>
-                                    <th><center>ทักษะ</center></th>
+                                    <!-- <th><center>ระดับความจำเป็น</center></th>
+                                    <th><center>ทักษะ</center></th> -->
                                     <th><center>แก้ไข/ลบ</center></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($gjc as $rs)
+                                @foreach($skillsSubGJ as $rs)
                                 <tr>
-                                    <td><center>{{$rs->cc_name}} @if($rs->FKgjc_userCreate == 0) <br> (พื้นฐาน) @endif</center></td>
-                                    <td><center>{!! asset($rs->cc_detail )?$rs->cc_detail :''!!}</center></td>
-                                    <th><center>{{$rs->gjc_important}}</center></th>
-                                    <td><center><a href="{{url('company/job/skills/'.$rs->gjc_id.'/'.$gj->sp_id)}}"><button class="btn btn-outline-secondary">ทักษะ</button></a></center></td>
+                                    <td><center>{{$rs->ss_name}} @if($rs->FKgjss_userCreate == 0) <br> (พื้นฐาน) @endif</center></td>
+                                    <td><center>{!! asset($rs->ss_detail )?$rs->ss_detail :''!!}</center></td>
                                     <td><center>
-                                        @if($rs->FKgjc_userCreate != 0)
-                                        <a href="{{ url ('company/job/capacity/edit/'.$rs->gjc_id.'/'.$gj->sp_id)}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
-                                        <button type="button" class="btn btn-danger" onclick="del_value({{$rs->gjc_id}})">ลบ</button>
+                                        @if($rs->FKgjss_userCreate != 0)
+                                        <a href="{{ url ('company/job/skillsSub/edit/'.$rs->gjss_id.'/'.$sp->sp_id)}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
+                                        <button type="button" class="btn btn-danger" onclick="del_value({{$rs->gjss_id}})">ลบ</button>
                                         @endif
                                     </center></td>
                                 </tr>
@@ -84,7 +82,7 @@ $i=1;
                             </tbody>
                         </table>
                         <center>
-                            <a href="{{ url ('/home')}}"><button type="button" class="btn btn-secondary w-26 ml-2"> กลับหน้าตำแหน่งงาน </button></a>
+                            <a href="{{ url ('company/job/skills/'.$gjs->gjc_id.'/'.$sp->sp_id)}}"><button type="button" class="btn btn-secondary w-26 ml-2"> กลับหน้าทักษะ </button></a>
                         </center>
                 </div>
               
@@ -118,7 +116,7 @@ function del_value(id) {
                     $.ajax({
                         type:"GET",
                         // url:"{!! url('company/job/delete/"+id+"') !!}",
-                        url:"{!! url('company/job/capacity/delete/"+id+"') !!}",
+                        url:"{!! url('hr/job/skillsSub/delete/"+id+"') !!}",
                         success: function(data) {
                             console.log(data);
                         }   

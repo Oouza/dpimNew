@@ -84,7 +84,7 @@ $active = "job";
                                     <b><label for="horizontal-form-1" class="form-label "> คำอธิบาย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <textarea cols="60" id="news_detail" name="news_detail" rows="10" disabled>{{ isset($sp->gj_detail) ? strip_tags($sp->gj_detail) : '' }}</textarea>
+                                    <textarea cols="45" id="news_detail" name="news_detail" rows="10" class="form-control" disabled>{{ isset($sp->gj_detail) ? strip_tags($sp->gj_detail) : '' }}</textarea>
                                 </div>
                             </div>
 
@@ -119,6 +119,7 @@ $active = "job";
                             </div>
 
                             <br>
+                            {{count($gjCapa)}}
                             <table id="example" class="table table-striped table-bordered" style="width:100%">
                                 <tr>
                                     <th><center>สมรรถนะ</center></th>
@@ -126,24 +127,20 @@ $active = "job";
                                     <th><center>ทักษะย่อย</center></th>
                                 </tr>
                                 @php 
-                                        $capacity = "";
-                                        $skills = "";
-                                    @endphp
-                                    @foreach($gjSub as $rs)
-                                    <tr>
-                                        <td><center>
-                                            @if($capacity != $rs->cc_name) 
-                                                {{$rs->cc_name}}
-                                                @php 
-                                                    $capacity = $rs->cc_name;
-                                                @endphp
+                                    $capacity = null;
+                                    $skills = "";
+                                @endphp
+                                @foreach($gjCapa as $rs)
+                                    @if($capacity != $rs->gjc_id) 
+                                        <tr>
+                                            <td><center>
+                                                {{$rs->gjc_id}} {{$rs->cc_name}}
                                                 @if($rs->FKgjc_userCreate == 0)
                                                     <br> (พื้นฐาน)
                                                 @endif
-                                            @endif
-                                        </center></td>
-                                        <td><center>
-                                            @if($skills != $rs->s_name) 
+                                            </td></center>
+                                            @if($skills != $rs->gjs_id)
+                                            <td><center>
                                                 {{$rs->s_name}}
                                                 @php 
                                                     $skills = $rs->s_name;
@@ -151,16 +148,95 @@ $active = "job";
                                                 @if($rs->FKgjs_userCreate == 0)
                                                     <br> (พื้นฐาน)
                                                 @endif
+                                            </center></td>
                                             @endif
-                                        </center></td>
-                                        <td><center>
-                                            {{$rs->ss_name}}
-                                            @if($rs->FKgjss_userCreate == 0)
+                                            <td><center>{{$rs->ss_name}}</center></td>
+                                        </tr>
+                                        @php  
+                                            $capacity = $rs->gjc_id; // อัพเดตค่า capacity เมื่อมีการเปลี่ยนค่า
+                                        @endphp
+                                    @endif
+                                    
+                                    
+                                @endforeach
+
+
+                                <!-- อันเก่า -->
+                                <!-- @foreach($gjCapa as $rs)
+                                <tr>
+                                    <td><center>
+                                        @if($capacity != $rs->gjc_id) 
+                                            {{$rs->gjc_id}} {{$rs->cc_name}}
+                                            @php  $capacity = $rs->gjc_id; @endphp
+                                            @if($rs->FKgjc_userCreate == 0)
                                                 <br> (พื้นฐาน)
                                             @endif
-                                        </center></td>
-                                    </tr>
-                                    @endforeach
+                                        @endif
+                                    </center></td>
+                                    <td><center>
+                                        @if($skills != $rs->s_name) 
+                                            {{$rs->s_name}}
+                                            @php 
+                                                $skills = $rs->s_name;
+                                            @endphp
+                                            @if($rs->FKgjs_userCreate == 0)
+                                                <br> (พื้นฐาน)
+                                            @endif
+                                        @endif
+                                    </center></td>
+                                    <td><center>
+                                        {{$rs->ss_name}}
+                                        @if($rs->FKgjss_userCreate == 0)
+                                            <br> (พื้นฐาน)
+                                        @endif
+                                    </center></td>
+                                </tr>
+                                @endforeach -->
+
+                                <!-- อันเก่า -->
+                                <!-- @foreach($gjCapa as $rs)
+                                <tr>
+                                    <td>{{$rs->gjc_id}} {{$rs->cc_name}} @if($rs->FKgjc_userCreate == 0) (พื้นฐาน) @endif</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                @endforeach -->
+                                <!-- @php 
+                                    $capacity = "";
+                                    $skills = "";
+                                @endphp
+                                @foreach($gjSub as $rs)
+                                <tr>
+                                    <td><center>
+                                        @if($capacity != $rs->cc_name) 
+                                            {{$rs->cc_name}}
+                                            @php 
+                                                $capacity = $rs->cc_name;
+                                            @endphp
+                                            @if($rs->FKgjc_userCreate == 0)
+                                                <br> (พื้นฐาน)
+                                            @endif
+                                        @endif
+                                    </center></td>
+                                    <td><center>
+                                        @if($skills != $rs->s_name) 
+                                            {{$rs->s_name}}
+                                            @php 
+                                                $skills = $rs->s_name;
+                                            @endphp
+                                            @if($rs->FKgjs_userCreate == 0)
+                                                <br> (พื้นฐาน)
+                                            @endif
+                                        @endif
+                                    </center></td>
+                                    <td><center>
+                                        {{$rs->ss_name}}
+                                        @if($rs->FKgjss_userCreate == 0)
+                                            <br> (พื้นฐาน)
+                                        @endif
+                                    </center></td>
+                                </tr>
+                                @endforeach -->
                             </table>
 
                             </div>

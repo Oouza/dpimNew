@@ -267,6 +267,7 @@ class HrJobController extends Controller
     }
 
     function companyJobDetail($id){
+        $hr = ceohr::where('FKch_userid',Auth::user()->id)->first();
         $sp = settingPosition::join('departments','departments.d_id','setting_positions.FKgsp_department')
         ->join('department_subs','department_subs.ds_id','setting_positions.FKgsp_departmentSub')
         ->join('positions','positions.p_id','setting_positions.FKgsp_position')
@@ -274,15 +275,37 @@ class HrJobController extends Controller
         ->join('type_job','type_job.tj_id','setting_positions.FKgsp_typeJob')
         ->join('groupjobs','groupjobs.gj_id','setting_positions.FKgsp_groupJob')->find($id);
 
+        $gjCapa = gjcapacity::join('capacities','capacities.cc_id','gjcapacities.FKgjc_capacity')
+            ->leftjoin('gjskills','gjskills.FKgjs_gjcapacity','gjcapacities.gjc_id')    
+            ->leftjoin('skills','skills.s_id','gjskills.FKgjs_skills')    
+            ->leftjoin('gj_skills_subs','gj_skills_subs.FKgjss_gjskills','gjskills.gjs_id')    
+            ->leftjoin('skills_subs','skills_subs.ss_id','gj_skills_subs.FKgjss_skillsSub') 
+            ->where(function ($query) use ($hr) {
+                $query->where('FKgjc_userCreate', 0)
+                    ->orWhere('FKgjc_userCreate', $hr->FKch_company);
+            })
+        ->whereNull('gjc_userDelete')->whereNull('gjs_userDelete')->whereNull('gjss_userDelete')
+        ->where('FKgjc_groupjob',$sp->FKgsp_groupJob)->orderBy('gjc_id','asc')
+        ->orderBy('gjs_id','asc')
+        ->orderBy('gjss_id','asc')->get();
+
         $gjSub = gjSkillsSub::join('skills_subs','skills_subs.ss_id','gj_skills_subs.FKgjss_skillsSub')
-            ->join('gjskills','gjskills.gjs_id','gj_skills_subs.FKgjss_gjskills')
+            ->rightjoin('gjskills','gjskills.gjs_id','gj_skills_subs.FKgjss_gjskills')
             ->join('skills','skills.s_id','gjskills.FKgjs_skills')
-            ->join('gjcapacities','gjcapacities.gjc_id','gj_skills_subs.FKgjss_gjcapacity')            
+            ->rightjoin('gjcapacities','gjcapacities.gjc_id','gj_skills_subs.FKgjss_gjcapacity')            
             ->join('capacities','capacities.cc_id','gjcapacities.FKgjc_capacity')            
             ->where('FKgjss_groupjob',$sp->gj_id)
-            ->where('FKgjss_userCreate',0)
+            // ->where('FKgjss_userCreate',0)
+            ->where(function ($query) use ($hr) {
+                $query->where('FKgjss_userCreate', 0)
+                    ->orWhere('FKgjss_userCreate', $hr->FKch_company);
+            })
             ->whereNull('gjss_userDelete')->get();
-        return view('frontend.company.job.job-detail',compact('sp','gjSub'));
+
+        $gj = gjskills::join('skills','skills.s_id','gjskills.FKgjs_skills')
+            ->join('gjcapacities','gjcapacities.gjc_id','gjskills.FKgjs_gjcapacity')
+            ->join('capacities','capacities.cc_id','gjcapacities.FKgjc_capacity')->get();
+        return view('frontend.company.job.job-detail',compact('sp','gjSub','gjCapa','gj','gjCapa'));
     }
 
     function companyJobUpdate(Request $request, $id){
@@ -502,6 +525,7 @@ class HrJobController extends Controller
     }
 
     function companyJobSkills($id, $spId){
+        $hr = ceohr::where('FKch_userid',Auth::user()->id)->first();
         $sp = settingPosition::join('groupjobs','groupjobs.gj_id','setting_positions.FKgsp_groupJob')
         ->join('positions','positions.p_id','setting_positions.FKgsp_position')
         ->find($spId);
@@ -511,11 +535,22 @@ class HrJobController extends Controller
         // dd($gj);
         
         $gjskills = gjskills::join('skills','skills.s_id','gjskills.FKgjs_skills')
-        ->where('FKgjs_gjcapacity',$id)->where('FKgjs_userCreate',0)->whereNull('gjs_userDelete')
+        ->where('FKgjs_gjcapacity',$id)
+        // ->where('FKgjs_userCreate',0)
+        ->where(function ($query) use ($hr) {
+            $query->where('FKgjs_userCreate', 0)
+                ->orWhere('FKgjs_userCreate', $hr->FKch_company);
+        })
+        ->whereNull('gjs_userDelete')
         ->get();
 
         $gjSkillsSub = gjSkillsSub::join('skills_subs','skills_subs.ss_id','gj_skills_subs.FKgjss_skillsSub')
-        ->where('FKgjss_gjcapacity',$id)->where('FKgjss_userCreate',0)->whereNull('gjss_userDelete')
+        ->where('FKgjss_gjcapacity',$id)
+        ->where(function ($query) use ($hr) {
+            $query->where('FKgjss_userCreate', 0)
+                ->orWhere('FKgjss_userCreate', $hr->FKch_company);
+        })
+        ->whereNull('gjss_userDelete')
         ->get();  
         return view('frontend.company.job.skills.skills',compact('sp','gjc','gjskills','gjSkillsSub'));
     }
@@ -535,11 +570,372 @@ class HrJobController extends Controller
                 ->orWhere('FKs_Create', $hr->FKch_company);
         })
         ->where('FKs_capacity',$gjc->FKgjc_capacity)->whereNull('s_userDelete')->get();
-        return view('frontend.company.job.skills.skills-add',compact('sp','gjc','skills'));
+        
+        $skillsTotal = skills::all();
+        return view('frontend.company.job.skills.skills-add',compact('sp','gjc','skills','skillsTotal'));
     }
 
-    function companyJobSkillsEdit(){
-        return view('frontend.company.job.skills.skills-edit');
+    function companyJobSkillsAdd(Request $request, $gjcId, $spId){
+        // dd($request);
+        $hr = ceohr::where('FKch_userid',Auth::user()->id)->first();
+        $skillsTotal = skills::all();
+        $number = count($skillsTotal)+1;
+        $no = str_pad($number, 3, "0", STR_PAD_LEFT);
+        $gjc = gjcapacity::find($gjcId);
+        if($request->skills == 0){
+
+            $skills                  = new skills;
+            $skills->s_no            = $no;
+            $skills->s_name          = $request->skills_name;
+            $skills->s_detail        = $request->ss_detail;
+            $skills->FKs_capacity    = $gjc->FKgjc_capacity;
+            $skills->FKs_Create      = $hr->FKch_company;
+            $skills->s_userCreate    = Auth::user()->name;
+            $skills->s_userUpdate    = Auth::user()->name;
+            $skills->save();
+
+            $last = DB::table('skills')->latest('s_id')->first();
+
+            $gjskills = new gjskills;
+            $gjskills->FKgjs_skills     = $last->s_id;
+            $gjskills->gjs_nameskills	= $request->skills_name;
+            $gjskills->FKgjs_gjcapacity = $gjcId;
+            $gjskills->FKgjs_groupjob   = $gjc->FKgjc_groupjob;
+            $gjskills->FKgjs_userCreate = $hr->FKch_company;
+            $gjskills->gjs_userCreate   = Auth::user()->name;
+            $gjskills->gjs_userUpdate   = Auth::user()->name;
+            $gjskills->save();
+
+            $mes = 'Success';
+            $yourURL= url('company/job/skills/'.$gjcId.'/'.$spId);
+            echo ("<script>alert('$mes'); location.href='$yourURL'; </script>");
+        }
+        else{
+            $ss = skills::find($request->skills);
+            
+            $gjskills = new gjskills;
+            $gjskills->FKgjs_skills     = $request->skills;
+            $gjskills->gjs_nameskills	= $ss->s_name;
+            $gjskills->FKgjs_gjcapacity = $gjcId;
+            $gjskills->FKgjs_groupjob   = $gjc->FKgjc_groupjob;
+            $gjskills->FKgjs_userCreate = $hr->FKch_company;
+            $gjskills->gjs_userCreate   = Auth::user()->name;
+            $gjskills->gjs_userUpdate   = Auth::user()->name;
+            $gjskills->save();
+
+            $mes = 'Success';
+            $yourURL= url('company/job/skills/'.$gjcId.'/'.$spId);
+            echo ("<script>alert('$mes'); location.href='$yourURL'; </script>");
+        }
+    }
+
+    function companyJobSkillsEdit($id, $spId){
+        $hr = ceohr::where('FKch_userid',Auth::user()->id)->first();
+
+        $sp = settingPosition::join('groupjobs','groupjobs.gj_id','setting_positions.FKgsp_groupJob')
+        ->join('positions','positions.p_id','setting_positions.FKgsp_position')
+        ->find($spId);
+
+        $gjs = gjskills::join('gjcapacities','gjcapacities.gjc_id','gjskills.FKgjs_gjcapacity')
+        ->join('capacities','capacities.cc_id','gjcapacities.FKgjc_capacity')
+        ->join('skills','skills.s_id','gjskills.FKgjs_skills')->find($id);
+
+        $skills = skills::
+        where(function ($query) use ($hr) {
+            $query->where('FKs_Create', 0)
+                ->orWhere('FKs_Create', $hr->FKch_company);
+        })
+        ->where('FKs_capacity',$gjs->FKgjc_capacity)->whereNull('s_userDelete')->get();
+        
+        $skillsTotal = skills::all();
+
+        return view('frontend.company.job.skills.skills-edit',compact('skills','skillsTotal','gjs','sp'));
+    }
+
+    function companyJobSkillsUpdate(Request $request, $gjsId, $spId){
+        $gjSkills = gjskills::join('gjcapacities','gjcapacities.gjc_id','gjskills.FKgjs_gjcapacity')->find($gjsId);
+        // dd($request);
+        if($request->skills == 0){
+            $hr = ceohr::where('FKch_userid',Auth::user()->id)->first();
+            $ct = skills::all();
+            $number = count($ct)+1;
+            $no = str_pad($number, 3, "0", STR_PAD_LEFT);
+            // dd('Add Capacity');
+            $skills                  = new skills;
+            $skills->s_no            = $no;
+            $skills->s_name          = $request->sName;
+            $skills->s_detail        = $request->ssNew_detail;
+            $skills->FKs_capacity    = $gjSkills->FKgjc_capacity;
+            $skills->FKs_Create      = $hr->FKch_company;
+            $skills->s_userCreate    = Auth::user()->name;
+            $skills->s_userUpdate    = Auth::user()->name;
+            $skills->save();
+
+            $last = DB::table('skills')->latest('s_id')->first();
+
+            $update = gjskills::find($gjsId)->update([
+                'FKgjs_skills'      => $last->s_id,
+                'gjs_nameskills'    => $request->sName,
+                'gjs_userUpdate'      => Auth::user()->name,
+            ]);
+            $mes = 'Success';
+            $yourURL= url('company/job/skills/'.$gjSkills->gjc_id.'/'.$spId);
+            echo ("<script>alert('$mes'); location.href='$yourURL'; </script>");
+        }
+        else{
+            $skills = skills::find($request->skills);
+
+            if($skills->FKs_Create == 0){
+                // dd('update capacity from admin');
+                $update = gjskills::find($gjsId)->update([
+                    'FKgjs_skills'      => $request->skills,
+                    'gjs_nameskills'    => $skills->s_name,
+                    'gjs_userUpdate'      => Auth::user()->name,
+                ]);
+                $mes = 'Success';
+                $yourURL= url('company/job/skills/'.$gjSkills->gjc_id.'/'.$spId);
+                echo ("<script>alert('$mes'); location.href='$yourURL'; </script>");
+            }else{
+                // dd('update capacity from company');
+                $update = skills::find($request->skills)->update([
+                    's_name'       =>  $request->skills_name,
+                    's_detail'     =>  $request->ss_detail,
+                    's_userUpdate' =>  Auth::user()->name
+                ]);
+
+                $update = gjskills::find($gjsId)->update([
+                    'FKgjs_skills'      => $request->skills,
+                    'gjs_nameskills'    => $request->skills_name,
+                    'gjs_userUpdate'    => Auth::user()->name,
+                ]);
+                $mes = 'Success';
+                $yourURL= url('company/job/skills/'.$gjSkills->gjc_id.'/'.$spId);
+                echo ("<script>alert('$mes'); location.href='$yourURL'; </script>");
+            }
+        }
+    }
+
+    function jobSkillsDelete($id){
+        $update = gjskills::find($id)->update([
+            'gjs_userDelete'    => Auth::user()->name,
+        ]);
+    }
+
+    function companyJobSkillsSub($GJS, $spId){
+        $hr = ceohr::where('FKch_userid',Auth::user()->id)->first();
+        $sp = settingPosition::join('groupjobs','groupjobs.gj_id','setting_positions.FKgsp_groupJob')
+        ->join('positions','positions.p_id','setting_positions.FKgsp_position')
+        ->find($spId);
+
+        $gjs = gjskills::join('gjcapacities','gjcapacities.gjc_id','gjskills.FKgjs_gjcapacity')
+        ->join('capacities','capacities.cc_id','gjcapacities.FKgjc_capacity')
+        ->join('skills','skills.s_id','gjskills.FKgjs_skills')->find($GJS);
+
+        $skillsSubGJ = gjSkillsSub::join('skills_subs','skills_subs.ss_id','gj_skills_subs.FKgjss_skillsSub')
+        ->where('FKgjss_gjskills',$GJS)
+        // ->where('FKgjss_userCreate',0)
+        ->where(function ($query) use ($hr) {
+            $query->where('FKgjss_userCreate', 0)
+                ->orWhere('FKgjss_userCreate', $hr->FKch_company);
+        })
+        ->whereNull('gjss_userDelete')
+        ->get();
+
+        // $skillsSubGJ = gjSkillsSub::where('gjSkillsSub',$GJS)->get();
+
+        return view('frontend.company.job.skillsSub.skillsSub',compact('sp', 'gjs', 'skillsSubGJ'));
+    }
+
+    function companyJobSkillsSubForm($gjsId, $spId) {
+        $hr = ceohr::where('FKch_userid', Auth::user()->id)->first();
+        
+        $gjs = gjskills::join('gjcapacities', 'gjcapacities.gjc_id', 'gjskills.FKgjs_gjcapacity')
+            ->join('capacities', 'capacities.cc_id', 'gjcapacities.FKgjc_capacity')
+            ->join('skills', 'skills.s_id', 'gjskills.FKgjs_skills')
+            ->find($gjsId);
+        
+        $sp = settingPosition::join('groupjobs', 'groupjobs.gj_id', 'setting_positions.FKgsp_groupJob')
+            ->join('positions', 'positions.p_id', 'setting_positions.FKgsp_position')
+            ->find($spId);
+        
+        $skillsSubstotal = skillsSubs::all();
+        
+        $skillsSub = skillsSubs::where('FKss_skills', $gjs->FKgjs_skills)
+            ->where(function ($query) use ($hr) {
+                $query->where('FKss_Create', 0)
+                    ->orWhere('FKss_Create', $hr->FKch_company);
+            })
+            ->whereNull('ss_userDelete')
+            ->get();
+        
+        return view('frontend.company.job.skillsSub.skillsSub-add', compact('sp', 'gjs', 'skillsSub', 'skillsSubstotal'));
+    }
+
+    function companyJobSkillsSubAdd(Request $request, $gjsId, $spId){
+        // dd($request);
+        $hr = ceohr::where('FKch_userid',Auth::user()->id)->first();
+
+        $ssTotal = skillsSubs::all();
+        $number = count($ssTotal)+1;
+        $no = str_pad($number, 3, "0", STR_PAD_LEFT);
+
+        $gjs = gjskills::join('gjcapacities','gjcapacities.gjc_id','gjskills.FKgjs_gjcapacity')->find($gjsId);
+
+        if($request->skills == 0){
+
+            $skillsSubs                   = new skillsSubs;
+            $skillsSubs->ss_no            = $no;
+            $skillsSubs->ss_name          = $request->skills_name;
+            $skillsSubs->ss_detail        = $request->ss_detail;
+            $skillsSubs->ss_standardOne   = $request->lavel1;
+            $skillsSubs->ss_standardTwo   = $request->lavel2;
+            $skillsSubs->ss_standardThree = $request->lavel3;
+            $skillsSubs->FKss_skills      = $gjs->FKgjs_skills;
+            $skillsSubs->FKss_capacity    = $gjs->FKgjc_capacity;
+            $skillsSubs->FKss_Create      = $hr->FKch_company;
+            $skillsSubs->ss_userCreate    = Auth::user()->name;
+            $skillsSubs->ss_userUpdate    = Auth::user()->name;
+            $skillsSubs->save();
+
+            $last = DB::table('skills_subs')->latest('ss_id')->first();
+
+            $gjSkillsSub = new gjSkillsSub;
+            $gjSkillsSub->FKgjss_skillsSub   = $last->ss_id;
+            $gjSkillsSub->gjss_nameskillsSub = $request->skills_name;
+            $gjSkillsSub->FKgjss_gjskills    = $gjsId;
+            $gjSkillsSub->FKgjss_gjcapacity  = $gjs->FKgjs_gjcapacity;
+            $gjSkillsSub->FKgjss_groupjob    = $gjs->FKgjs_groupjob;
+            $gjSkillsSub->FKgjss_userCreate  = $hr->FKch_company;
+            $gjSkillsSub->gjss_userCreate    = Auth::user()->name;
+            $gjSkillsSub->gjss_userUpdate    = Auth::user()->name;
+            $gjSkillsSub->save();
+
+            $mes = 'Success';
+            $yourURL= url('company/job/skillsSub/'.$gjsId.'/'.$spId);
+            echo ("<script>alert('$mes'); location.href='$yourURL'; </script>");
+        }
+        else{
+            $ss = skillsSubs::find($request->skills);
+            
+            $gjSkillsSub = new gjSkillsSub;
+            $gjSkillsSub->FKgjss_skillsSub   = $request->skills;
+            $gjSkillsSub->gjss_nameskillsSub = $ss->ss_name;
+            $gjSkillsSub->FKgjss_gjskills    = $gjsId;
+            $gjSkillsSub->FKgjss_gjcapacity  = $gjs->FKgjs_gjcapacity;
+            $gjSkillsSub->FKgjss_groupjob    = $gjs->FKgjs_groupjob;
+            $gjSkillsSub->FKgjss_userCreate  = $hr->FKch_company;
+            $gjSkillsSub->gjss_userCreate    = Auth::user()->name;
+            $gjSkillsSub->gjss_userUpdate    = Auth::user()->name;
+            $gjSkillsSub->save();
+
+            $mes = 'Success';
+            $yourURL= url('company/job/skillsSub/'.$gjsId.'/'.$spId);
+            echo ("<script>alert('$mes'); location.href='$yourURL'; </script>");
+        }
+    }
+
+    function companyJobSkillsSubEdit($gjssId, $spId) {
+        $hr = ceohr::where('FKch_userid', Auth::user()->id)->first();
+        
+        $gjss = gjSkillsSub::join('gjskills', 'gjskills.gjs_id', 'gj_skills_subs.FKgjss_gjskills')
+            // ->join('capacities', 'capacities.cc_id', 'gjcapacities.FKgjc_capacity')
+            ->join('skills', 'skills.s_id', 'gjskills.FKgjs_skills')
+            ->join('skills_subs', 'skills_subs.ss_id', 'gj_skills_subs.FKgjss_skillsSub')
+            ->find($gjssId);
+        
+        $sp = settingPosition::join('groupjobs', 'groupjobs.gj_id', 'setting_positions.FKgsp_groupJob')
+            ->join('positions', 'positions.p_id', 'setting_positions.FKgsp_position')
+            ->find($spId);
+        
+        $skillsSubstotal = skillsSubs::all();
+        
+        $skillsSub = skillsSubs::where('FKss_skills', $gjss->FKgjs_skills)
+            ->where(function ($query) use ($hr) {
+                $query->where('FKss_Create', 0)
+                    ->orWhere('FKss_Create', $hr->FKch_company);
+            })
+            ->whereNull('ss_userDelete')
+            ->get();
+        
+        return view('frontend.company.job.skillsSub.skillsSub-edit', compact('sp', 'gjss', 'skillsSub', 'skillsSubstotal'));
+    }
+
+    function companyJobSkillsSubUpdate(Request $request, $gjssId, $spId){
+        $gjss = gjSkillsSub::join('gjskills','gjskills.gjs_id','gj_skills_subs.FKgjss_gjskills')
+        ->join('gjcapacities','gjcapacities.gjc_id','gjskills.FKgjs_gjcapacity')->find($gjssId);
+        // dd($request);
+        if($request->skills == 0){
+            $hr = ceohr::where('FKch_userid',Auth::user()->id)->first();
+            $sst = skillsSubs::all();
+            $number = count($sst)+1;
+            $no = str_pad($number, 3, "0", STR_PAD_LEFT);
+            // dd('Add Capacity');
+            $skillsSubs                   = new skillsSubs;
+            $skillsSubs->ss_no            = $no;
+            $skillsSubs->ss_name          = $request->sName;
+            $skillsSubs->ss_detail        = $request->ssNew_detail;
+            $skillsSubs->ss_standardOne   = $request->lavel1;
+            $skillsSubs->ss_standardTwo   = $request->lavel2;
+            $skillsSubs->ss_standardThree = $request->lavel3;
+            $skillsSubs->FKss_skills      = $gjss->FKgjs_skills;
+            $skillsSubs->FKss_capacity    = $gjss->FKgjc_capacity;
+            $skillsSubs->FKss_Create      = $hr->FKch_company;
+            $skillsSubs->ss_userCreate    = Auth::user()->name;
+            $skillsSubs->ss_userUpdate    = Auth::user()->name;
+            $skillsSubs->save();
+
+            $last = DB::table('skills_subs')->latest('ss_id')->first();
+
+            $update = gjSkillsSub::find($gjssId)->update([
+                'FKgjss_skillsSub'      => $last->ss_id,
+                'gjss_nameskillsSub'    => $request->sName,
+                'gjss_userUpdate'       => Auth::user()->name,
+            ]);
+            $mes = 'Success';
+            $yourURL= url('company/job/skillsSub/'.$gjss->gjs_id.'/'.$spId);
+            echo ("<script>alert('$mes'); location.href='$yourURL'; </script>");
+        }
+        else{
+            $skillsSub = skillsSubs::find($request->skills);
+
+            if($skillsSub->FKss_Create == 0){
+                // dd('update capacity from admin');
+                $update = gjSkillsSub::find($gjssId)->update([
+                    'FKgjss_skillsSub'      => $request->skills,
+                    'gjss_nameskillsSub'    => $skillsSub->s_name,
+                    'gjss_userUpdate'       => Auth::user()->name,
+                ]);
+                $mes = 'Success';
+                $yourURL= url('company/job/skillsSub/'.$gjss->gjs_id.'/'.$spId);
+                echo ("<script>alert('$mes'); location.href='$yourURL'; </script>");
+            }else{
+                // dd('update capacity from company');
+                $update = skillsSubs::find($request->skills)->update([
+                    'ss_name'           =>  $request->skillsOld_name,
+                    'ss_detail'         =>  $request->editor,
+                    'ss_standardOne'    =>  $request->lavelOld1,
+                    'ss_standardTwo'    =>  $request->lavelOld2,
+                    'ss_standardThree'  =>  $request->lavelOld3,
+                    'ss_userUpdate'     =>  Auth::user()->name,
+                ]);
+
+                $update = gjSkillsSub::find($gjssId)->update([
+                    'FKgjss_skillsSub'      => $request->skills,
+                    'gjss_nameskillsSub'    => $request->skillsOld_name,
+                    'gjss_userUpdate'       => Auth::user()->name,
+                ]);
+
+                $mes = 'Success';
+                $yourURL= url('company/job/skillsSub/'.$gjss->gjs_id.'/'.$spId);
+                echo ("<script>alert('$mes'); location.href='$yourURL'; </script>");
+            }
+        }
+    }
+
+    function hrJobSkillsSubDel($id){
+        $update = gjSkillsSub::find($id)->update([
+            'gjss_userDelete'      => Auth::user()->name,
+        ]);
     }
 
     function searchHrCapacity(Request $request){
@@ -549,5 +945,46 @@ class HrJobController extends Controller
         $response["name"]  = $capacity->cc_name;
         $response["user"]  = $capacity->FKcc_Create;
         return json_encode($response);      
+    }
+
+    function searchHrSkills(Request $request){
+        $skills = skills::find($request->skills);
+        
+        $response = $skills->s_detail;
+        return json_encode($response);      
+    }
+
+    function searchHrSkillsDetail(Request $request){
+        $skills = skills::find($request->skills);
+        $response["detail"]  = $skills->s_detail;
+        $response["no"]  = $skills->s_no;
+        $response["name"]  = $skills->s_name;
+        $response["user"]  = $skills->FKs_Create;
+        // $response = $skills->s_detail;
+        return json_encode($response);    
+    }
+
+    function searchHrSkillsSub(Request $request){
+        $skillsSubs = skillsSubs::find($request->skills);
+        
+        // $response = $skillsSubs->ss_detail;
+        $response["detail"] = $skillsSubs->ss_detail;
+        $response["standardOne"] = $skillsSubs->ss_standardOne;
+        $response["standardTwo"]  = $skillsSubs->ss_standardTwo;
+        $response["standardThree"]  = $skillsSubs->ss_standardThree;
+        return json_encode($response);      
+    }
+
+    function searchHrSkillsSubDetail(Request $request){
+        $skills = skillsSubs::find($request->skills);
+        $response["detail"]  = $skills->ss_detail;
+        $response["no"]  = $skills->ss_no;
+        $response["name"]  = $skills->ss_name;
+        $response["user"]  = $skills->FKss_Create;
+        $response["lavel1"]  = $skills->ss_standardOne;
+        $response["lavel2"]  = $skills->ss_standardTwo;
+        $response["lavel3"]  = $skills->ss_standardThree;
+        // $response = $skills->s_detail;
+        return json_encode($response);    
     }
 }

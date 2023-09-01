@@ -59,7 +59,19 @@ Route::get('company/job/capacity/delete/{id}', [App\Http\Controllers\HrJobContro
 
 Route::get('company/job/skills/{id}/{spId}', [App\Http\Controllers\HrJobController::class, 'companyJobSkills']);
 Route::get('company/job/skills/form/{id}/{spId}', [App\Http\Controllers\HrJobController::class, 'companyJobSkillsForm']);
-Route::get('company/job/skills/edit', [App\Http\Controllers\HrJobController::class, 'companyJobSkillsEdit']);
+Route::post('company/job/skills/add/{gjcId}/{spId}', [App\Http\Controllers\HrJobController::class, 'companyJobSkillsAdd']);
+Route::get('company/job/skills/edit/{id}/{spId}', [App\Http\Controllers\HrJobController::class, 'companyJobSkillsEdit']);
+Route::post('company/job/skills/update/{gjsId}/{spId}', [App\Http\Controllers\HrJobController::class, 'companyJobSkillsUpdate']);
+Route::get('hr/job/skills/delete/{id}', [App\Http\Controllers\AdminJobController::class, 'jobSkillsDelete']);
+// Route::get('backend/job/skills/delete/{id}', [App\Http\Controllers\AdminJobController::class, 'jobSkillsDelete']);
+
+Route::get('company/job/skillsSub/{id}/{spId}', [App\Http\Controllers\HrJobController::class, 'companyJobSkillsSub']);
+Route::get('company/job/skillsSub/form/{gjsId}/{spId}', [App\Http\Controllers\HrJobController::class, 'companyJobSkillsSubForm']);
+Route::post('company/job/skillsSub/add/{gjsId}/{spId}', [App\Http\Controllers\HrJobController::class, 'companyJobSkillsSubAdd']);
+Route::get('company/job/skillsSub/edit/{gjssId}/{spId}', [App\Http\Controllers\HrJobController::class, 'companyJobSkillsSubEdit']);
+Route::post('company/job/skillsSub/update/{gjssId}/{spId}', [App\Http\Controllers\HrJobController::class, 'companyJobSkillsSubUpdate']);
+Route::get('company/job/skillsSub/delete/{id}', [App\Http\Controllers\HrJobController::class, 'companyJobSkillsSubDel']);
+Route::get('hr/job/skillsSub/delete/{id}', [App\Http\Controllers\HrJobController::class, 'hrJobSkillsSubDel']);
 
 // Route::get('company/capacity', [App\Http\Controllers\FrontendController::class, 'companyCapacity']);
 // Route::get('company/capacity/form', [App\Http\Controllers\FrontendController::class, 'companyCapacityForm']);
@@ -363,6 +375,10 @@ Route::post('searchAmphure', [App\Http\Controllers\BackendController::class, 'se
 Route::post('capacitySkills', [App\Http\Controllers\BackendController::class, 'capacitySkills']);
 
 Route::post('searchHrCapacity', [App\Http\Controllers\HrJobController::class, 'searchHrCapacity']);
+Route::post('searchHrSkills', [App\Http\Controllers\HrJobController::class, 'searchHrSkills']);
+Route::post('searchHrSkillsDetail', [App\Http\Controllers\HrJobController::class, 'searchHrSkillsDetail']);
+Route::post('searchHrSkillsSub', [App\Http\Controllers\HrJobController::class, 'searchHrSkillsSub']);
+Route::post('searchHrSkillsSubDetail', [App\Http\Controllers\HrJobController::class, 'searchHrSkillsSubDetail']);
 
 Route::post('searchCapacity', [App\Http\Controllers\AdminJobController::class, 'searchCapacity']);
 Route::post('searchSkills', [App\Http\Controllers\AdminJobController::class, 'searchSkills']);
