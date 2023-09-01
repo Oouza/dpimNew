@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 22, 2023 at 05:24 AM
+-- Generation Time: Aug 30, 2023 at 04:18 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 7.4.30
 
@@ -1065,7 +1065,12 @@ CREATE TABLE `capacities` (
 INSERT INTO `capacities` (`cc_id`, `cc_no`, `cc_name`, `cc_detail`, `FKcc_Create`, `cc_userCreate`, `cc_userUpdate`, `cc_userDelete`, `created_at`, `updated_at`) VALUES
 (1, '001', 'มีใบอนุญาตควบคุมวัตถุระเบิด', '<p>อธิบายมีใบอนุญาตควบคุมวัตถุระเบิด</p>', 0, 'Super Admin', 'Super Admin', NULL, '2023-08-11 18:51:19', '2023-08-19 07:10:35'),
 (2, '002', 'ความเป็นมืออาชีพ/ มีความชำนาญการ', '<p>อธิบายความเป็นมืออาชีพ/&nbsp;มีความชำนาญการ</p>', 0, 'Super Admin', 'Super Admin', NULL, '2023-08-11 19:07:38', '2023-08-19 07:17:14'),
-(3, '003', 'ความรู้ด้านเครื่องมือเครื่องจักร', '<p>อธิบายความรู้ด้านเครื่องมือเครื่องจักร</p>', 0, 'Super Admin', 'Super Admin', NULL, '2023-08-14 20:42:44', '2023-08-19 07:17:22');
+(3, '003', 'ความรู้ด้านเครื่องมือเครื่องจักร', '<p>อธิบายความรู้ด้านเครื่องมือเครื่องจักร</p>', 0, 'Super Admin', 'Super Admin', NULL, '2023-08-14 20:42:44', '2023-08-19 07:17:22'),
+(4, '004', 'กฎระเบียบและข้อบังคับ', '<p>คำอธิบายกฎระเบียบและข้อบังคับ</p>', 3, 'นางสาว บุษบา วงศ์ดี', 'นางสาว บุษบา วงศ์ดี', NULL, '2023-08-25 13:35:04', '2023-08-25 13:35:04'),
+(5, '005', 'ภาษาต่างประเทศ', '<p>อธิบายภาษาต่างประเทศ</p>', 3, 'นางสาว บุษบา วงศ์ดี', 'นางสาว บุษบา วงศ์ดี', NULL, '2023-08-26 09:48:50', '2023-08-28 10:05:17'),
+(6, '006', 'การสื่อสาร', '<p>อธิบายการสื่อสาร</p>', 3, 'นางสาว บุษบา วงศ์ดี', 'นางสาว บุษบา วงศ์ดี', NULL, '2023-08-28 10:13:33', '2023-08-28 10:13:33'),
+(7, '007', NULL, NULL, 3, 'นางสาว บุษบา วงศ์ดี', 'นางสาว บุษบา วงศ์ดี', NULL, '2023-08-29 03:31:37', '2023-08-29 03:31:37'),
+(8, '008', NULL, NULL, 3, 'นางสาว บุษบา วงศ์ดี', 'นางสาว บุษบา วงศ์ดี', NULL, '2023-08-29 03:32:01', '2023-08-29 03:32:01');
 
 -- --------------------------------------------------------
 
@@ -1123,7 +1128,7 @@ CREATE TABLE `companies` (
   `FKc_typemineral` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'id ชนิดแร่หลัก จาก type_minerals',
   `c_nameTypeMineral` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อชนิดแร่หลัก',
   `c_typeMineralSub` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชนิดแร่รอง',
-  `c_typeCompany` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'เหมืองแร่,โรงโม่หิน,โรงแต่งแร่,โรงประกอบโลหกรรม,ผู้รับเหมาเหมืองแร่,อื่นๆ',
+  `c_typeCompany` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'เหมืองแร่,โรงโม่หิน,โรงแต่งแร่,โรงประกอบโลหกรรม,ผู้รับเหมางานเหมืองแร่,อื่นๆ',
   `c_phone` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'เบอร์โทรบริษัท',
   `c_addressNo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'เลขที่อยู่',
   `FKc_provinces` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'id จังหวัด จาก provinces',
@@ -1241,8 +1246,9 @@ CREATE TABLE `departments` (
 --
 
 INSERT INTO `departments` (`d_id`, `d_name`, `FKd_company`, `d_delete`, `created_at`, `updated_at`) VALUES
-(1, 'การเงิน', 3, NULL, '2023-08-20 01:01:29', '2023-08-20 01:29:09'),
-(2, 'วางระเบิด', 3, NULL, '2023-08-20 01:01:37', '2023-08-20 01:26:08');
+(1, 'การเงินและบัญชี', 3, NULL, '2023-08-20 01:01:29', '2023-08-22 07:13:36'),
+(2, 'ออกแบบ', 3, NULL, '2023-08-20 01:01:37', '2023-08-22 07:12:12'),
+(3, 'ช่าง', 3, NULL, '2023-08-22 07:25:09', '2023-08-22 07:25:09');
 
 -- --------------------------------------------------------
 
@@ -1266,9 +1272,13 @@ CREATE TABLE `department_subs` (
 --
 
 INSERT INTO `department_subs` (`ds_id`, `ds_name`, `FKds_department`, `ds_namedepartment`, `FKds_company`, `ds_delete`, `created_at`, `updated_at`) VALUES
-(1, 'hjkbiujg', 1, 'การเงิน', 3, NULL, '2023-08-20 02:33:21', '2023-08-20 02:58:37'),
-(2, 'fghjdrtyhj', 2, 'วางระเบิด', 3, NULL, '2023-08-20 02:35:18', '2023-08-20 02:35:18'),
-(3, 'วางแผนซื้อระเบิด', 1, 'การเงิน', 3, NULL, '2023-08-20 02:44:30', '2023-08-20 02:54:46');
+(1, 'จัดทำรายงานการเงินต่างๆ', 1, 'การเงินและบัญชี', 3, NULL, '2023-08-20 02:33:21', '2023-08-22 07:23:50'),
+(2, 'คำนวณปริมาตรแร่', 2, 'ออกแบบ', 3, NULL, '2023-08-20 02:35:18', '2023-08-22 10:09:59'),
+(3, 'ตรวจหลักฐาน เอกสารทางการเงิน', 1, 'การเงินและบัญชี', 3, NULL, '2023-08-20 02:44:30', '2023-08-22 07:23:28'),
+(4, 'ช่างซ่อม', 3, 'ช่าง', 3, NULL, '2023-08-22 07:25:24', '2023-08-22 07:25:24'),
+(5, 'ช่างใช้อุปกรณ์', 3, 'ช่าง', 3, NULL, '2023-08-22 07:25:46', '2023-08-22 07:33:50'),
+(6, 'ตรวจสอบพื้นที่', 2, 'ออกแบบ', 3, NULL, '2023-08-22 07:27:13', '2023-08-22 07:27:13'),
+(7, 'ควบคุมการผลิต', 2, 'ออกแบบ', 3, NULL, '2023-08-22 07:27:34', '2023-08-22 07:27:34');
 
 -- --------------------------------------------------------
 
@@ -10161,7 +10171,7 @@ CREATE TABLE `employees` (
   `e_phone` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'เบอร์โทร',
   `e_birth` date DEFAULT NULL COMMENT 'วันเกิด',
   `e_gender` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'เพศ',
-  `e_status` int(11) DEFAULT NULL COMMENT 'สถานะการทำงาน ทำงานหรือว่างงาน',
+  `e_status` int(11) DEFAULT NULL COMMENT '1=ทำงาน 2=ว่างงาน',
   `FKe_company` int(11) DEFAULT NULL COMMENT 'id จาก companies',
   `e_nameCompany` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อบริษัท',
   `e_employeeNo` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'รหัสพนักงาน',
@@ -10200,7 +10210,7 @@ CREATE TABLE `employees` (
 --
 
 INSERT INTO `employees` (`e_id`, `e_title`, `e_fname`, `e_lname`, `e_phone`, `e_birth`, `e_gender`, `e_status`, `FKe_company`, `e_nameCompany`, `e_employeeNo`, `FKe_department`, `e_nameDepartment`, `FKe_departmentSub`, `e_nameDepartmentSub`, `FKe_position`, `e_namePosition`, `FKe_lavel`, `e_nameLavel`, `FKe_group`, `e_nameGroup`, `e_credit`, `addressNO_now`, `FKe_province_now`, `FKe_amphur_now`, `FKe_tambon_now`, `postcode_now`, `addressNO_past`, `FKe_province_past`, `FKe_amphur_past`, `FKe_tambon_past`, `postcode_past`, `FKe_userid`, `e_userCreate`, `e_userUpdate`, `e_userDelete`, `created_at`, `updated_at`, `e_note`) VALUES
-(1, 'นาย', 'ไก่', 'ไข่', '0984658888', '2000-03-03', 'ชาย', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '541', 1, 40, 104001, '10160', '65', 48, 706, 610601, '78645', 3, 'Super Admin', 'Super Admin', NULL, '2023-08-04 15:48:54', '2023-08-04 15:48:54', NULL),
+(1, 'นาย', 'ไก่', 'ไข่', '0984658888', '2000-03-03', 'ชาย', NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '541', 1, 40, 104001, '10160', '65', 48, 706, 610601, '78645', 3, 'Super Admin', 'Super Admin', NULL, '2023-08-04 15:48:54', '2023-08-04 15:48:54', NULL),
 (2, 'นางสาว', 'ส้ม', 'เช้ง', '0996663333', '2000-03-05', 'หญิง', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '45/85', 1, 40, 102203, '78945', '52/85', 1, 40, 102203, '78945', 4, 'Super Admin', 'Super Admin', NULL, '2023-08-04 15:48:54', '2023-08-04 15:48:54', NULL),
 (3, 'นาย', 'สมชาย', 'ดีดีดี', '088559999', '0990-06-25', 'ชาย', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '78', 1, 50, 105001, '78965', '98/87', 58, 813, 730701, '65421', 6, 'Super Admin', 'Super Admin', NULL, '2023-08-04 15:56:06', '2023-08-04 15:56:06', NULL),
 (4, 'นางสาว', 'สมหญิง', 'จริงๆ', '0996663358', '2000-03-05', 'หญิง', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '55/856', 1, 40, 102203, '78945', '52/85', 1, 40, 102203, '87456', 7, 'Super Admin', 'Super Admin', NULL, '2023-08-04 15:56:06', '2023-08-04 15:56:06', NULL),
@@ -10273,10 +10283,14 @@ CREATE TABLE `gjcapacities` (
 
 INSERT INTO `gjcapacities` (`gjc_id`, `FKgjc_capacity`, `gjc_namecapacity`, `gjc_important`, `FKgjc_groupjob`, `gjc_namegroupjob`, `FKgjc_userCreate`, `gjc_userCreate`, `gjc_userUpdate`, `gjc_userDelete`, `created_at`, `updated_at`) VALUES
 (1, 1, 'มีใบอนุญาตควบคุมวัตถุระเบิด', 'จำเป็น', 1, 'งานระเบิดผู้ปฎิบัติการ', 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:05:09', '2023-08-19 09:05:09'),
-(2, 2, 'ความเป็นมืออาชีพ/ มีความชำนาญการ', 'ไม่จำเป็น', 1, 'งานระเบิดผู้ปฎิบัติการ', 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:05:23', '2023-08-19 09:05:23'),
+(2, 2, 'ความเป็นมืออาชีพ/ มีความชำนาญการ', NULL, 1, 'งานระเบิดผู้ปฎิบัติการ', 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:05:23', '2023-08-19 09:05:23'),
 (3, 3, 'ความรู้ด้านเครื่องมือเครื่องจักร', 'จำเป็น', 1, 'งานระเบิดผู้ปฎิบัติการ', 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:05:38', '2023-08-19 09:05:38'),
 (4, 2, 'ความเป็นมืออาชีพ/ มีความชำนาญการ', 'จำเป็น', 3, 'งานบริหารของผู้บริหาร', 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:05:58', '2023-08-19 09:05:58'),
-(5, 3, 'ความรู้ด้านเครื่องมือเครื่องจักร', 'ไม่จำเป็น', 3, 'งานบริหารของผู้บริหาร', 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:06:08', '2023-08-19 09:06:08');
+(5, 3, 'ความรู้ด้านเครื่องมือเครื่องจักร', NULL, 3, 'งานบริหารของผู้บริหาร', 3, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:06:08', '2023-08-19 09:06:08'),
+(8, 4, 'กฎระเบียบและข้อบังคับ', 'จำเป็น', 1, 'งานระเบิดผู้ปฎิบัติการ', 3, 'นางสาว บุษบา วงศ์ดี', 'นางสาว บุษบา วงศ์ดี', NULL, '2023-08-25 13:35:04', '2023-08-25 13:35:04'),
+(9, 6, 'การสื่อสาร', NULL, 1, 'งานระเบิดผู้ปฎิบัติการ', 3, 'นางสาว บุษบา วงศ์ดี', 'นางสาว บุษบา วงศ์ดี', NULL, '2023-08-25 14:29:14', '2023-08-28 10:13:33'),
+(10, 5, 'การอ่าน', NULL, 1, 'งานระเบิดผู้ปฎิบัติการ', 3, 'นางสาว บุษบา วงศ์ดี', 'นางสาว บุษบา วงศ์ดี', NULL, '2023-08-26 09:48:50', '2023-08-28 02:28:41'),
+(11, 3, 'ความรู้ด้านเครื่องมือเครื่องจักร', 'จำเป็น', 1, 'งานระเบิดผู้ปฎิบัติการ', 3, 'นางสาว บุษบา วงศ์ดี', 'นางสาว บุษบา วงศ์ดี', NULL, '2023-08-26 11:08:32', '2023-08-26 11:08:32');
 
 -- --------------------------------------------------------
 
@@ -10308,7 +10322,11 @@ INSERT INTO `gjskills` (`gjs_id`, `FKgjs_skills`, `gjs_nameskills`, `FKgjs_gjcap
 (4, 5, 'ความสามารถในการทำงานเป็นทีม', 4, 3, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:09:58', '2023-08-19 09:09:58'),
 (5, 5, 'ความสามารถในการทำงานเป็นทีม', 4, 3, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:10:17', '2023-08-19 09:10:17'),
 (6, 3, 'การอบรม/สาธิต/มีความรู้ด้านเครื่องมือเครื่องจักร', 5, 3, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:10:42', '2023-08-19 09:10:42'),
-(7, 3, 'การอบรม/สาธิต/มีความรู้ด้านเครื่องมือเครื่องจักร', 3, 1, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:11:56', '2023-08-19 19:01:58');
+(7, 3, 'การอบรม/สาธิต/มีความรู้ด้านเครื่องมือเครื่องจักร', 3, 1, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:11:56', '2023-08-19 19:01:58'),
+(10, 1, 'การจำแนกประเภทวัตถุระเบิดและสารระเบิด', 1, 1, 3, 'นางสาว บุษบา วงศ์ดี', 'นางสาว บุษบา วงศ์ดี', NULL, '2023-08-29 01:56:44', '2023-08-29 04:10:17'),
+(11, 1, 'การจำแนกประเภทวัตถุระเบิดและสารระเบิด', 1, 1, 3, 'นางสาว บุษบา วงศ์ดี', 'นางสาว บุษบา วงศ์ดี', NULL, '2023-08-29 02:45:45', '2023-08-29 02:45:45'),
+(12, 10, 'เก็บกู้ระเบิด', 1, 1, 3, 'นางสาว บุษบา วงศ์ดี', 'นางสาว บุษบา วงศ์ดี', NULL, '2023-08-29 02:58:28', '2023-08-29 02:58:28'),
+(13, 12, 'ภาษาอังกฤษ', 9, 1, 3, 'นางสาว บุษบา วงศ์ดี', 'นางสาว บุษบา วงศ์ดี', NULL, '2023-08-29 03:53:58', '2023-08-29 04:09:46');
 
 -- --------------------------------------------------------
 
@@ -10348,7 +10366,9 @@ INSERT INTO `gj_skills_subs` (`gjss_id`, `FKgjss_skillsSub`, `gjss_nameskillsSub
 (11, 6, 'ตรวจสอบความพร้อมของเครื่องจักรก่อน-หลังใช้งาน', 7, 3, 1, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 09:11:56', '2023-08-19 09:11:56'),
 (12, 5, 'ผ่านการอบรม คุณสมบัติในการควบคุมและใช้เครื่องจักรได้อย่างเหมาะสม', 7, 3, 1, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 18:56:18', '2023-08-19 18:56:18'),
 (13, 5, 'ผ่านการอบรม คุณสมบัติในการควบคุมและใช้เครื่องจักรได้อย่างเหมาะสม', 7, 3, 1, 0, 'Super Admin', 'Super Admin', 'Super Admin', '2023-08-19 18:56:51', '2023-08-19 18:58:37'),
-(14, 5, 'ผ่านการอบรม คุณสมบัติในการควบคุมและใช้เครื่องจักรได้อย่างเหมาะสม', 7, 3, 1, 0, 'Super Admin', 'Super Admin', 'Super Admin', '2023-08-19 18:56:51', '2023-08-19 18:58:30');
+(14, 5, 'ผ่านการอบรม คุณสมบัติในการควบคุมและใช้เครื่องจักรได้อย่างเหมาะสม', 7, 3, 1, 0, 'Super Admin', 'Super Admin', 'Super Admin', '2023-08-19 18:56:51', '2023-08-19 18:58:30'),
+(17, 18, NULL, 1, 1, 1, 3, 'นางสาว บุษบา วงศ์ดี', 'นางสาว บุษบา วงศ์ดี', NULL, '2023-08-29 05:24:50', '2023-08-29 10:55:17'),
+(18, 1, 'สามารถจำแนกประเภทและลักษณะของวัตถุระเบิด', 1, 1, 1, 3, 'นางสาว บุษบา วงศ์ดี', 'นางสาว บุษบา วงศ์ดี', NULL, '2023-08-29 05:35:31', '2023-08-29 05:35:31');
 
 -- --------------------------------------------------------
 
@@ -10447,7 +10467,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (122, '2023_08_20_061856_create_department_subs_table', 28),
 (123, '2023_08_20_061931_create_positions_table', 29),
 (125, '2023_08_21_025327_create_course_skills_table', 30),
-(126, '2023_08_21_025259_create_courses_table', 31);
+(126, '2023_08_21_025259_create_courses_table', 31),
+(128, '2023_08_22_033914_create_setting_positions_table', 32);
 
 -- --------------------------------------------------------
 
@@ -10499,7 +10520,12 @@ CREATE TABLE `positions` (
 --
 
 INSERT INTO `positions` (`p_id`, `p_name`, `FKp_company`, `p_delete`, `created_at`, `updated_at`) VALUES
-(1, 'ชื่อตำแหน่ง', 3, NULL, '2023-08-20 03:20:28', '2023-08-20 03:36:32');
+(1, 'ผู้สอบบัญชี', 3, NULL, '2023-08-20 03:20:28', '2023-08-22 07:09:00'),
+(2, 'วิศวกรเหมืองแร่', 3, NULL, '2023-08-21 23:50:30', '2023-08-22 00:02:54'),
+(3, 'นักธรณีวิทยา', 3, NULL, '2023-08-22 00:03:11', '2023-08-22 00:03:11'),
+(4, 'ผู้จัดการแผนกบัญชี', 3, NULL, '2023-08-22 07:10:43', '2023-08-22 11:38:08'),
+(5, 'ช่างซ่อมเครื่องจักรหนัก', 3, NULL, '2023-08-22 07:30:58', '2023-08-22 07:30:58'),
+(6, 'ช่างวางระเบิด', 3, NULL, '2023-08-22 07:31:11', '2023-08-22 07:32:55');
 
 -- --------------------------------------------------------
 
@@ -10601,6 +10627,41 @@ INSERT INTO `provinces` (`id`, `code`, `name_th`, `name_en`, `geography_id`) VAL
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `setting_positions`
+--
+
+CREATE TABLE `setting_positions` (
+  `sp_id` int(10) UNSIGNED NOT NULL,
+  `FKgsp_department` int(11) DEFAULT NULL COMMENT 'id แผนก จาก departments',
+  `sp_namedepartment` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อแผนก',
+  `FKgsp_departmentSub` int(11) DEFAULT NULL COMMENT 'id แผนกย่อย จาก department_subs',
+  `sp_namedepartmentSub` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อแผนกย่อย',
+  `FKgsp_position` int(11) DEFAULT NULL COMMENT 'id ตำแหน่ง จาก positions',
+  `sp_nameposition` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อตำแหน่ง',
+  `FKgsp_groupJob` int(11) DEFAULT NULL COMMENT 'id กลุ่มตำแหน่ง จาก groupjobs',
+  `sp_namegroupJob` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อกลุ่มตำแหน่ง',
+  `sp_detail` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'รายละเอียดกลุ่มตำแหน่งจาก groupjobs',
+  `FKgsp_typeJob` int(11) DEFAULT NULL COMMENT 'id ประเภทงาน จาก groupjobs(FKgsp_typeJob)',
+  `sp_nametypeJob` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อประเภทงาน',
+  `FKgsp_lavel` int(11) DEFAULT NULL COMMENT 'id ระดับงาน จาก groupjobs(FKgsp_lavel)',
+  `sp_namelavel` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อระดับงาน',
+  `FKgsp_company` int(11) DEFAULT NULL COMMENT 'id บริษัท จาก ceohrs(FKch_company)',
+  `sp_delete` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'คนลบข้อมูล',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `setting_positions`
+--
+
+INSERT INTO `setting_positions` (`sp_id`, `FKgsp_department`, `sp_namedepartment`, `FKgsp_departmentSub`, `sp_namedepartmentSub`, `FKgsp_position`, `sp_nameposition`, `FKgsp_groupJob`, `sp_namegroupJob`, `sp_detail`, `FKgsp_typeJob`, `sp_nametypeJob`, `FKgsp_lavel`, `sp_namelavel`, `FKgsp_company`, `sp_delete`, `created_at`, `updated_at`) VALUES
+(1, 3, 'ช่าง', 5, 'ช่างใช้อุปกรณ์', 6, 'ช่างวางระเบิด', 1, 'งานระเบิดผู้ปฎิบัติการ', '<p>สมรรถนะ ทักษะ และทักษะย่อยของ งานระเบิดผู้ปฎิบัติการ</p>', 14, 'งานระเบิด', 4, 'ผู้ปฏิบัติการ', 3, NULL, '2023-08-22 08:11:49', '2023-08-22 11:37:24'),
+(2, 1, 'การเงินและบัญชี', 3, 'ตรวจหลักฐาน เอกสารทางการเงิน', 1, 'ผู้สอบบัญชี', 3, 'งานบริหารของผู้บริหาร', '<p>สมรรถนะ ทักษะ และทักษะย่อย ของ งานบริหารของผู้บริหาร</p>', 1, 'งานบริหาร', 1, 'ผู้บริหาร', 3, NULL, '2023-08-22 11:38:27', '2023-08-28 10:36:36');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `skills`
 --
 
@@ -10627,7 +10688,11 @@ INSERT INTO `skills` (`s_id`, `s_no`, `s_name`, `s_detail`, `FKs_capacity`, `FKs
 (2, '002', 'การควบคุมและเฝ้าระวังการระเบิด', '<p>อธิบายการควบคุมและเฝ้าระวังการระเบิด</p>', 1, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-11 22:32:33', '2023-08-19 07:20:23'),
 (3, '003', 'การอบรม/สาธิต/มีความรู้ด้านเครื่องมือเครื่องจักร', '<p>อธิบายการอบรม/สาธิต/มีความรู้ด้านเครื่องมือเครื่องจักร</p>', 3, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-11 22:46:41', '2023-08-19 07:21:12'),
 (5, '004', 'ความสามารถในการทำงานเป็นทีม', '<p>อธิบายความสามารถในการทำงานเป็นทีม</p>', 2, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 08:48:05', '2023-08-19 08:48:05'),
-(6, '005', 'ความสามารถในการทำงานภายใต้สภาพแวดล้อมที่หลากหลายทางวัฒนธรรม', '<p>อธิบายความสามารถในการทำงานภายใต้สภาพแวดล้อมที่หลากหลายทางวัฒนธรรม</p>', 2, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 08:49:12', '2023-08-19 08:49:12');
+(6, '005', 'ความสามารถในการทำงานภายใต้สภาพแวดล้อมที่หลากหลายทางวัฒนธรรม', '<p>อธิบายความสามารถในการทำงานภายใต้สภาพแวดล้อมที่หลากหลายทางวัฒนธรรม</p>', 2, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 08:49:12', '2023-08-19 08:49:12'),
+(9, '006', 'วางระเบิดดดดดดดด', '<p>อธิบายวางระเบิดดดดดดดด</p>', 1, 3, 'นางสาว บุษบา วงศ์ดี', 'นางสาว บุษบา วงศ์ดี', NULL, '2023-08-29 01:56:44', '2023-08-29 01:56:44'),
+(10, '007', 'เก็บกู้ระเบิด', '<p>อธิบายเก็บกู้ระเบิด</p>', 1, 3, 'นางสาว บุษบา วงศ์ดี', 'นางสาว บุษบา วงศ์ดี', NULL, '2023-08-29 02:58:28', '2023-08-29 02:58:28'),
+(11, '008', 'ภาษาไทย', '<p>อธิบายภาษาไทย</p>', 6, 3, 'นางสาว บุษบา วงศ์ดี', 'นางสาว บุษบา วงศ์ดี', NULL, '2023-08-29 03:53:58', '2023-08-29 03:53:58'),
+(12, '009', 'ภาษาอังกฤษ', '<p>อธิบายภาษาอังกฤษ</p>', 6, 3, 'นางสาว บุษบา วงศ์ดี', 'นางสาว บุษบา วงศ์ดี', NULL, '2023-08-29 03:55:28', '2023-08-29 04:09:46');
 
 -- --------------------------------------------------------
 
@@ -10668,7 +10733,9 @@ INSERT INTO `skills_subs` (`ss_id`, `ss_no`, `ss_name`, `ss_detail`, `ss_standar
 (8, '008', 'เคารพและให้เกียรติผู้ร่วมงาน', '<p>อธิบายเคารพและให้เกียรติผู้ร่วมงาน</p>', '<p>เกณฑ์ระดับที่ 1 เคารพและให้เกียรติผู้ร่วมงาน</p>', '<p>เกณฑ์ระดับที่ 2 เคารพและให้เกียรติผู้ร่วมงาน</p>', '<p>เกณฑ์ระดับที่ 3 เคารพและให้เกียรติผู้ร่วมงาน</p>', 5, 2, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 08:50:26', '2023-08-19 08:50:26'),
 (9, '009', 'มีความเป็นมืออาชีพ', '<p>อธิบายมีความเป็นมืออาชีพ</p>', '<p>เกณฑ์ระดับที่ 1<strong> </strong>มีความเป็นมืออาชีพ</p>', '<p>เกณฑ์ระดับที่ 2<strong> </strong>มีความเป็นมืออาชีพ</p>', '<p>เกณฑ์ระดับที่ 3<strong> </strong>มีความเป็นมืออาชีพ</p>', 5, 2, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 08:51:33', '2023-08-19 08:51:33'),
 (10, '010', 'เคารพและให้เกียรติหลักปฏิบัติของเพื่อนร่วมงานและคนรอบข้าง', '<p>อธิบายเคารพและให้เกียรติหลักปฏิบัติของเพื่อนร่วมงานและคนรอบข้าง</p>', '<p>เกณฑ์ระดับที่ 1<strong> </strong>เคารพและให้เกียรติหลักปฏิบัติของเพื่อนร่วมงานและคนรอบข้าง</p>', '<p>เกณฑ์ระดับที่ 2<strong> </strong>เคารพและให้เกียรติหลักปฏิบัติของเพื่อนร่วมงานและคนรอบข้าง</p>', '<p>เกณฑ์ระดับที่ 3<strong> </strong>เคารพและให้เกียรติหลักปฏิบัติของเพื่อนร่วมงานและคนรอบข้าง</p>', 6, 2, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 08:52:32', '2023-08-19 08:52:32'),
-(11, '011', 'เคารพและให้เกียรติสังคมและวัฒนธรรมที่หลากหลาย', '<p>อธิบายเคารพและให้เกียรติสังคมและวัฒนธรรมที่หลากหลาย</p>', '<p>เกณฑ์ระดับที่ 1<strong> </strong>เคารพและให้เกียรติสังคมและวัฒนธรรมที่หลากหลาย</p>', '<p>เกณฑ์ระดับที่ 2<strong> </strong>เคารพและให้เกียรติสังคมและวัฒนธรรมที่หลากหลาย</p>', '<p>เกณฑ์ระดับที่ 3<strong> </strong>เคารพและให้เกียรติสังคมและวัฒนธรรมที่หลากหลาย</p>', 6, 2, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 08:53:27', '2023-08-19 08:53:27');
+(11, '011', 'เคารพและให้เกียรติสังคมและวัฒนธรรมที่หลากหลาย', '<p>อธิบายเคารพและให้เกียรติสังคมและวัฒนธรรมที่หลากหลาย</p>', '<p>เกณฑ์ระดับที่ 1<strong> </strong>เคารพและให้เกียรติสังคมและวัฒนธรรมที่หลากหลาย</p>', '<p>เกณฑ์ระดับที่ 2<strong> </strong>เคารพและให้เกียรติสังคมและวัฒนธรรมที่หลากหลาย</p>', '<p>เกณฑ์ระดับที่ 3<strong> </strong>เคารพและให้เกียรติสังคมและวัฒนธรรมที่หลากหลาย</p>', 6, 2, 0, 'Super Admin', 'Super Admin', NULL, '2023-08-19 08:53:27', '2023-08-19 08:53:27'),
+(18, '012', 'ประเมินสภาพแวดล้อมหลังจากระเบิด', '<p>อธิบายประเมินสภาพแวดล้อมหลังจากระเบิด</p>', '<p>เกณฑ์ระดับที่ 1 ประเมินสภาพแวดล้อมหลังจากระเบิด</p>', NULL, NULL, 1, 1, 3, 'นางสาว บุษบา วงศ์ดี', 'นางสาว บุษบา วงศ์ดี', NULL, '2023-08-29 05:24:50', '2023-08-29 05:24:50'),
+(19, '013', 'คำนวณปริมาณระเบิดที่ต้องใช้', '<p>อธิบาย คำนวณปริมาณระเบิดที่ต้องใช้</p>', '<p>เกณฑ์ระดับที่ 1 คำนวณปริมาณระเบิดที่ต้องใช้</p>', '<p>เกณฑ์ระดับที่ 2 คำนวณปริมาณระเบิดที่ต้องใช้</p>', '<p>เกณฑ์ระดับที่ 3 คำนวณปริมาณระเบิดที่ต้องใช้</p>', 1, 1, 3, 'นางสาว บุษบา วงศ์ดี', 'นางสาว บุษบา วงศ์ดี', NULL, '2023-08-29 05:48:33', '2023-08-29 05:48:33');
 
 -- --------------------------------------------------------
 
@@ -10769,7 +10836,7 @@ CREATE TABLE `users` (
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` int(11) DEFAULT NULL COMMENT '1=admin 2=subAdmin 3=manger+hr not Cf 4=manger+hr Cf 5=manager+hr edit 6=manager+hr editCF 10=Del manager+hr ',
+  `status` int(11) DEFAULT NULL COMMENT '1=admin 2=subAdmin\r\n3=manger+hr not Cf 4=manger+hr Cf 5=manager+hr edit 6=manager+hr editCF 10=Del manager+hr \r\n7=employee not Cf 8=employee Cf \r\n9=employee edit  11=employee editcf\r\n2=Del employ ',
   `FK_company` int(11) DEFAULT NULL COMMENT 'ID companies',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -10940,6 +11007,12 @@ ALTER TABLE `provinces`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `setting_positions`
+--
+ALTER TABLE `setting_positions`
+  ADD PRIMARY KEY (`sp_id`);
+
+--
 -- Indexes for table `skills`
 --
 ALTER TABLE `skills`
@@ -10990,7 +11063,7 @@ ALTER TABLE `amphures`
 -- AUTO_INCREMENT for table `capacities`
 --
 ALTER TABLE `capacities`
-  MODIFY `cc_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `cc_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `ceohrs`
@@ -11020,13 +11093,13 @@ ALTER TABLE `course_skills`
 -- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `d_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `d_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `department_subs`
 --
 ALTER TABLE `department_subs`
-  MODIFY `ds_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ds_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `employees`
@@ -11050,19 +11123,19 @@ ALTER TABLE `geographies`
 -- AUTO_INCREMENT for table `gjcapacities`
 --
 ALTER TABLE `gjcapacities`
-  MODIFY `gjc_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `gjc_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `gjskills`
 --
 ALTER TABLE `gjskills`
-  MODIFY `gjs_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `gjs_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `gj_skills_subs`
 --
 ALTER TABLE `gj_skills_subs`
-  MODIFY `gjss_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `gjss_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `groupjobs`
@@ -11080,7 +11153,7 @@ ALTER TABLE `lavel_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -11092,7 +11165,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `positions`
 --
 ALTER TABLE `positions`
-  MODIFY `p_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `p_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `provinces`
@@ -11101,16 +11174,22 @@ ALTER TABLE `provinces`
   MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
+-- AUTO_INCREMENT for table `setting_positions`
+--
+ALTER TABLE `setting_positions`
+  MODIFY `sp_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `skills`
 --
 ALTER TABLE `skills`
-  MODIFY `s_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `s_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `skills_subs`
 --
 ALTER TABLE `skills_subs`
-  MODIFY `ss_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ss_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `type_course`
