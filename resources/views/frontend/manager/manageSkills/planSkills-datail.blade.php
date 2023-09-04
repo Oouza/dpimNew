@@ -253,7 +253,7 @@ $active = "planSkills";
                                 
                                 <a href="{{url('manager/plan/skills')}}" class="btn btn-warning w-50">กลับหน้าหลัก</a>
                                 <a href="#" class="btn btn-danger">แก้ไข</a>
-                                <a href="#" class="btn btn-success w-50">บันทึก</a>
+                                <a href="#" class="btn btn-success w-50">ยืนยัน</a>
                             
                             </center>
                       

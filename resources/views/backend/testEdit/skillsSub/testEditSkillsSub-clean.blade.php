@@ -20,7 +20,7 @@ $i=1;
             <div class="intro-y box py-10 sm:py-20 mt-5">
                
                 <div class="px-5 mt-10">
-                    <div class="font-medium text-center text-lg">ข้อมูลทักษะย่อยที่ถูกคลีน</div>
+                    <div class="font-medium text-center text-lg">ข้อมูลทักษะย่อยที่ถูกรวมกลุ่มแล้ว</div>
                    
                 </div>
          
@@ -42,6 +42,7 @@ $i=1;
                         &nbsp; &nbsp; &nbsp; &nbsp; -->
                         ทักษะ
                         <select name="" id="" class="select2">
+                            <option value="">ทักษะทั้งหมด</option>
                             <option value="">ทักษะ 1</option>
                             <option value="">ทักษะ 2</option>
                             <option value="">ทักษะ 3</option>
@@ -152,4 +153,7 @@ function del_value(id) {
             })
         }
 </script>
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 @endsection

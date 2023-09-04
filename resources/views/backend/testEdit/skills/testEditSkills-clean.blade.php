@@ -35,6 +35,7 @@ $i=1;
                         &nbsp; &nbsp; &nbsp; &nbsp; -->
                         สมรรถนะ
                         <select name="" id="" class="select2">
+                            <option value="">สมรรถนะทั้งหมด</option>
                             <option value="">สมรรถนะ 1</option>
                             <option value="">สมรรถนะ 2</option>
                             <option value="">สมรรถนะ 3</option>
@@ -138,5 +139,13 @@ function del_value(id) {
                 }
             })
         }
+</script>
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.select2').select2();
+    });
 </script>
 @endsection

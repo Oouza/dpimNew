@@ -57,7 +57,7 @@ $i=1;
                                     <td><center>{{$rs->gj_name}}</center></td>
                                     <td><center>{{$rs->lj_name}}</center></td>
                                     <td><center><a href="{{url('company/job/capacity/'.$rs->sp_id)}}"><button class="btn btn-outline-secondary">ตั้งค่า</button></a></center></td>
-                                    <td><center><a href="{{url('company/job/detail/'.$rs->sp_id)}}"><button type="button" class="btn btn-success"> สรุปข้อมูล </button></a></center></td>
+                                    <td><center><a href="{{url('company/job/detail/'.$rs->sp_id)}}"><button type="button" class="btn btn-success"> รายละเอียด </button></a></center></td>
                                     <td><center>
                                         <a href="{{ url ('company/job/edit/'.$rs->sp_id)}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
                                         <button type="button" class="btn btn-danger" onclick="del_value({{$rs->sp_id}})">ลบ</button>

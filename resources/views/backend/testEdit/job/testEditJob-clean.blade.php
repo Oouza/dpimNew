@@ -28,6 +28,7 @@ $i=1;
                     <h2 class="text-lg font-medium truncate mr-5">
                         กลุ่มตำแหน่ง
                         <select name="" id="" class="select2">
+                            <option value="">กลุ่มตำแหน่งทั้งหมด</option>
                             <option value="">กลุ่มตำแหน่ง 1</option>
                             <option value="">กลุ่มตำแหน่ง 2</option>
                             <option value="">กลุ่มตำแหน่ง 3</option>
@@ -126,5 +127,13 @@ function del_value(id) {
                 }
             })
         }
+</script>
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.select2').select2();
+    });
 </script>
 @endsection

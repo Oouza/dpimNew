@@ -31,7 +31,7 @@ $active = "testEditSkillsSub";
             <div class="intro-y box py-10 sm:py-20 mt-5">
                
                 <div class="px-5 mt-10">
-                    <div class="font-medium text-center text-lg">รวมทักษะย่อย</div>
+                    <div class="font-medium text-center text-lg">รวมข้อมูลทักษะย่อย</div>
                    
                 </div>
                 <form action="{{ url('backend/capacity/add') }}" method="post" enctype="multipart/form-data">
@@ -67,7 +67,7 @@ $active = "testEditSkillsSub";
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> เลือกทักษะ </lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> เลือกทักษะเป้าหมาย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="skills" id="skills" class="form-control select2">
@@ -93,7 +93,7 @@ $active = "testEditSkillsSub";
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> ทักษะย่อย 1</lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> ทักษะย่อยเป้าหมาย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="skillsSub_one" id="skillsSub_one" class="form-control select2">
@@ -106,7 +106,7 @@ $active = "testEditSkillsSub";
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> ทักษะย่อย 2</lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> ทักษะย่อยที่ต้องการนำไปรวมยังทักษะ่ยอเป้าหมาย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="skillsSub_two" id="skillsSub_two" class="form-control select2">
@@ -171,7 +171,7 @@ $active = "testEditSkillsSub";
     div.innerHTML = `
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-            <b><label for="horizontal-form-1" class="form-label "> ทักษะย่อย ${formCount} </lable></b> 
+            <b><label for="horizontal-form-1" class="form-label "> ทักษะย่อยที่ต้องการนำไปรวมยังทักษะ่ยอเป้าหมาย </lable></b> 
         </div>
         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
             <select name="" id="" class="form-control">
@@ -199,6 +199,8 @@ $active = "testEditSkillsSub";
 
 </script>
 
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
     $(document).ready(function(){
         $('#job').select2({

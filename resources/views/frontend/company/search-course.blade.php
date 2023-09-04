@@ -73,12 +73,10 @@ $i=1;
                                 <th><center>ชื่อหลักสูตร </center></th>
                                 <th><center>ผู้จัด</center></th>
                                 <th><center>ประเภทหลักสูตร</center></th>
-                                <th><center>ระยะเวลาการอบรม (จำนวนวัน)</center></th>
+                                <th><center>ระยะเวลาการอบรม (จำนวนชั่วโมง)</center></th>
                                 <th><center>รายละเอียด</center></th>
-                                <!-- <th><center>สมรรถนะ</center></th> -->
-                                <th><center>ทักษะ</center></th>
-                                <!-- <th><center>ทักษะย่อย</center></th> -->
-                                <th><center>หมายเหตุ</center></th>
+                                <th><center>ทักษะย่อย</center></th>
+                                <th><center>ค่าใช้จ่าย</center></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -95,12 +93,12 @@ $i=1;
                                     @php $i=1; @endphp
                                     @foreach($courseSkills as $row)
                                         @if($row->FKcs_course == $rs->cou_id)
-                                            {{$i++}}. {{$row->ss_name}} {{$row->cs_id}}<br>
+                                            {{$i++}}. {{$row->ss_name}}<br>
                                         @endif
                                     @endforeach
                                 </center></td>
                                 <!-- <td><center>ทักษะย่อย 1</center></td> -->
-                                <td><center>{!! asset($rs->cou_note )?$rs->cou_note :''!!}</center></td>
+                                <td><center>0 บาท</center></td>
                             </tr>
                             @endforeach
                             <!-- <tr>

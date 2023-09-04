@@ -92,12 +92,12 @@ $active = "userSkills";
                             ปี
                         </div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                            <select name="" id="" class="form-control">
-                                <option value="">2566</option>
-                                <option value="">2567</option>
-                                <option value="">2568</option>
-                                <option value="">2569</option>
-                                <option value="">2570</option>
+                            <select name="" id="" class="form-control selecte2">
+                                <option value="2566">2566</option>
+                                <option value="2567">2567</option>
+                                <option value="2568">2568</option>
+                                <option value="2569">2569</option>
+                                <option value="2570">2570</option>
                             </select>
                         </div>
                     </div>
@@ -203,14 +203,14 @@ $active = "userSkills";
             <b><label for="horizontal-form-1" class="form-label "> เป้าหมายการพัฒนาทักษะ ${formCount} </lable></b> 
         </div>
         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-4">
-            <select name="job_type" id="job_type" class="form-control" required onchange="province(${formCount})">
+            <select name="job_type" id="job_type" class="form-control select2" required>
                 <option value="" hidden>-กรุณาเลือกเป้าหมายการพัฒนาทักษะ-</option>
-                <option value="1">สมรรถนะ 1</option>
-                <option value="1">&nbsp;&nbsp;ทักษะ 1</option>
-                <option value="1">&nbsp;&nbsp;ทักษะ 2</option>
-                <option value="1">สมรรถนะ 2</option>
-                <option value="1">&nbsp;&nbsp;ทักษะ 1</option>
-                <option value="1">&nbsp;&nbsp;ทักษะ 2</option>
+                <option value="1" disabled>ทักษะ 1</option>
+                <option value="1">&nbsp;&nbsp;ทักษะย่อย 1</option>
+                <option value="1">&nbsp;&nbsp;ทักษะย่อย 2</option>
+                <option value="1" disabled>ทักษะ 2</option>
+                <option value="1">&nbsp;&nbsp;ทักษะย่อย 1</option>
+                <option value="1">&nbsp;&nbsp;ทักษะย่อย 2</option>
             </select>
         </div>
         <button class="btn py-0 px-2 btn-outline-secondary" type="button" onclick="del_study(${formCount})">ลบ</button>
@@ -246,16 +246,16 @@ function province($id) {
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-            <b><label for="horizontal-form-1" class="form-label "> ทักษะ${formCountSkills} </lable></b>
+            <b><label for="horizontal-form-1" class="form-label "> ทักษะย่อย${formCountSkills} </lable></b>
         </div>
         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-4">
-            <select name="job_type" id="job_type" class="form-control" required onchange="skillsSub()">
+            <select name="job_type" id="job_type" class="form-control select2" required onchange="skillsSub()">
                 <option value="" hidden>-กรุณาเลือก-</option>
-                <option value="1">ทักษะ1</option>
-                <option value="1">ทักษะ2</option>
-                <option value="1">ทักษะ3</option>
-                <option value="1">ทักษะ4</option>
-                <option value="1">ทักษะ5</option>
+                <option value="1">ทักษะย่อย1</option>
+                <option value="1">ทักษะย่อย2</option>
+                <option value="1">ทักษะย่อย3</option>
+                <option value="1">ทักษะย่อย4</option>
+                <option value="1">ทักษะย่อย5</option>
             </select>
         </div>
         <button class="btn py-0 px-2 btn-outline-secondary" type="button" onclick="del_skills(${formCountSkills})">ลบ</button>
@@ -300,13 +300,13 @@ function skillsSub() {
             <b><label for="horizontal-form-1" class="form-label "> ทักษะย่อย 1 </lable></b>
         </div>
         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-4">
-            <select name="job_type" id="job_type" class="form-control" required>
+            <select name="job_type" id="job_type" class="form-control select2" required>
                 <option value="" hidden>-กรุณาเลือก-</option>
                 <option value="1">ทักษะย่อย 1</option>
-                <option value="1">ทักษะย่อย 2</option>
-                <option value="1">ทักษะย่อย 3</option>
-                <option value="1">ทักษะย่อย 4</option>
-                <option value="1">ทักษะย่อย 5</option>
+                <option value="2">ทักษะย่อย 2</option>
+                <option value="3">ทักษะย่อย 3</option>
+                <option value="4">ทักษะย่อย 4</option>
+                <option value="5">ทักษะย่อย 5</option>
             </select>
         </div>
         <button class="btn py-0 px-2 btn-outline-secondary" type="button" onclick="del_skillsSub(${formCountSkills})">ลบ</button>
@@ -332,6 +332,14 @@ function del_skillsSub(count){
             }
         }
     } 
+</script>
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.select2').select2();
+    });
 </script>
 @endsection
 

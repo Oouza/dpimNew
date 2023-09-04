@@ -39,10 +39,10 @@ $i=1;
                                 <th><center>รหัสหลักสูตร </center></th>
                                 <th><center>ชื่อหลักสูตร </center></th>
                                 <th><center>ผู้จัด</center></th>
-                                <th><center>วันเดือนปีที่อบรม</center></th>
+                                <th><center>เริ่ม-สิ้นสุด</center></th>
                                 <th><center>ระยะเวลาการอบรม (ชั่วโมง)</center></th>
                                 <th><center>ประเภทหลักสูตร</center></th>
-                                <th><center>ชุดทักษะ</center></th>
+                                <!-- <th><center>ชุดทักษะ</center></th> -->
                                 <th><center>คำอธิบาย</center></th>
                                 <th><center>จัดการรายการ</center></th>
                             </tr>
@@ -52,10 +52,10 @@ $i=1;
                                 <td><center>01</center></td>
                                 <td><center>หลักสูตร 1</center></td>
                                 <td><center>ผู้จัด 1</center></td>
-                                <td><center>20-06-2566</center></td>
+                                <td><center>20/06/2566 <br> ถึง <br> 25/06/2566</center></td>
                                 <td><center>1 ชม. </center></td>
                                 <td><center>ประเภทหลักสูตร 1</center></td>
-                                <td><center>ชุดทักษะ 1</center></td>
+                                <!-- <td><center>ชุดทักษะ 1</center></td> -->
                                 <td><center>คำอธิบาย 1</center></td>
                                 <td><center>
                                     <a href="{{ url ('user/study/edit')}}"  >  <button type="button" class="btn btn-warning">แก้ไข</button></a>
@@ -66,10 +66,10 @@ $i=1;
                                 <td><center>02</center></td>
                                 <td><center>หลักสูตร 2</center></td>
                                 <td><center>ผู้จัด 2</center></td>
-                                <td><center>01-07-2566</center></td>
+                                <td><center>10/07/2566 <br> ถึง <br> 20/07/2566</center></td>
                                 <td><center>2 ชม.</center></td>
                                 <td><center>ประเภทหลักสูตร 2</center></td>
-                                <td><center>ชุดทักษะ 2</center></td>
+                                <!-- <td><center>ชุดทักษะ 2</center></td> -->
                                 <td><center>คำอธิบาย 2</center></td>
                                 <td><center>
                                     <a href="{{ url ('user/study/edit')}}"  >  <button type="button" class="btn btn-warning">แก้ไข</button></a>

@@ -182,34 +182,9 @@ $active = "testEditSkills";
 
 </script>
 
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
-    // $(document).ready(function(){
-    //     $('#job').select2({
-    //         placeholder: "- กรุณาเลือกกลุ่มตำแหน่ง -",
-    //         allowClear: true
-    //     });
-    // });
-
-    // $(document).ready(function(){
-    //     $('#position_one').select2({
-    //         placeholder: "- กรุณาเลือกตำแหน่ง -",
-    //         allowClear: true
-    //     });
-    // });
-
-    // $(document).ready(function(){
-    //     $('#position_two').select2({
-    //         placeholder: "- กรุณาเลือกตำแหน่ง -",
-    //         allowClear: true
-    //     });
-    // });
-
-    // $(document).ready(function(){
-    //     $('#skills_new').select2({
-    //         placeholder: "- กรุณาเลือกตำแหน่ง -",
-    //         allowClear: true
-    //     });
-    // });
     $(document).ready(function(){
         $('.select2').select2();
     });

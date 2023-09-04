@@ -21,10 +21,11 @@ $i=1;
                
                 <div class="px-5 mt-10">
                     <div class="font-medium text-center text-lg">สรุปจำนวนบุคลากรรายกลุ่มตำแหน่งงาน</div>
-                   
                 </div>
          
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-slate-200/60 dark:border-darkmode-400">
+                <!-- <div class="font-medium text-center text-lg">จำนวนบุคลากรทั้งหมด 100 คน</div> -->
+                <h2 class="text-lg font-medium truncate mr-5"> จำนวนบุคลากรทั้งหมด 100 คน </h2>
                 <!-- <div class="intro-y block sm:flex items-center h-10">
                                     <h2 class="text-lg font-medium truncate mr-5">
                                     สรุปจำนวนบุคลากรรายกลุ่มตำแหน่งงานตามประเภทสถานประกอบการ

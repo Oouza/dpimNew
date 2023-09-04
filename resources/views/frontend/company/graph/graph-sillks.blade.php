@@ -25,6 +25,7 @@ $i=1;
                 </div>
          
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-slate-200/60 dark:border-darkmode-400">
+                <h2 class="text-lg font-medium truncate mr-5"> จำนวนบุคลากรทั้งหมด 100 คน </h2>
                 <!-- <div class="intro-y block sm:flex items-center h-10">
                                     <h2 class="text-lg font-medium truncate mr-5">
                                     สรุปจำนวนบุคลากรรายกลุ่มตำแหน่งงานตามประเภทสถานประกอบการ
@@ -39,8 +40,8 @@ $i=1;
                                     <h3 class="text-lg font-medium truncate mr-5">เรียกดูตามหมวด</h3>
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-4">
                                         <select name="" id="">
-                                          <option value="" hidden>- เลือกกลุ่มตำแหน่ง -</option>
-                                          <option value=""> ทั้งหมด  </option>
+                                          <!-- <option value="" hidden>- เลือกกลุ่มตำแหน่ง -</option> -->
+                                          <option value=""> กลุ่มตำแหน่งทั้งหมด  </option>
                                           <option value=""> กลุ่มตำแหน่ง1  </option>
                                           <option value=""> กลุ่มตำแหน่ง2  </option>
                                           <option value=""> กลุ่มตำแหน่ง3  </option>

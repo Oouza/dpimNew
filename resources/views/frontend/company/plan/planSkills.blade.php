@@ -51,21 +51,17 @@ $i=1;
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr style="color:red">
                                 <td><center>001</center></td>
                                 <td><center>ไก่</center></td>
                                 <td><center>กา</center></td>
                                 <td><center>กลุ่มตำแหน่ง 1</center></td>
-                                <!-- <td><center>10/08/2566 ถึง 12/08/2566</center></td> -->
                                 <td><center>001</center></td>
                                 <td><center>หลัดสูตร 1</center></td>
-                                <!-- <td><center>ผู้จัด 1</center></td> -->
                                 <td><center>1 </center></td>
                                 <td><center>100</center></td>
                                 <td><center>
-                                    <!-- <a href="{{ url ('company/cf/skills/detail')}}"> -->
                                         <button class="btn btn-secondary"> ยังไม่ดำเนินการ </button>
-                                    <!-- </a> -->
                                 </center></td>
                                 <td><center>
                                     <a href="{{ url ('company/plan/skills/edit')}}"  >  <button type="button" class="btn btn-warning"  >Edit</button></a>

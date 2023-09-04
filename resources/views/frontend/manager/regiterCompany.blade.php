@@ -60,7 +60,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <form method="post" action="{{ url('company/add') }}" enctype="multipart/form-data" onSubmit="return checkPassword(this)">
                         @csrf
                             <h2 class="intro-x font-bold text-2xl xl:text-2xl text-center xl:text-left" >
-                            ลงทะเบียน บุคลากร รายใหม่
+                            ลงทะเบียน สถานประกอบการ รายใหม่
                             </h2>
                             @if(session("success"))
                                 <b class="text-danger">{{session('success')}}</b>

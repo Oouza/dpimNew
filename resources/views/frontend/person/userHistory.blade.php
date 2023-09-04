@@ -88,7 +88,7 @@ $date_old = $date-60;
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <input type="radio" value="2" name="work_status" onclick="toggleDiv('work-div', true)"> ทำงาน
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input type="radio" value="1" name="work_status" onclick="toggleDiv('work-div', false)"> ว่างงาน
+                                    <input type="radio" value="1" name="work_status" onclick="toggleDiv('work-div', false)"> อิสระ
                                 </div>
                             </div>
 
@@ -320,7 +320,7 @@ $date_old = $date-60;
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> รหัสไปรษรีย์ </lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> รหัสไปรษณีย์ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" value="{{$user->postcode_now}}" required>
@@ -391,7 +391,7 @@ $date_old = $date-60;
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> รหัสไปรษรีย์ </lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> รหัสไปรษณีย์ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" value="{{$user->postcode_past}}" required>

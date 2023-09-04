@@ -252,6 +252,11 @@ $active = "userSkills";
                     </table>
                 </div>
                 <div class="px-5 mt-10">
+                    <!-- <div class="grid grid-cols-12 gap-6 mt-5"> -->
+                        <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                            ความคืบหน้าและเป้าหมายการพัฒนาสมรรถนะและทักษะ 
+                        </div>
+                    <!-- </div> -->
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
                         <tr>
                             <th><center>สมรรถนะ</center></th>
@@ -327,7 +332,7 @@ $active = "userSkills";
                 <!-- <div class="px-5"> -->
                     <div class="grid grid-cols-12 gap-6 mt-5 sm:px-20">
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                            <b><label for="horizontal-form-1" class="form-label "> หมายเหตุแก้ไข </lable></b>
+                            <b><label for="horizontal-form-1" class="form-label "> ข้อคิดเห็นในการแก้ไขเป้าหมายการพัฒนาบุคลากร </lable></b>
                         </div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                             <textarea cols="80" id="news_detail" name="news_detail" rows="10"></textarea>

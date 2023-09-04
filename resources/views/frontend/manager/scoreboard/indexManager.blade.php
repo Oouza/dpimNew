@@ -34,6 +34,7 @@ $i=1;
                     <div class="intro-y block sm:flex items-center h-10">
                         <h2 class="text-lg font-medium truncate mr-5">กลุ่มตำแหน่ง</h2>
                         <select name="" id="">
+                            <option value="">กลุ่มตำแหน่งทั้งหมด</option>
                             <option value="">กลุ่มตำแหน่งที่ 1</option>
                             <option value="">กลุ่มตำแหน่งที่ 2</option>
                             <option value="">กลุ่มตำแหน่งที่ 3</option>
@@ -45,14 +46,14 @@ $i=1;
                     <br>
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
                         <tr><th>รายชื่อบุคลากรในกลุ่มตำแหน่ง</th></tr>
-                        <tr><td>
+                        <!-- <tr><td>
                             ตำแหน่ง 1 <br>
                             สมเกียรติ.ม – สมเกียรติ ม้าแก้ว
-                        </td></tr>
+                        </td></tr> -->
                         <tr><td>
-                            ตำแหน่ง 2 <br>
-                            กมล.ท – กมล ทหารไทย <br>
-                            สมาน.ด -  สมาน เด็กดี <br>
+                            สมเกียรติ.ม – สมเกียรติ ม้าแก้ว ตำแหน่ง 1 <br>
+                            กมล.ท – กมล ทหารไทย ตำแหน่ง 2 <br>
+                            สมาน.ด -  สมาน เด็กดี ตำแหน่ง 2 <br>
                         </td></tr>
                     </table>
                     <br>
@@ -69,49 +70,49 @@ $i=1;
                             <td><center>สมรรถนะ 1</center></td>
                             <td><center>ทักษะ 1</center></td>
                             <td><center>ทักษะย่อย 1</center></td>
-                            <th><center>สมเกียรติ.ม กมล.ท สมาน.ด</center></th>
-                            <th><center></center></th>
-                            <th><center></center></th>
+                            <td><center>สมเกียรติ.ม กมล.ท สมาน.ด</center></td>
+                            <td><center></center></td>
+                            <td><center></center></td>
                         </tr>
                         <tr>
                             <td><center></center></td>
                             <td><center></center></td>
                             <td><center>ทักษะย่อย 2</center></td>
-                            <th><center>สมเกียรติ.ม กมล.ท สมาน.ด</center></th>
-                            <th><center></center></th>
-                            <th><center></center></th>
+                            <td><center>สมเกียรติ.ม กมล.ท สมาน.ด</center></td>
+                            <td><center></center></td>
+                            <td><center></center></td>
                         </tr>
                         <tr>
                             <td><center></center></td>
                             <td><center>ทักษะ 2</center></td>
                             <td><center>ทักษะย่อย 1</center></td>
-                            <th><center>สมเกียรติ.ม กมล.ท สมาน.ด</center></th>
-                            <th><center>สมเกียรติ.ม</center></th>
-                            <th><center></center></th>
+                            <td><center>สมเกียรติ.ม กมล.ท สมาน.ด</center></td>
+                            <td><center>สมเกียรติ.ม</center></td>
+                            <td><center></center></td>
                         </tr>
                         <tr>
                             <td><center></center></td>
                             <td><center></center></td>
                             <td><center>ทักษะย่อย 2</center></td>
-                            <th><center>สมเกียรติ.ม กมล.ท</center></th>
-                            <th><center>สมเกียรติ.ม กมล.ท</center></th>
-                            <th><center>สมเกียรติ.ม กมล.ท</center></th>
+                            <td><center>สมเกียรติ.ม กมล.ท</center></td>
+                            <td><center>สมเกียรติ.ม กมล.ท</center></td>
+                            <td><center>สมเกียรติ.ม กมล.ท</center></td>
                         </tr>
                         <tr>
                             <td><center>สมรรถนะ 2</center></td>
                             <td><center>ทักษะ 1</center></td>
                             <td><center>ทักษะย่อย 1</center></td>
-                            <th><center>สมเกียรติ.ม กมล.ท สมาน.ด</center></th>
-                            <th><center></center></th>
-                            <th><center></center></th>
+                            <td><center>สมเกียรติ.ม กมล.ท สมาน.ด</center></td>
+                            <td><center></center></td>
+                            <td><center></center></td>
                         </tr>
                         <tr>
                             <td><center></center></td>
                             <td><center>ทักษะ 2</center></td>
                             <td><center>ทักษะย่อย 1</center></td>
-                            <th><center>สมเกียรติ.ม กมล.ท สมาน.ด</center></th>
-                            <th><center></center></th>
-                            <th><center></center></th>
+                            <td><center>สมเกียรติ.ม กมล.ท สมาน.ด</center></td>
+                            <td><center></center></td>
+                            <td><center></center></td>
                         </tr>
                     </table>
                     

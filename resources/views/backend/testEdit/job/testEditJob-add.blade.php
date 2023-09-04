@@ -41,11 +41,11 @@ $active = "testEditJob";
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> เลือกกลุ่มตำแหน่ง </lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> กลุ่มตำแหน่งงานเป้าหมาย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="job" id="job" class="form-control select2">
-                                        <option value="">- กรุณาเลือกกลุ่มตำแหน่ง -</option>
+                                        <option value="">- กลุ่มตำแหน่งงานเป้าหมาย -</option>
                                         <option value="1">กลุ่มตำแหน่ง 1</option>
                                         <option value="2">กลุ่มตำแหน่ง 2</option>
                                     </select>
@@ -67,7 +67,7 @@ $active = "testEditJob";
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> ตำแหน่ง 1</lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> ตำแหน่งเป้าหมาย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="position_one" id="position_one" class="form-control select2">
@@ -80,7 +80,7 @@ $active = "testEditJob";
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> ตำแหน่ง 2</lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> ตำแหน่งที่ต้องการนำไปรวมยังตำแหน่งเป้าหมาย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="position_two" id="position_two" class="form-control select2">
@@ -145,7 +145,7 @@ $active = "testEditJob";
     div.innerHTML = `
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-            <b><label for="horizontal-form-1" class="form-label "> ตำแหน่ง ${formCount} </lable></b> 
+            <b><label for="horizontal-form-1" class="form-label "> ตำแหน่งที่ต้องการนำไปรวมยังตำแหน่งเป้าหมาย </lable></b> 
         </div>
         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
             <select name="" id="" class="form-control">
@@ -173,10 +173,12 @@ $active = "testEditJob";
 
 </script>
 
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
     $(document).ready(function(){
         $('#job').select2({
-            placeholder: "- กรุณาเลือกกลุ่มตำแหน่ง -",
+            placeholder: "- กลุ่มตำแหน่งงานเป้าหมาย -",
             allowClear: true
         });
     });

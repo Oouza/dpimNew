@@ -265,17 +265,17 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{url('company/cf/skills')}}" <?php if ($active =="cfSkills") {?> class="side-menu side-menu--active" <?php }else{?> class="side-menu"<?php  } ?>
-                                    data-page="acct">
-                                    <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
-                                    <div class="side-menu__title"> ยืนยันข้อมูลการฝึกอบรมที่เสนอโดยบุคลากร </div>
-                                </a>
-                            </li>
-                            <li>
                                 <a href="{{url('company/cf/plan')}}" <?php if ($active =="cfPlanSkills") {?> class="side-menu side-menu--active" <?php }else{?> class="side-menu"<?php  } ?>
                                     data-page="acct">
                                     <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
                                     <div class="side-menu__title"> ยืนยันข้อเสนอการฝึกอบรมจากบุคลากร </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{url('company/cf/skills')}}" <?php if ($active =="cfSkills") {?> class="side-menu side-menu--active" <?php }else{?> class="side-menu"<?php  } ?>
+                                    data-page="acct">
+                                    <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
+                                    <div class="side-menu__title"> ยืนยันข้อมูลการฝึกอบรมที่เสนอโดยบุคลากร </div>
                                 </a>
                             </li>
                         </ul>

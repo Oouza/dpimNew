@@ -31,7 +31,7 @@ $active = "testEditCapacity";
             <div class="intro-y box py-10 sm:py-20 mt-5">
                
                 <div class="px-5 mt-10">
-                    <div class="font-medium text-center text-lg">รวมสมรรถนะ</div>
+                    <div class="font-medium text-center text-lg">รวมข้อมูลสมรรถนะ</div>
                    
                 </div>
                 <form action="{{ url('backend/capacity/add') }}" method="post" enctype="multipart/form-data">
@@ -41,7 +41,7 @@ $active = "testEditCapacity";
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> เลือกกลุ่มตำแหน่ง </lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> เลือกกลุ่มตำแหน่งเป้าหมาย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="job" id="job" class="form-control select2">
@@ -67,7 +67,7 @@ $active = "testEditCapacity";
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> สมรรถนะ 1</lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> สมรรถนะเป้ามหมาย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="capacity_one" id="capacity_one" class="form-control select2">
@@ -80,7 +80,7 @@ $active = "testEditCapacity";
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> สมรรถนะ 2</lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> สมรรถนะที่ต้องการนำไปรวมยังสมรรถนะเป้าหมาย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="capacity_two" id="capacity_two" class="form-control select2">
@@ -145,7 +145,7 @@ $active = "testEditCapacity";
     div.innerHTML = `
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-            <b><label for="horizontal-form-1" class="form-label "> สมรรถนะ ${formCount} </lable></b> 
+            <b><label for="horizontal-form-1" class="form-label "> สมรรถนะที่ต้องการนำไปรวมยังสมรรถนะเป้าหมาย </lable></b> 
         </div>
         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
             <select name="" id="" class="form-control">
@@ -173,6 +173,8 @@ $active = "testEditCapacity";
 
 </script>
 
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
     $(document).ready(function(){
         $('#job').select2({

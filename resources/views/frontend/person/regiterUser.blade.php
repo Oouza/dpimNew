@@ -127,7 +127,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <b><label for="horizontal-form-1" class="form-label "> จังหวัด </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="povices_now" id="povices_now" class="form-control" onchange="provinceNow()">
+                                    <select name="povices_now" id="povices_now" class="form-control select2" onchange="provinceNow()">
                                         <option value="" hidden>- กรุณาเลือกจังหวัด -</option>
                                         @foreach($provinces as $rs)
                                         <option value="{{$rs->id}}">{{$rs->name_th}}</option>
@@ -146,7 +146,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <b><label for="horizontal-form-1" class="form-label "> เขต/อำเภอ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="aumphur_now" id="aumphur_now" class="form-control" onchange="amphureNow()">
+                                    <select name="aumphur_now" id="aumphur_now" class="form-control select2" onchange="amphureNow()">
                                         <option value="" hidden>- กรุณาเลือกเขต/อำเภอ -</option>
                                         <!-- <option value="">บางแค</option>
                                         <option value="">อำเภอ 2</option>
@@ -162,7 +162,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <b><label for="horizontal-form-1" class="form-label "> แขวง/ตำบล </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="tumbon_now" id="tumbon_now" class="form-control">
+                                    <select name="tumbon_now" id="tumbon_now" class="form-control select2">
                                         <option value="" hidden>- กรุณาเลือกแขวง/ตำบล -</option>
                                         <!-- <option value="">บางแค</option>
                                         <option value="">ตำบล 2</option>
@@ -175,10 +175,10 @@ License: You must have a valid license purchased only from themeforest(the above
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> รหัสไปรษรีย์ </lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> รหัสไปรษณีย์ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="postcode_now" type="text" id="postcode_now" Placeholder="รหัสไปรษรีย์">
+                                    <input class="form-control box-form-ct" name="postcode_now" type="text" id="postcode_now" Placeholder="รหัสไปรษณีย์">
                                 </div>
                             </div>
                             <div class="grid grid-cols-12 gap-6 mt-5">
@@ -201,7 +201,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <b><label for="horizontal-form-1" class="form-label "> จังหวัด </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="povices_past" id="povices_past" class="form-control" onchange="provincepast()">
+                                    <select name="povices_past" id="povices_past" class="form-control select2" onchange="provincepast()">
                                         <option value="" hidden>- กรุณาเลือกจังหวัด -</option>
                                         @foreach($provinces as $rs)
                                         <option value="{{$rs->id}}">{{$rs->name_th}}</option>
@@ -220,7 +220,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <b><label for="horizontal-form-1" class="form-label "> เขต/อำเภอ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="aumphur_past" id="aumphur_past" class="form-control" onchange="amphurepast()">
+                                    <select name="aumphur_past" id="aumphur_past" class="form-control select2" onchange="amphurepast()">
                                         <option value="" hidden>- กรุณาเลือกเขต/อำเภอ -</option>
                                         <!-- <option value="">บางแค</option>
                                         <option value="">อำเภอ 2</option>
@@ -236,7 +236,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <b><label for="horizontal-form-1" class="form-label "> แขวง/ตำบล </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="tumbon_past" id="tumbon_past" class="form-control">
+                                    <select name="tumbon_past" id="tumbon_past" class="form-control select2">
                                         <option value="" hidden>- กรุณาเลือกแขวง/ตำบล -</option>
                                         <!-- <option value="">บางแค</option>
                                         <option value="">ตำบล 2</option>
@@ -249,10 +249,10 @@ License: You must have a valid license purchased only from themeforest(the above
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> รหัสไปรษรีย์ </lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> รหัสไปรษณีย์ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="postcode_past" type="text" id="postcode_past" Placeholder="รหัสไปรษรีย์">
+                                    <input class="form-control box-form-ct" name="postcode_past" type="text" id="postcode_past" Placeholder="รหัสไปรษณีย์">
                                 </div>
                             </div>
                             <div class="grid grid-cols-12 gap-6 mt-5">
