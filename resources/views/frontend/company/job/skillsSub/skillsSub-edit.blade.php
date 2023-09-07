@@ -64,6 +64,33 @@ $active = "job";
                                         <textarea cols="45" id="skills_detail" name="skills_detail" rows="10" class="form-control" disabled>{{ strip_tags(str_replace('&nbsp;', ' ', $gjss->ss_detail ?: '')) }}</textarea>
                                     </div>
                                 </div>
+
+                                <div class="grid grid-cols-12 gap-6 mt-5">
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                        <b><label for="horizontal-form-1" class="form-label "> เกณฑ์ระดับที่ 1 </lable></b>
+                                    </div>
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                        <textarea cols="45" id="lavelAdmin1" name="lavelAdmin1" rows="10" class="form-control" disabled>@if(!empty($gjss->ss_standardOne)) {{ strip_tags(str_replace('&nbsp;', ' ', $gjss->ss_standardOne ?: '')) }} @endif</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-12 gap-6 mt-5">
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                        <b><label for="horizontal-form-1" class="form-label "> เกณฑ์ระดับที่ 2 </lable></b>
+                                    </div>
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                        <textarea cols="45" id="lavelAdmin2" name="lavelAdmin2" rows="10" class="form-control" disabled>@if(!empty($gjss->ss_standardTwo)) {{ strip_tags(str_replace('&nbsp;', ' ', $gjss->ss_standardTwo ?: '')) }} @endif</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-12 gap-6 mt-5">
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                        <b><label for="horizontal-form-1" class="form-label "> เกณฑ์ระดับที่ 3 </lable></b>
+                                    </div>
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                        <textarea cols="45" id="lavelAdmin3" name="lavelAdmin3" rows="10" class="form-control" disabled>@if(!empty($gjss->ss_standardThree)) {{ strip_tags(str_replace('&nbsp;', ' ', $gjss->ss_standardThree ?: '')) }} @endif</textarea>
+                                    </div>
+                                </div>
                             </div>
 
                             <div id="detailHr" style="display:none;">
@@ -129,6 +156,33 @@ $active = "job";
                                     </div>
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                         <textarea cols="45" id="skills_detail" name="skills_detail" rows="10" class="form-control" disabled></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-12 gap-6 mt-5">
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                        <b><label for="horizontal-form-1" class="form-label "> เกณฑ์ระดับที่ 1 </lable></b>
+                                    </div>
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                        <textarea cols="45" id="lavelAdmin1" name="lavelAdmin1" rows="10" class="form-control" disabled></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-12 gap-6 mt-5">
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                        <b><label for="horizontal-form-1" class="form-label "> เกณฑ์ระดับที่ 2 </lable></b>
+                                    </div>
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                        <textarea cols="45" id="lavelAdmin2" name="lavelAdmin2" rows="10" class="form-control" disabled></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-12 gap-6 mt-5">
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                        <b><label for="horizontal-form-1" class="form-label "> เกณฑ์ระดับที่ 3 </lable></b>
+                                    </div>
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                        <textarea cols="45" id="lavelAdmin3" name="lavelAdmin3" rows="10" class="form-control" disabled></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -295,6 +349,18 @@ $active = "job";
                         var skillsDetail = $('#skills_detail');
                         var cleanedResponse = removeHtmlTags(response.detail);
                         skillsDetail.val(cleanedResponse);
+
+                        var lavelAdmin1 = $('#lavelAdmin1');
+                        var cleanedResponse = removeHtmlTags(response.lavel1);
+                        lavelAdmin1.val(cleanedResponse);
+
+                        var lavelAdmin2 = $('#lavelAdmin2');
+                        var cleanedResponse = removeHtmlTags(response.lavel2);
+                        lavelAdmin2.val(cleanedResponse);
+
+                        var lavelAdmin3 = $('#lavelAdmin3');
+                        var cleanedResponse = removeHtmlTags(response.lavel3);
+                        lavelAdmin3.val(cleanedResponse);
                     } else {
                         $('#detailAdmin').hide();
                         $('#detailHr').show();

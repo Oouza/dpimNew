@@ -33,7 +33,7 @@ $i=1;
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-slate-200/60 dark:border-darkmode-400">
                     <div class="intro-y block sm:flex items-center h-10">
                         <h2 class="text-lg font-medium truncate mr-5">กลุ่มตำแหน่ง</h2>
-                        <select name="" id="">
+                        <select name="" id="" class="select2">
                             <option value="">กลุ่มตำแหน่งทั้งหมด</option>
                             <option value="">กลุ่มตำแหน่งที่ 1</option>
                             <option value="">กลุ่มตำแหน่งที่ 2</option>
@@ -203,47 +203,11 @@ function del_value(id) {
         }
 </script>
 
-<!-- <script>
-    // ข้อมูลของกราฟ (ตัวอย่างเป็นข้อมูลจุด x และ y)
-    var data = [
-      { x: 10, y: 10 },
-      { x: 20, y: 20 },
-      { x: 30, y: 30 },
-      { x: 40, y: 40 },
-      { x: 50, y: 50 }
-    ];
-
-    // หาค่าต่ำสุดและสูงสุดของแกน x และแกน y
-    var minX = Math.min(...data.map(point => point.x));
-    var maxX = Math.max(...data.map(point => point.x));
-    var minY = Math.min(...data.map(point => point.y));
-    var maxY = Math.max(...data.map(point => point.y));
-
-    // สร้าง canvas และ context
-    var canvas = document.getElementById("myChart");
-    var context = canvas.getContext("2d");
-
-    // วาดกรอบกราฟ
-    context.beginPath();
-    context.rect(0, 0, canvas.width, canvas.height);
-    context.stroke();
-
-    // วาดแกน x และแกน y
-    context.beginPath();
-    context.moveTo(0, canvas.height - ((0 - minY) * canvas.height / (maxY - minY)));
-    context.lineTo(canvas.width, canvas.height - ((0 - minY) * canvas.height / (maxY - minY)));
-    context.moveTo((0 - minX) * canvas.width / (maxX - minX), 0);
-    context.lineTo((0 - minX) * canvas.width / (maxX - minX), canvas.height);
-    context.stroke();
-
-    // วาดจุดบนกราฟ
-    data.forEach(point => {
-      var x = (point.x - minX) * canvas.width / (maxX - minX);
-      var y = canvas.height - ((point.y - minY) * canvas.height / (maxY - minY));
-
-      context.beginPath();
-      context.arc(x, y, 5, 0, 2 * Math.PI);
-      context.fill();
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.select2').select2();
     });
-  </script> -->
+</script>
 @endsection

@@ -89,7 +89,7 @@ $active = "";
                                     <b><label for="horizontal-form-1" class="form-label "> เริ่ม </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="start" type="date" id="formFile" Placeholder="เริ่ม" disabled>
+                                    <input class="form-control box-form-ct" name="start" type="text" id="formFile" disabled>
                                 </div>
                             </div>
 
@@ -99,7 +99,7 @@ $active = "";
                                     <b><label for="horizontal-form-1" class="form-label "> สิ้นสุด </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="end" type="date" id="formFile" Placeholder="สิ้นสุด" disabled>
+                                    <input class="form-control box-form-ct" name="end" type="text" id="formFile" disabled>
                                 </div>
                             </div>
 
@@ -108,7 +108,7 @@ $active = "";
                                     <b><label for="horizontal-form-1" class="form-label "> ระยะเวลาการอบรม (ชั่วโมง) </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="number" min="1" id="formFile" placeholder="ระยะเวลาการอบรม (ชั่วโมง)" disabled>
+                                    <input class="form-control box-form-ct" name="news_name" type="number" min="1" id="formFile" disabled>
                                 </div>
                             </div>
 
@@ -186,7 +186,7 @@ $active = "";
                                     <b><label for="horizontal-form-1" class="form-label "> เริ่ม </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="start" type="date" id="formFile" Placeholder="เริ่ม">
+                                    <input class="form-control box-form-ct" name="start" type="date" id="formFile">
                                 </div>
                             </div>
 
@@ -196,7 +196,7 @@ $active = "";
                                     <b><label for="horizontal-form-1" class="form-label "> สิ้นสุด </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="end" type="date" id="formFile" Placeholder="สิ้นสุด">
+                                    <input class="form-control box-form-ct" name="end" type="date" id="formFile">
                                 </div>
                             </div>
 
@@ -240,14 +240,14 @@ $active = "";
                             <div id="form-container"></div>
                             <br><button id="add-form-btn" type="button" class="btn btn-outline-secondary btn200 rounded-10" >เพิ่มทักษะย่อย</button>
                             
-                            <div class="grid grid-cols-12 gap-6 mt-5">
+                            <!-- <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                     <b><label for="horizontal-form-1" class="form-label "> ความถี่ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <input class="form-control box-form-ct" name="news_name" type="number" min="1" id="formFile" Placeholder="ความถี่" required>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">

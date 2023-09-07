@@ -118,7 +118,7 @@ $active = "totalCourse";
                             @foreach($cs as $rsc)
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> ทักษะ {{$i++}}</lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> ทักษะย่อย {{$i++}}</lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="skills[{{$i}}]" id="skills[{{$i}}]" class="form-control select2" required onchange="province()">
@@ -139,8 +139,8 @@ $active = "totalCourse";
                             <input type="hidden" name="num" id="num" value="{{$i-1}}">
 
                             <div id="form-container"></div>
-                            <br><button id="add-form-btn" type="button" class="btn btn-outline-secondary btn200 rounded-10" onclick="add_fields()">เพิ่มทักษะ</button>
-                            <!-- <br><button id="add-form-btn" type="button" class="btn btn-outline-secondary btn200 rounded-10" >เพิ่มทักษะ</button> -->
+                            <br><button id="add-form-btn" type="button" class="btn btn-outline-secondary btn200 rounded-10" onclick="add_fields()">เพิ่มทักษะย่อย</button>
+                            <!-- <br><button id="add-form-btn" type="button" class="btn btn-outline-secondary btn200 rounded-10" >เพิ่มทักษะย่อย</button> -->
                             
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
@@ -225,11 +225,11 @@ $active = "totalCourse";
         div.innerHTML = `
         <div class="grid grid-cols-12 gap-6 mt-5">
             <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                <b><label for="horizontal-form-1" class="form-label "> ทักษะ ${formCount} </lable></b>
+                <b><label for="horizontal-form-1" class="form-label "> ทักษะย่อย ${formCount} </lable></b>
             </div>
             <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                 <select name="skills_other[${formCount}]" id="skills_other[${formCount}]" class="form-control select2">
-                    <option value="" hidden>- กรุณาเลือกทักษะ -</option>
+                    <option value="" hidden>- กรุณาเลือกทักษะย่อย -</option>
                     @foreach($skills as $row)
                     <option value="{{$row->s_id}}" disabled>{{$row->s_no}} {{$row->s_name}}</option>
                         @foreach($skillsSubs as $rs)
@@ -249,7 +249,7 @@ $active = "totalCourse";
 
         $(document).ready(function(){
             $(`#skills_other\\[${formCount}\\]`).select2({
-                placeholder: "- กรุณาเลือกทักษะ -",
+                placeholder: "- กรุณาเลือกทักษะย่อย -",
                 allowClear: true
             });
         });
@@ -274,7 +274,7 @@ $active = "totalCourse";
     function del_study(num) {
         const div = document.getElementById(`study${num}`);
         if (div) {
-            if (confirm(`คุณแน่ใจหรือไม่ว่าต้องการลบทักษะที่${num}?`)) {
+            if (confirm(`คุณแน่ใจหรือไม่ว่าต้องการลบทักษะย่อยที่${num}?`)) {
                 div.parentNode.removeChild(div); // ใช้ parentNode.removeChild เพื่อลบองค์ประกอบ
                 formCount--;
             }

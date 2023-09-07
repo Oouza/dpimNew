@@ -296,7 +296,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <!-- </a> -->
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <a href="{{url('loginCompany')}}"> <button class="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 mt-3 xl:mt-0 align-top">เข้าสู่ระบบ</button> </a>
+                                    <a href="{{url('/')}}"> <input type="button" value="เข้าสู่ระบบ" class="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 mt-3 xl:mt-0 align-top"> </a>
                                 </div>
                             </div>
                             </div>

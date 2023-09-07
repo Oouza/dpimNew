@@ -64,8 +64,8 @@ $i=1;
                                         <button class="btn btn-secondary"> ยังไม่ดำเนินการ </button>
                                 </center></td>
                                 <td><center>
-                                    <a href="{{ url ('company/plan/skills/edit')}}"  >  <button type="button" class="btn btn-warning"  >Edit</button></a>
-                                    <button type="button" class="btn btn-danger" onclick="del_value(1)">Delete</button>
+                                    <a href="{{ url ('company/plan/skills/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
+                                    <button type="button" class="btn btn-danger" onclick="del_value(1)">ลบ</button>
                                 </center></td>
                             </tr>
                             <tr>
@@ -85,8 +85,8 @@ $i=1;
                                     <!-- </a> -->
                                 </center></td>
                                 <td><center>
-                                    <a href="{{ url ('company/plan/skills/edit')}}"  >  <button type="button" class="btn btn-warning"  >Edit</button></a>
-                                    <button type="button" class="btn btn-danger" onclick="del_value(1)">Delete</button>
+                                    <a href="{{ url ('company/plan/skills/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
+                                    <button type="button" class="btn btn-danger" onclick="del_value(1)">ลบ</button>
                                 </center></td>
                             </tr>
                             <tr>
@@ -108,8 +108,8 @@ $i=1;
                                     <!-- </a> -->
                                 </center></td>
                                 <td><center>
-                                    <a href="{{ url ('company/plan/skills/edit')}}"  >  <button type="button" class="btn btn-warning"  >Edit</button></a>
-                                    <button type="button" class="btn btn-danger" onclick="del_value(1)">Delete</button>
+                                    <a href="{{ url ('company/plan/skills/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
+                                    <button type="button" class="btn btn-danger" onclick="del_value(1)">ลบ</button>
                                 </center></td>
                             </tr>
                         </tbody>

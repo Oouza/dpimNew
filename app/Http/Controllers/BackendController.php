@@ -266,9 +266,9 @@ class BackendController extends Controller
     }
 
     function admin(){
-        // $user = user::where('status',2)->get();
-        // return view('backend.adnim.adnim',compact('user'));
-        return view('backend.adnim.adnim');
+        $user = user::where('status',2)->get();
+        return view('backend.adnim.adnim',compact('user'));
+        // return view('backend.adnim.adnim');
     }
 
     function adminForm(){
@@ -299,10 +299,10 @@ class BackendController extends Controller
         return view('backend.adnim.adnim-add');
     }
 
-    function adminEdit(){
-        // $user = User::find($id);
-        // return view('backend.adnim.admin-edit',compact('user','id'));
-        return view('backend.adnim.admin-edit');
+    function adminEdit($id){
+        $user = User::find($id);
+        return view('backend.adnim.admin-edit',compact('user','id'));
+        // return view('backend.adnim.admin-edit');
     }
 
     function adminUpdate(Request $request, $id){
@@ -350,9 +350,9 @@ class BackendController extends Controller
     }
 
     function adminStting(){
-        // $user = User::find(Auth::user()->id);
-        // return view('backend.adnim.setting',compact('user'));
-        return view('backend.adnim.setting');
+        $user = User::find(Auth::user()->id);
+        return view('backend.adnim.setting',compact('user'));
+        // return view('backend.adnim.setting');
     }
 
     function adminSttingUpdate(Request $request, $id){

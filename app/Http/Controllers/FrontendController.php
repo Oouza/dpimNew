@@ -23,7 +23,7 @@ class FrontendController extends Controller
     }
 
     function forgotPasswordUser(){
-        return view('frontend.person.forgotPassword');
+        return view('frontend.person.forgotpassword');
     }
 
     function regiterUser(){

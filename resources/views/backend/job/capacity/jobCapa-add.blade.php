@@ -63,7 +63,7 @@ $active = "job";
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <!-- <input type="text" name="capacity_detail" id="capacity_detail"> -->
-                                    <textarea cols="45" id="capacity_detail" name="capacity_detail" rows="10" disabled></textarea>
+                                    <textarea cols="55" id="capacity_detail" name="capacity_detail" rows="10" class="form-control" disabled></textarea>
                                 </div>
                             </div>
 

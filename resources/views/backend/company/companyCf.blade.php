@@ -78,7 +78,7 @@ $i=1;
                                 <th><center>จังหวัด</center></th>
                                 <th><center>ข้อมูลผู้ติดต่อ</center></th>
                                 <th><center>สถานะ</center></th>
-                                <th><center>จัดการข้อมูล</center></th>
+                                <th><center>ตรวจสอบข้อมูล</center></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -123,6 +123,8 @@ $i=1;
 @endsection
 @section('javascripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>  <!-- delete -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script>
 function searchCompany() {

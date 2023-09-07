@@ -43,16 +43,18 @@ $i=1;
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($user as $rs)
                                 <tr>
-                                    <td><center> 1 </center></td>
-                                    <td><center> แอดมินรอง 1 </center></td>
-                                    <td><center> sunAdmin@gmail.com </center></td>
+                                    <td><center>{{ $i++ }}</center></td>
+                                    <td><center>{{ $rs->name }}</center></td>
+                                    <td><center>{{ $rs->email }}</center></td>
                                     <td><center>
-                                        <a href="{{ url ('backend/admin/edit/')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
-                                        <button type="button" class="btn btn-danger" onclick="del_value(0)">ลบ</button>
+                                        <a href="{{ url ('backend/admin/edit/'.$rs->id)}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
+                                        <button type="button" class="btn btn-danger" onclick="del_value({{$rs->id}})">ลบ</button>
                                     </center></td>
                                 </tr>
-                                <tr>
+                                @endforeach
+                                <!-- <tr>
                                     <td><center> 2 </center></td>
                                     <td><center> แอดมินรอง 2 </center></td>
                                     <td><center> sunAdmin2@gmail.com </center></td>
@@ -60,7 +62,7 @@ $i=1;
                                         <a href="{{ url ('backend/admin/edit/')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
                                         <button type="button" class="btn btn-danger" onclick="del_value(0)">ลบ</button>
                                     </center></td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         
                         </table>

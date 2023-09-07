@@ -166,7 +166,7 @@ $active = "mUser";
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> รหัสไปรษรีย์ </lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> รหัสไปรษณีย์ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" value="11501" required>
@@ -243,7 +243,7 @@ $active = "mUser";
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> รหัสไปรษรีย์ </lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> รหัสไปรษณีย์ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" value="75889" required>
@@ -261,7 +261,7 @@ $active = "mUser";
                                 </div>
                             </div>
 
-                            <div class="grid grid-cols-12 gap-6 mt-5">
+                            <!-- <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                     <b><label for="horizontal-form-1" class="form-label">สถานะการทำงาน</label></b>
                                 </div>
@@ -300,7 +300,7 @@ $active = "mUser";
                                         <option value="4">สถานประกอบการ 4</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                     <b><label for="horizontal-form-1" class="form-label "> หมายเลขพนักงาน </lable></b>

@@ -57,56 +57,22 @@ $active = "peopleSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> กลุ่มตำแหน่ง </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="job" id="job" class="form-control select2">
+                                    <input type="text" class="form-control" disabled>
+                                    <!-- <select name="job" id="job" class="form-control" disabled>
                                         <option value="" hidden>- เลือกกลุ่มตำแหน่ง -</option>
                                         <option value="1">กลุ่มตำแหน่ง 1</option>
                                         <option value="2">กลุ่มตำแหน่ง 2</option>
                                         <option value="3">กลุ่มตำแหน่ง 3</option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
-
-                            <!-- <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> สถานประกอบการ </lable></b>
-                                </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> แผนก </lable></b>
-                                </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> แผนกย่อย </lable></b>
-                                </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> ตำแหน่งปัจจุบัน </lable></b>
-                                </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div> -->
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                     <b><label for="horizontal-form-1" class="form-label "> หลักสูตร </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                    <!-- <input type="text" class="form-control" disabled> -->
                                     <select name="course" id="course" class="form-control select2" required>
                                         <option value="" hidden>- กรุณาเลือกหลักสูตร -</option>
                                         <option value="1">หลักสูตร 1</option>
@@ -123,14 +89,15 @@ $active = "peopleSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> ผู้จัดการอบรม </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="people_course" id="people_course" class="form-control select2" required>
+                                    <input type="text" class="form-control" disabled>
+                                    <!-- <select name="people_course" id="people_course" class="form-control select2" required>
                                         <option value="" hidden>- กรุณาเลือกผู้จัดการอบรม -</option>
                                         <option value="1">ผู้จัดการอบรม 1</option>
                                         <option value="2">ผู้จัดการอบรม 2</option>
                                         <option value="3">ผู้จัดการอบรม 3</option>
                                         <option value="4">ผู้จัดการอบรม 4</option>
                                         <option value="5">ผู้จัดการอบรม 5</option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
 
@@ -139,7 +106,7 @@ $active = "peopleSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> ระยะเวลาการอบรม (ชั่วโมง) </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input type="number" class="form-control">
+                                    <input type="text" class="form-control" disabled>
                                 </div>
                             </div>
 
@@ -148,37 +115,39 @@ $active = "peopleSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> ประเภทหลักสูตร </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="type_course" id="type_course" class="form-control select2" required>
+                                    <input type="text" class="form-control" disabled>
+                                    <!-- <select name="type_course" id="type_course" class="form-control select2" required>
                                         <option value="" hidden>- กรุณาเลือกประเภทหลักสูตร -</option>
                                         <option value="1">ประเภทหลักสูตร 1</option>
                                         <option value="2">ประเภทหลักสูตร 2</option>
                                         <option value="3">ประเภทหลักสูตร 3</option>
                                         <option value="4">ประเภทหลักสูตร 4</option>
                                         <option value="5">ประเภทหลักสูตร 5</option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> ทักษะ </lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> ทักษะย่อย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="skills" id="skills" class="form-control select2" required>
-                                        <option value="" hidden>- กรุณาเลือกทักษะ -</option>
+                                    <textarea name="" id="" cols="45" rows="10" class="form-control" disabled></textarea>
+                                    <!-- <select name="skills" id="skills" class="form-control select2" required>
+                                        <option value="" hidden>- กรุณาเลือกทักษะย่อย -</option>
                                         <option value="0" disabled>ทักษะ</option>
-                                        <option value="1">&nbsp; &nbsp; &nbsp; &nbsp;ทักษะ 1</option>
-                                        <option value="2">&nbsp; &nbsp; &nbsp; &nbsp;ทักษะ 2</option>
-                                        <option value="3">&nbsp; &nbsp; &nbsp; &nbsp;ทักษะ 3</option>
-                                        <option value="4">&nbsp; &nbsp; &nbsp; &nbsp;ทักษะ 4</option>
-                                        <option value="5">&nbsp; &nbsp; &nbsp; &nbsp;ทักษะ 5</option>
+                                        <option value="1">&nbsp; &nbsp; &nbsp; &nbsp;ทักษะย่อย 1</option>
+                                        <option value="2">&nbsp; &nbsp; &nbsp; &nbsp;ทักษะย่อย 2</option>
+                                        <option value="3">&nbsp; &nbsp; &nbsp; &nbsp;ทักษะย่อย 3</option>
+                                        <option value="4">&nbsp; &nbsp; &nbsp; &nbsp;ทักษะย่อย 4</option>
+                                        <option value="5">&nbsp; &nbsp; &nbsp; &nbsp;ทักษะย่อย 5</option>
                                         <option value="0" disabled>ทักษะ</option>
-                                        <option value="6">&nbsp; &nbsp; &nbsp; &nbsp;ทักษะ 1</option>
-                                        <option value="7">&nbsp; &nbsp; &nbsp; &nbsp;ทักษะ 2</option>
-                                        <option value="8">&nbsp; &nbsp; &nbsp; &nbsp;ทักษะ 3</option>
-                                        <option value="9">&nbsp; &nbsp; &nbsp; &nbsp;ทักษะ 4</option>
-                                        <option value="10">&nbsp; &nbsp; &nbsp; &nbsp;ทักษะ 5</option>
-                                    </select>
+                                        <option value="6">&nbsp; &nbsp; &nbsp; &nbsp;ทักษะย่อย 1</option>
+                                        <option value="7">&nbsp; &nbsp; &nbsp; &nbsp;ทักษะย่อย 2</option>
+                                        <option value="8">&nbsp; &nbsp; &nbsp; &nbsp;ทักษะย่อย 3</option>
+                                        <option value="9">&nbsp; &nbsp; &nbsp; &nbsp;ทักษะย่อย 4</option>
+                                        <option value="10">&nbsp; &nbsp; &nbsp; &nbsp;ทักษะย่อย 5</option>
+                                    </select> -->
                                 </div>
                             </div>
 
@@ -232,6 +201,9 @@ $active = "peopleSkills";
 
 
 @section('javascripts')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 <script>
     ClassicEditor
     .create( document.querySelector( '#news_detail' ) )

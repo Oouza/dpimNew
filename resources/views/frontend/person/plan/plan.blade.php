@@ -56,7 +56,7 @@ $i=1;
                                 <td><center>1</center></td>
                                 <td><center>ประเภทหลักสูตร 1</center></td>
                                 <!-- <td><center>ชุดทักษะ 1</center></td> -->
-                                <th><center>รอตรวจสอบจากผู้บริหาร</center></th>
+                                <th><center>รอการยืนยันจาก HR</center></th>
                                 <td><center>
                                     <a href="{{ url ('user/plan/edit')}}"  >  <button type="button" class="btn btn-success">ใส่ข้อมูล</button></a>
                                 </center></td>
@@ -69,9 +69,49 @@ $i=1;
                                 <td><center>2</center></td>
                                 <td><center>ประเภทหลักสูตร 2</center></td>
                                 <!-- <td><center>ชุดทักษะ 2</center></td> -->
-                                <th><center>ดำเนินการเสร็จสิิ้น</center></th>
+                                <th><center>รอการยืนยันจากผู้บริหาร</center></th>
                                 <td><center>
 
+                                    <a href="{{ url ('user/plan/edit')}}"  >  <button type="button" class="btn btn-success">ใส่ข้อมูล</button></a>
+                                </center></td>
+                            </tr>
+                            <tr>
+                                <td><center>03</center></td>
+                                <td><center>หลักสูตร 1</center></td>
+                                <td><center>ผู้จัด 1</center></td>
+                                <td><center>10/10/2566 ถึง 12/10/2566</center></td>
+                                <td><center>1</center></td>
+                                <td><center>ประเภทหลักสูตร 1</center></td>
+                                <!-- <td><center>ชุดทักษะ 1</center></td> -->
+                                <th><center>รอดำเนินการ</center></th>
+                                <td><center>
+                                    <a href="{{ url ('user/plan/edit')}}"  >  <button type="button" class="btn btn-success">ใส่ข้อมูล</button></a>
+                                </center></td>
+                            </tr>
+                            <tr>
+                                <td><center>04</center></td>
+                                <td><center>หลักสูตร 2</center></td>
+                                <td><center>ผู้จัด 2</center></td>
+                                <td><center>20/11/2566 ถึง 25/11/2566</center></td>
+                                <td><center>2</center></td>
+                                <td><center>ประเภทหลักสูตร 2</center></td>
+                                <!-- <td><center>ชุดทักษะ 2</center></td> -->
+                                <th><center>ดำเนินการแล้ว</center></th>
+                                <td><center>
+
+                                    <a href="{{ url ('user/plan/edit')}}"  >  <button type="button" class="btn btn-success">ใส่ข้อมูล</button></a>
+                                </center></td>
+                            </tr>
+                            <tr>
+                                <td><center>05</center></td>
+                                <td><center>หลักสูตร 1</center></td>
+                                <td><center>ผู้จัด 1</center></td>
+                                <td><center>10/10/2566 ถึง 12/10/2566</center></td>
+                                <td><center>1</center></td>
+                                <td><center>ประเภทหลักสูตร 1</center></td>
+                                <!-- <td><center>ชุดทักษะ 1</center></td> -->
+                                <th><center>ยกเลิกการดำเนินการ</center></th>
+                                <td><center>
                                     <a href="{{ url ('user/plan/edit')}}"  >  <button type="button" class="btn btn-success">ใส่ข้อมูล</button></a>
                                 </center></td>
                             </tr>

@@ -75,7 +75,7 @@ $i=1;
                                 <td><center>{!! asset($rs->ss_standardThree )?$rs->ss_standardThree :''!!}</center></td>
                                 <td><center>
                                     @if($rs->FKss_Create == 0)
-                                        กพร.
+                                        กพร. <br> ({{$rs->ss_userUpdate}})
                                     @else
                                         {{$rs->c_nameCompany}}
                                     @endif

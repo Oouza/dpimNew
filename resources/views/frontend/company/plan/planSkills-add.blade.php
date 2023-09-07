@@ -57,11 +57,12 @@ $active = "planSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> แผนก </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="department" id="department" class="form-control select2">
+                                    <input type="text" name="" id="" class="form-control" disabled>
+                                    <!-- <select name="department" id="department" class="form-control select2">
                                         <option value="" hidden>- กรุณาเลือกแผนก -</option>
                                         <option value="1">แผนก 1</option>
                                         <option value="2">แผนก 2</option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
 
@@ -70,11 +71,12 @@ $active = "planSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> แผนกย่อย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="departmentSub" id="departmentSub" class="form-control select2">
+                                    <input type="text" name="" id="" class="form-control" disabled>
+                                    <!-- <select name="departmentSub" id="departmentSub" class="form-control select2">
                                         <option value="" hidden>- กรุณาเลือกแผนกย่อย -</option>
                                         <option value="1">แผนกย่อย 1</option>
                                         <option value="2">แผนกย่อย 2</option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
 
@@ -83,11 +85,12 @@ $active = "planSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> ตำแหน่งปัจจุบัน </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="position" id="position" class="form-control select2">
+                                    <input type="text" name="" id="" class="form-control" disabled>
+                                    <!-- <select name="position" id="position" class="form-control select2">
                                         <option value="" hidden>- กรุณาเลือกตำแหน่ง -</option>
                                         <option value="1">ตำแหน่ง 1</option>
                                         <option value="2">ตำแหน่ง 2</option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
 
@@ -96,11 +99,12 @@ $active = "planSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> กลุ่มตำแหน่ง </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="job" id="job" class="form-control select2">
+                                    <input type="text" name="" id="" class="form-control" disabled>
+                                    <!-- <select name="job" id="job" class="form-control select2">
                                         <option value="" hidden>- กรุณาเลือกกลุ่มตำแหน่ง -</option>
                                         <option value="1">กลุ่มตำแหน่ง 1</option>
                                         <option value="2">กลุ่มตำแหน่ง 2</option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
 
@@ -174,7 +178,7 @@ $active = "planSkills";
                                         <b><label for="horizontal-form-1" class="form-label "> ผู้จัดการอบรม </lable></b>
                                     </div>
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                        <input type="text" class="form-control" placeholder="ผู้จัดการอบรม">
+                                        <input type="text" class="form-control" disabled>
                                         <!-- <select name="people_course" id="people_course" class="form-control select2" required onchange="province()">
                                             <option value="" hidden>- กรุณาเลือกผู้จัดการอบรม -</option>
                                             <option value="1">ผู้จัดการอบรม 1</option>
@@ -191,7 +195,7 @@ $active = "planSkills";
                                         <b><label for="horizontal-form-1" class="form-label "> ระยะเวลาการอบรม (ชั่วโมง) </lable></b>
                                     </div>
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                        <input type="number" class="form-control" placeholder="ระยะเวลาการอบรม (ชั่วโมง)">
+                                        <input type="text" class="form-control" disabled>
                                     </div>
                                 </div>
 
@@ -200,7 +204,7 @@ $active = "planSkills";
                                         <b><label for="horizontal-form-1" class="form-label "> ประเภทหลักสูตร </lable></b>
                                     </div>
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                        <input type="text" class="form-control" placeholder="ประเภทหลักสูตร">
+                                        <input type="text" class="form-control" disabled>
                                         <!-- <select name="type_course" id="type_course" class="form-control select2" required onchange="province()">
                                             <option value="" hidden>- กรุณาเลือกประเภทหลักสูตร -</option>
                                             <option value="1">ประเภทหลักสูตร 1</option>
@@ -214,23 +218,23 @@ $active = "planSkills";
 
                                 <div class="grid grid-cols-12 gap-6 mt-5">
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                        <b><label for="horizontal-form-1" class="form-label "> ชุดทักษะ</lable></b>
+                                        <b><label for="horizontal-form-1" class="form-label "> ทักษะย่อย</lable></b>
                                     </div>
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <textarea name="" id="" cols="" rows="10" class="form-control" placeholder="ชุดทักษะ"></textarea>    
+                                    <textarea name="" id="" cols="55" rows="10" class="form-control" disabled></textarea>    
                                     <!-- <select name="skills" id="skills" class="form-control select2" required>
-                                            <option value="" hidden>- กรุณาเลือกชุดทักษะ -</option>
-                                            <option value="1">ชุดทักษะ 1</option>
-                                            <option value="2">ชุดทักษะ 2</option>
-                                            <option value="3">ชุดทักษะ 3</option>
-                                            <option value="4">ชุดทักษะ 4</option>
-                                            <option value="5">ชุดทักษะ 5</option>
+                                            <option value="" hidden>- กรุณาเลือกทักษะย่อย -</option>
+                                            <option value="1">ทักษะย่อย 1</option>
+                                            <option value="2">ทักษะย่อย 2</option>
+                                            <option value="3">ทักษะย่อย 3</option>
+                                            <option value="4">ทักษะย่อย 4</option>
+                                            <option value="5">ทักษะย่อย 5</option>
                                         </select> -->
                                     </div>
                                 </div>
 
                                 <!-- <div id="form-container"></div>
-                                <br><button id="add-form-btn" type="button" class="btn btn-outline-secondary btn200 rounded-10" >เพิ่มชุดทักษะ</button> -->
+                                <br><button id="add-form-btn" type="button" class="btn btn-outline-secondary btn200 rounded-10" >เพิ่มทักษะย่อย</button> -->
 
                                 <!-- <div class="grid grid-cols-12 gap-6 mt-5">
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
@@ -297,22 +301,22 @@ $active = "planSkills";
 
                                 <div class="grid grid-cols-12 gap-6 mt-5">
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                        <b><label for="horizontal-form-1" class="form-label "> ชุดทักษะ 1</lable></b>
+                                        <b><label for="horizontal-form-1" class="form-label "> ทักษะย่อย 1</lable></b>
                                     </div>
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                         <select name="skills1" id="skills1" class="form-control select2" required onchange="province()">
-                                            <option value="" hidden>- กรุณาเลือกชุดทักษะ -</option>
-                                            <option value="1">ชุดทักษะ 1</option>
-                                            <option value="2">ชุดทักษะ 2</option>
-                                            <option value="3">ชุดทักษะ 3</option>
-                                            <option value="4">ชุดทักษะ 4</option>
-                                            <option value="5">ชุดทักษะ 5</option>
+                                            <option value="" hidden>- กรุณาเลือกทักษะย่อย -</option>
+                                            <option value="1">ทักษะย่อย 1</option>
+                                            <option value="2">ทักษะย่อย 2</option>
+                                            <option value="3">ทักษะย่อย 3</option>
+                                            <option value="4">ทักษะย่อย 4</option>
+                                            <option value="5">ทักษะย่อย 5</option>
                                         </select>
                                     </div>
                                 </div>
 
                                 <div id="form-container"></div>
-                                <br><button id="add-form-btn" type="button" class="btn btn-outline-secondary btn200 rounded-10" >เพิ่มชุดทักษะ</button>
+                                <br><button id="add-form-btn" type="button" class="btn btn-outline-secondary btn200 rounded-10" >เพิ่มทักษะย่อย</button>
                             </div>
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
@@ -335,7 +339,16 @@ $active = "planSkills";
 
                                 <div class="grid grid-cols-12 gap-6 mt-5">
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                        <b><label for="horizontal-form-1" class="form-label "> ค่าใช้จ่าย </lable></b>
+                                        <b><label for="horizontal-form-1" class="form-label "> ค่าสมัครอบรม </lable></b>
+                                    </div>
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                        <input type="number" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-12 gap-6 mt-5">
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                        <b><label for="horizontal-form-1" class="form-label "> ค่าใช้จ่ายอื่นๆ </lable></b>
                                     </div>
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                         <input type="number" class="form-control">
@@ -397,16 +410,16 @@ $active = "planSkills";
     div.innerHTML = `
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-            <b><label for="horizontal-form-1" class="form-label "> ชุดทักษะ ${formCount} </lable></b> 
+            <b><label for="horizontal-form-1" class="form-label "> ทักษะย่อย ${formCount} </lable></b> 
         </div>
         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
             <select name="job_type" id="job_type" class="form-control" required">
-                <option value="" hidden>- กรุณาเลือกชุดทักษะ -</option>
-                <option value="1">ชุดทักษะ 1</option>
-                <option value="1">ชุดทักษะ 2</option>
-                <option value="1">ชุดทักษะ 3</option>
-                <option value="1">ชุดทักษะ 4</option>
-                <option value="1">ชุดทักษะ 5</option>
+                <option value="" hidden>- กรุณาเลือกทักษะย่อย -</option>
+                <option value="1">ทักษะย่อย 1</option>
+                <option value="1">ทักษะย่อย 2</option>
+                <option value="1">ทักษะย่อย 3</option>
+                <option value="1">ทักษะย่อย 4</option>
+                <option value="1">ทักษะย่อย 5</option>
             </select>
         </div>
         <button class="btn py-0 px-2 btn-outline-secondary" type="button" onclick="del_study(${formCount})">ลบ</button>
@@ -494,14 +507,14 @@ $active = "planSkills";
 
     $(document).ready(function(){
         $('#skills').select2({
-            placeholder: "- กรุณาเลือกชุดทักษะ -",
+            placeholder: "- กรุณาเลือกทักษะย่อย -",
             allowClear: true
         });
     });
 
     $(document).ready(function(){
         $('#skills1').select2({
-            placeholder: "- กรุณาเลือกชุดทักษะ -",
+            placeholder: "- กรุณาเลือกทักษะย่อย -",
             allowClear: true
         });
     });

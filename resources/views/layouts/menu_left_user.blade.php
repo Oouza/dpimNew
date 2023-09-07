@@ -120,7 +120,7 @@
         <div class="flex">
             <!-- BEGIN: Side Menu -->
             <nav class="side-nav">
-                <a href="{{url('indexUser')}}" class="intro-x flex items-center pl-5 pt-4">
+                <a href="{{url('/home')}}" class="intro-x flex items-center pl-5 pt-4">
                     <img alt="Midone - HTML Admin Template" class="w-6" src="{{ asset('dist/images/logo.svg') }}">
                     <span class="hidden xl:block text-white text-lg ml-3"> User </span> 
                 </a>
@@ -128,7 +128,7 @@
                 @if($status==8)
                 <ul>     
                     <li>
-                        <a href="{{url('indexUser')}}" <?php if ($activePage =="statistic") {?> class="side-menu side-menu--active" <?php }else{?> class="side-menu"<?php  } ?>
+                        <a href="{{url('/home')}}" <?php if ($activePage =="statistic") {?> class="side-menu side-menu--active" <?php }else{?> class="side-menu"<?php  } ?>
                             data-page="acct">
                             <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
                             <div class="side-menu__title"> ติดตามการพัฒนาสมรรถนะและทักษะของบุคคล </div>

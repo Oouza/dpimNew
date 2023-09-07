@@ -39,7 +39,7 @@ $i=1;
                                 <div class="intro-y block sm:flex items-center h-10">
                                     <h3 class="text-lg font-medium truncate mr-5">เรียกดูตามหมวด</h3>
                                     <select name="type" id="type" class="select2" onchange="searchPeople()">
-                                    <option value=""> ประเภทสถานประกอบการทั้งหมด </option>
+                                        <option value=""> ประเภทสถานประกอบการทั้งหมด </option>
                                         <option @if(!empty($id) && $id == "เหมืองแร่") selected @endif value="เหมืองแร่"> เหมืองแร่ </option>
                                         <option @if(!empty($id) && $id == "โรงโม่หิน") selected @endif value="โรงโม่หิน"> โรงโม่หิน </option>
                                         <option @if(!empty($id) && $id == "โรงแต่งแร่") selected @endif value="โรงแต่งแร่"> โรงแต่งแร่ </option>
@@ -74,7 +74,7 @@ $i=1;
                                 </center></td>
                                 <td><center>
                                     <a href="{{ url ('backend/people/edit/'.$rs->FKe_userid)}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
-                                    <button type="button" class="btn btn-danger" onclick="del_value({{$rs->FKe_userid}})">Delete</button>
+                                    <button type="button" class="btn btn-danger" onclick="del_value({{$rs->FKe_userid}})">ลบ</button>
                                 </center></td>
                             </tr>
                             @endforeach
@@ -108,7 +108,8 @@ $i=1;
 @endsection
 @section('javascripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>  <!-- delete -->
-
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script>
     $(document).ready(function() {

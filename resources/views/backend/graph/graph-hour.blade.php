@@ -60,17 +60,17 @@ $i=1;
                         </div>
                     </div>
                     <br>
-
-                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                    กลุ่มตำแหน่ง 1 รวม 100 คน
+                    <table class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
                                 <!-- <th><center>ลำดับ</center></th> -->
                                 <th><center>กลุ่มตำแหน่ง</center></th>
                                 <th><center>จำนวนบุคลากร</center></th>
-                                <th><center>จำนวนชั่วโมงที่ได้รับการพัฒนาเฉลี่ยต่อคน - สมรรถนะ1</center></th>
-                                <th><center>จำนวนชั่วโมงที่ได้รับการพัฒนาเฉลี่ยต่อคน – สมรรถนะ2</center></th>
-                                <th><center>จำนวนชั่วโมงที่ได้รับการพัฒนาเฉลี่ยต่อคน - รวม</center></th>
-                                <th><center>หมายเหตุ</center></th>
+                                <th><center>สมรรถนะ</center></th>
+                                <th><center>จำนวนชั่วโมงที่ได้รับการพัฒนาสมรรถนะ</center></th>
+                                <!-- <th><center>จำนวนชั่วโมงที่ได้รับการพัฒนาเฉลี่ยต่อคน - รวม</center></th>
+                                <th><center>หมายเหตุ</center></th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -80,8 +80,8 @@ $i=1;
                                 <td><center>100</center></td>
                                 <td><center>4</center></td>
                                 <td><center>6</center></td>
-                                <td><center>10</center></td>
-                                <th><center></center></th>
+                                <!-- <td><center>10</center></td>
+                                <th><center></center></th> -->
                             </tr>
                             <tr>
                                 <!-- <td><center>01</center></td> -->
@@ -89,8 +89,8 @@ $i=1;
                                 <td><center>100</center></td>
                                 <td><center>4</center></td>
                                 <td><center>6</center></td>
-                                <td><center>10</center></td>
-                                <th><center></center></th>
+                                <!-- <td><center>10</center></td>
+                                <th><center></center></th> -->
                             </tr>
                             <tr>
                                 <!-- <td><center>01</center></td> -->
@@ -98,8 +98,8 @@ $i=1;
                                 <td><center>100</center></td>
                                 <td><center>4</center></td>
                                 <td><center>6</center></td>
-                                <td><center>10</center></td>
-                                <th><center></center></th>
+                                <!-- <td><center>10</center></td>
+                                <th><center></center></th> -->
                             </tr>
                             <tr>
                                 <!-- <td><center>02</center></td> -->
@@ -107,8 +107,8 @@ $i=1;
                                 <td><center>100</center></td>
                                 <td><center>5</center></td>
                                 <td><center>3</center></td>
-                                <td><center>6</center></td>
-                                <th><center></center></th>
+                                <!-- <td><center>6</center></td>
+                                <th><center></center></th> -->
                             </tr>
                             <tr>
                                 <!-- <td><center>01</center></td> -->
@@ -116,8 +116,8 @@ $i=1;
                                 <td><center>100</center></td>
                                 <td><center>4</center></td>
                                 <td><center>6</center></td>
-                                <td><center>10</center></td>
-                                <th><center></center></th>
+                                <!-- <td><center>10</center></td>
+                                <th><center></center></th> -->
                             </tr>
                         </tbody>
                     </table>

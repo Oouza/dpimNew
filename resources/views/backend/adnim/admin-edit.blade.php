@@ -34,7 +34,7 @@ $active = "";
                     <div class="font-medium text-center text-lg">เพิ่มแอดมิน</div>
                    
                 </div>
-                <form action="{{ url('backend/admin/update/') }}" method="post" enctype="multipart/form-data" onSubmit="return checkPassword(this)">
+                <form action="{{ url('backend/admin/update/'.$id) }}" method="post" enctype="multipart/form-data" onSubmit="return checkPassword(this)">
                 {{ csrf_field() }}
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-sl ate-200/60 dark:border-darkmode-400">
                     <div class="font-medium text-base">รายละเอียด</div>
@@ -50,7 +50,7 @@ $active = "";
                                     <b><label for="horizontal-form-1" class="form-label "> ชื่อแอดมิน </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="admin_name" type="text" id="formFile" value="แอดมินรอง" required>
+                                    <input class="form-control box-form-ct" name="admin_name" type="text" id="formFile" value="{{$user->name}}" required>
                                 </div>
                             </div>
 
@@ -59,7 +59,7 @@ $active = "";
                                     <b><label for="horizontal-form-1" class="form-label "> อีเมล </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="admin_email" type="email" id="formFile" value="subAdmin@gmail.com" required>
+                                    <input class="form-control box-form-ct" name="admin_email" type="email" id="formFile" value="{{$user->email}}" required>
                                 </div>
                             </div>
 

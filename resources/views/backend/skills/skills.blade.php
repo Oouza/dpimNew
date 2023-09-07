@@ -71,7 +71,7 @@ $i=1;
                                 <td><center>{{$rs->cc_name}}</center></td>
                                 <td><center>
                                     @if($rs->FKs_Create == 0)
-                                        กพร.
+                                        กพร. <br> ({{$rs->s_userUpdate}})
                                     @else
                                         {{$rs->c_nameCompany}}
                                     @endif

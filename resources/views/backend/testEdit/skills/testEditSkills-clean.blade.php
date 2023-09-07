@@ -7,7 +7,7 @@
 $activePage = "testEdit";
 $active = "testEditSkills";
 $i=1;
-?>  
+?> 
 @endsection
 
 @section('content')
@@ -26,13 +26,6 @@ $i=1;
          
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-slate-200/60 dark:border-darkmode-400">
                     <h2 class="text-lg font-medium truncate mr-5">
-                        <!-- กลุ่มตำแหน่ง
-                        <select name="" id="">
-                            <option value="">กลุ่มตำแหน่ง 1</option>
-                            <option value="">กลุ่มตำแหน่ง 2</option>
-                            <option value="">กลุ่มตำแหน่ง 3</option>
-                        </select>
-                        &nbsp; &nbsp; &nbsp; &nbsp; -->
                         สมรรถนะ
                         <select name="" id="" class="select2">
                             <option value="">สมรรถนะทั้งหมด</option>
@@ -41,17 +34,17 @@ $i=1;
                             <option value="">สมรรถนะ 3</option>
                         </select>
                     </h2>
-                <!-- <div class="intro-y block sm:flex items-center h-10">
-                                    <h2 class="text-lg font-medium truncate mr-5">
-                                    รายละเอียดทักษะ
+                    <div class="intro-y block sm:flex items-center h-10">
+                                    <!-- <h2 class="text-lg font-medium truncate mr-5">
+                                    รายละเอียดสมรรถนะ
                                     </h2>
                                     <div class="flex items-center sm:ml-auto mt-3 sm:mt-0">
-                                        <a href="{{ url ('backend/testEdit/skills/form')}}"  >   <button class="btn btn-elevated-primary w-24 mr-1 mb-2">รวมข้อมูล</button></a>
-                                        <a href="{{ url ('backend/testEdit/skills/clean')}}"  >   <button class="btn btn-success mr-1 mb-2"> ดูประวัติการแก้ไขทักษะ </button></a>
-                                    </div>
-                                </div> -->
+                                        <a href="{{ url ('backend/testEdit/capacity/form')}}"  >   <button class="btn btn-elevated-primary w-24 mr-1 mb-2">รวมข้อมูล</button></a>
+                                        <a href="{{ url ('backend/testEdit/capacity/clean')}}"  >   <button class="btn btn-success mr-1 mb-2"> ดูประวัติการแก้ไขกสมรรถนะ </button></a>
+                                    </div> -->
+                                </div>
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
-                    <thead>
+                            <thead>
                                 <tr>
                                     <th><center>รหัสทักษะ</center></th>
                                     <th><center>ทักษะ</center></th>
@@ -90,7 +83,9 @@ $i=1;
                             </tbody>
                         
                         </table>
-                        <center><a href="{{ url('backend/testEdit/skills') }}"><button class="btn btn-success"> กลับหน้าหลัก </button></a></center>
+                        <center>
+                            <a href="{{ url('backend/testEdit/skills') }}"><button class="btn btn-success"> กลับหน้าหลัก </button></a>
+                        </center>
                 </div>
               
             </div>

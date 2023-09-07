@@ -37,7 +37,7 @@ $i=1;
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
                     <thead>
                             <tr>
-                                <th><center>ลำดับ</center></th>
+                                <!-- <th><center>ลำดับ</center></th> -->
                                 <th><center>รหัสประเภทงาน</center></th>
                                 <th><center>ชื่อประเภทงาน</center></th>
                                 <th><center>ตั้งค่า</center></th>
@@ -46,12 +46,12 @@ $i=1;
                         <tbody>
                             @foreach($typeJob as $rs)
                                 <tr>
-                                    <td><center> {{$i++}} </center></td>
+                                    <!-- <td><center> {{$i++}} </center></td> -->
                                     <td><center> {{$rs->tj_no}} </center></td>
                                     <td><center> {{$rs->tj_name}} </center></td>
                                     <td><center>
-                                        <a href="{{ url ('backend/typeJob/edit/'.$rs->tj_id)}}"  >  <button type="button" class="btn btn-warning"  >Edit</button></a>
-                                        <button type="button" class="btn btn-danger" onclick="del_value({{$rs->tj_id}})">Delete</button>
+                                        <a href="{{ url ('backend/typeJob/edit/'.$rs->tj_id)}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
+                                        <button type="button" class="btn btn-danger" onclick="del_value({{$rs->tj_id}})">ลบ</button>
                                     </center></td>
                                 </tr>
                             @endforeach

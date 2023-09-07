@@ -334,8 +334,8 @@ Route::get('backend/testEdit/skillsSub/edit', [App\Http\Controllers\BackendContr
 Route::get('backend/Admin', [App\Http\Controllers\BackendController::class, 'admin']);
 Route::get('backend/admin/form', [App\Http\Controllers\BackendController::class, 'adminForm']);
 Route::post('backend/admin/add', [App\Http\Controllers\BackendController::class, 'adminAdd']);
-// Route::get('backend/admin/edit/{id}', [App\Http\Controllers\BackendController::class, 'adminEdit']);
-Route::get('backend/admin/edit/', [App\Http\Controllers\BackendController::class, 'adminEdit']);
+Route::get('backend/admin/edit/{id}', [App\Http\Controllers\BackendController::class, 'adminEdit']);
+// Route::get('backend/admin/edit/', [App\Http\Controllers\BackendController::class, 'adminEdit']);
 Route::post('backend/admin/update/{id}', [App\Http\Controllers\BackendController::class, 'adminUpdate']);
 Route::get('backend/admin/delete/{id}', [App\Http\Controllers\BackendController::class, 'adminDelete']);
 

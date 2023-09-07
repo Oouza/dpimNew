@@ -50,6 +50,7 @@ $active = "";
                                 </div>
                             </div>
 
+                            <!-- หลักสูตรที่มีอยู่แล้ว -->
                             <div style="display:block" id="input_studyOld">
                                 <!-- <div class="grid grid-cols-12 gap-6 mt-5">
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
@@ -64,7 +65,7 @@ $active = "";
                                         <b><label for="horizontal-form-1" class="form-label ">ชื่อหลักสูตรการอบรม</label></b>
                                     </div>
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                        <select name="course" id="course" onchange="sSelect()" class="form-control select2">
+                                        <select name="course" id="course" class="form-control select2">
                                             <option value="" hidden>- กรุณาเลือกหลักสูตรการอบรม -</option>
                                             <option value="1">หลักสูตรการอบรม 1</option>
                                             <option value="2">หลักสูตรการอบรม 2</option>
@@ -73,30 +74,30 @@ $active = "";
                                 </div>
 
                                 <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> ระยะเวลาการอบรม</lable></b>
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                        <b><label for="horizontal-form-1" class="form-label "> ระยะเวลาการอบรม</lable></b>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> เริ่ม </lable></b>
+                                <div class="grid grid-cols-12 gap-6 mt-5">
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                        <b><label for="horizontal-form-1" class="form-label "> เริ่ม </lable></b>
+                                    </div>
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                        <input class="form-control box-form-ct" name="start" type="text" id="formFile" disabled>
+                                    </div>
                                 </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="start" type="date" id="formFile" Placeholder="เริ่ม" disabled>
-                                </div>
-                            </div>
 
-                            <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> สิ้นสุด </lable></b>
+                                <div class="grid grid-cols-12 gap-6 mt-5">
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                        <b><label for="horizontal-form-1" class="form-label "> สิ้นสุด </lable></b>
+                                    </div>
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                        <input class="form-control box-form-ct" name="end" type="text" id="formFile" disabled>
+                                    </div>
                                 </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="end" type="date" id="formFile" Placeholder="สิ้นสุด" disabled>
-                                </div>
-                            </div>
                                     
                                 <div class="grid grid-cols-12 gap-6 mt-5">
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
@@ -104,13 +105,6 @@ $active = "";
                                     </div>
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                         <input type="text" class="form-control" disabled>
-                                        <!-- <select name="course_people" id="course_people" class="form-control select2">
-                                            <option value="" hidden>- กรุณาเลือกผู้จัด -</option>
-                                            <option value="1">ผู้จัด 1</option>
-                                            <option value="2">ผู้จัด 2</option>
-                                            <option value="3">ผู้จัด 3</option>
-                                            <option value="4">ผู้จัด 4</option>
-                                        </select> -->
                                     </div>
                                 </div>
 
@@ -119,7 +113,7 @@ $active = "";
                                         <b><label for="horizontal-form-1" class="form-label "> ระยะเวลาการอบรม (ชั่วโมง) </lable></b>
                                     </div>
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                        <input class="form-control box-form-ct" name="news_name" type="number" min="1" id="formFile" placeholder="ระยะเวลาการอบรม (ชั่วโมง.)" disabled>
+                                        <input class="form-control box-form-ct" name="news_name" type="number" min="1" id="formFile" disabled>
                                     </div>
                                 </div>
 
@@ -128,7 +122,7 @@ $active = "";
                                         <b><label for="horizontal-form-1" class="form-label "> ทักษะย่อย </lable></b>
                                     </div>
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                        <textarea class="form-control box-form-ct" name="news_detail" type="number" id="" placeholder="รายละเอียด" disabled></textarea>
+                                        <textarea class="form-control box-form-ct" name="news_detail" type="number" id="" disabled></textarea>
                                     </div>
                                 </div>
 
@@ -137,11 +131,13 @@ $active = "";
                                         <b><label for="horizontal-form-1" class="form-label "> รายละเอียด </lable></b>
                                     </div>
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                        <textarea class="form-control box-form-ct" name="news_detail" type="number" id="" placeholder="รายละเอียด" disabled></textarea>
+                                        <textarea class="form-control box-form-ct" name="news_detail" type="number" id="" disabled></textarea>
                                     </div>
                                 </div>
                             </div>
 
+
+                            <!-- หลักสูตรที่ไม่มี -->
                             <div style="display:none" id="input_study">
                                 <div class="grid grid-cols-12 gap-6 mt-5">
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
@@ -164,7 +160,7 @@ $active = "";
                                         <b><label for="horizontal-form-1" class="form-label "> เริ่ม </lable></b>
                                     </div>
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                        <input class="form-control box-form-ct" name="start" type="date" id="formFile" Placeholder="เริ่ม" disabled>
+                                        <input class="form-control box-form-ct" name="start" type="date" id="formFile">
                                     </div>
                                 </div>
 
@@ -174,7 +170,7 @@ $active = "";
                                         <b><label for="horizontal-form-1" class="form-label "> สิ้นสุด </lable></b>
                                     </div>
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                        <input class="form-control box-form-ct" name="end" type="date" id="formFile" Placeholder="สิ้นสุด" disabled>
+                                        <input class="form-control box-form-ct" name="end" type="date" id="formFile">
                                     </div>
                                 </div>
 
@@ -198,6 +194,18 @@ $active = "";
 
                                 <div class="grid grid-cols-12 gap-6 mt-5">
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                        <b><label for="horizontal-form-1" class="form-label ">ประเภทหลักสูตร</label></b>
+                                    </div>
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                        <select name="type_course" id="type_course" class="form-control select2">
+                                            <option value="" hidden>- กรุณาเลือกประเภทหลักสูตร -</option>
+                                            <option value="1">ประเภทหลักสูตร 1</option>
+                                            <option value="2">ประเภทหลักสูตร 2</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- <div class="grid grid-cols-12 gap-6 mt-5">
+                                    <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                         <b><label for="horizontal-form-1" class="form-label "> ประเภทหลักสูตร </lable></b>
                                     </div>
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
@@ -208,7 +216,7 @@ $active = "";
                                             <option value="3">ประเภทหลักสูตร 3</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <div class="grid grid-cols-12 gap-6 mt-5">
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
@@ -333,7 +341,7 @@ $active = "";
                             <center>
                                 
 
-                                <a href="{{url('indexUser')}}" class="btn btn-warning w-50">กลับหน้าหลัก</a>
+                                <a href="{{url('user/study')}}" class="btn btn-warning w-50">กลับหน้าหลัก</a>
                                 <!-- <button type="submit" class="btn btn-success w-24 ml-2">บันทึก</button>         -->
                                 <a href="#" class="btn btn-success w-50">บันทึก</a>        
                             </center>
@@ -453,6 +461,13 @@ $active = "";
             allowClear: true
         });
     });
+
+    // $(document).ready(function(){
+    //     $('#type_course').select2({
+    //         placeholder: "- กรุณาเลือกประเภทหลักสูตร -",
+    //         allowClear: true
+    //     });
+    // });
 
     $(document).ready(function(){
         $('#skills').select2({

@@ -143,7 +143,7 @@ $active = "peopleCF";
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="povices_now" id="povices_now" class="form-control select2" onchange="provinceNow()" required>
-                                        <option value="" hidden>- กรุณาเลือกจังหวัด -</option>
+                                        <!-- <option value="" hidden>- กรุณาเลือกจังหวัด -</option> -->
                                         @foreach($provinces as $rs)
                                         <option value="{{$rs->id}}" @if(!empty($user->FKe_province_now) && ($user->FKe_province_now == $rs->id)) selected @endif>{{$rs->name_th}}</option>
                                         @endforeach
@@ -158,7 +158,7 @@ $active = "peopleCF";
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="aumphur_now" id="aumphur_now" class="form-control select2" onchange="amphureNow()" required>
-                                        <option value="" hidden>- กรุณาเลือกเขต/อำเภอ -</option>
+                                        <!-- <option value="" hidden>- กรุณาเลือกเขต/อำเภอ -</option> -->
                                         @foreach($amphures as $rs)
                                         <option value="{{$rs->id}}" @if(!empty($user->FKe_amphur_now) && ($user->FKe_amphur_now == $rs->id)) selected @endif>{{$rs->name_th}}</option>
                                         @endforeach
@@ -173,7 +173,7 @@ $active = "peopleCF";
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="tumbon_now" id="tumbon_now" class="form-control select2" required>
-                                        <option value="" hidden>- กรุณาเลือกแขวง/ตำบล -</option>
+                                        <!-- <option value="" hidden>- กรุณาเลือกแขวง/ตำบล -</option> -->
                                         @foreach($districts as $rs)
                                         <option value="{{$rs->id}}" @if(!empty($user->FKe_tambon_now) && ($user->FKe_tambon_now == $rs->id)) selected @endif>{{$rs->name_th}}</option>
                                         @endforeach
@@ -214,7 +214,7 @@ $active = "peopleCF";
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="povices_past" id="povices_past" class="form-control select2" onchange="provincepast()" required>
-                                        <option value="" hidden>- กรุณาเลือกจังหวัด -</option>
+                                        <!-- <option value="" hidden>- กรุณาเลือกจังหวัด -</option> -->
                                         @foreach($provinces as $rs)
                                         <option value="{{$rs->id}}" @if(!empty($user->FKe_province_past) && ($user->FKe_province_past == $rs->id)) selected @endif>{{$rs->name_th}}</option>
                                         @endforeach
@@ -229,7 +229,7 @@ $active = "peopleCF";
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="aumphur_past" id="aumphur_past" class="form-control select2" onchange="amphurepast()" required>
-                                        <option value="" hidden>- กรุณาเลือกเขต/อำเภอ -</option>
+                                        <!-- <option value="" hidden>- กรุณาเลือกเขต/อำเภอ -</option> -->
                                         @foreach($amphures as $rs)
                                         <option value="{{$rs->id}}" @if(!empty($user->FKe_amphur_past) && ($user->FKe_amphur_past == $rs->id)) selected @endif>{{$rs->name_th}}</option>
                                         @endforeach
@@ -244,7 +244,7 @@ $active = "peopleCF";
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="tumbon_past" id="tumbon_past" class="form-control select2" required>
-                                        <option value="" hidden>- กรุณาเลือกแขวง/ตำบล -</option>
+                                        <!-- <option value="" hidden>- กรุณาเลือกแขวง/ตำบล -</option> -->
                                         @foreach($districts as $rs)
                                         <option value="{{$rs->id}}" @if(!empty($user->FKe_tambon_past) && ($user->FKe_tambon_past == $rs->id)) selected @endif>{{$rs->name_th}}</option>
                                         @endforeach
@@ -305,6 +305,9 @@ $active = "peopleCF";
 
 
 @section('javascripts')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 <script>
     ClassicEditor
     .create( document.querySelector( '#employ_note' ) )

@@ -44,8 +44,8 @@ $active = "peopleSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> บุคลากร </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="" id="" class="form-control select2">
-                                        <!-- <option value="" hidden>- เลือกพนักงาน -</option> -->
+                                    <select name="people" id="people" class="form-control select2">
+                                        <!-- <option value="" hidden>- เลือบุคลากร -</option> -->
                                         <option value="1" selected>ไก่ กา</option>
                                         <option value="2">เอ บี</option>
                                     </select>
@@ -57,69 +57,16 @@ $active = "peopleSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> กลุ่มตำแหน่ง </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="" id="" class="form-control select2">
-                                        <!-- <option value="" hidden>- เลือกกลุ่มตำแหน่ง -</option> -->
-                                        <option value="1" selected>กลุ่มตำแหน่ง 1</option>
-                                        <option value="2">กลุ่มตำแหน่ง 2</option>
-                                        <option value="3">กลุ่มตำแหน่ง 3</option>
-                                    </select>
+                                    <input type="text" class="form-control" value="กลุ่มตำแหน่ง1" disabled>
                                 </div>
                             </div>
-
-                            <!-- <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> สถานประกอบการ </lable></b>
-                                </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="" id="" class="form-control select2">
-                                        <option value="1" selected>สถานประกอบการ 1</option>
-                                        <option value="2">สถานประกอบการ 2</option>
-                                        <option value="3">สถานประกอบการ 3</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> แผนก </lable></b>
-                                </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="" id="" class="form-control select2">
-                                        <option value="1" selected>แผนก 1</option>
-                                        <option value="2">แผนก 2</option>
-                                        <option value="3">แผนก 3</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> แผนกย่อย </lable></b>
-                                </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="" id="" class="form-control select2">
-                                        <option value="1" selected>แผนกย่อย 1</option>
-                                        <option value="2">แผนกย่อย 2</option>
-                                        <option value="3">แผนกย่อย 3</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> ตำแหน่งปัจจุบัน </lable></b>
-                                </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input type="text" class="form-control" value="ตำแหน่ง 1">
-                                </div>
-                            </div> -->
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                     <b><label for="horizontal-form-1" class="form-label "> หลักสูตร </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="news_type" id="news_type" class="form-control select2" required onchange="province()">
+                                    <select name="course" id="course" class="form-control select2" required>
                                         <!-- <option value="" hidden>- กรุณาเลือกหลักสูตร -</option> -->
                                         <option value="1" selected>หลักสูตร 1</option>
                                         <option value="2">หลักสูตร 2</option>
@@ -135,14 +82,7 @@ $active = "peopleSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> ผู้จัดการอบรม </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="news_type" id="news_type" class="form-control select2" required onchange="province()">
-                                        <!-- <option value="" hidden>- กรุณาเลือกผู้จัดการอบรม -</option> -->
-                                        <option value="1">ผู้จัดการอบรม 1</option>
-                                        <option value="2" selected>ผู้จัดการอบรม 2</option>
-                                        <option value="3">ผู้จัดการอบรม 3</option>
-                                        <option value="4">ผู้จัดการอบรม 4</option>
-                                        <option value="5">ผู้จัดการอบรม 5</option>
-                                    </select>
+                                    <input type="text" class="form-control" value="กพร." disabled>
                                 </div>
                             </div>
 
@@ -151,7 +91,7 @@ $active = "peopleSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> ระยะเวลาการอบรม (ชั่วโมง) </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input type="number" class="form-control" value="3">
+                                    <input type="text" class="form-control" value="6" disabled>
                                 </div>
                             </div>
 
@@ -160,30 +100,16 @@ $active = "peopleSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> ประเภทหลักสูตร </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="news_type" id="news_type" class="form-control select2" required onchange="province()">
-                                        <!-- <option value="" hidden>- กรุณาเลือกประเภทหลักสูตร -</option> -->
-                                        <option value="1" selected>ประเภทหลักสูตร 1</option>
-                                        <option value="2">ประเภทหลักสูตร 2</option>
-                                        <option value="3">ประเภทหลักสูตร 3</option>
-                                        <option value="4">ประเภทหลักสูตร 4</option>
-                                        <option value="5">ประเภทหลักสูตร 5</option>
-                                    </select>
+                                    <input type="text" class="form-control" value="ประเภทหลักสูตร1" disabled>
                                 </div>
                             </div>
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> ทักษะ </lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> ทักษะย่อย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="news_type" id="news_type" class="form-control select2" required onchange="province()">
-                                        <!-- <option value="" hidden>- กรุณาเลือกทักษะ -</option> -->
-                                        <option value="1">ทักษะ 1</option>
-                                        <option value="2" selected>ทักษะ 2</option>
-                                        <option value="3">ทักษะ 3</option>
-                                        <option value="4">ทักษะ 4</option>
-                                        <option value="5">ทักษะ 5</option>
-                                    </select>
+                                    <textarea name="" id="" cols="45" rows="10" class="form-control" disabled>ทักษะย่อย1</textarea>
                                 </div>
                             </div>
 
@@ -195,7 +121,7 @@ $active = "peopleSkills";
                                     <input type="date" class="form-control" value="2023-08-10">
                                 </div>
                             </div>
-
+                            
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                     <b><label for="horizontal-form-1" class="form-label "> วันสิ้นอายุใบรับรอง </lable></b>
@@ -246,6 +172,9 @@ $active = "peopleSkills";
 
 
 @section('javascripts')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 <script>
     ClassicEditor
     .create( document.querySelector( '#news_detail' ) )

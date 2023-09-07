@@ -120,11 +120,11 @@ $active = "totalCourse";
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> ทักษะ 1</lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> ทักษะย่อย 1</lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="skills" id="skills" class="form-control select2" required>
-                                        <option value="" hidden>- กรุณาเลือกทักษะ -</option>
+                                        <option value="" hidden>- กรุณาเลือกทักษะย่อย -</option>
                                         @foreach($skills as $row)
                                         <option value="{{$row->s_id}}" disabled>{{$row->s_no}} {{$row->s_name}}</option>
                                             @foreach($skillsSubs as $rs)
@@ -201,11 +201,11 @@ $active = "totalCourse";
             div.innerHTML = `
             <div class="grid grid-cols-12 gap-6 mt-5">
                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                    <b><label for="horizontal-form-1" class="form-label "> ทักษะ ${formCount} </lable></b>
+                    <b><label for="horizontal-form-1" class="form-label "> ทักษะย่อย ${formCount} </lable></b>
                 </div>
                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                     <select name="skills_other[${formCount}]" id="skills_other[${formCount}]" class="form-control select2">
-                        <option value="" hidden>- กรุณาเลือกทักษะ -</option>
+                        <option value="" hidden>- กรุณาเลือกทักษะย่อย -</option>
                         @foreach($skills as $row)
                         <option value="{{$row->s_id}}" disabled>{{$row->s_no}} {{$row->s_name}}</option>
                             @foreach($skillsSubs as $rs)
@@ -223,7 +223,7 @@ $active = "totalCourse";
 
             $(document).ready(function(){
                 $(`#skills_other\\[${formCount}\\]`).select2({
-                    placeholder: "- กรุณาเลือกทักษะ -",
+                    placeholder: "- กรุณาเลือกทักษะย่อย -",
                     allowClear: true
                 });
             });
@@ -232,7 +232,7 @@ $active = "totalCourse";
     function del_study(num) {
         const div = document.getElementById(`study${num}`);
         if (div) {
-            if (confirm(`คุณแน่ใจหรือไม่ว่าต้องการลบทักษะที่${num}?`)) {
+            if (confirm(`คุณแน่ใจหรือไม่ว่าต้องการลบทักษะย่อยที่${num}?`)) {
                 div.parentNode.removeChild(div); // ใช้ parentNode.removeChild เพื่อลบองค์ประกอบ
                 formCount--;
             }
@@ -305,6 +305,9 @@ $active = "totalCourse";
     } );
 </script>
 
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 <script>
     $(document).ready(function(){
         $('#course_type').select2({
@@ -315,7 +318,7 @@ $active = "totalCourse";
 
     $(document).ready(function(){
         $('#skills').select2({
-            placeholder: "- กรุณาเลือกทักษะ -",
+            placeholder: "- กรุณาเลือกทักษะย่อย -",
             allowClear: true
         });
     });

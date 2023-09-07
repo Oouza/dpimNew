@@ -44,11 +44,11 @@ $active = "cfPlanSkills";
                                 <b><label for="horizontal-form-1" class="form-label "> พนักงาน </lable></b>
                             </div>
                             <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                <select name="" id="" class="form-control select2" disabled>
-                                    <!-- <option value="" hidden>- กรุณาเลือกพนักงาน -</option> -->
+                                <input type="text" name="" id="" class="form-control" value="นาย ไก่ กา" disabled>
+                                <!-- <select name="" id="" class="form-control select2" disabled>
                                     <option value="1" selected>ไก่ กา</option>
                                     <option value="2">เอ บี</option>
-                                </select>
+                                </select> -->
                             </div>
                         </div>
 
@@ -57,11 +57,11 @@ $active = "cfPlanSkills";
                                 <b><label for="horizontal-form-1" class="form-label "> แผนก </lable></b>
                             </div>
                             <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                <select name="" id="" class="form-control select2" disabled>
-                                    <!-- <option value="" hidden>- กรุณาเลือกแผนก -</option> -->
+                                <input type="text" name="" id="" class="form-control" value="แผนก1" disabled>
+                                <!-- <select name="" id="" class="form-control select2" disabled>
                                     <option value="1" selected>แผนก 1</option>
                                     <option value="2">แผนก 2</option>
-                                </select>
+                                </select> -->
                             </div>
                         </div>
 
@@ -70,11 +70,11 @@ $active = "cfPlanSkills";
                                 <b><label for="horizontal-form-1" class="form-label "> แผนกย่อย </lable></b>
                             </div>
                             <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                <select name="" id="" class="form-control select2" disabled>
-                                    <!-- <option value="" hidden>- กรุณาเลือกแผนกย่อย -</option> -->
+                                <input type="text" name="" id="" class="form-control" value="แผนกย่อย1" disabled>
+                                <!-- <select name="" id="" class="form-control select2" disabled>
                                     <option value="1" selected>แผนกย่อย 1</option>
                                     <option value="2">แผนกย่อย 2</option>
-                                </select>
+                                </select> -->
                             </div>
                         </div>
 
@@ -83,11 +83,11 @@ $active = "cfPlanSkills";
                                 <b><label for="horizontal-form-1" class="form-label "> ตำแหน่งปัจจุบัน </lable></b>
                             </div>
                             <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                <select name="" id="" class="form-control select2" disabled>
-                                    <!-- <option value="" hidden>- กรุณาเลือกตำแหน่ง -</option> -->
+                                <input type="text" name="" id="" class="form-control" value="ตำแหน่งปัจจุบัน1" disabled>
+                                <!-- <select name="" id="" class="form-control select2" disabled>
                                     <option value="1" selected>ตำแหน่ง 1</option>
                                     <option value="2">ตำแหน่ง 2</option>
-                                </select>
+                                </select> -->
                             </div>
                         </div>
 
@@ -96,11 +96,11 @@ $active = "cfPlanSkills";
                                 <b><label for="horizontal-form-1" class="form-label "> กลุ่มตำแหน่ง </lable></b>
                             </div>
                             <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                <select name="" id="" class="form-control select2" disabled>
-                                    <!-- <option value="" hidden>- กรุณาเลือกกลุ่มตำแหน่ง -</option> -->
+                                <input type="text" name="" id="" class="form-control" value="กลุ่มตำแหน่ง1" disabled>
+                                <!-- <select name="" id="" class="form-control select2" disabled>
                                     <option value="1" selected>กลุ่มตำแหน่ง 1</option>
                                     <option value="2">กลุ่มตำแหน่ง 2</option>
-                                </select>
+                                </select> -->
                             </div>
                         </div>
 

@@ -26,37 +26,23 @@ $i=1;
          
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-slate-200/60 dark:border-darkmode-400">
                     <h2 class="text-lg font-medium truncate mr-5">
-                        <!-- กลุ่มตำแหน่ง
-                        <select name="" id="">
-                            <option value="">กลุ่มตำแหน่ง 1</option>
-                            <option value="">กลุ่มตำแหน่ง 2</option>
-                            <option value="">กลุ่มตำแหน่ง 3</option>
-                        </select>
-                        &nbsp; &nbsp; &nbsp; &nbsp;
-                        สมรรถนะ
-                        <select name="" id="">
-                            <option value="">สมรรถนะ 1</option>
-                            <option value="">สมรรถนะ 2</option>
-                            <option value="">สมรรถนะ 3</option>
-                        </select>
-                        &nbsp; &nbsp; &nbsp; &nbsp; -->
                         ทักษะ
                         <select name="" id="" class="select2">
                             <option value="">ทักษะทั้งหมด</option>
                             <option value="">ทักษะ 1</option>
                             <option value="">ทักษะ 2</option>
                             <option value="">ทักษะ 3</option>
-                        </select>   
-                    </h2>          
-                <!-- <div class="intro-y block sm:flex items-center h-10">
-                                    <h2 class="text-lg font-medium truncate mr-5">
-                                    รายละเอียดทักษะย่อย
+                        </select>
+                    </h2>
+                    <div class="intro-y block sm:flex items-center h-10">
+                                    <!-- <h2 class="text-lg font-medium truncate mr-5">
+                                    รายละเอียดสมรรถนะ
                                     </h2>
                                     <div class="flex items-center sm:ml-auto mt-3 sm:mt-0">
-                                        <a href="{{ url ('backend/testEdit/skillsSub/form')}}"  >   <button class="btn btn-elevated-primary w-24 mr-1 mb-2">รวมข้อมูล</button></a>
-                                        <a href="{{ url ('backend/testEdit/skillsSub/clean')}}"  >   <button class="btn btn-success mr-1 mb-2"> ดูประวัติการแก้ไขทักษะย่อย </button></a>
-                                    </div>
-                                </div> -->
+                                        <a href="{{ url ('backend/testEdit/capacity/form')}}"  >   <button class="btn btn-elevated-primary w-24 mr-1 mb-2">รวมข้อมูล</button></a>
+                                        <a href="{{ url ('backend/testEdit/capacity/clean')}}"  >   <button class="btn btn-success mr-1 mb-2"> ดูประวัติการแก้ไขกสมรรถนะ </button></a>
+                                    </div> -->
+                                </div>
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
                     <thead>
                                 <tr>
@@ -103,7 +89,9 @@ $i=1;
                             </tbody>
                         
                         </table>
-                        <center><a href="{{ url('backend/testEdit/skillsSub')}}"><button class="btn btn-success"> กลับหน้าหลัก </button></a></center>
+                        <center>
+                            <a href="{{ url('backend/testEdit/capacity') }}"><button class="btn btn-success"> กลับหน้าหลัก </button></a>
+                        </center>
                 </div>
               
             </div>
@@ -156,4 +144,9 @@ function del_value(id) {
 
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.select2').select2();
+    });
+</script>
 @endsection

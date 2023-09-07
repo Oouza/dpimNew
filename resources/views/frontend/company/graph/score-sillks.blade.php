@@ -34,14 +34,14 @@ $i=1;
                     <div class="intro-y block sm:flex items-center h-10">
                         <!-- <h2 class="text-lg font-medium truncate mr-5">รายละเอียดข้อมูลกราฟแบ่งตามทักษะ</h2> -->
                         <h2 class="text-lg font-medium truncate mr-5">เลือกแสดงของปี</h2>
-                        <select name="" id="">
+                        <select name="" id="" class="select2">
                             <option value="">2566</option>
                             <option value="">2565</option>
                             <option value="">2564</option>
                         </select>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <h2 class="text-lg font-medium truncate mr-5">เลือกแสดงของกลุ่มตำแหน่ง</h2>
-                        <select name="" id="">
+                        <select name="" id="" class="select2">
                             <option value="">กลุ่มตำแหน่ง 1</option>
                             <option value="">กลุ่มตำแหน่ง 2</option>
                             <option value="">กลุ่มตำแหน่ง 3</option>
@@ -54,7 +54,8 @@ $i=1;
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
                         <tr>
                             <!-- <th><center>กลุ่มตำแนห่ง</center></th> -->
-                            <th><center>บุคลากร</center></th>
+                            <th><center>ชื่อ</center></th>
+                            <th><center>นามสกุล</center></th>
                             <th><center>ตำแหน่ง</center></th>
                             <th><center>หลักสูตร</center></th>
                             <th><center>ระยะเวลาอบรม</center></th>
@@ -67,7 +68,8 @@ $i=1;
                         </tr>
                         <tr>
                             <!-- <th><center>กลุ่มตำแนห่ง</center></th> -->
-                            <td><center>บุคลากร 1</center></td>
+                            <td><center>สมชาย</center></td>
+                            <td><center>อยู่ดี</center></td>
                             <td><center>ตำแหน่ง 1</center></td>
                             <td><center>หลักสูตร 1</center></td>
                             <td><center>2 วัน</center></td>
@@ -80,6 +82,7 @@ $i=1;
                         </tr>
                         <tr>
                             <!-- <td><center>กลุ่มตำแนห่ง</center></td> -->
+                            <td><center></center></td>
                             <td><center></center></td>
                             <td><center></center></td>
                             <td><center>หลักสูตร 2</center></td>
@@ -95,6 +98,7 @@ $i=1;
                             <!-- <td><center>กลุ่มตำแนห่ง</center></td> -->
                             <td><center></center></td>
                             <td><center></center></td>
+                            <td><center></center></td>
                             <td><center>หลักสูตร 3</center></td>
                             <td><center>3</center></td>
                             <td><center>สมรรถนะ 1</center></td>
@@ -106,7 +110,8 @@ $i=1;
                         </tr>
                         <tr>
                             <!-- <td><center>กลุ่มตำแนห่ง</center></td> -->
-                            <td><center>บุคลากร 2</center></td>
+                            <td><center>สมศักดิ์</center></td>
+                            <td><center>สกุลดี</center></td>
                             <td><center>ตำแหน่ง 1</center></td>
                             <td><center>หลักสูตร 1</center></td>
                             <td><center>2</center></td>
@@ -119,6 +124,7 @@ $i=1;
                         </tr>
                         <tr>
                             <!-- <td><center>กลุ่มตำแนห่ง</center></td> -->
+                            <td><center></center></td>
                             <td><center></center></td>
                             <td><center></center></td>
                             <td><center>หลักสูตร 2</center></td>
@@ -134,6 +140,7 @@ $i=1;
                             <!-- <td><center>กลุ่มตำแนห่ง</center></td> -->
                             <td><center></center></td>
                             <td><center></center></td>
+                            <td><center></center></td>
                             <td><center>หลักสูตร3</center></td>
                             <td><center>3</center></td>
                             <td><center>สมรรถนะ 1</center></td>
@@ -146,9 +153,9 @@ $i=1;
                     </table>
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
                         <tr>
-                            <td style="width:69.3%;">ค่าเฉลี่ยระยะเวลาฝึกอบรมต่อคนต่อปี</td>
-                            <td>6 วัน</td>
-                            <td style="width:18.5%;">1000 บาท</td>
+                            <td>ค่าเฉลี่ยต่อคนต่อปี</td>
+                            <td style="width:9.1%;">6 วัน</td>
+                            <td style="width:17.8%;">1000 บาท</td>
                         </tr>
                     </table>
                     <br>
@@ -289,4 +296,12 @@ function del_value(id) {
       }
     });
   </script>
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.select2').select2();
+    });
+</script>
 @endsection

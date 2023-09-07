@@ -46,7 +46,7 @@ $date_old = $date-60;
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                     <b><label for="horizontal-form-1" class="form-label "> ชื่อตำแหน่ง </lable></b>
                                 </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-4">
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <input class="form-control box-form-ct" name="poName" type="text" id="formFile" value="{{$po->p_name}}" required>
                                 </div>
                             </div>

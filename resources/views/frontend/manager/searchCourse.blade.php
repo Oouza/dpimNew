@@ -66,24 +66,24 @@ $i=1;
                     </div>
                     <div class="intro-y block sm:flex items-center h-10">
                         <!-- <h3 class="text-lg font-medium truncate mr-5">ค้นหาโดย</h3> -->
-                        <input type="text" placeholder="ชื่อหลักสูตร(คีย์เวิร์ด)">
+                        <input type="text" placeholder="ชื่อหลักสูตร(คีย์เวิร์ด)" style="width:40%;" class="form-control">
                         &nbsp; &nbsp; &nbsp; &nbsp;
                         <select name="people_course" id="people_course" class="select2">
-                            <option value="" hidden>- ผู้จัด -</option>
+                            <option value=""> ผู้จัดทั้งหมด </option>
                             <option value="1"> ผู้จัด 1</option>
                             <option value="2"> ผู้จัด 2</option>
                             <option value="3"> ผู้จัด 3</option>
                         </select>
                         &nbsp; &nbsp; &nbsp; &nbsp;
                         <select name="caapcity" id="caapcity"  class="select2">
-                            <option value="" hidden>- สมรรถนะ -</option>
+                            <option value=""> สมรรถนะทั้งหมด </option>
                             <option value="1"> สมรรถนะ 1</option>
                             <option value="2"> สมรรถนะ 2</option>
                             <option value="3"> สมรรถนะ 3</option>
                         </select>
                         &nbsp; &nbsp; &nbsp; &nbsp;
                         <select name="skills" id="skills" class="select2">
-                            <option value="" hidden>- ทักษะ -</option>
+                            <option value=""> ทักษะทั้งหมด </option>
                             <option value="1"> ทักษะ 1</option>
                             <option value="2"> ทักษะ 2</option>
                             <option value="3"> ทักษะ 3</option>
@@ -213,26 +213,11 @@ function del_value(id) {
     });
 </script>
 
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
-    // $(document).ready(function(){
-    //     $('#people_course').select2({
-    //         placeholder: "- ผู้จัด -",
-    //         allowClear: true
-    //     });
-    // });
-
-    // $(document).ready(function(){
-    //     $('#capacity').select2({
-    //         placeholder: "- สมรรถนะ -",
-    //         allowClear: true
-    //     });
-    // });
-
-    // $(document).ready(function(){
-    //     $('#skills').select2({
-    //         placeholder: "- ทักษะ -",
-    //         allowClear: true
-    //     });
-    // });
+    $(document).ready(function(){
+        $('.select2').select2();
+    });
 </script>
 @endsection

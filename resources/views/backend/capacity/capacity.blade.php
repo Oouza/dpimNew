@@ -51,7 +51,7 @@ $i=1;
                                 <td><center>{!! asset($rs->cc_detail )?$rs->cc_detail :''!!}</center></td>
                                 <td><center>
                                     @if($rs->FKcc_Create == 0)
-                                        กพร.
+                                        กพร. <br> ({{$rs->cc_userUpdate}})
                                     @else
                                         {{$rs->c_nameCompany}}
                                     @endif
