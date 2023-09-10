@@ -27,5 +27,6 @@ class settingPosition extends Model
         'sp_namelavel',
         'FKgsp_company',
         'sp_delete',
+        'FKgroupjobAdmin',
     ];
 }

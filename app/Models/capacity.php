@@ -19,5 +19,6 @@ class capacity extends Model
         'cc_userCreate',
         'cc_userUpdate',
         'cc_userDelete',
+        'FKgroupAdmin',
     ];
 }

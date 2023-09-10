@@ -30,6 +30,7 @@ class CreateSettingPositionsTable extends Migration
             $table->string('sp_namelavel',255)->nullable();
             $table->integer('FKgsp_company')->nullable();
             $table->string('sp_delete',255)->nullable();
+            $table->integer('FKgroupjobAdmin')->nullable();
             $table->timestamps();
         });
     }

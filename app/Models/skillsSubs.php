@@ -24,6 +24,7 @@ class skillsSubs extends Model
         'ss_userCreate',
         'ss_userUpdate',
         'ss_userDelete',
+        'FKskillsAdmin',
     ];
     
 }

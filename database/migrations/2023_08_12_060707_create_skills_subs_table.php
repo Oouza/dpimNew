@@ -27,6 +27,7 @@ class CreateSkillsSubsTable extends Migration
             $table->string('ss_userCreate',255)->nullable();
             $table->string('ss_userUpdate',255)->nullable();
             $table->string('ss_userDelete',255)->nullable();
+            $table->integer('FKskillsAdmin')->nullable();
             $table->timestamps();
         });
     }

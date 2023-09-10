@@ -20,5 +20,6 @@ class skills extends Model
         's_userCreate',
         's_userUpdate',
         's_userDelete',
+        'FKcapacityAdmin',
     ];
 }

@@ -22,6 +22,7 @@ class CreateCapacitiesTable extends Migration
             $table->string('cc_userCreate',255)->nullable();
             $table->string('cc_userUpdate',255)->nullable();
             $table->string('cc_userDelete',255)->nullable();
+            $table->integer('FKgroupAdmin')->nullable();
             $table->timestamps();
         });
     }

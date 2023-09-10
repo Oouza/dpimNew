@@ -23,6 +23,7 @@ class CreateSkillsTable extends Migration
             $table->string('s_userCreate',255)->nullable();
             $table->string('s_userUpdate',255)->nullable();
             $table->string('s_userDelete',255)->nullable();
+            $table->integer('FKcapacityAdmin')->nullable();
             $table->timestamps();
         });
     }
