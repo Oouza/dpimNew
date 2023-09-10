@@ -34,51 +34,41 @@ $active = "testEditCapacity";
                     <div class="font-medium text-center text-lg">รวมข้อมูลสมรรถนะ</div>
                    
                 </div>
-                <form action="{{ url('backend/capacity/add') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('backend/testEdit/capacity/add') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-sl ate-200/60 dark:border-darkmode-400">
                     <div class="font-medium text-base">รายละเอียด</div>
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> เลือกกลุ่มตำแหน่งเป้าหมาย </lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> เลือกสมรรถนะเป้าหมาย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="job" id="job" class="form-control select2">
-                                        <option value="" hidden>- กรุณาเลือกกลุ่มตำแหน่ง -</option>
-                                        <option value="1">กลุ่มตำแหน่ง 1</option>
-                                        <option value="2">กลุ่มตำแหน่ง 2</option>
+                                    <select name="capacity" id="capacity" class="form-control select2">
+                                        <option value="" hidden>- กรุณาเลือกสมรรถนะ -</option>
+                                        @foreach($capacityAdmin as $rs)
+                                        <option value="{{$rs->cc_id}}">{{$rs->cc_no}} {{$rs->cc_name}}</option>
+                                        @endforeach
+                                        <!-- <option value="2">กลุ่มตำแหน่ง 2</option> -->
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-12 gap-6 mt-5">
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                    <b><label for="horizontal-form-1" class="form-label "> สมรรถนะที่ต้องการนำไปรวมยังสมรรถนะเป้าหมาย </lable></b>
+                                </div>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                    <select name="capacity_new" id="capacity_new" class="form-control select2">
+                                        <option value="" hidden>- กรุณาเลือกสมรรถนะ -</option>
+                                        @foreach($capacity as $rs)
+                                        <option value="{{$rs->cc_id}}">{{$rs->cc_no}} {{$rs->cc_name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
 
                             <!-- <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> กลุ่มตำแหน่ง </lable></b>
-                                </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="" id="">
-                                        <option value="" hidden>- กรุณาเลือกกลุ่มตำแหน่ง -</option>
-                                        <option value="">- กลุ่มตำแหน่ง 1 -</option>
-                                        <option value="">- กลุ่มตำแหน่ง 2 -</option>
-                                    </select>
-                                </div>
-                            </div> -->
-
-                            <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> สมรรถนะเป้ามหมาย </lable></b>
-                                </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="capacity_one" id="capacity_one" class="form-control select2">
-                                        <option value="" hidden>- กรุณาเลือกสมรรถนะ -</option>
-                                        <option value="1">- สมรรถนะ 1 -</option>
-                                        <option value="2">- สมรรถนะ 2 -</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                     <b><label for="horizontal-form-1" class="form-label "> สมรรถนะที่ต้องการนำไปรวมยังสมรรถนะเป้าหมาย </lable></b>
                                 </div>
@@ -89,7 +79,7 @@ $active = "testEditCapacity";
                                         <option value="2">- สมรรถนะ 2 -</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div id="form-container"></div>
                             <br><button id="add-form-btn" type="button" class="btn btn-outline-secondary btn200 rounded-10" >เพิ่มสมรรถนะ</button>
@@ -148,10 +138,11 @@ $active = "testEditCapacity";
             <b><label for="horizontal-form-1" class="form-label "> สมรรถนะที่ต้องการนำไปรวมยังสมรรถนะเป้าหมาย </lable></b> 
         </div>
         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-            <select name="" id="" class="form-control">
+            <select name="capacityAdd[${formCount}]" id="capacityAdd[${formCount}]" class="form-control">
                 <option value="" hidden>- กรุณาเลือกสมรรถนะ -</option>
-                <option value="">- สมรรถนะ 1 -</option>
-                <option value="">- สมรรถนะ 2 -</option>
+                @foreach($capacity as $rs)
+                <option value="{{$rs->cc_id}}">{{$rs->cc_no}} {{$rs->cc_name}}</option>
+                @endforeach
             </select>
         </div>
         <button class="btn py-0 px-2 btn-outline-secondary" type="button" onclick="del_study(${formCount})">ลบ</button>
@@ -159,6 +150,14 @@ $active = "testEditCapacity";
     <div id="form-container-skills(${formCount})"></div>
     `;
     formContainer.appendChild(div);
+
+    $(document).ready(function(){
+        $(`#capacityAdd\\[${formCount}\\]`).select2({
+            placeholder: "- กรุณาเลือกสมรรถนะ -",
+            allowClear: true
+        });
+    });
+
     });
 
     function del_study(num){

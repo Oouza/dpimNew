@@ -27,11 +27,13 @@ $i=1;
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-slate-200/60 dark:border-darkmode-400">
                     <h2 class="text-lg font-medium truncate mr-5">
                         กลุ่มตำแหน่ง
-                        <select name="" id="" class="select2">
+                        <select name="searchGJ" id="searchGJ" class="select2" onchange="searchPositionCom()">
                             <option value="">กลุ่มตำแหน่งทั้งหมด</option>
-                            <option value="">กลุ่มตำแหน่ง 1</option>
-                            <option value="">กลุ่มตำแหน่ง 2</option>
-                            <option value="">กลุ่มตำแหน่ง 3</option>
+                            @foreach($groupjob as $rs)
+                            <option value="{{$rs->gj_id}}" @if(!empty($search) && ($search == $rs->gj_id)) selected @endif>{{$rs->gj_name}}</option>
+                            @endforeach
+                            <!-- <option value="">กลุ่มตำแหน่ง 2</option>
+                            <option value="">กลุ่มตำแหน่ง 3</option> -->
                         </select>
                     </h2>
                         
@@ -46,35 +48,43 @@ $i=1;
                                     </div> -->
                                 </div>
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
-                    <thead>
-                                <tr>
-                                    <th><center>ตำแหน่ง</center></th>
-                                    <th><center>เพิ่มโดย</center></th>
-                                    <th><center>กลุ่มตำแหน่งเดิม</center></th>
-                                    <th><center>กลุ่มตำแหน่งใหม่</center></th>
-                                    <th><center>วันที่แก้ไข</center></th>
-                                    <th><center>แก้ไข</center></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><center>ตำแหน่ง 1</center></td>
-                                    <td><center>สถานประกอบการ 1</center></td>
-                                    <td><center>กลุ่มตำแหน่งเดิม1</center></td>
-                                    <td><center>กลุ่มตำแหน่งใหม่2</center></td>
-                                    <td><center>20-05-2023</center></td>
-                                    <td><center><a href="{{ url('backend/testEdit/job/edit') }}"><button class="btn btn-warning w-50"> แก้ไข </button></a></center></td>
-                                </tr>
-                                <tr>
-                                    <td><center>ตำแหน่ง </center></td>
-                                    <td><center>สถานประกอบการ1</center></td>
-                                    <td><center>กลุ่มตำแหน่งเดิม1</center></td>
-                                    <td><center>กลุ่มตำแหน่งใหม่3</center></td>
-                                    <td><center>23-05-2023</center></td>
-                                    <td><center><a href="{{ url('backend/testEdit/job/edit') }}"><button class="btn btn-warning w-50"> แก้ไข </button></a></center></td>
-                                </tr>
-                            </tbody>
-                        
+                        <thead>
+                            <tr>
+                                <th><center>ตำแหน่ง</center></th>
+                                <th><center>เพิ่มโดย</center></th>
+                                <th><center>กลุ่มตำแหน่งเดิม</center></th>
+                                <th><center>กลุ่มตำแหน่งใหม่</center></th>
+                                <th><center>วันที่แก้ไข</center></th>
+                                <th><center>แก้ไข</center></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($settingPosition as $rs)
+                            <tr>
+                                <td><center>{{$rs->p_name}}</center></td>
+                                <td><center>{{$rs->c_nameCompany}}</center></td>
+                                <td><center>{{$rs->gj1_gj_name}}</center></td>
+                                <td><center>{{$rs->gj2_gj_name}}</center></td>
+                                <td><center>
+                                    @php
+                                        $time = $rs->updated_at;
+                                        $formattedDate = $time->format('d/m/Y');
+                                    @endphp
+                                    {{$formattedDate}}
+                                </center></td>
+                                <td><center><a href="{{ url('backend/testEdit/job/edit/'.$rs->sp_id) }}"><button class="btn btn-warning w-50"> แก้ไข </button></a></center></td>
+                            </tr>
+                            @endforeach
+                            <!-- <tr>
+                                <td><center>ตำแหน่ง </center></td>
+                                <td><center>สถานประกอบการ1</center></td>
+                                <td><center>กลุ่มตำแหน่งเดิม1</center></td>
+                                <td><center>กลุ่มตำแหน่งใหม่3</center></td>
+                                <td><center>23-05-2023</center></td>
+                                <td><center><a href="{{ url('backend/testEdit/job/edit') }}"><button class="btn btn-warning w-50"> แก้ไข </button></a></center></td>
+                            </tr> -->
+                    </tbody>
+                    
                         </table>
                         <center>
                             <a href="{{url('backend/testEdit/job')}}" class="btn btn-success w-50">กลับหน้าหลัก</a>
@@ -89,6 +99,25 @@ $i=1;
 @section('javascripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>  <!-- delete -->
 
+<script>
+function searchPositionCom() {
+    var searchGJ = $('#searchGJ').val();
+    if(searchGJ == ''){
+        var url = '{!! route('adminGJCom') !!}';
+        window.location.href = url;
+
+    }else{
+        var encodedSearchGJ = encodeURIComponent(searchGJ);
+
+        var url = '{!! route('resultGJCom', ['id' => '__id__']) !!}';
+        url = url.replace('__id__', encodedSearchGJ);
+
+        // เปิดหน้าใหม่หรือรีเฟรชหน้าโดยใช้ URL ที่สร้างข้างบน
+        window.location.href = url;
+    }
+    
+}
+</script>
 
 <script>
     $(document).ready(function() {

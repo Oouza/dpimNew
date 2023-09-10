@@ -310,26 +310,41 @@ Route::get('graph/capacity', [App\Http\Controllers\BackendController::class, 'gr
 Route::get('graph/sillks', [App\Http\Controllers\BackendController::class, 'graphSillks']);
 Route::get('graph/course', [App\Http\Controllers\BackendController::class, 'graphCourse']);
 Route::get('graph/hour', [App\Http\Controllers\BackendController::class, 'graphHour']);
+Route::get('graph/people', [App\Http\Controllers\BackendController::class, 'graphPeople']);
 
-Route::get('backend/testEdit/job', [App\Http\Controllers\BackendController::class, 'testEditJob']);
-Route::get('backend/testEdit/job/form', [App\Http\Controllers\BackendController::class, 'testEditJobForm']);
-Route::get('backend/testEdit/job/clean', [App\Http\Controllers\BackendController::class, 'testEditJobFormClean']);
-Route::get('backend/testEdit/job/edit', [App\Http\Controllers\BackendController::class, 'testEditJobEdit']);
+Route::get('resultadminSearchGraphJob', [App\Http\Controllers\BackendController::class, 'resultadminSearchGraphJob'])->name('resultadminSearchGraphJob');
 
-Route::get('backend/testEdit/capacity', [App\Http\Controllers\BackendController::class, 'testEditCapacity']);
-Route::get('backend/testEdit/capacity/form', [App\Http\Controllers\BackendController::class, 'testEditCapacityForm']);
-Route::get('backend/testEdit/capacity/clean', [App\Http\Controllers\BackendController::class, 'testEditCapacityClean']);
-Route::get('backend/textEdit/capacity/edit', [App\Http\Controllers\BackendController::class, 'testEditCapacityEdti']);
+Route::get('backend/testEdit/job', [App\Http\Controllers\AdminCheckDataController::class, 'testEditJob']);
+Route::get('backend/testEdit/job/form', [App\Http\Controllers\AdminCheckDataController::class, 'testEditJobForm']);
+Route::post('backend/testEdit/job/add', [App\Http\Controllers\AdminCheckDataController::class, 'testEditJobAdd']);
+Route::get('backend/testEdit/job/clean', [App\Http\Controllers\AdminCheckDataController::class, 'testEditJobFormClean'])->name('adminGJCom');
+Route::get('backend/testEdit/job/edit/{id}', [App\Http\Controllers\AdminCheckDataController::class, 'testEditJobEdit']);
+Route::post('backend/testEdit/job/update/{id}', [App\Http\Controllers\AdminCheckDataController::class, 'testEditJobUpdate']);
+Route::get('resultGJCom/{id}', [App\Http\Controllers\AdminCheckDataController::class, 'resultGJCom'])->name('resultGJCom');
 
-Route::get('backend/testEdit/skills', [App\Http\Controllers\BackendController::class, 'testEditSkills']);
-Route::get('backend/testEdit/skills/form', [App\Http\Controllers\BackendController::class, 'testEditSkillsForm']);
-Route::get('backend/testEdit/skills/clean', [App\Http\Controllers\BackendController::class, 'testEditSkillsClean']);
-Route::get('backend/testEdit/skills/edit', [App\Http\Controllers\BackendController::class, 'testEditSkillsEdit']);
+Route::get('backend/testEdit/capacity', [App\Http\Controllers\AdminCheckDataController::class, 'testEditCapacity']);
+Route::get('backend/testEdit/capacity/form', [App\Http\Controllers\AdminCheckDataController::class, 'testEditCapacityForm']);
+Route::post('backend/testEdit/capacity/add', [App\Http\Controllers\AdminCheckDataController::class, 'testEditCapacityAdd']);
+Route::get('backend/testEdit/capacity/clean', [App\Http\Controllers\AdminCheckDataController::class, 'testEditCapacityClean'])->name('adminCapacityCom');
+Route::get('backend/textEdit/capacity/edit', [App\Http\Controllers\AdminCheckDataController::class, 'testEditCapacityEdti']);
+Route::post('backend/testEdit/capacity/update/{id}', [App\Http\Controllers\AdminCheckDataController::class, 'testEditCapacityUpdate']);
+Route::get('resultCapacityCom/{id}', [App\Http\Controllers\AdminCheckDataController::class, 'resultCapacityCom'])->name('resultCapacityCom');
 
-Route::get('backend/testEdit/skillsSub', [App\Http\Controllers\BackendController::class, 'testEditSkillsSub']);
-Route::get('backend/testEdit/skillsSub/form', [App\Http\Controllers\BackendController::class, 'testEditSkillsSubForm']);
-Route::get('backend/testEdit/skillsSub/clean', [App\Http\Controllers\BackendController::class, 'testEditSkillsSubClean']);
-Route::get('backend/testEdit/skillsSub/edit', [App\Http\Controllers\BackendController::class, 'testEditSkillsSubEdit']);
+Route::get('backend/testEdit/skills', [App\Http\Controllers\AdminCheckDataController::class, 'testEditSkills']);
+Route::get('backend/testEdit/skills/form', [App\Http\Controllers\AdminCheckDataController::class, 'testEditSkillsForm']);
+Route::post('backend/testEdit/skills/add', [App\Http\Controllers\AdminCheckDataController::class, 'testEditSkillsAdd']);
+Route::get('backend/testEdit/skills/clean', [App\Http\Controllers\AdminCheckDataController::class, 'testEditSkillsClean'])->name('adminSkillsCom');
+Route::get('backend/testEdit/skills/edit/{id}', [App\Http\Controllers\AdminCheckDataController::class, 'testEditSkillsEdit']);
+Route::post('backend/testEdit/skills/update/{id}', [App\Http\Controllers\AdminCheckDataController::class, 'testEditSkillsUpdate']);
+Route::get('resultSkillsCom/{id}', [App\Http\Controllers\AdminCheckDataController::class, 'resultSkillsCom'])->name('resultSkillsCom');
+
+Route::get('backend/testEdit/skillsSub', [App\Http\Controllers\AdminCheckDataController::class, 'testEditSkillsSub']);
+Route::get('backend/testEdit/skillsSub/form', [App\Http\Controllers\AdminCheckDataController::class, 'testEditSkillsSubForm']);
+Route::post('backend/testEdit/skillsSub/add', [App\Http\Controllers\AdminCheckDataController::class, 'testEditSkillsSubAdd']);
+Route::get('backend/testEdit/skillsSub/clean', [App\Http\Controllers\AdminCheckDataController::class, 'testEditSkillsSubClean'])->name('adminSkillSubCom');
+Route::get('backend/testEdit/skillsSub/edit/{id}', [App\Http\Controllers\AdminCheckDataController::class, 'testEditSkillsSubEdit']);
+Route::post('backend/testEdit/skillsSub/update/{id}', [App\Http\Controllers\AdminCheckDataController::class, 'testEditSkillsSubUpdate']);
+Route::get('resultSkillsSubCom/{id}', [App\Http\Controllers\AdminCheckDataController::class, 'resultSkillsSubCom'])->name('resultSkillsSubCom');
 
 Route::get('backend/Admin', [App\Http\Controllers\BackendController::class, 'admin']);
 Route::get('backend/admin/form', [App\Http\Controllers\BackendController::class, 'adminForm']);

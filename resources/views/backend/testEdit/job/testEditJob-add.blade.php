@@ -34,7 +34,7 @@ $active = "testEditJob";
                     <div class="font-medium text-center text-lg">รวมกลุ่มตำแหน่งงาน</div>
                    
                 </div>
-                <form action="{{ url('backend/capacity/add') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('backend/testEdit/job/add') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-sl ate-200/60 dark:border-darkmode-400">
                     <div class="font-medium text-base">รายละเอียด</div>
@@ -46,8 +46,10 @@ $active = "testEditJob";
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="job" id="job" class="form-control select2">
                                         <option value="">- กลุ่มตำแหน่งงานเป้าหมาย -</option>
-                                        <option value="1">กลุ่มตำแหน่ง 1</option>
-                                        <option value="2">กลุ่มตำแหน่ง 2</option>
+                                        @foreach($groupjob as $rs)
+                                        <option value="{{$rs->gj_id}}">{{$rs->gj_no}} {{$rs->gj_name}}</option>
+                                        @endforeach
+                                        <!-- <option value="2">กลุ่มตำแหน่ง 2</option> -->
                                     </select>
                                 </div>
                             </div>
@@ -67,29 +69,31 @@ $active = "testEditJob";
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> ตำแหน่งเป้าหมาย </lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> ตำแหน่งที่ต้องการนำไปรวมยังกลุ่มตำแหน่งเป้าหมาย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="position_one" id="position_one" class="form-control select2">
                                         <option value="" hidden>- กรุณาเลือกตำแหน่ง -</option>
-                                        <option value="1">- ตำแหน่ง 1 -</option>
-                                        <option value="2">- ตำแหน่ง 2 -</option>
+                                        @foreach($settingPosition as $rs)
+                                        <option value="{{$rs->sp_id}}">{{$rs->c_nameCompany}} {{$rs->p_name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
 
-                            <div class="grid grid-cols-12 gap-6 mt-5">
+                            <!-- <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                     <b><label for="horizontal-form-1" class="form-label "> ตำแหน่งที่ต้องการนำไปรวมยังตำแหน่งเป้าหมาย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="position_two" id="position_two" class="form-control select2">
                                         <option value="" hidden>- กรุณาเลือกตำแหน่ง -</option>
-                                        <option value="1">- ตำแหน่ง 1 -</option>
-                                        <option value="2">- ตำแหน่ง 2 -</option>
+                                        @foreach($settingPosition as $rs)
+                                        <option value="{{$rs->sp_id}}">{{$rs->c_nameCompany}} {{$rs->p_name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div id="form-container"></div>
                             <br><button id="add-form-btn" type="button" class="btn btn-outline-secondary btn200 rounded-10" >เพิ่มตำแหน่ง</button>
@@ -148,10 +152,11 @@ $active = "testEditJob";
             <b><label for="horizontal-form-1" class="form-label "> ตำแหน่งที่ต้องการนำไปรวมยังตำแหน่งเป้าหมาย </lable></b> 
         </div>
         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-            <select name="" id="" class="form-control">
+            <select name="positionAdd[${formCount}]" id="positionAdd[${formCount}]" class="form-control select2">
                 <option value="" hidden>- กรุณาเลือกตำแหน่ง -</option>
-                <option value="">- ตำแหน่ง 1 -</option>
-                <option value="">- ตำแหน่ง 2 -</option>
+                @foreach($settingPosition as $rs)
+                <option value="{{$rs->sp_id}}">{{$rs->c_nameCompany}} {{$rs->p_name}}</option>
+                @endforeach
             </select>
         </div>
         <button class="btn py-0 px-2 btn-outline-secondary" type="button" onclick="del_study(${formCount})">ลบ</button>
@@ -159,6 +164,13 @@ $active = "testEditJob";
     <div id="form-container-skills(${formCount})"></div>
     `;
     formContainer.appendChild(div);
+
+    $(document).ready(function(){
+        $(`#positionAdd\\[${formCount}\\]`).select2({
+            placeholder: "- กรุณาเลือกตำแหน่ง -",
+            allowClear: true
+        });
+    });
     });
 
     function del_study(num){

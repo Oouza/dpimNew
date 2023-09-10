@@ -9,7 +9,7 @@
 @section('styles')
 <?php
 $activePage = "scoreboard";
-$active = "sHour";
+$active = "sPeople";
 $i=1;
 ?>
 
@@ -24,8 +24,7 @@ $i=1;
             <!-- BEGIN: Wizard Layout -->
             <div class="intro-y box py-10 sm:py-20 mt-5">
                 <div class="px-5 mt-10">
-                    <div class="font-medium text-center text-lg">สรุปผลการพัฒนาทักษะของบุคลากร
- </div>
+                    <div class="font-medium text-center text-lg">สรุปการใช้งานเว็บไซต์</div>
                 </div>
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-slate-200/60 dark:border-darkmode-400">
                     <!-- <div class="intro-y block sm:flex items-center h-10">

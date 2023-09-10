@@ -35,30 +35,31 @@ $i=1;
                                     </div>
                                 </div>
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
-                    <thead>
-                                <tr>
-                                    <th><center>รหัสกลุ่มตำแหน่ง</center></th>
-                                    <th><center>ชื่อกลุ่มตำแหน่ง</center></th>
-                                    <th><center>ตำแหน่ง</center></th>
-                                    <th><center>เพิ่มโดย</center></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><center>01</center></td>
-                                    <td><center>กลุ่มตำแหน่ง 1</center></td>
-                                    <td><center>ตำแหน่ง 1</center></td>
-                                    <td><center>สถานประกอบการ 1</center></td>
-                                </tr>
-                                <tr>
-                                    <td><center>02</center></td>
-                                    <td><center>กลุ่มตำแหน่ง 2</center></td>
-                                    <td><center>ตำแหน่ง 2</center></td>
-                                    <td><center>สถานประกอบการ2</center></td>
-                                </tr>
-                            </tbody>
-                        
-                        </table>
+                        <thead>
+                            <tr>
+                                <th><center>รหัสกลุ่มตำแหน่ง</center></th>
+                                <th><center>ชื่อกลุ่มตำแหน่ง</center></th>
+                                <th><center>ตำแหน่ง</center></th>
+                                <th><center>เพิ่มโดย</center></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($settingPosition as $rs)
+                            <tr>
+                                <td><center>{{$rs->gj_no}}</center></td>
+                                <td><center>{{$rs->gj_name}}</center></td>
+                                <td><center>{{$rs->p_name}}</center></td>
+                                <td><center>{{$rs->c_nameCompany}}</center></td>
+                            </tr>
+                            @endforeach
+                            <!-- <tr>
+                                <td><center>02</center></td>
+                                <td><center>กลุ่มตำแหน่ง 2</center></td>
+                                <td><center>ตำแหน่ง 2</center></td>
+                                <td><center>สถานประกอบการ2</center></td>
+                            </tr> -->
+                        </tbody>
+                    </table>
                 </div>
               
             </div>

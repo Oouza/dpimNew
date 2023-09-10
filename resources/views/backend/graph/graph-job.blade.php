@@ -25,39 +25,31 @@ $i=1;
                 </div>
          
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-slate-200/60 dark:border-darkmode-400">
-                <!-- <div class="intro-y block sm:flex items-center h-10">
-                                    <h2 class="text-lg font-medium truncate mr-5">
-                                    สรุปจำนวนบุคลากรรายกลุ่มตำแหน่งงานตามประเภทสถานประกอบการ
-                                    </h2>
-                                    <div class="flex items-center sm:ml-auto mt-3 sm:mt-0">
-                                    <a href="{{ url('backend/skills/form' )}}"  >   <button class="btn btn-elevated-primary w-24 mr-1 mb-2">เพิ่มข้อมูล</button></a>
-                                    </div>
-                                </div> -->
-                                @foreach($user as $rs)
-                                    @if($rs->c_typeCompany == '')
-                                        อิสระ
-                                    @else
-                                        {{$rs->c_typeCompany}}
-                                    @endif
-                                @endforeach
                                 <br>
                                 <br>
                                 <div class="intro-y block sm:flex items-center h-10">
                                     <h3 class="text-lg font-medium truncate mr-5">เรียกดูตามหมวด</h3>
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-4">
-                                        <select name="" id="" class="select2">
+                                        <select name="year" id="year" class="select2" onchange="search()">
                                             <!-- <option value="" hidden>- เลือกปี -</option> -->
                                             <option value=""> ปีทั้งหมด  </option>
-                                            <option value=""> 2566 </option>
-                                            <option value=""> 2565 </option>
-                                            <option value=""> 2564 </option>
+                                            @php
+                                                use Carbon\Carbon;
+                                                $dateTime = Carbon::now();
+                                                $formattedDate = $dateTime->format('Y');
+                                            @endphp
+                                            @for($formattedDate; $formattedDate>=2020; $formattedDate--)
+                                            <option value="{{$formattedDate}}" @if(!empty($year) && ($year == $formattedDate)) selected @endif>{{$formattedDate+543}}</option>
+                                            @endfor
+                                            <!-- <option value=""> 2565 {{$formattedDate}}</option>
+                                            <option value=""> 2564 {{$formattedDate}}</option> -->
                                         </select>
                                         &nbsp; &nbsp; &nbsp; &nbsp;
-                                        <select name="" id="" class="select2">
+                                        <select name="gj" id="gj" class="select2" onchange="search()">
                                             <!-- <option value="" hidden>- เลือกกลุ่มตำแหน่ง -</option> -->
                                             <option value=""> กลุ่มตำแหน่งทั้งหมด  </option>
                                             @foreach($groupjob as $rs)
-                                            <option value="{{$rs->gj_id}}">{{$rs->gj_no}} {{$rs->gj_name}}</option>
+                                            <option value="{{$rs->gj_id}}" @if(!empty($gj) && ($gj == $rs->gj_id)) selected @endif>{{$rs->gj_id}} {{$rs->gj_no}} {{$rs->gj_name}}</option>
                                             @endforeach
                                             <!-- <option value=""> กลุ่มตำแหน่ง1  </option>
                                             <option value=""> กลุ่มตำแหน่ง2  </option>
@@ -82,10 +74,45 @@ $i=1;
             <!-- END: Wizard Layout -->
         </div>
         <!-- END: Content -->
+
+        
+<!-- @foreach($user as $item)
+    {
+        name: '{{ $item->c_typeCompany }}',
+        y: 25,
+        drilldown: '{{ $item->c_typeCompany }}'
+    },
+@endforeach -->
+
 @endsection
 @section('javascripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>  <!-- delete -->
 
+<script>
+function search() {
+    var year = $('#year').val();
+    var gj = $('#gj').val();
+    // alert(year);
+    if(year == '' && gj == ''){
+        var url = '{!! route('home') !!}';
+        window.location.href = url;
+
+    }else{
+        var data = {
+        data: null,
+        year: year,
+        gj: gj,
+        _token: '{{ csrf_token() }}'
+    };
+    var params = $.param(data);
+
+    var url = '{{ route('resultadminSearchGraphJob', ['data' => '']) }}' +  params;
+
+    window.location.href = url;
+    }
+    
+}
+</script>
 
 <script>
     $(document).ready(function() {
@@ -131,7 +158,11 @@ function del_value(id) {
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
+
 <script>
+    var user = {!! json_encode($user) !!};
+    console.log(user);
+
     Highcharts.chart('container', {
     chart: {
         type: 'column'
@@ -140,10 +171,6 @@ function del_value(id) {
         align: 'left',
         text: 'สรุปจำนวนบุคลากรรายกลุ่มตำแหน่งงานตามประเภทสถานประกอบการ'
     },
-    // subtitle: {
-    //     align: 'left',
-    //     text: 'Click the columns to view versions. Source: <a href="http://statcounter.com" target="_blank">statcounter.com</a>'
-    // },
     accessibility: {
         announceNewData: {
             enabled: true
@@ -182,37 +209,38 @@ function del_value(id) {
             data: [
                 {
                     name: 'เหมืองแร่',
-                    y: 25,
+                    // y: @foreach($user as $rs) @if($rs->c_typeCompany == 'เหมืองแร่') @php $num = 0 @endphp $num++ @endif @endforeach,
+                    y: {{ $user->where('c_typeCompany', 'เหมืองแร่')->count() }},
                     drilldown: 'เหมืองแร่'
                 },
                 {
                     name: 'โรงโม่หิน',
-                    y: 19,
+                    y: {{ $user->where('c_typeCompany', 'โรงโม่หิน')->count() }},
                     drilldown: 'โรงโม่หิน'
                 },
                 {
                     name: 'โรงแต่งแร่',
-                    y: 4,
+                    y: {{ $user->where('c_typeCompany', 'โรงแต่งแร่')->count() }},
                     drilldown: 'โรงแต่แร่'
                 },
                 {
                     name: 'โรงประกอบโลหกรรม',
-                    y: 4,
+                    y: {{ $user->where('c_typeCompany', 'โรงประกอบโลหกรรม')->count() }},
                     drilldown: 'โรงประกอบโลหกรรม'
                 },
                 {
                     name: 'ผู้รับเหมาเหมืองแร่',
-                    y: 2,
+                    y: {{ $user->where('c_typeCompany', 'ผู้รับเหมาเหมืองแร่')->count() }},
                     drilldown: 'ผู้รับเหมาเหมืองแร่'
                 },
                 {
                     name: 'อื่นๆ',
-                    y: 30,
+                    y: {{ $user->where('c_typeCompany', 'อื่นๆ')->count() }},
                     drilldown: 'อื่นๆ'
                 },
                 {
                     name: 'อิสระ',
-                    y: 15,
+                    y: {{ $user->where('e_status', '')->count() }},
                     drilldown: 'อิสระ'
                 }
             ]
@@ -231,7 +259,7 @@ function del_value(id) {
         align: 'left'
     },
     xAxis: {
-        categories: ['ระดับปฏิบัติงาน', 'ระดับหัวหน้า'],
+        categories: [@foreach($lj as $rs) '{{$rs->lj_name}}', @endforeach],
         crosshair: true,
         accessibility: {
             description: 'Countries'
@@ -243,9 +271,6 @@ function del_value(id) {
             text: 'จำนวนบุคลากร'
         }
     },
-    // tooltip: {
-    //     valueSuffix: ' (1000 MT)'
-    // },
     plotOptions: {
         column: {
             pointPadding: 0.2,
@@ -255,31 +280,32 @@ function del_value(id) {
     series: [
         {
             name: 'เหมืองแร่',
-            data: [100, 110]
-        },
+            data: [@foreach($lj as $rs) {{$user->where('c_typeCompany', 'เหมืองแร่')->where('FKe_lavel', $rs->lj_id)->count()}}, @endforeach]
+        }
+        ,
         {
             name: 'โรงโม่หิน',
-            data: [50, 90]
+            data: [@foreach($lj as $rs) {{$user->where('c_typeCompany', 'โรงโม่หิน')->where('FKe_lavel', $rs->lj_id)->count()}} ,@endforeach]
         },
         {
             name: 'โรงแต่งแร่',
-            data: [60, 40]
+            data: [@foreach($lj as $rs) {{{$user->where('c_typeCompany', 'โรงแต่งแร่')->where('FKe_lavel', $rs->lj_id)->count()}}}, @endforeach]
         },
         {
             name: 'โรงประกอบโลหกรรม',
-            data: [90, 70]
+            data: [@foreach($lj as $rs) {{{$user->where('c_typeCompany', 'โรงประกอบโลหกรรม')->where('FKe_lavel', $rs->lj_id)->count()}}}, @endforeach]
         },
         {
             name: 'ผู้รับเหมาเหมืองแร่',
-            data: [20, 30]
+            data: [@foreach($lj as $rs) {{{$user->where('c_typeCompany', 'ผู้รับเหมาเหมืองแร่')->where('FKe_lavel', $rs->lj_id)->count()}}}, @endforeach]
         },
         {
             name: 'อื่นๆ',
-            data: [30, 50]
+            data: [@foreach($lj as $rs) {{{$user->where('c_typeCompany', 'อื่นๆ')->where('FKe_lavel', $rs->lj_id)->count()}}}, @endforeach]
         },
         {
             name: 'อิสระ',
-            data: [10, 5]
+            data: [@foreach($lj as $rs) {{{$user->where('c_typeCompany', '')->where('FKe_lavel', $rs->lj_id)->count()}}}, @endforeach]
         }
     ]
 });

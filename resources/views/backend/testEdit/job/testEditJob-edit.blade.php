@@ -34,7 +34,7 @@ $active = "testEditJob";
                     <div class="font-medium text-center text-lg">แก้ไขการรวมกลุ่มตำแหน่งงาน</div>
                    
                 </div>
-                <form action="{{ url('backend/capacity/add') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('backend/testEdit/job/update/'.$sp->sp_id) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-sl ate-200/60 dark:border-darkmode-400">
                     <div class="font-medium text-base">รายละเอียด</div>
@@ -44,10 +44,11 @@ $active = "testEditJob";
                                     <b><label for="horizontal-form-1" class="form-label "> ตำแหน่ง </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="position_one" id="" class="form-control" disabled>
+                                    <input type="text" value="{{$sp->p_name}}" class="form-control" disabled>
+                                    <!-- <select name="position_one" id="" class="form-control" disabled>
                                         <option value="1" selected> ตำแหน่ง 1 </option>
                                         <option value="2"> ตำแหน่ง 2 </option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
 
@@ -56,10 +57,11 @@ $active = "testEditJob";
                                     <b><label for="horizontal-form-1" class="form-label "> เพิ่มโดย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="position_one" id="" class="form-control" disabled>
+                                    <input type="text" value="{{$sp->c_nameCompany}}" class="form-control" disabled>
+                                    <!-- <select name="position_one" id="" class="form-control" disabled>
                                         <option value="1" selected> สถานประกอบการ 1 </option>
                                         <option value="2"> สถานประกอบการ 2 </option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
 
@@ -68,10 +70,11 @@ $active = "testEditJob";
                                     <b><label for="horizontal-form-1" class="form-label "> กลุ่มตำแหน่งเดิม </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="position_one" id="" class="form-control" disabled>
+                                    <input type="text" value="{{$sp->gj1_gj_name}}" class="form-control" disabled>
+                                    <!-- <select name="position_one" id="" class="form-control" disabled>
                                         <option value="1" selected> กลุ่มตำแหน่ง 1 </option>
                                         <option value="2"> กลุ่มตำแหน่ง 2 </option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
 
@@ -81,8 +84,10 @@ $active = "testEditJob";
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="position_one" id="position_one" class="form-control select2">
-                                        <option value="1" > กลุ่มตำแหน่ง 1 </option>
-                                        <option value="2"selected> กลุ่มตำแหน่ง 2 </option>
+                                        @foreach($groupjob as $rs)
+                                        <option value="{{$rs->gj_id}}" >{{$rs->gj_name}}</option>
+                                        @endforeach
+                                        <!-- <option value="2"selected> กลุ่มตำแหน่ง 2 </option> -->
                                     </select>
                                 </div>
                             </div>

@@ -34,7 +34,7 @@ $active = "testEditSkills";
                     <div class="font-medium text-center text-lg">แก้ไขการรวมทักษะ</div>
                    
                 </div>
-                <form action="{{ url('backend/capacity/add') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('backend/testEdit/skills/update/'.$skills->s_id) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-sl ate-200/60 dark:border-darkmode-400">
                     <div class="font-medium text-base">รายละเอียด</div>
@@ -44,10 +44,11 @@ $active = "testEditSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> ทักษะ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="position_one" id="" class="form-control" disabled>
+                                    <input type="text" class="form-control" value="{{$skills->s_name}}" disabled>
+                                    <!-- <select name="position_one" id="" class="form-control" disabled>
                                         <option value="1" selected> ทักษะ 1 </option>
                                         <option value="2"> ทักษะ 2 </option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
 
@@ -56,10 +57,11 @@ $active = "testEditSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> เพิ่มโดย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="position_one" id="" class="form-control" disabled>
+                                    <input type="text" class="form-control" value="{{$skills->c_nameCompany}}" disabled>
+                                    <!-- <select name="position_one" id="" class="form-control" disabled>
                                         <option value="1" selected> สถานประกอบการ 1 </option>
                                         <option value="2"> สถานประกอบการ 2 </option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
 
@@ -68,10 +70,9 @@ $active = "testEditSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> สมรรถนะเดิม </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="position_one" id="" class="form-control" disabled>
-                                        <option value="1" selected> สมรรถนะ 1 </option>
-                                        <option value="2"> สมรรถนะ 2 </option>
-                                    </select>
+                                    <input type="text" class="form-control" value="{{$skills->cc_name}}" disabled>
+                                    <!-- <select name="position_one" id="" class="form-control" disabled>
+                                    </select> -->
                                 </div>
                             </div>
 
@@ -93,8 +94,9 @@ $active = "testEditSkills";
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="skills_new" id="skills_new" class="form-control select2">
-                                        <option value="1" selected> สมรรถนะ 1 </option>
-                                        <option value="2"> สมรรถนะ 2 </option>
+                                        @foreach($capacity as $rs)
+                                        <option value="{{$rs->cc_id}}">{{$rs->cc_no}} {{$rs->cc_name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>

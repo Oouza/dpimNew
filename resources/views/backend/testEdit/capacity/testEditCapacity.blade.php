@@ -35,29 +35,31 @@ $i=1;
                                     </div>
                                 </div>
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
-                    <thead>
-                                <tr>
-                                    <th><center>รหัสสมรรถนะ</center></th>
-                                    <th><center>สมรรถนะ</center></th>
-                                    <th><center>กลุ่มตำแหน่ง</center></th>
-                                    <th><center>เพิ่มโดย</center></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><center>01</center></td>
-                                    <td><center>สมรรถนะ1</center></td>
-                                    <td><center>กลุ่มตำแหน่ง1</center></td>
-                                    <td><center>สถานประกอบการ</center></td>
-                                </tr>
-                                <tr>
-                                    <td><center>02</center></td>
-                                    <td><center>สมรรถนะ1</center></td>
-                                    <td><center>กลุ่มตำแหน่ง2</center></td>
-                                    <td><center>สถานประกอบการ1</center></td>
-                                </tr>
-                            </tbody>
-                        
+                        <thead>
+                            <tr>
+                                <th><center>รหัสสมรรถนะ</center></th>
+                                <th><center>สมรรถนะ</center></th>
+                                <th><center>กลุ่มตำแหน่ง</center></th>
+                                <th><center>เพิ่มโดย</center></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($capacity as $rs)
+                            <tr>
+                                <td><center>{{$rs->cc_no}}</center></td>
+                                <td><center>{{$rs->cc_name}}</center></td>
+                                <td><center>กลุ่มตำแหน่ง1</center></td>
+                                <td><center>{{$rs->c_nameCompany}}</center></td>
+                            </tr>
+                            @endforeach
+                            <!-- <tr>
+                                <td><center>02</center></td>
+                                <td><center>สมรรถนะ1</center></td>
+                                <td><center>กลุ่มตำแหน่ง2</center></td>
+                                <td><center>สถานประกอบการ1</center></td>
+                            </tr> -->
+                        </tbody>
+                    
                         </table>
                 </div>
               

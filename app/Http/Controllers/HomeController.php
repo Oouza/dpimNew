@@ -36,7 +36,8 @@ class HomeController extends Controller
         if(\Auth::user()->status == '1' || \Auth::user()->status == '2' ){  // แอดมินน
             $user = User::join('employees','employees.FKe_userid','users.id')
             ->leftjoin('companies','companies.c_id','employees.FKe_company')->where('status',8)
-            ->groupBy('c_typeCompany')->select('companies.c_typeCompany')->get();
+            // ->groupBy('c_typeCompany')->select('companies.c_typeCompany')
+            ->get();
 
             $lj = lavelJob::whereNull('lj_userDelete')->get();
             $groupjob = groupjob::whereNull('gj_userDelete')->get();

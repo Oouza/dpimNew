@@ -34,7 +34,7 @@ $active = "testEditSkillsSub";
                     <div class="font-medium text-center text-lg">แก้ไขการรวมทักษะย่อย</div>
                    
                 </div>
-                <form action="{{ url('backend/capacity/add') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('backend/testEdit/skillsSub/update/'.$ss->ss_id) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-sl ate-200/60 dark:border-darkmode-400">
                     <div class="font-medium text-base">รายละเอียด</div>
@@ -44,10 +44,11 @@ $active = "testEditSkillsSub";
                                     <b><label for="horizontal-form-1" class="form-label "> ทักษะย่อย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="position_one" id="" class="form-control" disabled>
+                                    <input type="text" class="form-control" value="{{$ss->ss_name}}" disabled>
+                                    <!-- <select name="position_one" id="" class="form-control" disabled>
                                         <option value="1" selected> ทักษะ 1 </option>
                                         <option value="2"> ทักษะ 2 </option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
 
@@ -56,10 +57,11 @@ $active = "testEditSkillsSub";
                                     <b><label for="horizontal-form-1" class="form-label "> เพิ่มโดย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="position_one" id="" class="form-control" disabled>
+                                    <input type="text" class="form-control" value="{{$ss->c_nameCompany}}" disabled>
+                                    <!-- <select name="position_one" id="" class="form-control" disabled>
                                         <option value="1" selected> สถานประกอบการ 1 </option>
                                         <option value="2"> สถานประกอบการ 2 </option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
 
@@ -68,10 +70,11 @@ $active = "testEditSkillsSub";
                                     <b><label for="horizontal-form-1" class="form-label "> ทักษะเดิม </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="position_one" id="" class="form-control" disabled>
+                                    <input type="text" class="form-control" value="{{$ss->s_name}}" disabled>
+                                    <!-- <select name="position_one" id="" class="form-control" disabled>
                                         <option value="1" selected> ทักษะ 1 </option>
                                         <option value="2"> ทักษะ 2 </option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
 
@@ -105,8 +108,10 @@ $active = "testEditSkillsSub";
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="skills_new" id="skills_new" class="select2">
-                                        <option value="1" selected> ทักษะ 1 </option>
-                                        <option value="2"> ทักษะ 2 </option>
+                                        @foreach($skills as $rs)
+                                        <option value="{{$rs->s_id}}" @if($ss->FKskillsAdmin == $rs->s_id) selected @endif>{{$rs->s_no}} {{$rs->s_name}}</option>
+                                        @endforeach
+                                        <!-- <option value="2"> ทักษะ 2 </option> -->
                                     </select>
                                 </div>
                             </div>

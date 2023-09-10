@@ -27,11 +27,13 @@ $i=1;
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-slate-200/60 dark:border-darkmode-400">
                     <h2 class="text-lg font-medium truncate mr-5">
                         ทักษะ
-                        <select name="" id="" class="select2">
+                        <select name="searchSS" id="searchSS" class="select2" onchange="searchSkillsSub()">
                             <option value="">ทักษะทั้งหมด</option>
-                            <option value="">ทักษะ 1</option>
-                            <option value="">ทักษะ 2</option>
-                            <option value="">ทักษะ 3</option>
+                            @foreach($skills as $rs)
+                            <option value="{{$rs->s_id}}" @if(!empty($id) && ($id == $rs->s_id)) selected @endif>{{$rs->s_name}}</option>
+                            @endforeach
+                            <!-- <option value="">ทักษะ 2</option>
+                            <option value="">ทักษะ 3</option> -->
                         </select>
                     </h2>
                     <div class="intro-y block sm:flex items-center h-10">
@@ -60,32 +62,36 @@ $i=1;
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($skillsSubs as $rs)
                                 <tr>
-                                    <td><center>01</center></td>
-                                    <td><center>ทักษะย่อย 1</center></td>
-                                    <td><center>ทักษะเดิม3</center></td>
-                                    <td><center>ทักษะใหม่1</center></td>
+                                    <td><center>{{$rs->ss_no}}</center></td>
+                                    <td><center>{{$rs->ss_name}}</center></td>
+                                    <td><center>{{$rs->skillsOld}}</center></td>
+                                    <td><center>{{$rs->skillsNew}}</center></td>
                                     <!-- <td><center>สมรรถนะเดิม3</center></td>
                                     <td><center>สมรรถนะใหม่1</center></td>
                                     <td><center>กลุ่มตำแหน่งเดิม3</center></td>
                                     <td><center>กลุ่มตำแหน่งใหม่1</center></td> -->
-                                    <td><center>สถานประกอบการ1</center></td>
-                                    <td><center>20-07-2023</center></td>
-                                    <td><center><a href="{{ url('backend/testEdit/skillsSub/edit') }}"><button class="btn btn-warning"> แก้ไข </button></a></center></td>
+                                    <td><center>{{$rs->c_nameCompany}}</center></td>
+                                    <td><center>
+                                        @php
+                                            $time = $rs->updated_at;
+                                            $formattedDate = $time->format('d/m/Y');
+                                        @endphp
+                                        {{$formattedDate}}
+                                    </center></td>
+                                    <td><center><a href="{{ url('backend/testEdit/skillsSub/edit/'.$rs->ss_id) }}"><button class="btn btn-warning"> แก้ไข </button></a></center></td>
                                 </tr>
-                                <tr>
+                                @endforeach
+                                <!-- <tr>
                                     <td><center>02</center></td>
                                     <td><center>ทักษะย่อย 2</center></td>
                                     <td><center>ทักษะเดิม3</center></td>
                                     <td><center>ทักษะใหม่1</center></td>
-                                    <!-- <td><center>สมรรถนะเดิม5</center></td>
-                                    <td><center>สมรรถนะใหม่1</center></td>
-                                    <td><center>กลุ่มตำแหน่งเดิม6</center></td>
-                                    <td><center>กลุ่มตำแหน่งใหม่1</center></td> -->
                                     <td><center>สถานประกอบการ8</center></td>
                                     <td><center>20-07-2023</center></td>
                                     <td><center><a href="{{ url('backend/testEdit/skillsSub/edit') }}"><button class="btn btn-warning"> แก้ไข </button></a></center></td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         
                         </table>
@@ -102,6 +108,25 @@ $i=1;
 @section('javascripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>  <!-- delete -->
 
+<script>
+function searchSkillsSub() {
+    var searchSS = $('#searchSS').val();
+    if(searchSS == ''){
+        var url = '{!! route('adminSkillSubCom') !!}';
+        window.location.href = url;
+
+    }else{
+        var encodedSearchSS = encodeURIComponent(searchSS);
+
+        var url = '{!! route('resultSkillsSubCom', ['id' => '__id__']) !!}';
+        url = url.replace('__id__', encodedSearchSS);
+
+        // เปิดหน้าใหม่หรือรีเฟรชหน้าโดยใช้ URL ที่สร้างข้างบน
+        window.location.href = url;
+    }
+    
+}
+</script>
 
 <script>
     $(document).ready(function() {

@@ -611,6 +611,13 @@
                                     <div class="side-menu__title"> สรุปชั่วโมงการพัฒนาทักษะของบุคลากร </div>
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ url('graph/people') }}" <?php if ($active =="sPeople") {?> class="side-menu side-menu--active" <?php }else{?> class="side-menu"<?php  } ?>
+                                    data-page="acct">
+                                    <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
+                                    <div class="side-menu__title"> สรุปการใช้งานเว็บไซต์ </div>
+                                </a>
+                            </li>
                         </ul>
                     </li>
 

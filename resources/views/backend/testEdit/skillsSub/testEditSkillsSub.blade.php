@@ -46,22 +46,24 @@ $i=1;
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($skillsSubs as $rs)
                                 <tr>
-                                    <td><center>01</center></td>
-                                    <td><center>ทักษะย่อย 1</center></td>
-                                    <td><center>ทักษะ 1</center></td>
-                                    <td><center>สมรรถนะ 1</center></td>
+                                    <td><center>{{$rs->ss_no}}</center></td>
+                                    <td><center>{{$rs->ss_name}}</center></td>
+                                    <td><center>{{$rs->s_name}}</center></td>
+                                    <td><center>{{$rs->cc_name}}</center></td>
                                     <td><center>กลุ่มตำแหน่ง 1</center></td>
-                                    <td><center>สถานประกอบการ 1</center></td>
+                                    <td><center>{{$rs->c_nameCompany}}</center></td>
                                 </tr>
-                                <tr>
+                                @endforeach
+                                <!-- <tr>
                                     <td><center>02</center></td>
                                     <td><center>ทักษะย่อย 2</center></td>
                                     <td><center>ทักษะ 2</center></td>
                                     <td><center>สมรรถนะ 2</center></td>
                                     <td><center>กลุ่มตำแหน่ง 2</center></td>
                                     <td><center>สถานประกอบการ 1</center></td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         
                         </table>

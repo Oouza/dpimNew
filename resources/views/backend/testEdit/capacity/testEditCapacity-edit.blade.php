@@ -44,10 +44,11 @@ $active = "testEditCapacity";
                                     <b><label for="horizontal-form-1" class="form-label "> สมรรถนะ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="position_one" id="" class="form-control" disabled>
+                                    <input type="text" class="form-control" value="{{$capacity->cc_name}}"disabled>
+                                    <!-- <select name="position_one" id="" class="form-control" disabled>
                                         <option value="1" selected> สมรรถนะ 1 </option>
                                         <option value="2"> สมรรถนะ 2 </option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
 
@@ -56,10 +57,11 @@ $active = "testEditCapacity";
                                     <b><label for="horizontal-form-1" class="form-label "> เพิ่มโดย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="position_one" id="" class="form-control" disabled>
+                                    <input type="text" class="form-control" value="{{$capacity->c_nameCompany}}"disabled>
+                                    <!-- <select name="position_one" id="" class="form-control" disabled>
                                         <option value="1" selected> สถานประกอบการ 1 </option>
                                         <option value="2"> สถานประกอบการ 2 </option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
 
@@ -68,10 +70,11 @@ $active = "testEditCapacity";
                                     <b><label for="horizontal-form-1" class="form-label "> กลุ่มตำแหน่งเดิม </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="position_one" id="" class="form-control" disabled>
+                                    <input type="text" class="form-control" value="{{$capacity->cc_name}}"disabled>
+                                    <!-- <select name="position_one" id="" class="form-control" disabled>
                                         <option value="1" selected> กลุ่มตำแหน่ง 1 </option>
                                         <option value="2"> กลุ่มตำแหน่ง 2 </option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
 

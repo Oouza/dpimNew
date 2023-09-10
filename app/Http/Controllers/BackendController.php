@@ -11,6 +11,8 @@ use App\Models\User;
 use App\Models\capacity;
 use App\Models\skills;
 use App\Models\skillsSubs;
+use App\Models\lavelJob;
+use App\Models\groupjob;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\CapacityExport;
 use App\Exports\SkilsExport;
@@ -265,6 +267,10 @@ class BackendController extends Controller
         return view('backend.graph.graph-hour');
     }
 
+    function graphPeople(){
+        return view('backend.graph.graph-people');
+    }
+
     function admin(){
         $user = user::where('status',2)->get();
         return view('backend.adnim.adnim',compact('user'));
@@ -391,70 +397,6 @@ class BackendController extends Controller
         return view('backend.adnim.setting',compact('user'));
     }
 
-    function testEditJob(){
-        return view('backend.testEdit.job.testEditJob');
-    }
-
-    function testEditJobForm(){
-        return view('backend.testEdit.job.testEditJob-add');
-    }
-
-    function testEditJobFormClean(){
-        return view('backend.testEdit.job.testEditJob-clean');
-    }
-
-    function testEditJobEdit(){
-        return view('backend.testEdit.job.testEditJob-edit');
-    }
-
-    function testEditCapacity(){
-        return view('backend.testEdit.capacity.testEditCapacity');
-    }
-
-    function testEditCapacityForm(){
-        return view('backend.testEdit.capacity.testEditCapacity-add');
-    }
-
-    function testEditCapacityClean(){
-        return view('backend.testEdit.capacity.testEditCapacity-clean');
-    }
-
-    function testEditCapacityEdti(){
-        return view('backend.testEdit.capacity.testEditCapacity-edit');
-    }
-
-    function testEditSkills(){
-        return view('backend.testEdit.skills.testEditSkills');
-    }
-
-    function testEditSkillsForm(){
-        return view('backend.testEdit.skills.testEditSkills-add');
-    }
-
-    function testEditSkillsClean(){
-        return view('backend.testEdit.skills.testEditSkills-clean');
-    }
-
-    function testEditSkillsEdit(){
-        return view('backend.testEdit.skills.testEditSkills-edit');
-    }
-
-    function testEditSkillsSub(){
-        return view('backend.testEdit.skillsSub.testEditSkillsSub');
-    }
-
-    function testEditSkillsSubForm(){
-        return view('backend.testEdit.skillsSub.testEditSkillsSub-add');
-    }
-
-    function testEditSkillsSubClean(){
-        return view('backend.testEdit.skillsSub.testEditSkillsSub-clean');
-    }
-
-    function testEditSkillsSubEdit(){
-        return view('backend.testEdit.skillsSub.testEditSkillsSub-edit');
-    }
-
     function searchProvice(Request $request)
     {
         $amphur = DB::table('amphures')->where('province_id',$request->input('provice'))
@@ -520,5 +462,26 @@ class BackendController extends Controller
         }
         $response["html"] = $html;
         return json_encode($response);      
+    }
+
+    function resultadminSearchGraphJob(Request $request){
+        $year = $request->year;
+        $gj = $request->gj;
+        // dd($year);
+
+        $user = User::join('employees','employees.FKe_userid','users.id')
+            ->leftjoin('companies','companies.c_id','employees.FKe_company')->where('status',8)
+            ->when(!empty($year), function ($query) use ($year) {
+                $query->whereRaw('YEAR(employees.created_at) = ?', [$year]);
+            })
+            ->when(!empty($gj), function ($query) use ($gj) {
+                $query->where('FKe_group',$gj);
+            })
+            ->get();
+
+        $lj = lavelJob::whereNull('lj_userDelete')->get();
+        $groupjob = groupjob::whereNull('gj_userDelete')->get();
+            
+        return view('backend.graph.graph-job',compact('user','lj','groupjob','year','gj'));
     }
 }

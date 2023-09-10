@@ -7,6 +7,7 @@
 $activePage = "testEdit";
 $active = "testEditSkills";
 $i=1;
+use Carbon\Carbon;
 ?> 
 @endsection
 
@@ -27,11 +28,13 @@ $i=1;
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-slate-200/60 dark:border-darkmode-400">
                     <h2 class="text-lg font-medium truncate mr-5">
                         สมรรถนะ
-                        <select name="" id="" class="select2">
+                        <select name="searchSkill" id="searchSkill"  onchange="searchSkills()" class="select2">
                             <option value="">สมรรถนะทั้งหมด</option>
-                            <option value="">สมรรถนะ 1</option>
-                            <option value="">สมรรถนะ 2</option>
-                            <option value="">สมรรถนะ 3</option>
+                            @foreach($capacity as $rs)
+                            <option value="{{$rs->cc_id}}" @if(!empty($search) && ($search == $rs->cc_id)) selected @endif>{{$rs->cc_name}}</option>
+                            @endforeach
+                            <!-- <option value="">สมรรถนะ 2</option>
+                            <option value="">สมรรถนะ 3</option> -->
                         </select>
                     </h2>
                     <div class="intro-y block sm:flex items-center h-10">
@@ -58,28 +61,34 @@ $i=1;
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($skills as $rs)
                                 <tr>
-                                    <td><center>01</center></td>
-                                    <td><center>ทักษะ 1</center></td>
-                                    <td><center>สมรรถนะเดิม</center></td>
-                                    <td><center>สมรรถนะใหม่</center></td>
+                                    <td><center>{{$rs->s_no}}</center></td>
+                                    <td><center>{{$rs->s_name}}</center></td>
+                                    <td><center>{{$rs->CapaOld}}</center></td>
+                                    <td><center>{{$rs->CapaNew}}</center></td>
                                     <!-- <td><center>กลุ่มตำแหน่งเดิม</center></td>
                                     <td><center>กลุ่มตำแหน่งใหม่</center></td> -->
-                                    <td><center>สถานประกอบการ</center></td>
-                                    <td><center>20-07-2023</center></td>
-                                    <td><center><a href="{{ url('backend/testEdit/skills/edit') }}"><button class="btn btn-warning"> แก้ไข </button></a></center></td>
+                                    <td><center>{{$rs->c_nameCompany}}</center></td>
+                                    <td><center>
+                                        @php
+                                            $time = $rs->updated_at;
+                                            $formattedDate = $time->format('d/m/Y');
+                                        @endphp
+                                        {{$formattedDate}}
+                                    </center></td>
+                                    <td><center><a href="{{ url('backend/testEdit/skills/edit/'.$rs->s_id) }}"><button class="btn btn-warning"> แก้ไข </button></a></center></td>
                                 </tr>
-                                <tr>
+                                @endforeach
+                                <!-- <tr>
                                     <td><center>02</center></td>
                                     <td><center>ทักษะ 2</center></td>
                                     <td><center>สมรรถนะเดิม</center></td>
                                     <td><center>สมรรถนะใหม่</center></td>
-                                    <!-- <td><center>กลุ่มตำแหน่งเดิม</center></td>
-                                    <td><center>กลุ่มตำแหน่งใหม่</center></td> -->
                                     <td><center>สถานประกอบการ1</center></td>
                                     <td><center>20-07-2023</center></td>
                                     <td><center><a href="{{ url('backend/testEdit/skills/edit') }}"><button class="btn btn-warning"> แก้ไข </button></a></center></td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         
                         </table>
@@ -96,6 +105,25 @@ $i=1;
 @section('javascripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>  <!-- delete -->
 
+<script>
+function searchSkills() {
+    var searchSkill = $('#searchSkill').val();
+    if(searchSkill == ''){
+        var url = '{!! route('adminSkillsCom') !!}';
+        window.location.href = url;
+
+    }else{
+        var encodedSkills = encodeURIComponent(searchSkill);
+
+        var url = '{!! route('resultSkillsCom', ['id' => '__id__']) !!}';
+        url = url.replace('__id__', encodedSkills);
+
+        // เปิดหน้าใหม่หรือรีเฟรชหน้าโดยใช้ URL ที่สร้างข้างบน
+        window.location.href = url;
+    }
+    
+}
+</script>
 
 <script>
     $(document).ready(function() {

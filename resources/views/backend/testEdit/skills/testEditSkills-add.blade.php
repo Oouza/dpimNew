@@ -34,7 +34,7 @@ $active = "testEditSkills";
                     <div class="font-medium text-center text-lg">รวมข้อมูลทักษะ</div>
                    
                 </div>
-                <form action="{{ url('backend/capacity/add') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('backend/testEdit/skills/add') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-sl ate-200/60 dark:border-darkmode-400">
                     <div class="font-medium text-base">รายละเอียด</div>
@@ -59,8 +59,10 @@ $active = "testEditSkills";
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="capacity" id="capacity" class="form-control select2">
                                         <option value="" hidden>- กรุณาเลือกสมรรถนะ -</option>
-                                        <option value="1">สมรรถนะ 1</option>
-                                        <option value="2">สมรรถนะ 2</option>
+                                        @foreach($capacity as $rs)
+                                        <option value="{{$rs->cc_id}}">{{$rs->cc_no}} {{$rs->cc_name}}</option>
+                                        @endforeach
+                                        <!-- <option value="2">สมรรถนะ 2</option> -->
                                     </select>
                                 </div>
                             </div>
@@ -80,29 +82,32 @@ $active = "testEditSkills";
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> ทักษะเป้าหมาย </lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> ทักษะที่ต้องการนำไปรวมยังทักษะเป้าหมาย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="skills_one" id="skills_one" class="form-control select2">
                                         <option value="" hidden>- กรุณาเลือกทักษะ -</option>
-                                        <option value="1">- ทักษะ 1 -</option>
-                                        <option value="2">- ทักษะ 2 -</option>
+                                        @foreach($skills as $rs)
+                                        <option value="{{$rs->s_id}}">{{$rs->s_no}} {{$rs->s_name}} {{$rs->c_nameCompany}}</option>
+                                        @endforeach
+                                        <!-- <option value="2">- ทักษะ 2 -</option> -->
                                     </select>
                                 </div>
                             </div>
 
-                            <div class="grid grid-cols-12 gap-6 mt-5">
+                            <!-- <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                     <b><label for="horizontal-form-1" class="form-label "> ทักษะเป้าหมายที่ต้องการนำไปรวมยังทักษะเป้าหมาย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="skills_two" id="skills_two" class="form-control select2">
                                         <option value="" hidden>- กรุณาเลือกทักษะ -</option>
-                                        <option value="1">- ทักษะ 1 -</option>
-                                        <option value="2">- ทักษะ 2 -</option>
+                                        @foreach($skills as $rs)
+                                        <option value="{{$rs->s_id}}">{{$rs->s_no}} {{$rs->s_name}} {{$rs->c_nameCompany}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div id="form-container"></div>
                             <br><button id="add-form-btn" type="button" class="btn btn-outline-secondary btn200 rounded-10" >เพิ่มทักษะ</button>
@@ -161,10 +166,11 @@ $active = "testEditSkills";
             <b><label for="horizontal-form-1" class="form-label "> ทักษะเป้าหมายที่ต้องการนำไปรวมยังทักษะเป้าหมาย </lable></b> 
         </div>
         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-            <select name="" id="" class="form-control select2">
+            <select name="skillsAdd[${formCount}]" id="skillsAdd[${formCount}]" class="form-control select2">
                 <option value="" hidden>- กรุณาเลือกทักษะ -</option>
-                <option value="">- ทักษะ 1 -</option>
-                <option value="">- ทักษะ 2 -</option>
+                @foreach($skills as $rs)
+                <option value="{{$rs->s_id}}">{{$rs->s_no}} {{$rs->s_name}} {{$rs->c_nameCompany}}</option>
+                @endforeach
             </select>
         </div>
         <button class="btn py-0 px-2 btn-outline-secondary" type="button" onclick="del_study(${formCount})">ลบ</button>
@@ -172,6 +178,14 @@ $active = "testEditSkills";
     <div id="form-container-skills(${formCount})"></div>
     `;
     formContainer.appendChild(div);
+
+    $(document).ready(function(){
+        $(`#skillsAdd\\[${formCount}\\]`).select2({
+            placeholder: "- กรุณาเลือกทักษะ -",
+            allowClear: true
+        });
+    });
+
     });
 
     function del_study(num){

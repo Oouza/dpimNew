@@ -26,12 +26,15 @@ $i=1;
          
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-slate-200/60 dark:border-darkmode-400">
                     <h2 class="text-lg font-medium truncate mr-5">
-                        กลุ่มตำแหน่ง
-                        <select name="" id="" class="select2">
+                        สมรรถนะ
+                        <select name="sCapacity" id="sCapacity" class="select2" onchange="searchCapacityCom()">
                             <option value="">กลุ่มตำแหน่งทั้งหมด</option>
-                            <option value="">กลุ่มตำแหน่ง 1</option>
+                            @foreach($capacityAdmin as $rs)
+                            <option value="{{$rs->cc_id}}">{{$rs->cc_no}} {{$rs->cc_name}}</option>
+                            @endforeach
+                            <!-- <option value="">กลุ่มตำแหน่ง 1</option>
                             <option value="">กลุ่มตำแหน่ง 2</option>
-                            <option value="">กลุ่มตำแหน่ง 3</option>
+                            <option value="">กลุ่มตำแหน่ง 3</option> -->
                         </select>
                     </h2>
                     <div class="intro-y block sm:flex items-center h-10">
@@ -49,31 +52,37 @@ $i=1;
                                     <th><center>รหัสสมรรถนะ</center></th>
                                     <th><center>สมรรถนะ</center></th>
                                     <th><center>เพิ่มโดย</center></th>
-                                    <th><center>กลุ่มตำแหน่งเดิม</center></th>
-                                    <th><center>กลุ่มตำแหน่งใหม่</center></th>
+                                    <!-- <th><center>กลุ่มตำแหน่งเดิม</center></th> -->
+                                    <th><center>สมรรถนะใหม่</center></th>
                                     <th><center>วันที่แก้ไข</center></th>
                                     <th><center>แก้ไข</center></th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($capacity as $rs)
                                 <tr>
-                                    <td><center>01</center></td>
-                                    <td><center>สมรรถนะ1</center></td>
-                                    <td><center>สถานประกอบการ</center></td>
-                                    <td><center>กลุ่มตำแหน่งเดิม2</center></td>
-                                    <td><center>กลุ่มตำแหน่งใหม่</center></td>
-                                    <td><center>20-07-2023</center></td>
+                                    <td><center>{{$rs->cc_no}}</center></td>
+                                    <td><center>{{$rs->cc_name}}</center></td>
+                                    <td><center>{{$rs->c_nameCompany}}</center></td>
+                                    <td><center>{{$rs->CapaName}}</center></td>
+                                    <td><center>
+                                        @php
+                                            $time = $rs->updated_at;
+                                            $formattedDate = $time->format('d/m/Y');
+                                        @endphp
+                                        {{$formattedDate}}
+                                    </center></td>
                                     <td><center><a href="{{ url('backend/textEdit/capacity/edit') }}"><button class="btn btn-warning"> แก้ไข </button></a></center></td>
                                 </tr>
-                                <tr>
+                                @endforeach
+                                <!-- <tr>
                                     <td><center>02</center></td>
                                     <td><center>สมรรถนะ1</center></td>
                                     <td><center>สถานประกอบการ1</center></td>
-                                    <td><center>กลุ่มตำแหน่งเดิม3</center></td>
                                     <td><center>กลุ่มตำแหน่งใหม่</center></td>
                                     <td><center>20-07-2023</center></td>
                                     <td><center><a href="{{ url('backend/textEdit/capacity/edit') }}"><button class="btn btn-warning"> แก้ไข </button></a></center></td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         
                         </table>
@@ -90,6 +99,25 @@ $i=1;
 @section('javascripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>  <!-- delete -->
 
+<script>
+function searchCapacityCom() {
+    var sCapacity = $('#sCapacity').val();
+    if(sCapacity == ''){
+        var url = '{!! route('adminCapacityCom') !!}';
+        window.location.href = url;
+
+    }else{
+        var encodedSCapacity = encodeURIComponent(sCapacity);
+
+        var url = '{!! route('resultCapacityCom', ['id' => '__id__']) !!}';
+        url = url.replace('__id__', encodedSCapacity);
+
+        // เปิดหน้าใหม่หรือรีเฟรชหน้าโดยใช้ URL ที่สร้างข้างบน
+        window.location.href = url;
+    }
+    
+}
+</script>
 
 <script>
     $(document).ready(function() {
