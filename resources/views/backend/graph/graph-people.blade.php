@@ -13,6 +13,8 @@ $active = "sPeople";
 $i=1;
 ?>
 
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
 @endsection
 
 @section('content')
@@ -60,46 +62,29 @@ $i=1;
                     </div>
                     <br>
                     <h3 class="text-lg font-medium truncate mr-5">กลุ่มตำแหน่ง 1 รวม 100 คน</h3>
-                    <table class="table table-striped table-bordered" style="width:100%">
+                    <table class="table-auto">
                         <thead>
-                            <tr>
-                                <th><center>กลุ่มตำแหน่ง</center></th>
-                                <th><center>จำนวนบุคลากร</center></th>
-                                <th><center>สมรรถนะ</center></th>
-                                <th><center>จำนวนชั่วโมงที่ได้รับการพัฒนาสมรรถนะ</center></th>
-                            </tr>
+                        <tr>
+                            <th>#</th>
+                            <th>Date</th>
+                            <th>Visitors</th>
+                            <th>Page Title</th>
+                            <th>Page Views</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><center>กลุ่มตำแหน่ง 1</center></td>
-                                <td><center>100</center></td>
-                                <td><center>4</center></td>
-                                <td><center>6</center></td>
-                            </tr>
-                            <tr>
-                                <td><center>สมรรถนะ1</center></td>
-                                <td><center>100</center></td>
-                                <td><center>4</center></td>
-                                <td><center>6</center></td>
-                            </tr>
-                            <tr>
-                                <td><center>สมรรถนะ2</center></td>
-                                <td><center>100</center></td>
-                                <td><center>4</center></td>
-                                <td><center>6</center></td>
-                            </tr>
-                            <tr>
-                                <td><center>กลุ่มตำแหน่ง 2</center></td>
-                                <td><center>100</center></td>
-                                <td><center>5</center></td>
-                                <td><center>3</center></td>
-                            </tr>
-                            <tr>
-                                <td><center>สมรรถนะ1</center></td>
-                                <td><center>100</center></td>
-                                <td><center>4</center></td>
-                                <td><center>6</center></td>
-                            </tr>
+                            @php
+                                $no = 0;
+                            @endphp
+                        @foreach ($analyticsData as $data)
+                        <tr>
+                            <td>{{ ++$no }}</td>
+                            <td>{{ $data['date'] }}</td>
+                            <td>{{ $data['visitors'] }}</td>
+                            <td>{{ $data['pageTitle'] }}</td>
+                            <td>{{ $data['pageViews'] }}</td>
+                        </tr>
+                        @endforeach
                         </tbody>
                     </table>
                     <br>

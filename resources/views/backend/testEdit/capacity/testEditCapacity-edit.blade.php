@@ -34,7 +34,7 @@ $active = "testEditCapacity";
                     <div class="font-medium text-center text-lg">แก้ไขการรวมสมรรถนะ</div>
                    
                 </div>
-                <form action="{{ url('backend/capacity/add') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('backend/testEdit/capacity/update/'.$ccg->ccg_id) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-sl ate-200/60 dark:border-darkmode-400">
                     <div class="font-medium text-base">รายละเอียด</div>
@@ -44,7 +44,7 @@ $active = "testEditCapacity";
                                     <b><label for="horizontal-form-1" class="form-label "> สมรรถนะ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input type="text" class="form-control" value="{{$capacity->cc_name}}"disabled>
+                                    <input type="text" class="form-control" value="{{$ccg->cc_name}}"disabled>
                                     <!-- <select name="position_one" id="" class="form-control" disabled>
                                         <option value="1" selected> สมรรถนะ 1 </option>
                                         <option value="2"> สมรรถนะ 2 </option>
@@ -57,7 +57,7 @@ $active = "testEditCapacity";
                                     <b><label for="horizontal-form-1" class="form-label "> เพิ่มโดย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input type="text" class="form-control" value="{{$capacity->c_nameCompany}}"disabled>
+                                    <input type="text" class="form-control" value="{{$ccg->c_nameCompany}}"disabled>
                                     <!-- <select name="position_one" id="" class="form-control" disabled>
                                         <option value="1" selected> สถานประกอบการ 1 </option>
                                         <option value="2"> สถานประกอบการ 2 </option>
@@ -67,25 +67,13 @@ $active = "testEditCapacity";
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> กลุ่มตำแหน่งเดิม </lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> สมรรถนะใหม่ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input type="text" class="form-control" value="{{$capacity->cc_name}}"disabled>
-                                    <!-- <select name="position_one" id="" class="form-control" disabled>
-                                        <option value="1" selected> กลุ่มตำแหน่ง 1 </option>
-                                        <option value="2"> กลุ่มตำแหน่ง 2 </option>
-                                    </select> -->
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> กลุ่มตำแหน่งใหม่ </lable></b>
-                                </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="position_one" id="position_one" class="form-control select2">
-                                        <option value="1" > กลุ่มตำแหน่ง 1 </option>
-                                        <option value="2"selected> กลุ่มตำแหน่ง 2 </option>
+                                    <select name="capacity_new" id="capacity_new" class="form-control select2">
+                                        @foreach($capacityAdmin as $rs)
+                                        <option value="{{$rs->cc_id}}" @if($ccg->FKcc_Admin == $rs->cc_id) selected @endif>{{$rs->cc_no}} {{$rs->cc_name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>

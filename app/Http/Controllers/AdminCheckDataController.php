@@ -11,6 +11,7 @@ use App\Models\groupjob;
 use App\Models\capacity;
 use App\Models\skills;
 use App\Models\skillsSubs;
+use App\Models\capacityGroup;
 
 class AdminCheckDataController extends Controller
 {
@@ -124,16 +125,29 @@ class AdminCheckDataController extends Controller
     function testEditCapacityAdd(Request $request){
         // dd($request);
 
+        $capacityGroup = new capacityGroup;
+        $capacityGroup->FKcc_Company = $request->capacity_new;
+        $capacityGroup->FKcc_Admin = $request->capacity;
+        $capacityGroup->ccg_userUpdate = Auth::user()->name;
+        $capacityGroup->save();
+        
         $upSpOne = capacity::find($request->capacity_new)->update([
-            'FKgroupAdmin'   => $request->capacity,
+            'FKgroupAdmin'   => 0,
         ]);
 
         if($request->capacityAdd!=''){
             for($i = 0; $i < count($request->capacityAdd); $i++) {
                 $indexedArray = array_values($request->capacityAdd); // เรียงลำดับค่าใหม่ให้เป็นอาร์เรย์ที่มีคีย์ต่อเนื่องกัน
                 $value = $indexedArray[$i];
+
+                $capacityGroup = new capacityGroup;
+                $capacityGroup->FKcc_Company = $value;
+                $capacityGroup->FKcc_Admin = $request->capacity;
+                $capacityGroup->ccg_userUpdate = Auth::user()->name;
+                $capacityGroup->save();
+
                 $upSp = capacity::find($value)->update([
-                    'FKgroupAdmin'   => $request->capacity,
+                    'FKgroupAdmin'   => 0,
                 ]);
             }
         }
@@ -145,33 +159,52 @@ class AdminCheckDataController extends Controller
     }
 
     function testEditCapacityClean(){
+        $capacityGroups = capacityGroup::join('capacities as capaCom','capaCom.cc_id','capacity_groups.FKcc_Company')
+        ->join('companies','companies.c_id','capaCom.FKcc_Create')
+        ->join('capacities as capaAdmin','capaAdmin.cc_id','capacity_groups.FKcc_Admin')
+        ->select('ccg_id','c_nameCompany','capaCom.cc_no as capaComNo','capaCom.cc_name as capaComName','capaAdmin.cc_name as capaAdminName','capacity_groups.updated_at')
+        ->get();
+
         $capacity = capacity::join('companies','companies.c_id','capacities.FKcc_Create')
             ->where('FKcc_Create','!=','0')->whereNotNull('FKgroupAdmin')->whereNull('cc_userDelete')->get();
             
         $capacityAdmin = capacity::where('FKcc_Create',0)->whereNull('cc_userDelete')->get();
-        return view('backend.testEdit.capacity.testEditCapacity-clean',compact('capacity','capacityAdmin'));
+        return view('backend.testEdit.capacity.testEditCapacity-clean',compact('capacity','capacityAdmin','capacityGroups'));
     }
 
     function testEditCapacityEdti($id){
-        $capacity = capacity::join('companies','companies.c_id','capacities.FKcc_Create')
-            ->join('capacities as Capa','Capa.c_id','capacities.FKgroupAdmin')
-            ->select('cc_id','c_name','c_nameCompany','Capa.cc_name as CapaName','gj2.gj_name as gj2_gj_name','capacities.updated_at')
-            ->where('FKcc_Create','!=','0')->whereNotNull('FKgroupAdmin')->whereNull('cc_userDelete')->find($id);
-        // $settingPosition = settingPosition::join('positions', 'positions.p_id', '=', 'setting_positions.FKgsp_position')
-        //     ->join('groupjobs as gj1', 'gj1.gj_id', '=', 'setting_positions.FKgsp_groupJob')
-        //     ->join('groupjobs as gj2', 'gj2.gj_id', '=', 'setting_positions.FKgroupjobAdmin')
-        //     ->join('companies', 'companies.c_id', '=', 'setting_positions.FKgsp_company')
-        //     ->where('FKgroupjobAdmin',$search)
-        //     ->whereNull('sp_delete')
-        //     ->select('sp_id','p_name','c_nameCompany','gj1.gj_name as gj1_gj_name','gj2.gj_name as gj2_gj_name','setting_positions.updated_at')
-        //     ->get();
+        $ccg = capacityGroup::join('capacities','capacities.cc_id','capacity_groups.FKcc_Company')
+            ->join('companies','companies.c_id','capacities.FKcc_Create')->find($id);
 
         $capacityAdmin = capacity::where('FKcc_Create',0)->whereNull('cc_userDelete')->get();
-        return view('backend.testEdit.capacity.testEditCapacity-edit',compact('capacity','capacityAdmin'));
+        return view('backend.testEdit.capacity.testEditCapacity-edit',compact('capacityAdmin','ccg'));
     }
 
-    function testEditCapacityUpdate($id){
-        return view('backend.testEdit.capacity.testEditCapacity-edit');
+    function testEditCapacityUpdate(Request $request, $id){
+        $ccg = capacityGroup::find($id)->update([
+            'FKcc_Admin'   => $request->capacity_new,
+        ]);
+
+        $mes = 'Success';
+        $yourURL= url('backend/testEdit/capacity/clean');
+        echo ("<script>alert('$mes'); location.href='$yourURL'; </script>");
+    }
+
+    function resultCapacityCom($id){
+        $search = $id;
+
+        $capacityGroups = capacityGroup::join('capacities as capaCom','capaCom.cc_id','capacity_groups.FKcc_Company')
+        ->join('companies','companies.c_id','capaCom.FKcc_Create')
+        ->join('capacities as capaAdmin','capaAdmin.cc_id','capacity_groups.FKcc_Admin')
+        ->select('ccg_id','c_nameCompany','capaCom.cc_no as capaComNo','capaCom.cc_name as capaComName','capaAdmin.cc_name as capaAdminName','capacity_groups.updated_at')
+        ->where('FKcc_Admin',$search)->get();
+
+        $capacity = capacity::join('companies','companies.c_id','capacities.FKcc_Create')
+            ->where('FKcc_Create','!=','0')->whereNotNull('FKgroupAdmin')->whereNull('cc_userDelete')->get();
+            
+        $capacityAdmin = capacity::where('FKcc_Create',0)->whereNull('cc_userDelete')->get();
+        return view('backend.testEdit.capacity.testEditCapacity-clean',compact('capacity','capacityAdmin','capacityGroups','search'));
+        // return view('backend.testEdit.skills.testEditSkills-clean',compact('skills','capacity','search'));
     }
 
     function testEditSkills(){

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Spatie\Analytics\Period;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -310,7 +310,13 @@ Route::get('graph/capacity', [App\Http\Controllers\BackendController::class, 'gr
 Route::get('graph/sillks', [App\Http\Controllers\BackendController::class, 'graphSillks']);
 Route::get('graph/course', [App\Http\Controllers\BackendController::class, 'graphCourse']);
 Route::get('graph/hour', [App\Http\Controllers\BackendController::class, 'graphHour']);
-Route::get('graph/people', [App\Http\Controllers\BackendController::class, 'graphPeople']);
+// Route::get('graph/people', [App\Http\Controllers\BackendController::class, 'graphPeople']);
+Route::get('graph/people', function () {
+
+    $analyticsData = Analytics::all();
+    return view('backend.graph.graph-people', ['analyticsData' => $analyticsData]);
+    // return view('welcome', ['analyticsData' => $analyticsData]);
+}); 
 
 Route::get('resultadminSearchGraphJob', [App\Http\Controllers\BackendController::class, 'resultadminSearchGraphJob'])->name('resultadminSearchGraphJob');
 
@@ -326,7 +332,7 @@ Route::get('backend/testEdit/capacity', [App\Http\Controllers\AdminCheckDataCont
 Route::get('backend/testEdit/capacity/form', [App\Http\Controllers\AdminCheckDataController::class, 'testEditCapacityForm']);
 Route::post('backend/testEdit/capacity/add', [App\Http\Controllers\AdminCheckDataController::class, 'testEditCapacityAdd']);
 Route::get('backend/testEdit/capacity/clean', [App\Http\Controllers\AdminCheckDataController::class, 'testEditCapacityClean'])->name('adminCapacityCom');
-Route::get('backend/textEdit/capacity/edit', [App\Http\Controllers\AdminCheckDataController::class, 'testEditCapacityEdti']);
+Route::get('backend/textEdit/capacity/edit/{id}', [App\Http\Controllers\AdminCheckDataController::class, 'testEditCapacityEdti']);
 Route::post('backend/testEdit/capacity/update/{id}', [App\Http\Controllers\AdminCheckDataController::class, 'testEditCapacityUpdate']);
 Route::get('resultCapacityCom/{id}', [App\Http\Controllers\AdminCheckDataController::class, 'resultCapacityCom'])->name('resultCapacityCom');
 

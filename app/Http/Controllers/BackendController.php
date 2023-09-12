@@ -252,7 +252,11 @@ class BackendController extends Controller
     }
 
     function graphCapacity(){
-        return view('backend.graph.graph-capacity');
+        $groupjob = groupjob::whereNull('gj_userDelete')->get();
+        
+        $capacity = capacity::where('FKcc_Create',0)->whereNull('cc_userDelete')->get();
+
+        return view('backend.graph.graph-capacity',compact('groupjob','capacity'));
     }
 
     function graphSillks(){

@@ -23,7 +23,10 @@ $i=1;
                     <div class="font-medium text-center text-lg">สรุปจำนวนบุคลากรในระดับสมรรถนะต่าง ๆ</div>
                    
                 </div>
-         
+                    {{count($capacity)}}
+                    @foreach($capacity as $rs)
+                    1.{{$rs->cc_name}}
+                    @endforeach
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-slate-200/60 dark:border-darkmode-400">
                 <!-- <div class="intro-y block sm:flex items-center h-10">
                                     <h2 class="text-lg font-medium truncate mr-5">
@@ -38,23 +41,30 @@ $i=1;
                                 <div class="intro-y block sm:flex items-center h-10">
                                     <h3 class="text-lg font-medium truncate mr-5">เรียกดูตามหมวด</h3>
                                     <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-4">
-                                        <select name="" id="" class="select2">
+                                        <select name="year" id="year" class="select2" onchange="search()">
                                           <!-- <option value="" hidden>- เลือกปี -</option> -->
-                                          <option value=""> ปีทั้งหมด  </option>
-                                          <option value="2566"> 2566 </option>
-                                          <option value="2565"> 2565 </option>
-                                          <option value="2564"> 2564 </option>
+                                            <option value=""> ปีทั้งหมด  </option>
+                                            @php
+                                                use Carbon\Carbon;
+                                                $dateTime = Carbon::now();
+                                                $formattedDate = $dateTime->format('Y');
+                                            @endphp
+                                            @for($formattedDate; $formattedDate>=2020; $formattedDate--)
+                                            <option value="{{$formattedDate}}" @if(!empty($year) && ($year == $formattedDate)) selected @endif>{{$formattedDate+543}}</option>
+                                            @endfor
                                         </select>
                                         &nbsp; &nbsp; &nbsp; &nbsp;
-                                        <select name="" id="" class="select2">
+                                        <select name="gj" id="gj" class="select2" onchange="search()">
                                           <!-- <option value="" hidden>- เลือกกลุ่มตำแหน่ง -</option> -->
                                           <option value=""> กลุ่มตำแหน่งทั้งหมด  </option>
-                                          <option value=""> กลุ่มตำแหน่ง1  </option>
-                                          <option value=""> กลุ่มตำแหน่ง2  </option>
-                                          <option value=""> กลุ่มตำแหน่ง3  </option>
+                                          @foreach($groupjob as $rs)
+                                          <option value="{{$rs->gj_id}}">{{$rs->gj_name}}</option>
+                                          @endforeach
+                                          <!-- <option value=""> กลุ่มตำแหน่ง2  </option>
+                                          <option value=""> กลุ่มตำแหน่ง3  </option> -->
                                         </select>
                                         &nbsp; &nbsp; &nbsp; &nbsp;
-                                        <select name="" id="" class="select2">
+                                        <select name="company" id="company" class="select2" onchange="search()">
                                           <option value="ประเภทสถานประกอบการทั้งหมด">ประเภทสถานประกอบการทั้งหมด</option>
                                           <option value="เหมืองแร่">เหมืองแร่</option>
                                           <option value="โรงโม่หิน">โรงโม่หิน</option>
@@ -142,7 +152,7 @@ function del_value(id) {
         text: null
     },
     xAxis: {
-        categories: ['สมรรถนะ1', 'สมรรถนะ2', 'สมรรถนะ3', 'สมรรถนะ4', 'สมรรถนะ5']
+        categories: [@foreach($capacity as $rs) '{{$rs->cc_name}}', @endforeach]
     },
     yAxis: {
         min: 0,
@@ -167,13 +177,13 @@ function del_value(id) {
     },
     series: [{
         name: 'จำนวนบุคลากรที่มีทักษะมากกว่า 50 %',
-        data: [3, 5, 1, 13, 10]
+        data: [5,10]
     }, {
         name: 'จำนวนบุคลากรที่มีทักษะน้อยกว่า 50 %',
-        data: [14, 8, 8, 12, 6]
+        data: [5,10]
     }, {
         name: 'จำนวนคนที่ยังไม่มีทักษะ',
-        data: [0, 2, 6, 3, 8]
+        data: [5,10]
     }]
 });
 </script>

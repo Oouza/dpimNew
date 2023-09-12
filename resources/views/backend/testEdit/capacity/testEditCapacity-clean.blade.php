@@ -30,7 +30,7 @@ $i=1;
                         <select name="sCapacity" id="sCapacity" class="select2" onchange="searchCapacityCom()">
                             <option value="">กลุ่มตำแหน่งทั้งหมด</option>
                             @foreach($capacityAdmin as $rs)
-                            <option value="{{$rs->cc_id}}">{{$rs->cc_no}} {{$rs->cc_name}}</option>
+                            <option value="{{$rs->cc_id}}" @if(!empty($search) && ($search == $rs->cc_id)) selected @endif>{{$rs->cc_no}} {{$rs->cc_name}}</option>
                             @endforeach
                             <!-- <option value="">กลุ่มตำแหน่ง 1</option>
                             <option value="">กลุ่มตำแหน่ง 2</option>
@@ -59,12 +59,12 @@ $i=1;
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($capacity as $rs)
+                                @foreach($capacityGroups as $rs)
                                 <tr>
-                                    <td><center>{{$rs->cc_no}}</center></td>
-                                    <td><center>{{$rs->cc_name}}</center></td>
+                                    <td><center>{{$rs->capaComNo}}</center></td>
+                                    <td><center>{{$rs->capaComName}}</center></td>
                                     <td><center>{{$rs->c_nameCompany}}</center></td>
-                                    <td><center>{{$rs->CapaName}}</center></td>
+                                    <td><center>{{$rs->capaAdminName}}</center></td>
                                     <td><center>
                                         @php
                                             $time = $rs->updated_at;
@@ -72,7 +72,7 @@ $i=1;
                                         @endphp
                                         {{$formattedDate}}
                                     </center></td>
-                                    <td><center><a href="{{ url('backend/textEdit/capacity/edit') }}"><button class="btn btn-warning"> แก้ไข </button></a></center></td>
+                                    <td><center><a href="{{ url('backend/textEdit/capacity/edit/'.$rs->ccg_id) }}"><button class="btn btn-warning"> แก้ไข </button></a></center></td>
                                 </tr>
                                 @endforeach
                                 <!-- <tr>
