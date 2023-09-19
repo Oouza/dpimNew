@@ -31,7 +31,7 @@ $active = "";
             <div class="intro-y box py-10 sm:py-20 mt-5">
                
                 <div class="px-5 mt-10">
-                    <div class="font-medium text-center text-lg">เพิ่มแอดมิน</div>
+                    <div class="font-medium text-center text-lg">แก้ไขแอดมิน</div>
                    
                 </div>
                 <form action="{{ url('backend/admin/update/'.$id) }}" method="post" enctype="multipart/form-data" onSubmit="return checkPassword(this)">

@@ -31,7 +31,7 @@ $active = "planSkills";
             <div class="intro-y box py-10 sm:py-20 mt-5">
                
                 <div class="px-5 mt-10">
-                    <div class="font-medium text-center text-lg">แก้ไขแผนการพัฒนาบุคลากร</div>
+                    <div class="font-medium text-center text-lg">แผนการพัฒนาบุคลากร</div>
                    
                 </div>
                 <form action="#" method="post" enctype="multipart/form-data">

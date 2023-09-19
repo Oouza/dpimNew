@@ -262,7 +262,7 @@ $date_old = $date-60;
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <input type="radio" value="2" name="work_status" checked> ทำงาน
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input type="radio" value="1" name="work_status" disabled> ว่างงาน
+                                    <input type="radio" value="1" name="work_status" disabled> อิสระ
                                 </div>
                             </div>
 

@@ -24,6 +24,44 @@ License: You must have a valid license purchased only from themeforest(the above
         <!-- BEGIN: CSS Assets-->
         <link rel="stylesheet" href="{{ asset('dist/css/app.css')}}" />
         <!-- END: CSS Assets-->
+        <style>
+            .btn-green {
+                background-color: #1E40AF;
+                color: white;
+            }
+            .btn-green:hover {
+                color: white;
+                box-shadow: 0 0 50px rgba(0, 0, 0, 0.5) inset;
+            }
+            .box-cookie {
+                background-color: white;
+                border: 1px solid #a3a3a3;
+                box-shadow: 0px 2px 50px 7px rgba(0, 0, 0, 0.2);
+                padding: 25px 40px;
+                border-radius: 10px;
+                position: fixed;
+                transform: translate(-50%, -40px);
+                left: 50%;
+                bottom: 0;
+                width: 1340px;
+                max-width: 90%;
+                z-index: 999;
+            }
+            .text-green {
+                color: rgba(var(--color-green), var(--opa-1));
+            }
+            @media screen and (max-width: 767px) {
+                .list-group-item {
+                    padding: 0.5rem 0rem;
+                }
+                .box-cookie {
+                    padding: 25px 20px;
+                }
+            }
+            h6 {
+                line-height: 1.7;
+            }
+        </style>
     </head>
     <!-- END: Head -->
     <body class="login">
@@ -117,6 +155,16 @@ License: You must have a valid license purchased only from themeforest(the above
                         </div>
                         <!-- <div class="intro-x mt-10 xl:mt-24 text-slate-600 dark:text-slate-500 text-center xl:text-left"> By signin up, you agree to our <a class="text-primary dark:text-slate-200" href="">Terms and Conditions</a> & <a class="text-primary dark:text-slate-200" href="">Privacy Policy</a> </div> -->
                         </form>
+                        <div class="box-cookie">
+                            <h6>เว็บไซต์นี้ใช้คุกกี้</h6>
+                            <p>เราใช้คุกกี้เพื่อเพิ่มประสิทธิภาพ และประสบการณ์ที่ดีในการใช้งานเว็บไซต์ คุณสามารถเลือกตั้งค่าความยินยอมการใช้คุกกี้ได้ โดยคลิก "การตั้งค่าคุกกี้"นโยบายความเป็นส่วนตัว</p>
+
+                            <div class="text-center">
+                                <button class="btn btn-link text-green">การตั้งค่าคุกกี้</button>
+                                <button class="btn btn-green">ยอมรับทั้งหมด</button>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
                 <!-- END: Login Form -->
@@ -132,5 +180,6 @@ License: You must have a valid license purchased only from themeforest(the above
         <!-- BEGIN: JS Assets-->
         <script src="{{ asset('dist/js/app.js') }}"></script>
         <!-- END: JS Assets-->
+
     </body>
 </html>

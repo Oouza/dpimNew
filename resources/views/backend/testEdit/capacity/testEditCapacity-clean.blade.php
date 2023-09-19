@@ -28,7 +28,7 @@ $i=1;
                     <h2 class="text-lg font-medium truncate mr-5">
                         สมรรถนะ
                         <select name="sCapacity" id="sCapacity" class="select2" onchange="searchCapacityCom()">
-                            <option value="">กลุ่มตำแหน่งทั้งหมด</option>
+                            <option value="">สมรรถนะทั้งหมด</option>
                             @foreach($capacityAdmin as $rs)
                             <option value="{{$rs->cc_id}}" @if(!empty($search) && ($search == $rs->cc_id)) selected @endif>{{$rs->cc_no}} {{$rs->cc_name}}</option>
                             @endforeach

@@ -39,7 +39,7 @@ $i=1;
                             <tr>
                                 <th><center>รหัสสมรรถนะ</center></th>
                                 <th><center>สมรรถนะ</center></th>
-                                <th><center>กลุ่มตำแหน่ง</center></th>
+                                <!-- <th><center>กลุ่มตำแหน่ง</center></th> -->
                                 <th><center>เพิ่มโดย</center></th>
                             </tr>
                         </thead>
@@ -48,7 +48,7 @@ $i=1;
                             <tr>
                                 <td><center>{{$rs->cc_no}}</center></td>
                                 <td><center>{{$rs->cc_name}}</center></td>
-                                <td><center>กลุ่มตำแหน่ง1</center></td>
+                                <!-- <td><center>กลุ่มตำแหน่ง1</center></td> -->
                                 <td><center>{{$rs->c_nameCompany}}</center></td>
                             </tr>
                             @endforeach

@@ -261,6 +261,45 @@ $active = "";
 
                         <div class="grid grid-cols-12 gap-6 mt-5">
                             <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                <b><label for="horizontal-form-1" class="form-label "> สมรรถนะที่ต้องการพัฒนา </lable></b>
+                            </div>
+                            <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                <select name="capacity" id="capacity" class="form-control select2">
+                                    <option value="" hidden>- กรุณาเลือกสมรรถนะ -</option>
+                                    <option value="1">สมรรถนะ 1</option>
+                                    <option value="2">สมรรถนะ 2</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-12 gap-6 mt-5">
+                            <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                <b><label for="horizontal-form-1" class="form-label "> ทักษะที่ต้องการพัฒนา </lable></b>
+                            </div>
+                            <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                <select name="upSkills" id="upSkills" class="form-control select2">
+                                    <option value="" hidden>- กรุณาเลือกทักษะ -</option>
+                                    <option value="1">ทักษะ 1</option>
+                                    <option value="2">ทักษะ 2</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-12 gap-6 mt-5">
+                            <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                <b><label for="horizontal-form-1" class="form-label "> ทักษะย่อยที่ต้องการพัฒนา </lable></b>
+                            </div>
+                            <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                <select name="skillsSub" id="skillsSub" class="form-control select2">
+                                    <option value="" hidden>- กรุณาเลือกทักษะย่อย -</option>
+                                    <option value="1">ทักษะย่อย 1</option>
+                                    <option value="2">ทักษะย่อย 2</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-12 gap-6 mt-5">
+                            <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                 <b><label for="horizontal-form-1" class="form-label "> เริ่มการอบรมวันที่ </lable></b>
                             </div>
                             <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">

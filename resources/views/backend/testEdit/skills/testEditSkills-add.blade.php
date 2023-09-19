@@ -82,7 +82,7 @@ $active = "testEditSkills";
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> ทักษะที่ต้องการนำไปรวมยังทักษะเป้าหมาย </lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> ทักษะที่ต้องการนำไปรวมยังสมรรถนะเป้าหมาย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="skills_one" id="skills_one" class="form-control select2">
@@ -163,7 +163,7 @@ $active = "testEditSkills";
     div.innerHTML = `
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-            <b><label for="horizontal-form-1" class="form-label "> ทักษะเป้าหมายที่ต้องการนำไปรวมยังทักษะเป้าหมาย </lable></b> 
+            <b><label for="horizontal-form-1" class="form-label "> ทักษะที่ต้องการนำไปรวมยังสมรรถนะเป้าหมาย </lable></b> 
         </div>
         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
             <select name="skillsAdd[${formCount}]" id="skillsAdd[${formCount}]" class="form-control select2">

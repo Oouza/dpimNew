@@ -203,14 +203,14 @@ $active = "cfPlanSkills";
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> ชุดทักษะ 1</lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> ทักษะย่อย 1</lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
                                     <select name="" id="" class="form-control select2">
                                         <!-- <option value="" hidden>- กรุณาเลือกชุดทักษะ -</option> -->
-                                        <option value="1" selected>ชุดทักษะ 1</option>
-                                        <option value="2">ชุดทักษะ 2</option>
-                                        <option value="3">ชุดทักษะ 3</option>
+                                        <option value="1" selected>ทักษะย่อย 1</option>
+                                        <option value="2">ทักษะย่อย 2</option>
+                                        <option value="3">ทักษะย่อย 3</option>
                                     </select>
                                 </div>
                             </div>

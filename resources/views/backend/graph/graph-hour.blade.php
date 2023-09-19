@@ -67,39 +67,57 @@ $i=1;
                                 <th><center>กลุ่มตำแหน่ง</center></th>
                                 <th><center>จำนวนบุคลากร</center></th>
                                 <th><center>สมรรถนะ</center></th>
-                                <th><center>จำนวนชั่วโมงที่ได้รับการพัฒนาสมรรถนะ</center></th>
+                                <th><center>จำนวนชั่วโมงเฉลี่ยที่ได้รับการพัฒนาสมรรถนะ</center></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td><center>กลุ่มตำแหน่ง 1</center></td>
-                                <td><center>100</center></td>
-                                <td><center>4</center></td>
-                                <td><center>6</center></td>
+                                <td><center>60 คน</center></td>
+                                <td colspan="2"><center></center></td>
+                                <!-- <td><center></center></td> -->
                             </tr>
                             <tr>
+                                <td><center></center></td>
+                                <td><center></center></td>
                                 <td><center>สมรรถนะ1</center></td>
-                                <td><center>100</center></td>
-                                <td><center>4</center></td>
-                                <td><center>6</center></td>
+                                <td><center>6 ชั่วโมง</center></td>
                             </tr>
                             <tr>
+                                <td><center></center></td>
+                                <td><center></center></td>
                                 <td><center>สมรรถนะ2</center></td>
-                                <td><center>100</center></td>
-                                <td><center>4</center></td>
-                                <td><center>6</center></td>
+                                <td><center>5 ชั่วโมง</center></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="left">รวม</td>
+                                <!-- <td border="0"><center></center></td>
+                                <td border="0"><center></center></td> -->
+                                <td><center>11 ชั่วโมง</center></td>
                             </tr>
                             <tr>
                                 <td><center>กลุ่มตำแหน่ง 2</center></td>
-                                <td><center>100</center></td>
-                                <td><center>5</center></td>
-                                <td><center>3</center></td>
+                                <td><center>40 คน</center></td>
+                                <td colspan="2"><center></center></td>
+                                <!-- <td><center></center></td> -->
                             </tr>
                             <tr>
+                                <td><center></center></td>
+                                <td><center></center></td>
                                 <td><center>สมรรถนะ1</center></td>
-                                <td><center>100</center></td>
-                                <td><center>4</center></td>
-                                <td><center>6</center></td>
+                                <td><center>6 ชั่วโมง</center></td>
+                            </tr>
+                            <tr>
+                                <td><center></center></td>
+                                <td><center></center></td>
+                                <td><center>สมรรถนะ1</center></td>
+                                <td><center>6 ชั่วโมง</center></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="left">รวม</td>
+                                <!-- <td border="0"><center></center></td>
+                                <td border="0"><center></center></td> -->
+                                <td><center>12 ชั่วโมง</center></td>
                             </tr>
                         </tbody>
                     </table>

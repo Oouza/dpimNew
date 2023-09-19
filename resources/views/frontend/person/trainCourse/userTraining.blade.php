@@ -83,7 +83,7 @@ $i=1;
                                 <td><center>001</center></td>
                                 <td><center>ชื่อหลักสูตร 1</center></td>
                                 <td><center>ผู้จัด 1</center></td>
-                                <th><center>ประเภทหลักสูตร1</center></th>
+                                <td><center>ประเภทหลักสูตร1</center></td>
                                 <td><center>5</center></td>
                                 <td><center>รายละเอียด 1</center></td>
                                 <!-- <td><center>สมรรถนะ 1</center></td>
@@ -96,7 +96,7 @@ $i=1;
                                 <td><center>002</center></td>
                                 <td><center>ชื่อหลักสูตร 2</center></td>
                                 <td><center>ผู้จัด 2</center></td>
-                                <th><center>ประเภทหลักสูตร2</center></th>
+                                <td><center>ประเภทหลักสูตร2</center></td>
                                 <td><center>6</center></td>
                                 <td><center>รายละเอียด 2</center></td>
                                 <!-- <td><center>สมรรถนะ 2</center></td>

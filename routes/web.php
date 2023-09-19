@@ -310,13 +310,12 @@ Route::get('graph/capacity', [App\Http\Controllers\BackendController::class, 'gr
 Route::get('graph/sillks', [App\Http\Controllers\BackendController::class, 'graphSillks']);
 Route::get('graph/course', [App\Http\Controllers\BackendController::class, 'graphCourse']);
 Route::get('graph/hour', [App\Http\Controllers\BackendController::class, 'graphHour']);
-// Route::get('graph/people', [App\Http\Controllers\BackendController::class, 'graphPeople']);
-Route::get('graph/people', function () {
+Route::get('graph/people', [App\Http\Controllers\BackendController::class, 'graphPeople']);
+// Route::get('graph/people', function () {
 
-    $analyticsData = Analytics::all();
-    return view('backend.graph.graph-people', ['analyticsData' => $analyticsData]);
-    // return view('welcome', ['analyticsData' => $analyticsData]);
-}); 
+//     $analyticsData = Analytics::all();
+//     return view('backend.graph.graph-people', ['analyticsData' => $analyticsData]);
+// }); 
 
 Route::get('resultadminSearchGraphJob', [App\Http\Controllers\BackendController::class, 'resultadminSearchGraphJob'])->name('resultadminSearchGraphJob');
 

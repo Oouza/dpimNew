@@ -270,49 +270,49 @@ $active = "userSkills";
                             <td><center>สมรรถนะ 1</center></td>
                             <td><center>ทักษะ 1</center></td>
                             <td><center>ทักษะย่อย 1</center></td>
-                            <th><center><input type="radio" checked> </center></th>
-                            <th><center><input type="radio" checked> </center></th>
-                            <th><center><input type="radio" checked> </center></th>
+                            <td><center><input type="radio" checked> </center></td>
+                            <td><center><input type="radio" checked> </center></td>
+                            <td><center><input type="radio" checked> </center></td>
                         </tr>
                         <tr>
                             <td><center></center></td>
                             <td><center></center></td>
                             <td><center>ทักษะย่อย 2</center></td>
-                            <th><center><input type="radio" checked> </center></th>
-                            <th><center><input type="radio" disabled> </center></th>
-                            <th><center><input type="radio" disabled> </center></th>
+                            <td><center><input type="radio" checked> </center></td>
+                            <td><center><input type="radio" disabled> </center></td>
+                            <td><center><input type="radio" disabled> </center></td>
                         </tr>
                         <tr>
                             <td><center></center></td>
                             <td><center>ทักษะ 2</center></td>
                             <td><center>ทักษะย่อย 1</center></td>
-                            <th><center><input type="radio" disabled> </center></th>
-                            <th><center>x</center></th>
-                            <th><center>x</center></th>
+                            <td><center><input type="radio" disabled> </center></td>
+                            <td><center>x</center></td>
+                            <td><center>x</center></td>
                         </tr>
                         <tr>
                             <td><center></center></td>
                             <td><center></center></td>
                             <td><center>ทักษะย่อย 2</center></td>
-                            <th><center><input type="radio" checked> </center></th>
-                            <th><center>x</center></th>
-                            <th><center></center></th>
+                            <td><center><input type="radio" checked> </center></td>
+                            <td><center>x</center></td>
+                            <td><center></center></td>
                         </tr>
                         <tr>
                             <td><center>สมรรถนะ 2</center></td>
                             <td><center>ทักษะ 1</center></td>
                             <td><center>ทักษะย่อย 1</center></td>
-                            <th><center><input type="radio" checked> </center></th>
-                            <th><center><input type="radio" checked> </center></th>
-                            <th><center><input type="radio" disabled> </center></th>
+                            <td><center><input type="radio" checked> </center></td>
+                            <td><center><input type="radio" checked> </center></td>
+                            <td><center><input type="radio" disabled> </center></td>
                         </tr>
                         <tr>
                             <td><center></center></td>
                             <td><center>ทักษะ 2</center></td>
                             <td><center>ทักษะย่อย 1</center></td>
-                            <th><center><input type="radio" disabled> </center></th>
-                            <th><center>x</th>
-                            <th><center></th>
+                            <td><center><input type="radio" disabled> </center></td>
+                            <td><center>x</td>
+                            <td><center></td>
                         </tr>
                     </table>
                 </div>

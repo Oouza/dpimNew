@@ -56,7 +56,7 @@ $i=1;
                                 <td><center>1</center></td>
                                 <td><center>ประเภทหลักสูตร 1</center></td>
                                 <!-- <td><center>ชุดทักษะ 1</center></td> -->
-                                <th><center>รอการยืนยันจาก HR</center></th>
+                                <td><center>รอการยืนยันจาก HR</center></td>
                                 <td><center>
                                     <a href="{{ url ('user/plan/edit')}}"  >  <button type="button" class="btn btn-success">ใส่ข้อมูล</button></a>
                                 </center></td>
@@ -69,7 +69,7 @@ $i=1;
                                 <td><center>2</center></td>
                                 <td><center>ประเภทหลักสูตร 2</center></td>
                                 <!-- <td><center>ชุดทักษะ 2</center></td> -->
-                                <th><center>รอการยืนยันจากผู้บริหาร</center></th>
+                                <td><center>รอการยืนยันจากผู้บริหาร</center></td>
                                 <td><center>
 
                                     <a href="{{ url ('user/plan/edit')}}"  >  <button type="button" class="btn btn-success">ใส่ข้อมูล</button></a>
@@ -83,7 +83,7 @@ $i=1;
                                 <td><center>1</center></td>
                                 <td><center>ประเภทหลักสูตร 1</center></td>
                                 <!-- <td><center>ชุดทักษะ 1</center></td> -->
-                                <th><center>รอดำเนินการ</center></th>
+                                <td><center>รอดำเนินการ</center></td>
                                 <td><center>
                                     <a href="{{ url ('user/plan/edit')}}"  >  <button type="button" class="btn btn-success">ใส่ข้อมูล</button></a>
                                 </center></td>
@@ -96,7 +96,7 @@ $i=1;
                                 <td><center>2</center></td>
                                 <td><center>ประเภทหลักสูตร 2</center></td>
                                 <!-- <td><center>ชุดทักษะ 2</center></td> -->
-                                <th><center>ดำเนินการแล้ว</center></th>
+                                <td><center>ดำเนินการแล้ว</center></td>
                                 <td><center>
 
                                     <a href="{{ url ('user/plan/edit')}}"  >  <button type="button" class="btn btn-success">ใส่ข้อมูล</button></a>
@@ -110,7 +110,7 @@ $i=1;
                                 <td><center>1</center></td>
                                 <td><center>ประเภทหลักสูตร 1</center></td>
                                 <!-- <td><center>ชุดทักษะ 1</center></td> -->
-                                <th><center>ยกเลิกการดำเนินการ</center></th>
+                                <td><center>ยกเลิกการดำเนินการ</center></td>
                                 <td><center>
                                     <a href="{{ url ('user/plan/edit')}}"  >  <button type="button" class="btn btn-success">ใส่ข้อมูล</button></a>
                                 </center></td>
