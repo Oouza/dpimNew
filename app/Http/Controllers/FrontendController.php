@@ -343,12 +343,14 @@ class FrontendController extends Controller
             ->select(
                 'course_skills.FKcs_course',
                 'courses.cou_id',
+                // 'courses.cou_detail',
                 'type_course.tc_id', // เพิ่มคอลัมน์ที่ต้องการจาก type_course
                 DB::raw('MAX(courses.cou_no) as cou_no'),
                 DB::raw('MAX(courses.cou_name) as cou_name'),
                 DB::raw('MAX(courses.cou_organizer) as cou_organizer'),
                 DB::raw('MAX(courses.cou_period) as cou_period'),
                 DB::raw('MAX(courses.cou_frequency) as cou_frequency'),
+                DB::raw('MAX(courses.cou_detail) as cou_detail'),
                 DB::raw('MAX(type_course.tc_name) as tc_name'),
             )
             ->groupBy(
