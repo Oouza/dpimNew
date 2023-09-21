@@ -53,8 +53,13 @@ class HomeController extends Controller
             $provinces = DB::table('provinces')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
             $amphures = DB::table('amphures')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
             $districts = DB::table('districts')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
+            $company = DB::table('companies')->orderBy("c_id", 'ASC')->get();
+            $department = DB::table('departments')->orderBy("d_id", 'ASC')->get();
+            $departmentsub = DB::table('department_subs')->orderBy("ds_id", 'ASC')->get();
+            $setting_positions = DB::table('setting_positions')->orderBy("sp_id", 'ASC')->get();
+            $level_jobs = DB::table('lavel_jobs')->orderBy("lj_id", 'ASC')->get();
             $group = DB::table('groupjobs')->orderBy("gj_name", 'ASC')->get();
-            return view('frontend.person.userHistory',compact('user','provinces','amphures','districts','group'));
+            return view('frontend.person.userHistory',compact('user','provinces','amphures','districts','company','department','departmentsub','setting_positions','level_jobs','group'));
         }else if(\Auth::user()->status == '3' ||\Auth::user()->status == '5'){  // HR+Manager
             $id = \Auth::user()->id;
             $user = User::join('ceohrs','ceohrs.FKch_userid','users.id')
