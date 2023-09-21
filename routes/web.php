@@ -416,3 +416,5 @@ Route::post('searchGroupJob', [App\Http\Controllers\FrontendController::class, '
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+require_once('personnel.php');
