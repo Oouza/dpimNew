@@ -53,7 +53,8 @@ class HomeController extends Controller
             $provinces = DB::table('provinces')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
             $amphures = DB::table('amphures')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
             $districts = DB::table('districts')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
-            return view('frontend.person.userHistory',compact('user','provinces','amphures','districts'));
+            $group = DB::table('groupjobs')->orderBy("gj_name", 'ASC')->get();
+            return view('frontend.person.userHistory',compact('user','provinces','amphures','districts','group'));
         }else if(\Auth::user()->status == '3' ||\Auth::user()->status == '5'){  // HR+Manager
             $id = \Auth::user()->id;
             $user = User::join('ceohrs','ceohrs.FKch_userid','users.id')
