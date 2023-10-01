@@ -44,7 +44,7 @@ $active = "userSkills";
                             หมายเลขพนักงาน
                         </div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                            001
+                            {{$employee->e_employeeNo}}
                         </div>
                     </div>
                     <div class="grid grid-cols-12 gap-6 mt-5">
@@ -52,7 +52,7 @@ $active = "userSkills";
                             ชื่อ - นามสกุล
                         </div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                            นาย ไก่ กา
+                            {{$employee->e_title}} {{$employee->e_fname}} {{$employee->e_lname}}
                         </div>
                     </div>
                     <div class="grid grid-cols-12 gap-6 mt-5">
@@ -60,7 +60,7 @@ $active = "userSkills";
                             แผนก
                         </div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                            แผนก 1
+                            {{$employee->d_name}}
                         </div>
                     </div>
                     <div class="grid grid-cols-12 gap-6 mt-5">
@@ -68,7 +68,7 @@ $active = "userSkills";
                             แผนกย่อย
                         </div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                            แผนกย่อย 1
+                            {{$employee->ds_name}}
                         </div>
                     </div>
                     <div class="grid grid-cols-12 gap-6 mt-5">
@@ -76,7 +76,7 @@ $active = "userSkills";
                             ตำแหน่ง
                         </div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                            ตำแหน่ง 1
+                            {{$employee->p_name}}
                         </div>
                     </div>
                     <div class="grid grid-cols-12 gap-6 mt-5">
@@ -84,7 +84,7 @@ $active = "userSkills";
                             กลุ่มตำแหน่ง
                         </div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                            กลุ่มตำแหน่ง 1
+                            {{$employee->gj_name}} {{$employee->gj_id}} {{count($gjSub)}} {{count($skills)}}
                         </div>
                     </div>
                     <div class="grid grid-cols-12 gap-6 mt-5">
@@ -92,12 +92,15 @@ $active = "userSkills";
                             ปี
                         </div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                            <select name="" id="" class="form-control selecte2">
-                                <option value="2566">2566</option>
-                                <option value="2567">2567</option>
-                                <option value="2568">2568</option>
-                                <option value="2569">2569</option>
-                                <option value="2570">2570</option>
+                            <select name="" id="" class="form-control select2">
+                                @php
+                                    use Carbon\Carbon;
+                                    $dateTime = Carbon::now();
+                                    $formattedDate = $dateTime->format('Y');
+                                @endphp
+                                @for($formattedDate; $formattedDate>=2020; $formattedDate--)
+                                <option value="{{$formattedDate}}" @if(!empty($year) && ($year == $formattedDate)) selected @endif>{{$formattedDate+543}}</option>
+                                @endfor
                             </select>
                         </div>
                     </div>
@@ -111,54 +114,34 @@ $active = "userSkills";
                             <th><center>ระดับ 2</center></th>
                             <th><center>ระดับ 3</center></th>
                         </tr>
+                        @php 
+                            $capacity = "";
+                            $skills = "";
+                        @endphp
+                        @foreach($gjSub as $rs)
                         <tr>
-                            <td><center>สมรรถนะ 1</center></td>
-                            <td><center>ทักษะ 1</center></td>
-                            <td><center>ทักษะย่อย 1</center></td>
-                            <td><center><input type="radio" checked> </center></td>
-                            <td><center><input type="radio" checked> </center></td>
-                            <td><center><input type="radio" checked> </center></td>
-                        </tr>
-                        <tr>
-                            <td><center></center></td>
-                            <td><center></center></td>
-                            <td><center>ทักษะย่อย 2</center></td>
-                            <td><center><input type="radio" checked> </center></td>
-                            <td><center><input type="radio" disabled> </center></td>
-                            <td><center><input type="radio" disabled> </center></td>
-                        </tr>
-                        <tr>
-                            <td><center></center></td>
-                            <td><center>ทักษะ 2</center></td>
-                            <td><center>ทักษะย่อย 1</center></td>
-                            <td><center><input type="radio" disabled> </center></td>
-                            <td><center><input type="radio" disabled> </center></td>
-                            <td><center><input type="radio" disabled> </center></td>
-                        </tr>
-                        <tr>
-                            <td><center></center></td>
-                            <td><center></center></td>
-                            <td><center>ทักษะย่อย 2</center></td>
+                            <td><center>
+                                @if($capacity != $rs->cc_name) 
+                                    {{$rs->cc_name}}
+                                    @php 
+                                        $capacity = $rs->cc_name;
+                                    @endphp
+                                @endif
+                            </center></td>
+                            <td><center>
+                                @if($skills != $rs->s_name) 
+                                    {{$rs->s_name}}
+                                    @php 
+                                        $skills = $rs->s_name;
+                                    @endphp
+                                @endif
+                            </center></td>
+                            <td><center>{{$rs->ss_name}}</center></td>
                             <td><center><input type="radio" checked> </center></td>
                             <td><center><input type="radio" disabled> </center></td>
                             <td><center><input type="radio" disabled> </center></td>
                         </tr>
-                        <tr>
-                            <td><center>สมรรถนะ 2</center></td>
-                            <td><center>ทักษะ 1</center></td>
-                            <td><center>ทักษะย่อย 1</center></td>
-                            <td><center><input type="radio" checked> </center></td>
-                            <td><center><input type="radio" checked> </center></td>
-                            <td><center><input type="radio" disabled> </center></td>
-                        </tr>
-                        <tr>
-                            <td><center></center></td>
-                            <td><center>ทักษะ 2</center></td>
-                            <td><center>ทักษะย่อย 1</center></td>
-                            <td><center><input type="radio" disabled> </center></td>
-                            <td><center><input type="radio" disabled> </center></td>
-                            <td><center><input type="radio" disabled> </center></td>
-                        </tr>
+                        @endforeach
                     </table>
                     <br>
                     <div id="form-container"></div>
@@ -178,7 +161,13 @@ $active = "userSkills";
                       
                 </form>
             </div>
-            
+            @if($skills)
+                @foreach($skills as $rs)
+                    {{$rs->s_name}} ชม.
+                @endforeach
+            @else
+                <p>No skills found.</p>
+            @endif
             <!-- END: Wizard Layout -->
         </div>
         

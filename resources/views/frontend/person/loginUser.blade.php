@@ -109,6 +109,12 @@ License: You must have a valid license purchased only from themeforest(the above
                         </a>
                     </center>
                     <br>
+                    @if(session('message'))
+                        <script>
+                            alert("{{ session('message') }}");
+                        </script>
+                    @endif
+                    <br>
                     <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">
