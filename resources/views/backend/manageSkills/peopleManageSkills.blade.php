@@ -43,7 +43,7 @@ $i=1;
                                     <select name="coures" id="coures" class="select2" onchange="searchTrain()">
                                         <option value="" > หลักสูตรอบรมทั้งหมด </option>
                                         @foreach($course as $rs)
-                                        <option value="{{$rs->cou_id}}">{{$rs->cou_no}} {{$rs->cou_name}}</option>
+                                        <option value="{{$rs->cou_id}}" @if((!empty($s_coures)) && ($s_coures == $rs->cou_id)) selected @endif>{{$rs->cou_no}} {{$rs->cou_name}}</option>
                                         @endforeach
                                         <!-- <option value=""> หลักสูตรอบรม 2</option>
                                         <option value=""> หลักสูตรอบรม 3</option> -->
@@ -52,7 +52,7 @@ $i=1;
                                     <select name="GJ" id="GJ" class="select2" onchange="searchTrain()">
                                         <option value="" hidden> กลุ่มตำแหน่งทั้งหมด </option>
                                         @foreach($groupJob as $rs)
-                                        <option value="{{$rs->gj_id}}">{{$rs->gj_no}} {{$rs->gj_name}}</option>
+                                        <option value="{{$rs->gj_id}}" @if((!empty($s_gj)) && ($s_gj == $rs->gj_id)) selected @endif>{{$rs->gj_no}} {{$rs->gj_name}}</option>
                                         @endforeach
                                         <!-- <option value=""> กลุ่มตำแหน่ง 2</option>
                                         <option value=""> กลุ่มตำแหน่ง 3</option> -->
@@ -74,42 +74,30 @@ $i=1;
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($training as $rs)
                             <tr>
-                                <td><center>นาย</center></td>
-                                <td><center>ชื่อ1</center></td>
-                                <td><center>นามสกุล1</center></td>
-                                <td><center>user1@gmail.com</center></td>
-                                <td><center>หลักสูตรอบมรม1</center></td>
-                                <td><center>01-06-2566</center></td>
+                                <td><center>{{$rs->e_title}}</center></td>
+                                <td><center>{{$rs->e_fname}}</center></td>
+                                <td><center>{{$rs->e_lname}}</center></td>
+                                <td><center>{{$rs->email}}</center></td>
+                                <td><center>{{$rs->cou_name}}</center></td>
+                                <td><center>{{ date('d-m-Y', strtotime($rs->tn_dateTrain)) }}</center></td>
                                 <td><center>
-                                    <a href="{{ url ('backend/people/manageskills/detail')}}"><button type="button" class="btn btn-success">แสดงรายละเอียด</button></a>
+                                    <a href="{{ url ('backend/people/manageskills/detail/'.$rs->tn_id)}}"><button type="button" class="btn btn-success">แสดงรายละเอียด</button></a>
                                 </center></td>
                                 <td><center>
-                                    <a href="{{ url ('backend/people/manageskills/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
-                                    <button type="button" class="btn btn-danger" onclick="del_value(1)">ลบ</button>
+                                    <a href="{{ url ('backend/people/manageskills/edit/'.$rs->tn_id)}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
+                                    <button type="button" class="btn btn-danger" onclick="del_value({{$rs->tn_id}})">ลบ</button>
                                 </center></td>
                             </tr>
-                            <tr>
-                                <td><center>นางสาว</center></td>
-                                <td><center>ชื่อ2</center></td>
-                                <td><center>นามสกุล2</center></td>
-                                <td><center>user2@gmail.com</center></td>
-                                <td><center>หลักสูตรอบมรม2</center></td>
-                                <td><center>20-06-2566</center></td>
-                                <td><center>
-                                    <a href="{{ url ('backend/people/manageskills/detail')}}"><button type="button" class="btn btn-success">แสดงรายละเอียด</button></a>
-                                </center></td>
-                                <!-- <td><center><a href="{{ url ('backend/company/detail')}}"  >  <button type="button" class="btn btn-success"  >รายละเอียด</button></a></center></td> -->
-                                <td><center>
-                                    <a href="{{ url ('backend/people/manageskills/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
-                                    <button type="button" class="btn btn-danger" onclick="del_value(1)">ลบ</button>
-                                </center></td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     
                     </table>
                         <center>
-                            <button type="button" class="btn btn-secondary w-26 ml-2"> ดาวน์โหลดข้อมูลการพัฒนาบุคลากรทั้งหมด (เป็น xlsx) </button>        
+                            <a href="{{ url('backend/people/manageskills/download') }}">
+                                <button type="button" class="btn btn-secondary w-26 ml-2"> ดาวน์โหลดข้อมูลการพัฒนาบุคลากรทั้งหมด (เป็น xlsx) </button>        
+                            </a>
                         </center>
                 </div>
               
@@ -122,6 +110,31 @@ $i=1;
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>  <!-- delete -->
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+function searchTrain() {
+    var coures = $('#coures').val();
+    var GJ = $('#GJ').val();
+    if(coures == '' && GJ == ''){
+        var url = '{!! route('training') !!}';
+        window.location.href = url;
+
+    }else{
+        var data = {
+            data: null,
+            coures: coures,
+            GJ: GJ,
+            _token: '{{ csrf_token() }}'
+        };
+        var params = $.param(data);
+
+        var url = '{{ route('resultTraining', ['data' => '']) }}' +  params;
+
+        window.location.href = url;
+    }
+    
+}
+</script>
 
 <script>
     $(document).ready(function() {
@@ -143,7 +156,7 @@ function del_value(id) {
                 if (result.value) {
                     $.ajax({
                         type:"GET",
-                        url:"{!! url('member/delete/"+id+"') !!}",
+                        url:"{!! url('backend/people/manageskills/delete/"+id+"') !!}",
                         success: function(data) {
                             console.log(data);
                         }   
