@@ -79,7 +79,7 @@ $i=1;
                     </table>
                         <center>
                             <a href="{{ url('backend/job/pdf') }}">
-                                <button type="button" class="btn btn-secondary w-26 ml-2"> ดาวน์โหลดข้อมูลกลุ่มตำแหน่งทั้งหมด (เป็น xlsx) </button>
+                                <button type="button" class="btn btn-secondary w-26 ml-2"> ดาวน์โหลดข้อมูลกลุ่มตำแหน่งทั้งหมด (เป็น pdf) </button>
                             </a>            
                         </center>
                 </div>
