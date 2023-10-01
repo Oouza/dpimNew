@@ -255,9 +255,9 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <b><label for="horizontal-form-1" class="form-label "> ตำแหน่ง </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input name="position" type="radio" id="formFile" value="ผู้บริหาร" required> ผู้บริหาร
+                                    <input name="position" type="radio" id="position" value="ผู้บริหาร" required> ผู้บริหาร
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input name="position" type="radio" id="formFile" value="HR" required> HR
+                                    <input name="position" type="radio" id="position" value="HR" required> HR
                                 </div>
                             </div>
                             
@@ -372,14 +372,62 @@ License: You must have a valid license purchased only from themeforest(the above
         </script>
 
         <script> 
-            // Function เพื่อตรวจสอบรหัสผ่านว่าตรงกันหรือไม่
             function checkPassword(form) { 
                 password1 = form.pass.value; 
                 password2 = form.passCf.value; 
+                
+                var extall = "jpg,jpeg,gif,png";
+                var fileInput = document.getElementById("credti");
+                var file = fileInput.value;
+                var ext = file.split('.').pop().toLowerCase();
+                
+                var position = form.position.value;
+                if (!position) {
+                    alert('กรุณาเลือกตำแหน่ง');
+                    return false;
+                }
+
+                if (extall.indexOf(ext) < 0) {
+                    alert('รองรับไฟล์นามสกุล : ' + extall);
+                    return false;
+                }
                 if (password1 != password2) { 
-                    alert ("Password did not match: Please try again...") 
+                    alert("รหัสผ่านไม่ตรงกัน กรุณากรอกใหม่อีกครั้ง") 
                     return false; 
-                } 
+                } else {
+                    if (password1.length < 8) {
+                        alert("รหัสผ่านของคุณน้อยกว่า 8 ตัวอักษร กรุณากรอกรหัสผ่านใหม่อีกครั้ง") 
+                        return false; 
+                    } else if (password1.length > 20) {
+                        alert("รหัสผ่านของคุณมากกว่า 20 ตัวอักษร กรุณากรอกรหัสผ่านใหม่อีกครั้ง") 
+                        return false; 
+                    } 
+
+                    if(password1.match(/[a-z]/)) {
+                    } else {
+                        alert('รหัสผ่านของคุณไม่มีตัวอักษรพิมพ์เล็ก กรุณากรอกรหัสผ่านใหม่อีกครั้ง');
+                        return false; 
+                    }
+
+                    if(password1.match(/[A-Z]/)) {
+                    } else {
+                        alert('รหัสผ่านของคุณไม่มีตัวอักษรพิมพ์ใหญ่ กรุณากรอกรหัสผ่านใหม่อีกครั้ง');
+                        return false; 
+                    }
+
+                    if(password1.match(/.[-, \, #, \, $, \, ., \, %, \, &, \, @, \, !, \, +, \, =, \, <, \, >, \, *]/)){
+                    }else{
+                        alert('รหัสผ่านของคุณไม่มีสัญลักษณ์ กรุณากรอกรหัสผ่านใหม่อีกครั้ง');
+                        return false;
+                    }
+
+                    if(password1.match(/\d+/)){
+                    }else{
+                        alert('รหัสผ่านของคุณตัวเลข กรุณากรอกรหัสผ่านใหม่อีกครั้ง');
+                        return false;
+                    }
+
+                }
             } 
         </script>
 
