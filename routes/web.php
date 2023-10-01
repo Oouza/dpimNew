@@ -85,20 +85,20 @@ Route::get('hr/job/skillsSub/delete/{id}', [App\Http\Controllers\HrJobController
 // Route::get('company/skillsSub/form', [App\Http\Controllers\FrontendController::class, 'companySkillsSubForm']);
 // Route::get('company/skillsSub/edit', [App\Http\Controllers\FrontendController::class, 'companySkillsSubEdit']);
 
-Route::get('company/user', [App\Http\Controllers\FrontendController::class, 'user']);
-Route::get('company/user/form', [App\Http\Controllers\FrontendController::class, 'userForm']);
-Route::get('company/user/edit', [App\Http\Controllers\FrontendController::class, 'userEdit']);
+Route::get('company/user', [App\Http\Controllers\HrEmployeeController::class, 'user']);
+Route::get('company/user/form', [App\Http\Controllers\HrEmployeeController::class, 'userForm']);
+Route::get('company/user/edit', [App\Http\Controllers\HrEmployeeController::class, 'userEdit']);
 
-Route::get('company/user/file', [App\Http\Controllers\FrontendController::class, 'userFile']);
+Route::get('company/user/file', [App\Http\Controllers\HrEmployeeController::class, 'userFile']);
 
-Route::get('company/cfUser', [App\Http\Controllers\FrontendController::class, 'cfUser']);
-Route::get('company/user/detail', [App\Http\Controllers\FrontendController::class, 'cfUserDetail']);
-Route::get('company/cfUserEdit', [App\Http\Controllers\FrontendController::class, 'cfUserEdit']);
+Route::get('company/cfUser', [App\Http\Controllers\HrEmployeeController::class, 'cfUser']);
+Route::get('company/user/detail', [App\Http\Controllers\HrEmployeeController::class, 'cfUserDetail']);
+// Route::get('company/cfUserEdit', [App\Http\Controllers\FrontendController::class, 'cfUserEdit']);
 
-Route::get('company/manage/skills', [App\Http\Controllers\FrontendController::class, 'manageSkills']);
-Route::get('company/manage/skills/form', [App\Http\Controllers\FrontendController::class, 'manageSkillsForm']);
-Route::get('company/manage/skills/edit', [App\Http\Controllers\FrontendController::class, 'manageSkillsEdit']);
-Route::get('company/manage/skills/detail', [App\Http\Controllers\FrontendController::class, 'manageSkillsDetail']);
+Route::get('company/manage/skills', [App\Http\Controllers\HrPlanController::class, 'manageSkills']);
+Route::get('company/manage/skills/detail/{id}', [App\Http\Controllers\HrPlanController::class, 'manageSkillsDetail']);
+// Route::get('company/manage/skills/form', [App\Http\Controllers\FrontendController::class, 'manageSkillsForm']);
+// Route::get('company/manage/skills/edit', [App\Http\Controllers\FrontendController::class, 'manageSkillsEdit']);
 
 Route::get('company/plan/skills', [App\Http\Controllers\FrontendController::class, 'planSkills']);
 Route::get('company/plan/skills/form', [App\Http\Controllers\FrontendController::class, 'planSkillsForm']);
@@ -194,12 +194,13 @@ Route::get('backend/job/pdf', [App\Http\Controllers\AdminJobController::class, '
 Route::get('backend/job/pdf/{id}', [App\Http\Controllers\AdminJobController::class, 'jobPDF']);
 // Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
 
-Route::get('backend/job/capacity/{id}', [App\Http\Controllers\AdminJobController::class, 'jobCapacity']);
+Route::get('backend/job/capacity/{id}', [App\Http\Controllers\AdminJobController::class, 'jobCapacity'])->name('jobCapacity');
 Route::get('backend/job/capacity/form/{id}', [App\Http\Controllers\AdminJobController::class, 'jobCapacityForm']);
 Route::post('backend/job/capacity/add/{id}', [App\Http\Controllers\AdminJobController::class, 'jobCapacityAdd']);
 Route::get('backend/job/capacity/edit/{id}', [App\Http\Controllers\AdminJobController::class, 'jobCapacityEdit']);
 Route::post('backend/job/capacity/update/{id}', [App\Http\Controllers\AdminJobController::class, 'jobCapacityUpdate']);
 Route::get('backend/job/capacity/delete/{id}', [App\Http\Controllers\AdminJobController::class, 'jobCapacityDelete']);
+Route::get('searchJobCapacity', [App\Http\Controllers\AdminJobController::class, 'searchJobCapacity'])->name('searchJobCapacity');
 
 Route::get('backend/job/skills/{id}', [App\Http\Controllers\AdminJobController::class, 'jobSkills']);
 Route::get('backend/job/skills/form/{id}', [App\Http\Controllers\AdminJobController::class, 'jobSkillsForm']);
@@ -287,6 +288,7 @@ Route::get('backend/company/file', [App\Http\Controllers\AdminCompanyController:
 Route::get('backend/company/delate', [App\Http\Controllers\AdminCompanyController::class, 'companyDel']);
 Route::post('backend/company/import', [App\Http\Controllers\AdminCompanyController::class, 'companyImport']);
 Route::get('resultCompany', [App\Http\Controllers\AdminCompanyController::class, 'resultCompany'])->name('resultCompany');
+Route::get('backend/company/export', [App\Http\Controllers\AdminCompanyController::class, 'exportCompany']);
 
 Route::get('backend/companyCf', [App\Http\Controllers\AdminCompanyController::class, 'companyCf'])->name('adminCompanyCF');
 Route::get('backend/companyCf/detail/{id}', [App\Http\Controllers\AdminCompanyController::class, 'companyCfDetail']);
@@ -380,11 +382,20 @@ Route::get('backend/peopleCf', [App\Http\Controllers\AdminEmployeeController::cl
 Route::get('backend/peopleCf/detail/{id}', [App\Http\Controllers\AdminEmployeeController::class, 'peopleCfDetail']);
 Route::post('backend/peopleCf/CF/{id}', [App\Http\Controllers\AdminEmployeeController::class, 'peopleCfConfirm']);
 
-Route::get('backend/people/manageskills', [App\Http\Controllers\AdminEmployeeController::class, 'peopleManageskills']);
+Route::get('backend/people/manageskills', [App\Http\Controllers\AdminEmployeeController::class, 'peopleManageskills'])->name('training');
 Route::get('backend/people/manageskills/form', [App\Http\Controllers\AdminEmployeeController::class, 'peopleManageskillsForm']);
-Route::get('backend/people/manageskills/edit', [App\Http\Controllers\AdminEmployeeController::class, 'peopleManageskillsEdit']);
-Route::get('backend/people/manageskills/detail', [App\Http\Controllers\AdminEmployeeController::class, 'peopleManageskillsdetail']);
+Route::post('backend/people/manageskills/add', [App\Http\Controllers\AdminEmployeeController::class, 'peopleManageskillsAdd']);
+Route::get('backend/people/manageskills/edit/{id}', [App\Http\Controllers\AdminEmployeeController::class, 'peopleManageskillsEdit']);
+Route::post('backend/people/manageskills/update/{id}', [App\Http\Controllers\AdminEmployeeController::class, 'peopleManageskillsUpdate']);
+Route::get('backend/people/manageskills/delete/{id}', [App\Http\Controllers\AdminEmployeeController::class, 'peopleManageskillsDelete']);
+Route::get('backend/people/manageskills/detail/{id}', [App\Http\Controllers\AdminEmployeeController::class, 'peopleManageskillsdetail']);
 Route::get('backend/people/manageskills/file', [App\Http\Controllers\AdminEmployeeController::class, 'peopleManageskillsFile']);
+Route::post('backend/people/manageskills/import', [App\Http\Controllers\AdminEmployeeController::class, 'peopleManageskillsImport']);
+Route::get('backend/people/manageskills/download', [App\Http\Controllers\AdminEmployeeController::class, 'peopleManageskillsExport']);
+Route::get('backend/people/manageskills/search', [App\Http\Controllers\AdminEmployeeController::class, 'peopleManageskillsResult'])->name('resultTraining');
+
+Route::post('searchPeople', [App\Http\Controllers\AdminEmployeeController::class, 'searchPeople']);
+Route::post('searchTrain', [App\Http\Controllers\AdminEmployeeController::class, 'searchTrain']);
 
 Route::get('backend/people/cfSkills', [App\Http\Controllers\AdminEmployeeController::class, 'peopleCfSkills']);
 Route::get('backend/people/cfSkills/detail', [App\Http\Controllers\AdminEmployeeController::class, 'peopleCfSkillsDetail']);
