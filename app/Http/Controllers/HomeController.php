@@ -96,7 +96,7 @@ class HomeController extends Controller
             }
         }else{
             \Auth::logout();
-            return redirect('/login')->with('message', 'You have been logged out.');
+            return redirect('/')->with('message', 'การลงทะเบียนของคุณถูกยกเลิก กรุณาติดต่อเจ้าหน้าที่');
         }
         
     }

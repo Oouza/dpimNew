@@ -247,6 +247,17 @@ class AdminJobController extends Controller
         echo ("<script>alert('$mes'); location.href='$yourURL'; </script>");
     }
 
+    function searchJobCapacity(Request $request){
+        $search = $request->value;
+        $id = $request->jobId;
+        // dd($id);
+        $gj = groupjob::find($request->jobId);
+        $capacity = gjcapacity::where('FKgjc_groupjob',$id)->where('FKgjc_userCreate',0)
+        ->where('gjc_important',$search)->whereNull('gjc_userDelete')
+        ->join('capacities','capacities.cc_id','gjcapacities.FKgjc_capacity')->get();        
+        return view('backend.job.capacity.jobCapa',compact('gj','capacity','search'));
+    }
+
     function jobskills($id){
         $gj = gjcapacity::join('groupjobs','groupjobs.gj_id','gjcapacities.FKgjc_groupjob')
         ->join('capacities','capacities.cc_id','gjcapacities.FKgjc_capacity')->where('gjcapacities.gjc_id',$id)->first();
@@ -333,7 +344,7 @@ class AdminJobController extends Controller
         // dd($gjs->FKgjc_capacity);
 
         $gjSub = gjSkillsSub::join('skills_subs','skills_subs.ss_id','gj_skills_subs.FKgjss_skillsSub')
-        ->where('FKgjss_gjskills',$id)->whereNull('gjss_userDelete')->get();  
+            ->where('FKgjss_gjskills',$id)->whereNull('gjss_userDelete')->where('FKgjss_userCreate',0)->get();  
         $skills = skills::where('FKs_capacity',$gjs->FKgjc_capacity)->where('FKs_Create',0)->whereNull('s_userDelete')->get();
         $skillsSubs = skillsSubs::where('FKss_skills',$gjs->FKgjs_skills)->where('FKss_Create',0)->whereNull('ss_userDelete')->get();
         
