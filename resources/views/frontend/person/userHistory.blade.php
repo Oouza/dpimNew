@@ -327,11 +327,7 @@ $date_old = $date-60;
                                 </div>
                             </div>
                             @endif
-<<<<<<< HEAD
                             
-=======
-
->>>>>>> bcaf8291bf2975d43eb8cb802c6a838dca2e49ce
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                     <b><label for="horizontal-form-1" class="form-label "> อีเมล </lable></b>
@@ -539,13 +535,8 @@ $date_old = $date-60;
                                     <b><label for="horizontal-form-1" class="form-label "> ประวัติการศึกษาลำดับที่ {{ $key+1 }} </lable></b>
                                 </div>
                             </div>
-<<<<<<< HEAD
                             <input type="hidden" id="ids" name="ids[]" value="{{ $val->er_id }}" readonly>
                             <input type="hidden" class="keys" id="keys" name="keys[]" value="{{ $key+1 }}" readonly>
-=======
-
-                            @if($user->status == 8)
->>>>>>> bcaf8291bf2975d43eb8cb802c6a838dca2e49ce
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
@@ -792,8 +783,150 @@ $date_old = $date-60;
                                     <button id="add-form-btn-job" type="button" class="btn btn-outline-secondary btn200 rounded-10" >เพิ่มประวัติการทำงาน</button>
                                 </div>
                             </div>
-                            @endif
 
+                            <!-- <div class="grid grid-cols-12 gap-6 mt-5">
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                    <b><label for="horizontal-form-1" class="form-label "> ประวัติการฝึกอบรม 1 </lable></b>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-12 gap-6 mt-5">
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                    <b><label for="horizontal-form-1" class="form-label "> วันเดือนปีที่อบรม </lable></b>
+                                </div>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                    <input type="date">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-12 gap-6 mt-5">
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                    <b><label for="horizontal-form-1" class="form-label "> ชื่อหลักสูตร </lable></b>
+                                </div>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                    <select name="" id="">
+                                        <option hidden>- กรุณาเลือกหลักสูตร -</option>
+                                        <option value="">หลักสูตร 1</option>
+                                        <option value="">หลักสูตร 2</option>
+                                        <option value="">หลักสูตร 3</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-12 gap-6 mt-5">
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                    <b><label for="horizontal-form-1" class="form-label "> ผู้จัด </lable></b>
+                                </div>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                    <select name="" id="">
+                                        <option hidden>- กรุณาเลือกผู้จัด -</option>
+                                        <option value="">ผู้จัด 1</option>
+                                        <option value="">ผู้จัด 2</option>
+                                        <option value="">ผู้จัด 3</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-12 gap-6 mt-5">
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                    <b><label for="horizontal-form-1" class="form-label "> ระยะเวลาอบรม </lable></b>
+                                </div>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                    <input type="number">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-12 gap-6 mt-5">
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                    <b><label for="horizontal-form-1" class="form-label "> ใบรับรอง </lable></b>
+                                </div>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                    <input type="file">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-12 gap-6 mt-5">
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                    <b><label for="horizontal-form-1" class="form-label "> สมรรถนะ </lable></b>
+                                </div>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                    <select name="" id="">
+                                        <option value="">- สมรรถนะ -</option>
+                                        <option value="">สมรรถนะ 1</option>
+                                        <option value="">สมรรถนะ 2</option>
+                                        <option value="">สมรรถนะ 3</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-12 gap-6 mt-5">
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                    <b><label for="horizontal-form-1" class="form-label "> ทักษะ </lable></b>
+                                </div>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                    <select name="" id="">
+                                        <option value="">- ทักษะ -</option>
+                                        <option value="">ทักษะ 1</option>
+                                        <option value="">ทักษะ 2</option>
+                                        <option value="">ทักษะ 3</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-12 gap-6 mt-5">
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                    <b><label for="horizontal-form-1" class="form-label "> ทักษะย่อย </lable></b>
+                                </div>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                    <select name="" id="">
+                                        <option value="">- ทักษะย่อย -</option>
+                                        <option value="">ทักษะย่อย 1</option>
+                                        <option value="">ทักษะย่อย 2</option>
+                                        <option value="">ทักษะย่อย 3</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-12 gap-6 mt-5">
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                    <b><label for="horizontal-form-1" class="form-label "> ระดับ </lable></b>
+                                </div>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                    <select name="" id="">
+                                        <option value="">- ระดับ -</option>
+                                        <option value="">ระดับ 1</option>
+                                        <option value="">ระดับ 2</option>
+                                        <option value="">ระดับ 3</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-12 gap-6 mt-5">
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
+                                    <b><label for="horizontal-form-1" class="form-label "> หมายเหตุ </lable></b>
+                                </div>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                                </div>
+                            </div>
+
+                            <div id="form-container-skills"></div>
+                            <div class="grid grid-cols-12 gap-6 mt-5">
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div><div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3"></div>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
+                                    <button id="skillsSub1" type="button" class="btn btn-outline-secondary btn200 rounded-10" >ประวัติการฝึกอบรม</button>
+                                </div>
+                            </div> -->
 
                             </div>
                             </div>
