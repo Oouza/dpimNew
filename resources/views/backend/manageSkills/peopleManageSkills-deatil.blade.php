@@ -44,11 +44,7 @@ $active = "peopleSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> บุคลากร </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="" id="" class="form-control" disabled>
-                                        <option value="" hidden>- เลือกพนักงาน -</option>
-                                        <option value="" selected>ไก่ กา</option>
-                                        <option value="">เอ บี</option>
-                                    </select>
+                                    <input type="text" value="{{$training->e_title}} {{$training->e_fname}} {{$training->e_lname}}" class="form-control" disabled>
                                 </div>
                             </div>
 
@@ -57,12 +53,7 @@ $active = "peopleSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> กลุ่มตำแหน่ง </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="" id="" class="form-control" disabled>
-                                        <option value="" hidden>- เลือกกลุ่มตำแหน่ง -</option>
-                                        <option value="" selected>กลุ่มตำแหน่ง 1</option>
-                                        <option value="">กลุ่มตำแหน่ง 2</option>
-                                        <option value="">กลุ่มตำแหน่ง 3</option>
-                                    </select>
+                                    <input type="text" value="{{$training->gj_name}}" class="form-control" disabled>
                                 </div>
                             </div>
 
@@ -122,14 +113,7 @@ $active = "peopleSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> หลักสูตร </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="news_type" id="news_type" class="form-control" required onchange="province()" disabled>
-                                        <option value="" hidden>- กรุณาเลือกหลักสูตร -</option>
-                                        <option value="1" selected>หลักสูตร 1</option>
-                                        <option value="1">หลักสูตร 2</option>
-                                        <option value="1">หลักสูตร 3</option>
-                                        <option value="1">หลักสูตร 4</option>
-                                        <option value="1">หลักสูตร 5</option>
-                                    </select>
+                                    <input type="text" value="{{$training->cou_name}}" class="form-control" disabled>
                                 </div>
                             </div>
 
@@ -137,15 +121,8 @@ $active = "peopleSkills";
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                     <b><label for="horizontal-form-1" class="form-label "> ผู้จัดการอบรม </lable></b>
                                 </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="news_type" id="news_type" class="form-control" required onchange="province()" disabled>
-                                        <option value="" hidden>- กรุณาเลือกผู้จัดการอบรม -</option>
-                                        <option value="1">ผู้จัดการอบรม 1</option>
-                                        <option value="1" selected>ผู้จัดการอบรม 2</option>
-                                        <option value="1">ผู้จัดการอบรม 3</option>
-                                        <option value="1">ผู้จัดการอบรม 4</option>
-                                        <option value="1">ผู้จัดการอบรม 5</option>
-                                    </select>
+                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">                                    <input type="text" value="{{$training->cou_organizer}}" class="form-control" disabled>
+                                    <input type="text" value="{{$training->cou_organizer}}" class="form-control" disabled>
                                 </div>
                             </div>
 
@@ -154,7 +131,7 @@ $active = "peopleSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> ระยะเวลาการอบรม (ชั่วโมง) </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input type="number" class="form-control" value="3" disabled>
+                                    <input type="text" value="{{$training->cou_period}}" class="form-control" disabled>
                                 </div>
                             </div>
 
@@ -163,30 +140,16 @@ $active = "peopleSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> ประเภทหลักสูตร </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="news_type" id="news_type" class="form-control" required onchange="province()" disabled>
-                                        <option value="" hidden>- กรุณาเลือกประเภทหลักสูตร -</option>
-                                        <option value="1" selected>ประเภทหลักสูตร 1</option>
-                                        <option value="1">ประเภทหลักสูตร 2</option>
-                                        <option value="1">ประเภทหลักสูตร 3</option>
-                                        <option value="1">ประเภทหลักสูตร 4</option>
-                                        <option value="1">ประเภทหลักสูตร 5</option>
-                                    </select>
+                                    <input type="text" value="{{$training->tc_name}}" class="form-control" disabled>
                                 </div>
                             </div>
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> ประเภทชุดทักษะ </lable></b>
+                                    <b><label for="horizontal-form-1" class="form-label "> ทักษะย่อย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="news_type" id="news_type" class="form-control" required onchange="province()" disabled>
-                                        <option value="" hidden>- กรุณาเลือกประเภทชุดทักษะ -</option>
-                                        <option value="1">ประเภทชุดทักษะ 1</option>
-                                        <option value="1" selected>ประเภทชุดทักษะ 2</option>
-                                        <option value="1">ประเภทชุดทักษะ 3</option>
-                                        <option value="1">ประเภทชุดทักษะ 4</option>
-                                        <option value="1">ประเภทชุดทักษะ 5</option>
-                                    </select>
+                                    <textarea name="skillsSub" id="skillsSub" cols="45" rows="10" class="form-control" disabled>{{$couSkills}}</textarea>
                                 </div>
                             </div>
 
@@ -195,27 +158,31 @@ $active = "peopleSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> วันที่อบรม </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input type="date" class="form-control" value="2023-08-10" disabled>
+                                    <input type="date" class="form-control" value="{{$training->tn_dateTrain}}" disabled>
                                 </div>
                             </div>
 
+                            if(!empty($training->tn_endCredit)) 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                     <b><label for="horizontal-form-1" class="form-label "> วันสิ้นอายุใบรับรอง </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input type="date" class="form-control" value="2028-08-10" disabled>
+                                    <input type="date" class="form-control" @value="{{$training->tn_endCredit}}" disabled>
                                 </div>
                             </div>
+                            @endif
 
+                            @if(!empty($training->tn_Credit))
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                     <b><label for="horizontal-form-1" class="form-label "> หลักฐานอบรม </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <img src="{{ asset('dist/images/test.jpg') }}">
+                                    <img src="{{asset('public/upload/img').'/'.$training->tn_Credit}}">
                                 </div>
                             </div>
+                            @endif
 
                             </div>
                             </div>

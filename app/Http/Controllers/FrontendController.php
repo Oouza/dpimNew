@@ -224,38 +224,6 @@ class FrontendController extends Controller
     // function companySkillsSubEdit(){
     //     return view('frontend.company.skillsSub.skillsSub-edit');
     // }
-
-    function user(){
-        return view('frontend.company.person.user');
-    }
-
-    function userForm(){
-        return view('frontend.company.person.user-add');
-    }
-
-    function userEdit(){
-        return view('frontend.company.person.user-edit');
-    }
-
-    function userFile(){
-        return view('frontend.company.person.user-file');
-    }
-
-    function cfUser(){
-        return view('frontend.company.person.cfUser');
-    }
-    
-    function cfUserDetail(){
-        return view('frontend.company.person.cfUser-detail');
-    }
-
-    function cfUserEdit(){
-        return view('frontend.company.person.cfUser-edit');
-    }
-
-    function manageSkills(){
-        return view('frontend.company.manageSkills.manageSkills');
-    }
     
     function manageSkillsForm(){
         return view('frontend.company.manageSkills.manageSkills-add');
@@ -264,11 +232,7 @@ class FrontendController extends Controller
     function manageSkillsEdit(){
         return view('frontend.company.manageSkills.manageSkills-edit');
     }
-
-    function manageSkillsDetail(){
-        return view('frontend.company.manageSkills.manageSkills-detail');
-    }
-
+    
     function planSkills(){
         return view('frontend.company.plan.planSkills');
     }

@@ -23,10 +23,6 @@ $i=1;
                     <div class="font-medium text-center text-lg">สรุปจำนวนบุคลากรในระดับสมรรถนะต่าง ๆ</div>
                    
                 </div>
-                    {{count($capacity)}}
-                    @foreach($capacity as $rs)
-                    1.{{$rs->cc_name}}
-                    @endforeach
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-slate-200/60 dark:border-darkmode-400">
                 <!-- <div class="intro-y block sm:flex items-center h-10">
                                     <h2 class="text-lg font-medium truncate mr-5">
@@ -97,46 +93,6 @@ $i=1;
 @section('javascripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>  <!-- delete -->
 
-
-<script>
-    $(document).ready(function() {
-    $('#example').DataTable({
-        responsive: true
-    });
-} );
-function del_value(id) {
-            Swal.fire({
-            title: 'ต้องการลบข้อมูลใช่หรือไม่ ?',
-            text: "ข้อมูลจะลูกลบอย่างถาวร !",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'ตกลง',
-            cancelButtonText: 'ยกเลิก'
-            }).then((result) => {
-                if (result.value) {
-                    $.ajax({
-                        type:"GET",
-                        url:"{!! url('member/delete/"+id+"') !!}",
-                        success: function(data) {
-                            console.log(data);
-                        }   
-                    });
-
-                    Swal.fire(
-                        'สำเร็จ!',
-                        'ข้อมูลถูกลบสำเร็จ',
-                        'success'
-                    ).then(() => {
-                        location.reload();
-                    })
-                   
-                }
-            })
-        }
-</script>
-
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
@@ -152,7 +108,7 @@ function del_value(id) {
         text: null
     },
     xAxis: {
-        categories: [@foreach($capacity as $rs) '{{$rs->cc_name}}', @endforeach]
+        categories: [@foreach($capacity as $item) "{{$item->cc_name}}", @endforeach]
     },
     yAxis: {
         min: 0,
@@ -186,6 +142,10 @@ function del_value(id) {
         data: [5,10]
     }]
 });
+</script>
+
+<script>
+    console.log(@json($capacity));
 </script>
 
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />

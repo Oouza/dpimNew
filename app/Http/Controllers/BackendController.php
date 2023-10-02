@@ -256,7 +256,8 @@ class BackendController extends Controller
         
         $capacity = capacity::where('FKcc_Create',0)->whereNull('cc_userDelete')->get();
 
-        return view('backend.graph.graph-capacity',compact('groupjob','capacity'));
+        $lj = lavelJob::whereNull('lj_userDelete')->get();
+        return view('backend.graph.graph-capacity',compact('groupjob','capacity','lj'));
     }
 
     function graphSillks(){

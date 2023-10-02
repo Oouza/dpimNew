@@ -47,10 +47,11 @@ $i=1;
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($employee as $rs)
                             <tr>
-                                <td><center>01</center></td>
-                                <td><center>ไก่</center></td>
-                                <td><center>กา</center></td>
+                                <td><center>{{$rs->e_employeeNo}}</center></td>
+                                <td><center>{{$rs->e_fname}}</center></td>
+                                <td><center>{{$rs->e_lname}}</center></td>
                                 <td><center>แผนก 1 </center></td>
                                 <td><center>แผนกย่อย 1</center></td>
                                 <td><center>ตำแหน่งปัจจุบัน 1</center></td>
@@ -59,18 +60,7 @@ $i=1;
                                     <button type="button" class="btn btn-danger" onclick="del_value(1)">ลบ</button>
                                 </center></td>
                             </tr>
-                            <tr>
-                                <td><center>02</center></td>
-                                <td><center>เอ</center></td>
-                                <td><center>บี</center></td>
-                                <td><center>แผนก 2</center></td>
-                                <td><center>แผนกย่อย 2</center></td>
-                                <td><center>ตำแหน่งปัจจุบัน 2</center></td>
-                                <td><center>
-                                    <a href="{{ url ('company/user/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
-                                    <button type="button" class="btn btn-danger" onclick="del_value(1)">ลบ</button>
-                                </center></td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     
                     </table>

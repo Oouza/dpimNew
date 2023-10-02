@@ -34,7 +34,7 @@ $active = "peopleSkills";
                     <div class="font-medium text-center text-lg">เพิ่มประวัติการพัฒนาบุคลากร</div>
                    
                 </div>
-                <form action="#" method="post" enctype="multipart/form-data">
+                <form action="{{url('backend/people/manageskills/add')}}" method="post" enctype="multipart/form-data" onSubmit="return checkForm(this)">
                 {{ csrf_field() }}
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-sl ate-200/60 dark:border-darkmode-400">
                     <div class="font-medium text-base">รายละเอียด</div>
@@ -44,10 +44,11 @@ $active = "peopleSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> บุคลากร </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="people" id="people" class="form-control select2">
-                                        <option value="" hidden>- เลือบุคลากร -</option>
-                                        <option value="1">ไก่ กา</option>
-                                        <option value="2">เอ บี</option>
+                                    <select name="people" id="people" class="form-control select2" onchange="selectPeople()" required>
+                                        <option value="" hidden>- เลือกบุคลากร -</option>
+                                        @foreach($employee as $rs)
+                                        <option value="{{$rs->FKe_userid}}">{{$rs->e_title}} {{$rs->e_fname}} {{$rs->e_lname}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -57,13 +58,7 @@ $active = "peopleSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> กลุ่มตำแหน่ง </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input type="text" class="form-control" disabled>
-                                    <!-- <select name="job" id="job" class="form-control" disabled>
-                                        <option value="" hidden>- เลือกกลุ่มตำแหน่ง -</option>
-                                        <option value="1">กลุ่มตำแหน่ง 1</option>
-                                        <option value="2">กลุ่มตำแหน่ง 2</option>
-                                        <option value="3">กลุ่มตำแหน่ง 3</option>
-                                    </select> -->
+                                    <input type="text" name="gj" id="gj" class="form-control" disabled>
                                 </div>
                             </div>
 
@@ -72,14 +67,11 @@ $active = "peopleSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> หลักสูตร </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <!-- <input type="text" class="form-control" disabled> -->
-                                    <select name="course" id="course" class="form-control select2" required>
+                                    <select name="course" id="course" class="form-control select2" onchange="selectCourse()" required>
                                         <option value="" hidden>- กรุณาเลือกหลักสูตร -</option>
-                                        <option value="1">หลักสูตร 1</option>
-                                        <option value="2">หลักสูตร 2</option>
-                                        <option value="3">หลักสูตร 3</option>
-                                        <option value="4">หลักสูตร 4</option>
-                                        <option value="5">หลักสูตร 5</option>
+                                        @foreach($course as $rs)
+                                        <option value="{{$rs->cou_id}}">{{$rs->cou_no}} {{$rs->cou_name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -89,15 +81,7 @@ $active = "peopleSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> ผู้จัดการอบรม </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input type="text" class="form-control" disabled>
-                                    <!-- <select name="people_course" id="people_course" class="form-control select2" required>
-                                        <option value="" hidden>- กรุณาเลือกผู้จัดการอบรม -</option>
-                                        <option value="1">ผู้จัดการอบรม 1</option>
-                                        <option value="2">ผู้จัดการอบรม 2</option>
-                                        <option value="3">ผู้จัดการอบรม 3</option>
-                                        <option value="4">ผู้จัดการอบรม 4</option>
-                                        <option value="5">ผู้จัดการอบรม 5</option>
-                                    </select> -->
+                                    <input type="text" name="Organizer" id="Organizer" class="form-control" disabled>
                                 </div>
                             </div>
 
@@ -106,7 +90,7 @@ $active = "peopleSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> ระยะเวลาการอบรม (ชั่วโมง) </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input type="text" class="form-control" disabled>
+                                    <input type="text" name="time" id="time" class="form-control" disabled>
                                 </div>
                             </div>
 
@@ -115,15 +99,7 @@ $active = "peopleSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> ประเภทหลักสูตร </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input type="text" class="form-control" disabled>
-                                    <!-- <select name="type_course" id="type_course" class="form-control select2" required>
-                                        <option value="" hidden>- กรุณาเลือกประเภทหลักสูตร -</option>
-                                        <option value="1">ประเภทหลักสูตร 1</option>
-                                        <option value="2">ประเภทหลักสูตร 2</option>
-                                        <option value="3">ประเภทหลักสูตร 3</option>
-                                        <option value="4">ประเภทหลักสูตร 4</option>
-                                        <option value="5">ประเภทหลักสูตร 5</option>
-                                    </select> -->
+                                    <input type="text" name="type" id="type" class="form-control" disabled>
                                 </div>
                             </div>
 
@@ -132,22 +108,7 @@ $active = "peopleSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> ทักษะย่อย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <textarea name="" id="" cols="45" rows="10" class="form-control" disabled></textarea>
-                                    <!-- <select name="skills" id="skills" class="form-control select2" required>
-                                        <option value="" hidden>- กรุณาเลือกทักษะย่อย -</option>
-                                        <option value="0" disabled>ทักษะ</option>
-                                        <option value="1">&nbsp; &nbsp; &nbsp; &nbsp;ทักษะย่อย 1</option>
-                                        <option value="2">&nbsp; &nbsp; &nbsp; &nbsp;ทักษะย่อย 2</option>
-                                        <option value="3">&nbsp; &nbsp; &nbsp; &nbsp;ทักษะย่อย 3</option>
-                                        <option value="4">&nbsp; &nbsp; &nbsp; &nbsp;ทักษะย่อย 4</option>
-                                        <option value="5">&nbsp; &nbsp; &nbsp; &nbsp;ทักษะย่อย 5</option>
-                                        <option value="0" disabled>ทักษะ</option>
-                                        <option value="6">&nbsp; &nbsp; &nbsp; &nbsp;ทักษะย่อย 1</option>
-                                        <option value="7">&nbsp; &nbsp; &nbsp; &nbsp;ทักษะย่อย 2</option>
-                                        <option value="8">&nbsp; &nbsp; &nbsp; &nbsp;ทักษะย่อย 3</option>
-                                        <option value="9">&nbsp; &nbsp; &nbsp; &nbsp;ทักษะย่อย 4</option>
-                                        <option value="10">&nbsp; &nbsp; &nbsp; &nbsp;ทักษะย่อย 5</option>
-                                    </select> -->
+                                    <textarea name="skillsSub" id="skillsSub" cols="45" rows="10" class="form-control" disabled></textarea>
                                 </div>
                             </div>
 
@@ -156,7 +117,7 @@ $active = "peopleSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> วันที่อบรม </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input type="date" class="form-control">
+                                    <input type="date" name="dateTrain" id="dateTrain" class="form-control" required>
                                 </div>
                             </div>
                             
@@ -165,7 +126,7 @@ $active = "peopleSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> วันสิ้นอายุใบรับรอง </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input type="date" class="form-control">
+                                    <input type="date" name="dateEnd" id="dateEnd" class="form-control">
                                 </div>
                             </div>
 
@@ -174,7 +135,7 @@ $active = "peopleSkills";
                                     <b><label for="horizontal-form-1" class="form-label "> หลักฐานอบรม </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input type="file" class="form-control">
+                                    <input type="file" name="credit" id="credit" class="form-control">
                                 </div>
                             </div>
 
@@ -184,8 +145,7 @@ $active = "peopleSkills";
                             <center>
                                 
                                 <a href="{{url('backend/people/manageskills')}}" class="btn btn-warning w-50">กลับหน้าหลัก</a>
-                                <!-- <a href="#" class="btn btn-danger">แก้ไข</a> -->
-                                <a href="#" class="btn btn-success w-50">บันทึก</a>
+                                <button type="submit" class="btn btn-success w-24 ml-2">บันทึก</button>        
                             
                             </center>
                       
@@ -203,6 +163,81 @@ $active = "peopleSkills";
 @section('javascripts')
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script> 
+	// Function เพื่อตรวจสอบรหัสผ่านว่าตรงกันหรือไม่
+	function checkForm(form) { 
+        
+        var extall = "jpg,jpeg,gif,png";
+        var fileInput = document.getElementById("credit");
+        var file = fileInput.value;
+        var ext = file.split('.').pop().toLowerCase();
+        
+        if (extall.indexOf(ext) < 0) {
+            alert('รองรับไฟล์นามสกุล : ' + extall);
+            return false;
+        }
+    }
+</script>
+
+<script>
+function selectCourse() {
+    var course = $('#course').val();
+    // alert(course);
+    if (course == '') {
+    } else {
+        $.ajax({
+            type: 'post',
+            url: "{{ url('searchTrain') }}",
+            dataType: 'json',
+            data: {
+                course: course,
+                _token: "{{ csrf_token() }}"
+            },
+            success: function (response) {
+                $('#Organizer').val(response.Organizer);
+                $('#time').val(response.time);
+                $('#type').val(response.type);
+                $('#skillsSub').val(response.skills);
+            },
+            error: function (xhr, status, error) {
+                console.log("Error:", error);
+                // แสดงข้อผิดพลาดที่เกิดขึ้น หรือทำอะไรตามความเหมาะสม
+            }
+        });
+    }
+}
+</script>
+
+<script>
+function selectPeople() {
+    var people = $('#people').val();
+    // alert(people);
+    if (people == '') {
+    } else {
+        $.ajax({
+            type: 'post',
+            url: "{{ url('searchPeople') }}",
+            dataType: 'json',
+            data: {
+                people: people,
+                _token: "{{ csrf_token() }}"
+            },
+            success: function (response) {
+                if (response) {
+                    $('#gj').val(response);
+                } else {
+                    $('#gj').val(''); // เซ็ตเป็นช่องว่างเมื่อ response ว่าง
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log("Error:", error);
+                // แสดงข้อผิดพลาดที่เกิดขึ้น หรือทำอะไรตามความเหมาะสม
+            }
+        });
+    }
+}
+</script>
 
 <script>
     ClassicEditor

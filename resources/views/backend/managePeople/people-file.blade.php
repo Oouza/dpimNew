@@ -33,7 +33,7 @@ $active = "managePeople";
                 <div class="px-5 mt-10">
                     <div class="font-medium text-center text-lg"> เพิ่มไฟล์ข้อมูลบุคลากร </div>
                 </div>
-                <form action="{{ url('backend/people/upload') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('backend/people/upload') }}" method="post" enctype="multipart/form-data"  onSubmit="return checkForm(this)">
                 {{ csrf_field() }}
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-sl ate-200/60 dark:border-darkmode-400">
                     <div class="font-medium text-base">รายละเอียด</div>
@@ -55,7 +55,7 @@ $active = "managePeople";
                             <b><label for="horizontal-form-1" class="form-label "> ไฟล์ข้อมูลบุคลากร </lable></b>
                         </div>
                         <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                            <input class="form-control box-form-ct" name="file_people" type="file" id="formFile">
+                            <input class="form-control box-form-ct" name="file_people" type="file" id="file_people">
                         </div>
                     </div>
 
@@ -81,6 +81,19 @@ $active = "managePeople";
 
 
 @section('javascripts')
+<script> 
+	function checkForm(form) {
+        var extall = "xlsx";
+        var fileInput = document.getElementById("file_people");
+        var file = fileInput.value;
+        var ext = file.split('.').pop().toLowerCase();
+        
+        if (extall.indexOf(ext) < 0) {
+            alert('รองรับไฟล์นามสกุล : ' + extall);
+            return false;
+        }
+    }
+</script>
 @endsection
 
 

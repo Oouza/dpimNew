@@ -37,7 +37,7 @@ $active = "job";
                 <form action="{{ url('backend/job/capacity/add/'.$id) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-sl ate-200/60 dark:border-darkmode-400">
-                    <div class="font-medium text-base">รายละเอียด {{$id}}</div>
+                    <div class="font-medium text-base">รายละเอียด</div>
 
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">

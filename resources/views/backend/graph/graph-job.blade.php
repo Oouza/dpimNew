@@ -49,7 +49,7 @@ $i=1;
                                             <!-- <option value="" hidden>- เลือกกลุ่มตำแหน่ง -</option> -->
                                             <option value=""> กลุ่มตำแหน่งทั้งหมด  </option>
                                             @foreach($groupjob as $rs)
-                                            <option value="{{$rs->gj_id}}" @if(!empty($gj) && ($gj == $rs->gj_id)) selected @endif>{{$rs->gj_id}} {{$rs->gj_no}} {{$rs->gj_name}}</option>
+                                            <option value="{{$rs->gj_id}}" @if(!empty($gj) && ($gj == $rs->gj_id)) selected @endif>{{$rs->gj_no}} {{$rs->gj_name}}</option>
                                             @endforeach
                                             <!-- <option value=""> กลุ่มตำแหน่ง1  </option>
                                             <option value=""> กลุ่มตำแหน่ง2  </option>

@@ -15,6 +15,10 @@ use App\Models\typeMineral;
 use App\Exports\TypeMineralExport;
 use App\Imports\TypeMineralImport;
 use App\Imports\CEOhrImport;
+use Mail;
+use App\Mail\TestMail;
+use App\Mail\SendCus;
+use App\Exports\CompanyExport;
 
 class AdminCompanyController extends Controller
 {
@@ -286,6 +290,10 @@ class AdminCompanyController extends Controller
         return view('backend.company.company-file');
     }
 
+    function exportCompany(){
+        return Excel::download(new CompanyExport, 'company.xlsx');
+    }
+
     function companyCf(){
         $provinces = DB::table('provinces')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
         $mineral = typeMineral::whereNull('tm_userDelete')->get();
@@ -377,6 +385,7 @@ class AdminCompanyController extends Controller
             $update = ceohr::where('FKch_userid',$id)->update([
                 'ch_note' =>  '',
             ]);
+            $typeButton = 'การลงทะบียนสำเร็จ สามารถเข้าใช้บริการได้';
         }elseif($request->status_button == '2'){
             $updateUser = User::where('id',$id)->update([
                 'name'      =>  $name,
@@ -386,6 +395,7 @@ class AdminCompanyController extends Controller
                 'ch_userUpdate' =>  Auth::user()->name,
                 'ch_note'       =>  $request->company_note,
             ]);
+            $typeButton = 'กรุณาแก้ไขข้อมูลการลงทะบียน และส่งกลับเพื่อยืนยันการลงทะเบียนใหม่อีกครั้ง';
         }else{
             $updateUser = User::where('id',$id)->update([
                 'name'      =>  $name,
@@ -395,8 +405,14 @@ class AdminCompanyController extends Controller
             $update = ceohr::where('FKch_userid',$id)->update([
                 'ch_userDelete' =>  Auth::user()->name,
             ]);
+            $typeButton = 'การลงทะบียนถูกยกเลิก กรุณาติดต่อเจ้าหน้าที่';
         }
 
+        $textmail = [
+            "text"      =>$typeButton,
+        ];
+        Mail::to($email)->send(new TestMail($textmail));
+        
         $mes = 'Success';
         $yourURL= url('backend/companyCf');
         echo ("<script>alert('$mes'); location.href='$yourURL'; </script>");

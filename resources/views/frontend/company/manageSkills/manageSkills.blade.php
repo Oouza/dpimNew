@@ -47,40 +47,25 @@ $i=1;
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($employee as $rs)
                             <tr>
-                                <td><center>01</center></td>
-                                <td><center>ไก่</center></td>
-                                <td><center>กา</center></td>
-                                <td><center>แผนก 1 </center></td>
-                                <td><center>แผนกย่อย 1</center></td>
-                                <td><center>ตำแหน่งปัจจุบัน 1</center></td>
-                                <td><center>กลุ่มตำแหน่ง 1</center></td>
+                                <td><center>{{$rs->e_employeeNo}}</center></td>
+                                <td><center>{{$rs->e_fname}}</center></td>
+                                <td><center>{{$rs->e_lname}}</center></td>
+                                <td><center>{{$rs->d_name}}</center></td>
+                                <td><center>{{$rs->ds_name}}</center></td>
+                                <td><center>{{$rs->p_name}}</center></td>
+                                <td><center>{{$rs->gj_name}}</center></td>
                                 <td><center>
                                     <!-- <a href="{{ url ('company/manage/skills/detail')}}">
                                         <button type="button" class="btn btn-success" onclick="detail(1)"> รายละเอียด </button>
                                     </a> -->
-                                    <a href="{{ url ('company/manage/skills/detail')}}">
+                                    <a href="{{ url ('company/manage/skills/detail/'.$rs->e_id)}}">
                                         <button type="button" class="btn btn-success"> รายละเอียด </button>
                                     </a>
                                 </center></td>
                             </tr>
-                            <tr>
-                                <td><center>02</center></td>
-                                <td><center>เอ</center></td>
-                                <td><center>บี</center></td>
-                                <td><center>แผนก 2</center></td>
-                                <td><center>แผนกย่อย 2</center></td>
-                                <td><center>ตำแหน่งปัจจุบัน 2</center></td>
-                                <td><center>กลุ่มตำแหน่ง 2</center></td>
-                                <td><center>
-                                    <!-- <a href="{{ url ('company/manage/skills/detail')}}">
-                                        <button type="button" class="btn btn-success" onclick="detail(1)"> รายละเอียด </button>
-                                    </a> -->
-                                    <a href="{{ url ('company/manage/skills/detail')}}">
-                                        <button type="button" class="btn btn-success"> รายละเอียด </button>
-                                    </a>
-                                </center></td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     
                     </table>

@@ -39,9 +39,10 @@ $i=1;
                             <h3 class="text-lg font-medium truncate mr-5">เรียกดูตามความจำเป็น</h3>
                         <!-- </div>
                         <div class="intro-y block sm:flex items-center h-10"> -->
-                            <input type="radio" name="important" id="important" value="" onclick="important()">&nbsp;ทั้งหมด
+                            <input type="radio" name="important" id="all" value="" onclick="important(this)" checked>&nbsp;ทั้งหมด
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type="radio" name="important" id="important" value="จำเป็น" onclick="important()">&nbsp;จำเป็น
+                            <input type="radio" name="important" id="necessary" value="จำเป็น" onclick="important(this)" @if(!empty($search)) checked @endif>&nbsp;จำเป็น
+                            <input type="hidden" name="jobId" id="jobId" value="{{$gj->gj_id}}">
                         </div>
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
                     <thead>
@@ -82,6 +83,7 @@ $i=1;
                             </tr> -->
                         </tbody>                    
                     </table>
+                    <br>
                         <center>
                             <a href="{{ url ('backend/job')}}"><button type="button" class="btn btn-secondary w-26 ml-2"> กลับหน้ากลุ่มตำแหน่งงาน </button></a>
                         </center>
@@ -94,11 +96,27 @@ $i=1;
 @endsection
 @section('javascripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>  <!-- delete -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    function important (){
-        var important = $('#important').val();
-        alert(important);
+function important(element){
+    var value = $(element).val();
+    var jobId = $('#jobId').val();
+    // alert(jobId);
+    if(value === 'จำเป็น'){
+        var data = {
+            data: null,
+            value: value,
+            jobId: jobId,
+            _token: '{{ csrf_token() }}'
+        };
+        var params = $.param(data);
+        var url = '{{ route('searchJobCapacity', ['data' => '']) }}' +  params;
+        window.location.href = url;
+    }else{
+        var url = 'backend/job/capacity/' + jobId;
+        window.location.href = url;
     }
+}
 </script>
 
 <script>

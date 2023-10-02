@@ -127,7 +127,7 @@ function del_value(id) {
         align: 'left'
     },
     xAxis: {
-        categories: ['สมรรถนะ1', 'สมรรถนะ2', 'สมรรถนะ3', 'สมรรถนะ4', 'สมรรถนะอื่นๆ', 'สมรรถนะอื่นๆ'],
+        categories: ['สมรรถนะ_1', 'สมรรถนะ_2', 'สมรรถนะ_3', 'สมรรถนะ_4', 'สมรรถนะ_อื่นๆ', 'สมรรถนะ_อื่นๆ'],
         crosshair: true,
         accessibility: {
             description: 'Countries'
