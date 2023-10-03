@@ -48,7 +48,7 @@ $i=1;
                                 <tr>
                                     <td><center>{{$rs->cc_name}} @if($rs->FKgjc_userCreate == 0) <br> (พื้นฐาน) @endif</center></td>
                                     <td><center>{!! asset($rs->cc_detail )?$rs->cc_detail :''!!}</center></td>
-                                    <th><center>{{$rs->gjc_important}}</center></th>
+                                    <td><center>{{$rs->gjc_important}}</center></td>
                                     <td><center><a href="{{url('company/job/skills/'.$rs->gjc_id.'/'.$gj->sp_id)}}"><button class="btn btn-outline-secondary">ทักษะ</button></a></center></td>
                                     <td><center>
                                         @if($rs->FKgjc_userCreate != 0)
