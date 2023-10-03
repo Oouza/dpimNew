@@ -263,7 +263,7 @@ class AdminEmployeeController extends Controller
             $update = employee::where('FKe_userid',$id)->update([
                 'e_note' =>  '',
             ]);
-            $typeButton = 'การลงทะบียนสำเร็จ สามารถเข้าใช้บริการได้';
+            $typeButton = 'การลงทะเบียนสำเร็จ สามารถเข้าใช้บริการได้';
         }elseif($request->button_employee == '2'){
             $updateUser = User::where('id',$id)->update([
                 'name'      =>  $name,
@@ -273,7 +273,7 @@ class AdminEmployeeController extends Controller
                 'e_userUpdate' =>  Auth::user()->name,
                 'e_note'       =>  $request->employ_note,
             ]);
-            $typeButton = 'กรุณาแก้ไขข้อมูลการลงทะบียน และส่งกลับเพื่อยืนยันการลงทะเบียนใหม่อีกครั้ง';
+            $typeButton = 'กรุณาแก้ไขข้อมูลการลงทะเบียน และส่งกลับเพื่อยืนยันการลงทะเบียนใหม่อีกครั้ง';
         }else{
             $updateUser = User::where('id',$id)->update([
                 'name'      =>  $name,
@@ -283,7 +283,7 @@ class AdminEmployeeController extends Controller
             $update = employee::where('FKe_userid',$id)->update([
                 'e_userDelete' =>  Auth::user()->name,
             ]);
-            $typeButton = 'การลงทะบียนถูกยกเลิก กรุณาติดต่อเจ้าหน้าที่';
+            $typeButton = 'การลงทะเบียนถูกยกเลิก กรุณาติดต่อเจ้าหน้าที่';
         }
         $textmail = [
             "text"      =>$typeButton,
