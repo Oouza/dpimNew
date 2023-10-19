@@ -128,7 +128,7 @@ function del_value(id) {
         align: 'left'
     },
     xAxis: {
-        categories: ['กลุ่มตำแหน่ง1', 'กลุ่มตำแหน่ง2', 'กลุ่มตำแหน่ง3', 'กลุ่มตำแหน่ง4'],
+        categories: [@foreach($setPosition as $rs) '{{$rs->gj_name}}', @endforeach],
         crosshair: true,
         accessibility: {
             description: 'Countries'
@@ -140,9 +140,6 @@ function del_value(id) {
             text: 'จำนวนบุคลากร'
         }
     },
-    // tooltip: {
-    //     valueSuffix: ' (1000 MT)'
-    // },
     plotOptions: {
         column: {
             pointPadding: 0.2,
@@ -150,30 +147,46 @@ function del_value(id) {
         }
     },
     series: [
+        @foreach($lavel as $rs1)
         {
-            name: 'ระดับงาน1',
-            data: [100, 110, 50, 40]
+            name: '{{$rs1->lj_name}}',
+            data: [
+                @foreach($setPosition as $rs)
+                    @php $i = 0 @endphp
+                    @foreach($employee as $row)
+                        @if($row->FKe_lavel == $rs1->lj_id && $row->FKe_position == $rs->sp_id) 
+                            @php $i = $i + 1 @endphp
+                        @endif
+                    @endforeach
+                    {{$i}},
+                @endforeach
+            ],
         },
-        {
-            name: 'ระดับงาน2',
-            data: [50, 90, 60, 80]
-        },
-        {
-            name: 'ระดับงาน3',
-            data: [60, 40, 84, 33]
-        },
-        {
-            name: 'ระดับงาน4',
-            data: [90, 70, 98, 65]
-        },
-        {
-            name: 'ระดับงาน5',
-            data: [20, 30, 70, 52]
-        },
-        {
-            name: 'ระดับงาน6',
-            data: [30, 50, 45, 39]
-        }
+        @endforeach
+        // {
+        //     name: 'ระดับงาน1',
+        //     data: [50, 40]
+        // },
+        // {
+        //     name: 'ระดับงาน2',
+        //     data: [25,45]
+        // },
+        // {
+        //     name: 'ระดับงาน3',
+        //     data: [30, 33]
+        // },
+        // {
+        //     name: 'ระดับงาน4',
+        //     data: [36,45]
+        // },
+        // {
+        //     name: 'ระดับงาน5',
+        //     data: [10, 30]
+        // },
+        // {
+        //     name: 'ระดับงาน6',
+        //     data: [23,45,]
+        // }
     ]
 });
 </script>

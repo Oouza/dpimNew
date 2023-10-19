@@ -267,34 +267,24 @@ class HrJobController extends Controller
     }
 
     function companyJobDetail($id){
+        // dd($id);
         $hr = ceohr::where('FKch_userid',Auth::user()->id)->first();
         $sp = settingPosition::join('departments','departments.d_id','setting_positions.FKgsp_department')
-        ->join('department_subs','department_subs.ds_id','setting_positions.FKgsp_departmentSub')
-        ->join('positions','positions.p_id','setting_positions.FKgsp_position')
-        ->join('lavel_jobs','lavel_jobs.lj_id','setting_positions.FKgsp_lavel')
-        ->join('type_job','type_job.tj_id','setting_positions.FKgsp_typeJob')
-        ->join('groupjobs','groupjobs.gj_id','setting_positions.FKgsp_groupJob')->find($id);
+            ->join('department_subs','department_subs.ds_id','setting_positions.FKgsp_departmentSub')
+            ->join('positions','positions.p_id','setting_positions.FKgsp_position')
+            ->join('lavel_jobs','lavel_jobs.lj_id','setting_positions.FKgsp_lavel')
+            ->join('type_job','type_job.tj_id','setting_positions.FKgsp_typeJob')
+            ->join('groupjobs','groupjobs.gj_id','setting_positions.FKgsp_groupJob')->find($id);
 
-        $gjCapa = gjcapacity::join('capacities','capacities.cc_id','gjcapacities.FKgjc_capacity')
-            ->leftjoin('gjskills','gjskills.FKgjs_gjcapacity','gjcapacities.gjc_id')    
-            ->leftjoin('skills','skills.s_id','gjskills.FKgjs_skills')    
-            ->leftjoin('gj_skills_subs','gj_skills_subs.FKgjss_gjskills','gjskills.gjs_id')    
-            ->leftjoin('skills_subs','skills_subs.ss_id','gj_skills_subs.FKgjss_skillsSub') 
-            ->where(function ($query) use ($hr) {
-                $query->where('FKgjc_userCreate', 0)
-                    ->orWhere('FKgjc_userCreate', $hr->FKch_company);
-            })
-        ->whereNull('gjc_userDelete')->whereNull('gjs_userDelete')->whereNull('gjss_userDelete')
-        ->where('FKgjc_groupjob',$sp->FKgsp_groupJob)->orderBy('gjc_id','asc')
-        ->orderBy('gjs_id','asc')
-        ->orderBy('gjss_id','asc')->get();
+        // $gj = groupjob::join('lavel_jobs','lavel_jobs.lj_id','groupjobs.FKgj_lavel')
+        //     ->join('type_job','type_job.tj_id','groupjobs.FKgj_typeJob')->find($id);
 
         $gjSub = gjSkillsSub::join('skills_subs','skills_subs.ss_id','gj_skills_subs.FKgjss_skillsSub')
-            ->rightjoin('gjskills','gjskills.gjs_id','gj_skills_subs.FKgjss_gjskills')
+            ->join('gjskills','gjskills.gjs_id','gj_skills_subs.FKgjss_gjskills')
             ->join('skills','skills.s_id','gjskills.FKgjs_skills')
-            ->rightjoin('gjcapacities','gjcapacities.gjc_id','gj_skills_subs.FKgjss_gjcapacity')            
+            ->join('gjcapacities','gjcapacities.gjc_id','gj_skills_subs.FKgjss_gjcapacity')            
             ->join('capacities','capacities.cc_id','gjcapacities.FKgjc_capacity')            
-            ->where('FKgjss_groupjob',$sp->gj_id)
+            ->where('FKgjss_groupjob',$sp->FKgsp_groupJob)
             // ->where('FKgjss_userCreate',0)
             ->where(function ($query) use ($hr) {
                 $query->where('FKgjss_userCreate', 0)
@@ -302,10 +292,8 @@ class HrJobController extends Controller
             })
             ->whereNull('gjss_userDelete')->get();
 
-        $gj = gjskills::join('skills','skills.s_id','gjskills.FKgjs_skills')
-            ->join('gjcapacities','gjcapacities.gjc_id','gjskills.FKgjs_gjcapacity')
-            ->join('capacities','capacities.cc_id','gjcapacities.FKgjc_capacity')->get();
-        return view('frontend.company.job.job-detail',compact('sp','gjSub','gjCapa','gj','gjCapa'));
+        return view('frontend.company.job.job-detail',compact('sp','gjSub'));
+        // return view('frontend.company.job.job-detail',compact('sp','gjSub','gjCapa','gj','gjCapa'));
     }
 
     function companyJobUpdate(Request $request, $id){

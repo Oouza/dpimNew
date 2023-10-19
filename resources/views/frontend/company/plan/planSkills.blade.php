@@ -50,39 +50,51 @@ $i=1;
                                 <th><center>จัดการรายการ</center></th>
                             </tr>
                         </thead>
+                        @php $now = new DateTime(); @endphp
                         <tbody>
+                        @foreach($plan as $rs)
+                            @if($rs->plans_dateend > $now && $rs->plans_status == 1)
                             <tr style="color:red">
-                                <td><center>001</center></td>
-                                <td><center>ไก่</center></td>
-                                <td><center>กา</center></td>
-                                <td><center>กลุ่มตำแหน่ง 1</center></td>
-                                <td><center>001</center></td>
-                                <td><center>หลัดสูตร 1</center></td>
-                                <td><center>1 </center></td>
-                                <td><center>100</center></td>
+                            @else
+                            <tr>
+                            @endif
+                                <td><center>{{$rs->e_employeeNo}}</center></td>
+                                <td><center>{{$rs->e_fname}}</center></td>
+                                <td><center>{{$rs->e_lname}}</center></td>
+                                <td><center>{{$rs->gj_name}}</center></td>
+                                <td><center>{{$rs->cou_no}}</center></td>
+                                <td><center>{{$rs->cou_name}}</center></td>
+                                <td><center>{{$rs->cou_period}}</center></td>
+                                <td><center>{{$rs->plans_moneycouser + $rs->plans_moneyother}} บาท</center></td>
                                 <td><center>
-                                        <button class="btn btn-secondary"> ยังไม่ดำเนินการ </button>
+                                    @if($rs->plans_status == 2)
+                                        @if(empty($rs->plans_note))
+                                            <button type="button" class="btn btn-secondary"> รอยืนยัน </button>
+                                        @else
+                                            <button type="button" class="btn btn-secondary"> แก้ไข </button>
+                                        @endif
+                                    @elseif($rs->plans_status == 1)
+                                        <button class="btn btn-primary"> ยังไม่ดำเนินการ </button>
+                                    @else
+                                        <button class="btn btn-success"> ดำเนินการแล้ว </button>
+                                    @endif
                                 </center></td>
                                 <td><center>
-                                    <a href="{{ url ('company/plan/skills/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
-                                    <button type="button" class="btn btn-danger" onclick="del_value(1)">ลบ</button>
+                                    <a href="{{ url ('company/plan/skills/edit/'.$rs->plans_id)}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
+                                    <button type="button" class="btn btn-danger" onclick="del_value({{$rs->plans_id}})">ลบ</button>
                                 </center></td>
                             </tr>
-                            <tr>
+                            <!-- <tr>
                                 <td><center>002</center></td>
                                 <td><center>เอ</center></td>
                                 <td><center>บี</center></td>
                                 <td><center>กลุ่มตำแหน่ง 2</center></td>
-                                <!-- <td><center>25/08/2566 ถึง 26/08/2566</center></td> -->
                                 <td><center>002</center></td>
                                 <td><center>หลัดสูตร 2</center></td>
-                                <!-- <td><center>ผู้จัด 2</center></td> -->
                                 <td><center>3 </center></td>
                                 <td><center>200</center></td>
                                 <td><center>
-                                    <!-- <a href="{{ url ('company/cf/skills/detail')}}"> -->
                                         <button type="button" class="btn btn-secondary"> รอยืนยัน </button>
-                                    <!-- </a> -->
                                 </center></td>
                                 <td><center>
                                     <a href="{{ url ('company/plan/skills/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
@@ -94,26 +106,20 @@ $i=1;
                                 <td><center>เอ</center></td>
                                 <td><center>บี</center></td>
                                 <td><center>กลุ่มตำแหน่ง 2</center></td>
-                                <!-- <td><center>25/08/2566 ถึง 26/08/2566</center></td> -->
                                 <td><center>002</center></td>
                                 <td><center>หลัดสูตร 2</center></td>
-                                <!-- <td><center>ผู้จัด 2</center></td> -->
                                 <td><center>3 </center></td>
                                 <td><center>500</center></td>
-                                <!-- <td><center>ประเภทหลักสูตร 2</center></td>
-                                <td><center>ชุดทักษะ 2</center></td> -->
                                 <td><center>
-                                    <!-- <a href="{{ url ('company/cf/skills/detail')}}"> -->
                                     <button class="btn btn-success"> ดำเนินการแล้ว </button>
-                                    <!-- </a> -->
                                 </center></td>
                                 <td><center>
                                     <a href="{{ url ('company/plan/skills/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
                                     <button type="button" class="btn btn-danger" onclick="del_value(1)">ลบ</button>
                                 </center></td>
-                            </tr>
+                            </tr> -->
+                        @endforeach
                         </tbody>
-                    
                     </table>
                         <!-- <center>
                             <button type="button" class="btn btn-secondary w-26 ml-2"> ดาวน์โหลดข้อมูลแผนกทั้งหมด (เป็น xlsx) </button>        

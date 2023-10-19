@@ -33,11 +33,11 @@ $i=1;
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-slate-200/60 dark:border-darkmode-400">
                     <div class="intro-y block sm:flex items-center h-10">
                         <h2 class="text-lg font-medium truncate mr-5">กลุ่มตำแหน่ง</h2>
-                        <select name="" id="" class="select2">
+                        <select name="gj" id="gj" class="select2">
                             <option value="">กลุ่มตำแหน่งทั้งหมด</option>
-                            <option value="">กลุ่มตำแหน่งที่ 1</option>
-                            <option value="">กลุ่มตำแหน่งที่ 2</option>
-                            <option value="">กลุ่มตำแหน่งที่ 3</option>
+                            @foreach($groupjob as $rs)
+                            <option value="{{$rs->gj_id}}">{{$rs->gj_name}}</option>
+                            @endforeach
                         </select>
                         <div class="flex items-center sm:ml-auto mt-3 sm:mt-0">
                         <!-- <a href="{{ url ('company/skillsSub/form')}}"  >   <button class="btn btn-elevated-primary w-24 mr-1 mb-2">เพิ่มข้อมูล</button></a> -->
@@ -51,9 +51,12 @@ $i=1;
                             สมเกียรติ.ม – สมเกียรติ ม้าแก้ว
                         </td></tr> -->
                         <tr><td>
-                            สมเกียรติ.ม – สมเกียรติ ม้าแก้ว ตำแหน่ง 1 <br>
+                            @foreach($employee as $rs)
+                            {{$rs->e_fname}}.{{ mb_substr(preg_replace('/[^\x{0E00}-\x{0E7F}]/u', '', $rs->e_lname), 0, 1) }} - {{$rs->e_fname}} {{$rs->e_lname}} {{$rs->p_name}} <br>
+                            @endforeach
+                            <!-- สมเกียรติ.ม – สมเกียรติ ม้าแก้ว ตำแหน่ง 1 <br>
                             กมล.ท – กมล ทหารไทย ตำแหน่ง 2 <br>
-                            สมาน.ด -  สมาน เด็กดี ตำแหน่ง 2 <br>
+                            สมาน.ด -  สมาน เด็กดี ตำแหน่ง 2 <br> -->
                         </td></tr>
                     </table>
                     <br>

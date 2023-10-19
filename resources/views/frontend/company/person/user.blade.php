@@ -28,6 +28,9 @@ $i=1;
                 <div class="intro-y block sm:flex items-center h-10">
                                     <h2 class="text-lg font-medium truncate mr-5">
                                     รายละเอียดข้อมูลบุคลากร
+                                    @if(session("success"))
+                                        <b class="text-danger">{{session('success')}}</b>
+                                    @endif
                                     </h2>
                                     <div class="flex items-center sm:ml-auto mt-3 sm:mt-0">
                                         <a href="{{ url ('company/user/form')}}"  >   <button class="btn btn-elevated-primary w-24 mr-1 mb-2">เพิ่มข้อมูล</button></a>
@@ -52,12 +55,12 @@ $i=1;
                                 <td><center>{{$rs->e_employeeNo}}</center></td>
                                 <td><center>{{$rs->e_fname}}</center></td>
                                 <td><center>{{$rs->e_lname}}</center></td>
-                                <td><center>แผนก 1 </center></td>
-                                <td><center>แผนกย่อย 1</center></td>
-                                <td><center>ตำแหน่งปัจจุบัน 1</center></td>
+                                <td><center>{{$rs->d_name}}</center></td>
+                                <td><center>{{$rs->ds_name}}</center></td>
+                                <td><center>{{$rs->p_name}}</center></td>
                                 <td><center>
-                                    <a href="{{ url ('company/user/edit')}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
-                                    <button type="button" class="btn btn-danger" onclick="del_value(1)">ลบ</button>
+                                    <a href="{{ url ('company/user/edit/'.$rs->e_id)}}"  >  <button type="button" class="btn btn-warning"  >แก้ไข</button></a>
+                                    <button type="button" class="btn btn-danger" onclick="del_value({{$rs->e_id}})">ลบ</button>
                                 </center></td>
                             </tr>
                             @endforeach
@@ -65,7 +68,9 @@ $i=1;
                     
                     </table>
                         <center>
-                            <button type="button" class="btn btn-secondary w-26 ml-2"> ดาวน์โหลดข้อมูลบุคลากรทั้งหมด (เป็น xlsx) </button>        
+                            <a href="{{url('company/user/export')}}">
+                                <button type="button" class="btn btn-secondary w-26 ml-2"> ดาวน์โหลดข้อมูลบุคลากรทั้งหมด (เป็น xlsx) </button>        
+                            </a>
                         </center>
                 </div>
               
@@ -98,7 +103,7 @@ function del_value(id) {
                 if (result.value) {
                     $.ajax({
                         type:"GET",
-                        url:"{!! url('member/delete/"+id+"') !!}",
+                        url:"{!! url('company/user/delete/"+id+"') !!}",
                         success: function(data) {
                             console.log(data);
                         }   

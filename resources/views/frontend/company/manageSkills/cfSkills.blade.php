@@ -47,21 +47,23 @@ $i=1;
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($tn as $rs)
                             <tr>
-                                <td><center>01</center></td>
-                                <td><center>ไก่</center></td>
-                                <td><center>กา</center></td>
-                                <td><center>ตำแหน่ง1</center></td>
-                                <td><center>หลักสูตรอบรม 1 </center></td>
-                                <td><center>ผู้จัดการอบรม 1</center></td>
-                                <td><center>100</center></td>
+                                <td><center>{{$rs->e_employeeNo}}</center></td>
+                                <td><center>{{$rs->e_fname}}</center></td>
+                                <td><center>{{$rs->e_lname}}</center></td>
+                                <td><center>{{$rs->p_name}}</center></td>
+                                <td><center>{{$rs->cou_name}}</center></td>
+                                <td><center>{{$rs->cou_organizer}}</center></td>
+                                <td><center>{{$rs->tn_moneyTrain + $rs->tn_moneyOther}} บาท</center></td>
                                 <td><center>
-                                    <a href="{{ url ('company/cf/skills/detail')}}">
+                                    <a href="{{ url ('company/cf/skills/detail/'.$rs->tn_id)}}">
                                         <button type="button" class="btn btn-success"> รายละเอียด </button>
                                     </a>
                                 </center></td>
                             </tr>
-                            <tr>
+                            @endforeach
+                            <!-- <tr>
                                 <td><center>02</center></td>
                                 <td><center>เอ</center></td>
                                 <td><center>บี</center></td>
@@ -74,7 +76,7 @@ $i=1;
                                         <button type="button" class="btn btn-success"> รายละเอียด </button>
                                     </a>
                                 </center></td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     
                     </table>

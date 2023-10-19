@@ -87,31 +87,44 @@ Route::get('hr/job/skillsSub/delete/{id}', [App\Http\Controllers\HrJobController
 
 Route::get('company/user', [App\Http\Controllers\HrEmployeeController::class, 'user']);
 Route::get('company/user/form', [App\Http\Controllers\HrEmployeeController::class, 'userForm']);
-Route::get('company/user/edit', [App\Http\Controllers\HrEmployeeController::class, 'userEdit']);
-
+Route::post('company/user/add', [App\Http\Controllers\HrEmployeeController::class, 'userAdd']);
+Route::get('company/user/edit/{id}', [App\Http\Controllers\HrEmployeeController::class, 'userEdit']);
+Route::post('company/user/update/{id}', [App\Http\Controllers\HrEmployeeController::class, 'userUpdate']);
+Route::get('company/user/delete/{id}', [App\Http\Controllers\HrEmployeeController::class, 'userDelete']);
 Route::get('company/user/file', [App\Http\Controllers\HrEmployeeController::class, 'userFile']);
+Route::post('company/user/upload', [App\Http\Controllers\HrEmployeeController::class, 'userImport']);
+Route::get('company/user/export', [App\Http\Controllers\HrEmployeeController::class, 'userExport']);
 
 Route::get('company/cfUser', [App\Http\Controllers\HrEmployeeController::class, 'cfUser']);
-Route::get('company/user/detail', [App\Http\Controllers\HrEmployeeController::class, 'cfUserDetail']);
+Route::get('company/user/detail/{id}', [App\Http\Controllers\HrEmployeeController::class, 'cfUserDetail']);
+Route::post('company/user/confirm/{id}', [App\Http\Controllers\HrEmployeeController::class, 'userCfConfirm']);
 // Route::get('company/cfUserEdit', [App\Http\Controllers\FrontendController::class, 'cfUserEdit']);
 
 Route::get('company/manage/skills', [App\Http\Controllers\HrPlanController::class, 'manageSkills']);
-Route::get('company/manage/skills/detail/{id}', [App\Http\Controllers\HrPlanController::class, 'manageSkillsDetail']);
+Route::get('company/manage/skills/detail/{id}', [App\Http\Controllers\HrPlanController::class, 'manageSkillsDetail'])->name('manageSkillsDetail');
+Route::get('resultManageSkillsDetail', [App\Http\Controllers\HrPlanController::class, 'resultManageSkillsDetail'])->name('resultManageSkillsDetail');
+Route::post('company/manage/skills/add/{id}', [App\Http\Controllers\HrPlanController::class, 'manageSkillsAdd']);
+Route::get('company/manage/skills/delete/{id}', [App\Http\Controllers\HrPlanController::class, 'manageSkillsDelete']);
+
 // Route::get('company/manage/skills/form', [App\Http\Controllers\FrontendController::class, 'manageSkillsForm']);
 // Route::get('company/manage/skills/edit', [App\Http\Controllers\FrontendController::class, 'manageSkillsEdit']);
 
-Route::get('company/plan/skills', [App\Http\Controllers\FrontendController::class, 'planSkills']);
-Route::get('company/plan/skills/form', [App\Http\Controllers\FrontendController::class, 'planSkillsForm']);
-Route::get('company/plan/skills/edit', [App\Http\Controllers\FrontendController::class, 'planSkillsEdit']);
+Route::get('company/plan/skills', [App\Http\Controllers\HrPlanController::class, 'planSkills']);
+Route::get('company/plan/skills/form', [App\Http\Controllers\HrPlanController::class, 'planSkillsForm']);
+Route::post('company/plan/skills/add', [App\Http\Controllers\HrPlanController::class, 'planSkillsAdd']);
+Route::get('company/plan/skills/edit/{id}', [App\Http\Controllers\HrPlanController::class, 'planSkillsEdit']);
+Route::post('company/plan/skills/update/{id}', [App\Http\Controllers\HrPlanController::class, 'planSkillsUpdate']);
+Route::get('course/skills/delete/{id}', [App\Http\Controllers\HrPlanController::class, 'courseSkillsDel']);
 
-
-Route::get('company/cf/skills', [App\Http\Controllers\FrontendController::class, 'cfSkills']);
-Route::get('company/cf/skills/detail', [App\Http\Controllers\FrontendController::class, 'cfSkillsDetail']);
+Route::get('company/cf/skills', [App\Http\Controllers\HrConfirmController::class, 'cfSkills']);
+Route::get('company/cf/skills/detail/{id}', [App\Http\Controllers\HrConfirmController::class, 'cfSkillsDetail']);
+Route::post('company/cf/skills/confirm/{id}', [App\Http\Controllers\HrConfirmController::class, 'cfSkillsConfirm']);
 
 Route::get('company/cf/plan', [App\Http\Controllers\FrontendController::class, 'cfPlanSkills']);
 Route::get('company/cf/plan/detail', [App\Http\Controllers\FrontendController::class, 'cfPlanSkillsDetail']);
 
 Route::get('company/edit', [App\Http\Controllers\FrontendController::class, 'setting']);
+Route::post('company/update/{id}', [App\Http\Controllers\FrontendController::class, 'settingUpdate']);
 
 Route::get('company/graph/job', [App\Http\Controllers\FrontendController::class, 'companyGraphJob']);
 Route::get('company/graph/capacity', [App\Http\Controllers\FrontendController::class, 'companyGraphCapacity']);
@@ -419,6 +432,10 @@ Route::get('detailSkillsSub', [App\Http\Controllers\AdminJobController::class, '
 Route::post('searchDepartment', [App\Http\Controllers\FrontendController::class, 'searchDepartment']);
 Route::post('searchGroupJob', [App\Http\Controllers\FrontendController::class, 'searchGroupJob']);
 
+Route::post('searchEmployee', [App\Http\Controllers\HrPlanController::class, 'searchEmployee']);
+Route::post('skillsWant', [App\Http\Controllers\HrPlanController::class, 'skillsWant']);
+Route::post('skillsSubWant', [App\Http\Controllers\HrPlanController::class, 'skillsSubWant']);
+Route::post('searchCoursePlan', [App\Http\Controllers\HrPlanController::class, 'searchCoursePlan']);
 
 // Auth::routes();
 

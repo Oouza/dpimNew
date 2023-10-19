@@ -28,6 +28,7 @@ class training extends Model
         'tn_moneyTrain',
         'tn_moneyOther',
         'tn_status',
+        'tn_note',
         'FKtn_userCreate',
         'tn_userCreate',
         'tn_userUpdate',

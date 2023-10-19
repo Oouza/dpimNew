@@ -32,7 +32,10 @@ class HomeController extends Controller
     public function index()
     {
         //     return view('home');
-        
+        $provinces = DB::table('provinces')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
+        $amphures = DB::table('amphures')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
+        $districts = DB::table('districts')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
+
         if(\Auth::user()->status == '1' || \Auth::user()->status == '2' ){  // แอดมินน
             $user = User::join('employees','employees.FKe_userid','users.id')
             ->leftjoin('companies','companies.c_id','employees.FKe_company')->where('status',8)
@@ -50,9 +53,6 @@ class HomeController extends Controller
         }
         else if(\Auth::user()->status == '7' || \Auth::user()->status == '9'){  // บุคลากร
             $user = User::join('employees','employees.FKe_userid','users.id')->find(\Auth::user()->id);
-            $provinces = DB::table('provinces')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
-            $amphures = DB::table('amphures')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
-            $districts = DB::table('districts')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
             $company = DB::table('companies')->orderBy("c_id", 'ASC')->get();
             $department = DB::table('departments')->orderBy("d_id", 'ASC')->get();
             $departmentsub = DB::table('department_subs')->orderBy("ds_id", 'ASC')->get();
@@ -62,16 +62,17 @@ class HomeController extends Controller
             return view('frontend.person.userHistory',compact('user','provinces','amphures','districts','company','department','departmentsub','setting_positions','level_jobs','group'));
         }else if(\Auth::user()->status == '3' ||\Auth::user()->status == '5'){  // HR+Manager
             $id = \Auth::user()->id;
-            $user = User::join('ceohrs','ceohrs.FKch_userid','users.id')
+            $hr = User::join('ceohrs','ceohrs.FKch_userid','users.id')
             ->join('companies','companies.c_id','ceohrs.FKch_company')
-            ->join('provinces','provinces.id','companies.FKc_provinces')
             ->where('users.id',$id)->first();
-            // dd($user->ch_note);
+            
+            $minerals = DB::table('type_minerals')->whereNull('tm_userDelete')->get();
+            // dd($hr->ch_note);
 
-            if($user->ch_position=='HR'){
-                return view('frontend.company.userHistory',compact('user'));
-            }else if($user->ch_position=='ผู้บริหาร'){
-                return view('frontend.manager.companySetting',compact('user'));
+            if($hr->ch_position=='HR'){
+                return view('frontend.company.userHistory',compact('hr','minerals','provinces','amphures','districts'));
+            }else if($hr->ch_position=='ผู้บริหาร'){
+                return view('frontend.manager.companySetting',compact('hr','minerals','provinces','amphures','districts'));
             }
         }else if(\Auth::user()->status == '4'){  // HR+Manager
             $user = User::join('ceohrs','ceohrs.FKch_userid','users.id')
