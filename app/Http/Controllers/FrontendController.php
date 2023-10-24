@@ -10,15 +10,16 @@ use App\Models\User;
 use App\Models\departmentSub;
 use App\Models\groupjob;
 use App\Models\course;
+use App\Models\CourseModel;
 use App\Models\courseSkills;
 use App\Models\typeCourse;
 use App\Models\skills;
 use App\Models\skillsSubs;
+use App\Models\capacity;
 use App\Models\ceohr;
 use App\Models\Company;
 use App\Models\hr;
 use App\Models\settingPosition;
-use App\Models\capacity;
 use App\Models\lavelJob;
 use Illuminate\Support\Facades\Hash;
 
@@ -99,8 +100,20 @@ class FrontendController extends Controller
     //     return view('frontend.userStudy');
     // }
 
-    function userStudyForm(){
-        return view('frontend.person.study.userStudy-add');
+    function userStudyForm()
+    {
+        $date = date('Y-m-d');
+        $courses = CourseModel::where('cou_startTime', '<=', $date)->where('cou_endTime', '>=', $date)->where('FKcou_userCreate', 0)->orderBy('cou_id', 'DESC')->get();
+        $typecourses = typeCourse::get();
+        $skills_subs = skillsSubs::get();
+        $capacity = capacity::get();
+        $data = array(
+            'courses' => $courses,
+            'typecourses' => $typecourses,
+            'skills_subs' => $skills_subs,
+            'capacity' => $capacity,
+        );
+        return view('frontend.person.study.userStudy-add', $data);
     }
 
     function userStudyEdit(){
