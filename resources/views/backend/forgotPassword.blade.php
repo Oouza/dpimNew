@@ -32,11 +32,11 @@ License: You must have a valid license purchased only from themeforest(the above
                 <!-- BEGIN: Login Info -->
                 <div class="hidden xl:flex flex-col min-h-screen">
                     <a href="" class="-intro-x flex items-center pt-5">
-                        <img alt="Midone - HTML Admin Template" class="w-6" src="{{asset('dist/images/logo.svg')}}">
+                        <img alt="Midone - HTML Admin Template" class="w-6" src="dist/images/logo.svg">
                         <span class="text-white text-lg ml-3"> ระบบคลังข้อมูลสำหรับติดตามการพัฒนาทักษะ<br>ของบุคลากรในอุตสาหกรรมเหมืองแร่ </span> 
                     </a>
                     <div class="my-auto">
-                        <img alt="Midone - HTML Admin Template" class="-intro-x w-1/2 -mt-16" src="{{asset('dist/images/illustration.svg')}}">
+                        <img alt="Midone - HTML Admin Template" class="-intro-x w-1/2 -mt-16" src="dist/images/illustration.svg">
                         <div class="-intro-x text-white font-medium text-4xl leading-tight mt-10">
                             <!-- A few more clicks to  -->
                             <br>
@@ -45,7 +45,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <div class="-intro-x mt-5 text-lg text-white text-opacity-70 dark:text-slate-400"></div>
                     </div>
                     <a href="" class="-intro-x flex items-center pt-5">
-                    <img class="-intro-x w-1/2 -mt-16" style="width:60px;height:60px;margin-bottom:0px;margin-left:-50px;" src="{{asset('dist/images/logo.png')}}">
+                    <img class="-intro-x w-1/2 -mt-16" style="width:60px;height:60px;margin-bottom:0px;margin-left:-50px;" src="dist/images/logo.png">
                         <span class="text-white text-lg ml-3" style="margin-bottom:60px;"> กรมอุตสาหกรรมพื้นฐานและการเหมืองแร่ 0 2430 6847 ต่อ 4731 </span> 
                     </a>
                 </div>
@@ -68,39 +68,32 @@ License: You must have a valid license purchased only from themeforest(the above
                         </a>
                     </center>
                     <br> -->
-                    <form method="post" action="{{ route('password.update') }}">
+                    <form method="post" action="{{ route('password.email') }}">
                  @csrf
                     <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">
-                        เปลี่ยนรหัสผ่าน
-                        <input type="hidden" name="token" value="{{ $token }}">
-
+                        ลืมรหัสผ่าน
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
                         </h2>
                         <div class="intro-x mt-2 text-slate-400 xl:hidden text-center"></div>
                         <div class="intro-x mt-8">
-                        <!-- <input type="text" class="intro-x login__input form-control py-3 px-4 block @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" autocomplete="email" placeholder="Email" autofocus > -->
-                            <input id="email" type="email" class="intro-x login__input py-3 px-4 form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
-                                @error('email')
+                        <input type="text" class="intro-x login__input form-control py-3 px-4 block @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" autocomplete="email" placeholder="Email" autofocus >
+                            @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror                        
-                        </div>
-                        <div class="intro-x mt-8">                            
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
+                             @enderror
+                             
+                            <!-- <input type="password"  id="password" class="intro-x login__input form-control py-3 px-4 block mt-4 @error('password') is-invalid @enderror" name="password" autocomplete="current-password" placeholder="Password">
                             @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="intro-x mt-8">                            
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Password confirm">
-                            @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                             @enderror -->
+                        
                         </div>
                         <div class="intro-x flex text-slate-600 dark:text-slate-500 text-xs sm:text-sm mt-4">
                             <div class="flex items-center mr-auto">
@@ -113,13 +106,13 @@ License: You must have a valid license purchased only from themeforest(the above
                         <center>
                             <!-- <a href="#"> -->
                                 <button class="btn btn-primary" type="submit">
-                                    เปลี่ยนรหัสผ่าน
+                                    ส่งลิ้งก์เปลี่ยนรหัสผ่านไปยังอีเมล
                                 </button>
                             <!-- </a> -->
                         </center>
                         <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
                             <center>
-                            <a href="{{url('/')}}">
+                            <a href="{{url('loginAdmin')}}">
                                 <button class="btn btn-outline-secondary">
                                     เข้าสู่ระบบ
                                 </button>

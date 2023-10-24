@@ -15,7 +15,12 @@ use App\Models\courseSkills;
 use App\Models\typeCourse;
 use App\Models\skills;
 use App\Models\skillsSubs;
+use App\Models\ceohr;
+use App\Models\Company;
+use App\Models\hr;
+use App\Models\settingPosition;
 use App\Models\capacity;
+use App\Models\lavelJob;
 use Illuminate\Support\Facades\Hash;
 
 class FrontendController extends Controller
@@ -245,27 +250,7 @@ class FrontendController extends Controller
 
     function manageSkillsEdit(){
         return view('frontend.company.manageSkills.manageSkills-edit');
-    }
-    
-    function planSkills(){
-        return view('frontend.company.plan.planSkills');
-    }
-
-    function planSkillsForm(){
-        return view('frontend.company.plan.planSkills-add');
-    }
-
-    function planSkillsEdit(){
-        return view('frontend.company.plan.planSkills-edit');
-    }
-
-    function cfSkills(){
-        return view('frontend.company.manageSkills.cfSkills');
-    }
-
-    function cfSkillsDetail(){
-        return view('frontend.company.manageSkills.cfSkills-detail');
-    }
+    }  
 
     function cfPlanSkills(){
         return view('frontend.company.plan.cfPlanSkills');
@@ -276,11 +261,95 @@ class FrontendController extends Controller
     }
 
     function setting(){
-        return view('frontend.company.userHistory');
+        // Auth::user()->id
+        $hr = ceohr::join('companies','companies.c_id','ceohrs.FKch_company')
+            ->join('users','users.id','ceohrs.FKch_userid')->where('FKch_userid',Auth::user()->id)->first();
+        $provinces = DB::table('provinces')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
+        $amphures = DB::table('amphures')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
+        $districts = DB::table('districts')->orderByRaw("CONVERT(name_th USING tis620) asc")->get();
+        $minerals = DB::table('type_minerals')->whereNull('tm_userDelete')->get();
+        return view('frontend.company.userHistory',compact('hr','provinces','amphures','districts','minerals'));
+    }
+
+    function settingUpdate(Request $request, $id){
+        // dd($id);
+        $name = $request->title.' '.$request->fname.' '.$request->lname;
+
+        $chemail = DB::table('users')->where('email',$request->email)->first();
+
+        if((!empty($chemail)) && ($chemail->id != $id)){
+            return back()->with('success',$request->email.' อีเมลนี้ลงทะเบียนแล้ว กรุณาเปลี่ยนอีเมลใหม่',compact(('request')));
+        }else{
+            // return back()->with('success',$request->email.' OK ',compact(('request')));
+        }
+
+        // update users
+        $update = User::find($id)->update([
+            'email' =>  $request->email,
+            'name'  =>  $name,
+        ]);
+
+        // update users
+        if(!empty($request->pass)){
+            $update = User::find($user->id)->update([
+                'password'         =>  Hash::make($request->input('pass')),
+            ]);
+        }
+
+        $user = User::join('ceohrs','ceohrs.FKch_userid','users.id')
+        ->join('companies','companies.c_id','ceohrs.FKch_company')
+        ->where('users.id',$id)->first();
+        // dd($user->FKch_company);
+
+        // update companies
+        $update = Company::where('c_id',$user->FKch_company)->update([
+            'c_addressNo'       =>  $request->address_no,
+            'FKc_provinces'     =>  $request->povices_now,
+            'FKc_amphur'        =>  $request->aumphur_now,
+            'FKc_tumbon'        =>  $request->tumbon_now,
+            'c_postCode'        =>  $request->postcode,
+            'c_userUpdate'      =>  Auth::user()->name,
+        ]);
+
+        // update ceohr
+        $update = ceohr::where('FKch_userid',$id)->update([
+            'ch_title'      =>  $request->title,
+            'ch_fname'      =>  $request->fname,
+            'ch_lname'      =>  $request->lname,
+            'ch_phone'      =>  $request->phone,
+            'ch_userUpdate' =>  Auth::user()->name,
+        ]);
+        if (!empty($request->file('credti'))) {
+    
+            //ลบรูปเก่าเพื่ออัพโหลดรูปใหม่แทน
+            $path2 = 'public/upload/img/'.$request->credti;
+
+            if (file_exists($path2)) {
+                //dd($path2.$data->image_profile);
+                @unlink($path2);
+            }
+            $path = 'upload/img/';
+            $img = $request->file('credti');
+            $img_name = 'credti' . time() . '.' . $img->getClientOriginalExtension();
+            $save_path = $img->move(public_path($path), $img_name);
+            // dd($img_name);
+            $data2['ch_credit']=$img_name;
+            
+            DB::table('ceohrs')->where('FKch_userid',$id)->update($data2);    
+        }
+
+        $mes = 'Update Success';
+        $yourURL= url('company/edit');
+        echo ("<script>alert('$mes'); location.href='$yourURL'; </script>");
+        return view('backend.adnim.setting',compact('user'));
     }
 
     function companyGraphJob(){
-        return view('frontend.company.graph.graph-job');
+        $hr = ceohr::where('FKch_userid',Auth::user()->id)->first();
+        $employee = employee::leftjoin('positions','positions.p_id','employees.FKe_department')
+            ->where('e_status',1)->where('FKe_company',$hr->FKch_company)->get();
+        $groupjob = groupjob::whereNull('gj_userDelete')->get();
+        return view('frontend.company.graph.graph-job',compact('employee','groupjob'));
     }
 
     function companyGraphCapacity(){
@@ -288,11 +357,34 @@ class FrontendController extends Controller
     }
 
     function companyGraphSillks(){
-        return view('frontend.company.graph.graph-sillks');
+        $hr = ceohr::where('FKch_userid',Auth::user()->id)->first();
+        $employee = employee::leftjoin('departments','departments.d_id','employees.FKe_position')
+            ->where('e_status',1)->where('FKe_company',$hr->FKch_company)->get();
+        $capacity = capacity::
+            where(function ($query) use ($hr) {
+                $query->where('FKcc_Create', 0)
+                    ->orWhere('FKcc_Create', $hr->FKch_company);
+            })
+            ->whereNull('cc_userDelete')->get();
+        $groupjob = groupjob::whereNull('gj_userDelete')->get();
+        return view('frontend.company.graph.graph-sillks',compact('employee','capacity','groupjob'));
     }
 
     function companyScoreJob(){
-        return view('frontend.company.graph.score-job');
+        $hr = ceohr::where('FKch_userid',Auth::user()->id)->first();
+        $employee = employee::leftjoin('departments','departments.d_id','employees.FKe_department')
+            ->leftjoin('setting_positions','setting_positions.sp_id','employees.FKe_position')
+            ->leftjoin('positions','positions.p_id','setting_positions.FKgsp_position')
+            ->leftjoin('department_subs','department_subs.ds_id','employees.FKe_departmentSub')
+            ->where('e_status',1)->where('FKe_company',$hr->FKch_company)->get();
+        $setPosition = settingPosition::leftjoin('positions', 'positions.p_id', 'setting_positions.FKgsp_position')
+            ->leftjoin('groupjobs', 'groupjobs.gj_id', 'setting_positions.FKgsp_groupJob')
+            ->leftjoin('lavel_jobs', 'lavel_jobs.lj_id', 'setting_positions.FKgsp_lavel')
+            // ->whereNull('sp_delete')->get();
+            ->where('FKgsp_company',$hr->FKch_company)->whereNull('sp_delete')->get();
+        $lavel = lavelJob::whereNull('lj_userDelete')->get();
+        // dd($setPosition);
+        return view('frontend.company.graph.score-job',compact('employee','setPosition','lavel'));
     }
 
     function companyScoreSillks(){

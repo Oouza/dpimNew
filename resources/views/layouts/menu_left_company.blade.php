@@ -3,6 +3,16 @@
     // use Auth;
     $status=Auth::user()->status;
 ?>
+@if(empty($status))
+<form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+@csrf
+</form>
+<script>
+    var msg = 'log out';
+    alert(msg);
+    document.getElementById('logout-form').submit();
+</script>
+@endif
  <div class="mobile-menu md:hidden">
             <div class="mobile-menu-bar">
                 <a href="" class="flex mr-auto">
@@ -11,46 +21,11 @@
                 <a href="javascript:;" id="mobile-menu-toggler"> <i data-lucide="bar-chart-2" class="w-8 h-8 text-white transform -rotate-90"></i> </a>
             </div>
             <ul class="border-t border-white/[0.08] py-5 hidden">
+            @if($status==4)
                 <li>
-                    <a href="javascript:;" class="menu">
-                        <div class="menu__icon"> <i data-lucide="home"></i> </div>
-                        <div class="menu__title">
-                            หน้าแรก 
-                        <div class="menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
-                        </div>
-                    </a>
-                    <ul <?php if ($activePage =="index") {?> class="side-menu__sub-open" <?php }else{?> class=""<?php  } ?>>
-                        <li>
-                            <a href="{{url('/home')}}" class="menu menu--active">
-                                <div class="menu__icon"> <i data-lucide="home"></i> </div>
-                                <div class="menu__title"> แบนเนอร์ </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{url('backend/aboutme')}}" class="menu menu--active">
-                                <div class="menu__icon"> <i data-lucide="home"></i> </div>
-                                <div class="menu__title"> เกี่ยวกับเรา </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{url('backend/resume')}}" class="menu menu--active">
-                                <div class="menu__icon"> <i data-lucide="home"></i> </div>
-                                <div class="menu__title"> สร้างเรซูเม่ </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{url('backend/joinUs')}}" class="menu menu--active">
-                                <div class="menu__icon"> <i data-lucide="home"></i> </div>
-                                <div class="menu__title"> มาร่วมงานกับเรา </div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="{{url('backend/news')}}" class="menu">
+                    <a href="{{url('/home')}}" class="menu">
                         <div class="menu__icon"> <i data-lucide="edit"></i> </div>
-                        <div class="menu__title"> ลูกค้าของเรา </div>
+                        <div class="menu__title"> ตั้งค่าตำแหน่งงาน สมรรถนะ และทักษะในองค์กร </div>
                     </a>
                 </li>
 
@@ -58,33 +33,27 @@
                     <a href="javascript:;" class="menu">
                         <div class="menu__icon"> <i data-lucide="type"></i> </div>
                         <div class="menu__title">
-                            หมวดหมู่ 
+                            จัดการข้อมูลแผนก 
                         <div class="menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
                         </div>
                     </a>
-                    <ul <?php if ($activePage =="jobtype") {?> class="side-menu__sub-open" <?php }else{?> class=""<?php  } ?>>
+                    <ul <?php if ($activePage =="dataDepartment") {?> class="side-menu__sub-open" <?php }else{?> class=""<?php  } ?>>
                         <li>
-                            <a href="{{url('backend/companytype')}}" class="menu menu--active">
+                            <a href="{{url('company/department')}}" class="menu menu--active">
                                 <div class="menu__icon"> <i data-lucide="type"></i> </div>
-                                <div class="menu__title"> ลักษณะธุรกิจ </div>
+                                <div class="menu__title"> ข้อมูลแผนก </div>
                             </a>
                         </li>
                         <li>
-                            <a href="{{url('backend/jobmain')}}" class="menu menu--active">
+                            <a href="{{url('company/departmentSub')}}" class="menu menu--active">
                                 <div class="menu__icon"> <i data-lucide="type"></i> </div>
-                                <div class="menu__title"> หมวดงานหลัก </div>
+                                <div class="menu__title"> ข้อมูลแผนกย่อย </div>
                             </a>
                         </li>
                         <li>
-                            <a href="{{url('backend/jobsub')}}" class="menu menu--active">
+                            <a href="{{url('company/position')}}" class="menu menu--active">
                                 <div class="menu__icon"> <i data-lucide="type"></i> </div>
-                                <div class="menu__title"> หมวดงานรอง </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{url('backend/address')}}" class="menu menu--active">
-                                <div class="menu__icon"> <i data-lucide="type"></i> </div>
-                                <div class="menu__title"> สถานที่ตั้ง </div>
+                                <div class="menu__title"> ข้อมูลตำแหน่ง </div>
                             </a>
                         </li>
                     </ul>
@@ -94,25 +63,118 @@
                     <a href="javascript:;" class="menu">
                         <div class="menu__icon"> <i data-lucide="users"></i> </div>
                         <div class="menu__title">
-                            ตรวจสอบบริษัท 
+                            จัดการข้อมูลบุคลากร 
                         <div class="menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
                         </div>
                     </a>
-                    <ul <?php if ($activePage =="company") {?> class="side-menu__sub-open" <?php }else{?> class=""<?php  } ?>>
+                    <ul <?php if ($activePage =="users") {?> class="side-menu__sub-open" <?php }else{?> class=""<?php  } ?>>
                         <li>
-                            <a href="{{url('backend/company')}}" class="menu menu--active">
+                            <a href="{{url('company/user')}}" class="menu menu--active">
                                 <div class="menu__icon"> <i data-lucide="users"></i> </div>
-                                <div class="menu__title"> ยืนยันการสมัคร </div>
+                                <div class="menu__title"> จัดการข้อมูลบุคลากร </div>
                             </a>
                         </li>
                         <li>
-                            <a href="{{url('backend/firstCompany')}}" class="menu menu--active">
+                            <a href="{{url('company/cfUser')}}" class="menu menu--active">
                                 <div class="menu__icon"> <i data-lucide="users"></i> </div>
-                                <div class="menu__title"> บริษัทชั้นนำ </div>
+                                <div class="menu__title"> ยืนยันบุคลากร </div>
                             </a>
                         </li>
                     </ul>
                 </li>
+
+                <li>
+                    <a href="javascript:;" class="menu">
+                        <div class="menu__icon"> <i data-lucide="users"></i> </div>
+                        <div class="menu__title">
+                            จัดการทักษะบุคลากร 
+                        <div class="menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
+                        </div>
+                    </a>
+                    <ul <?php if ($activePage =="manage") {?> class="side-menu__sub-open" <?php }else{?> class=""<?php  } ?>>
+                        <li>
+                            <a href="{{url('company/manage/skills')}}" class="menu menu--active">
+                                <div class="menu__icon"> <i data-lucide="users"></i> </div>
+                                <div class="menu__title"> กำหนดเป้าหมายการพัฒนารายบุคคล </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{url('company/plan/skills')}}" class="menu menu--active">
+                                <div class="menu__icon"> <i data-lucide="users"></i> </div>
+                                <div class="menu__title"> กำหนดและติดตามการพัฒนาตามแผน </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{url('company/cf/plan')}}" class="menu menu--active">
+                                <div class="menu__icon"> <i data-lucide="users"></i> </div>
+                                <div class="menu__title"> ยืนยันข้อเสนอการฝึกอบรมจากบุคลากร </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{url('company/cf/skills')}}" class="menu menu--active">
+                                <div class="menu__icon"> <i data-lucide="users"></i> </div>
+                                <div class="menu__title"> ยืนยันข้อมูลการฝึกอบรมที่เสนอโดยบุคลากร </div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="{{url('search/course')}}" class="menu">
+                        <div class="menu__icon"> <i data-lucide="edit"></i> </div>
+                        <div class="menu__title"> ค้นหาหลักสูตรฝึกอบรม </div>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="javascript:;" class="menu">
+                        <div class="menu__icon"> <i data-lucide="users"></i> </div>
+                        <div class="menu__title">
+                            กระดานสรุป 
+                        <div class="menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
+                        </div>
+                    </a>
+                    <ul <?php if ($activePage =="scoreboard") {?> class="side-menu__sub-open" <?php }else{?> class=""<?php  } ?>>
+                        <li>
+                            <a href="{{ url('company/graph/job' )}}" class="menu menu--active">
+                                <div class="menu__icon"> <i data-lucide="users"></i> </div>
+                                <div class="menu__title"> สรุประดับทักษะของบุคลากรรายตำแหน่ง </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url('company/score/sillks') }}" class="menu menu--active">
+                                <div class="menu__icon"> <i data-lucide="users"></i> </div>
+                                <div class="menu__title"> สรุปผลการพัฒนาทักษะของบุคลากร </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url('company/score/job' )}}" class="menu menu--active">
+                                <div class="menu__icon"> <i data-lucide="users"></i> </div>
+                                <div class="menu__title"> สรุปจำนวนบุคลากรรายกลุ่มตำแหน่งงาน </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url('company/graph/sillks' )}}" class="menu menu--active">
+                                <div class="menu__icon"> <i data-lucide="users"></i> </div>
+                                <div class="menu__title"> สรุปจำนวนบุคลากรในระดับทักษะต่าง ๆ </div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{{url('company/edit')}}" class="menu">
+                        <div class="menu__icon"> <i data-lucide="edit"></i> </div>
+                        <div class="menu__title"> แก้ไขข้อมูลสถานประกอบการ </div>
+                    </a>
+                </li>
+                @else
+                <li>
+                    <a href="{{url('company/edit')}}" class="menu">
+                        <div class="menu__icon"> <i data-lucide="edit"></i> </div>
+                        <div class="menu__title"> แก้ไขข้อมูลสถานประกอบการ </div>
+                    </a>
+                </li>
+                @endif
 
             </ul>
         </div>

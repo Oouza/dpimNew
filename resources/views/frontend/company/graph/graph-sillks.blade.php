@@ -25,7 +25,7 @@ $i=1;
                 </div>
          
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-slate-200/60 dark:border-darkmode-400">
-                <h2 class="text-lg font-medium truncate mr-5"> จำนวนบุคลากรทั้งหมด 100 คน </h2>
+                <h2 class="text-lg font-medium truncate mr-5"> จำนวนบุคลากรทั้งหมด {{count($employee)}} คน </h2>
                 <!-- <div class="intro-y block sm:flex items-center h-10">
                                     <h2 class="text-lg font-medium truncate mr-5">
                                     สรุปจำนวนบุคลากรรายกลุ่มตำแหน่งงานตามประเภทสถานประกอบการ
@@ -42,9 +42,12 @@ $i=1;
                                         <select name="" id="" class="select2">
                                           <!-- <option value="" hidden>- เลือกกลุ่มตำแหน่ง -</option> -->
                                           <option value=""> กลุ่มตำแหน่งทั้งหมด  </option>
-                                          <option value=""> กลุ่มตำแหน่ง1  </option>
+                                          @foreach($groupjob as $rs)
+                                          <option value="{{$rs->gj_id}}"> {{$rs->gj_name}}  </option>
+                                          @endforeach
+                                          <!-- <option value=""> กลุ่มตำแหน่ง1  </option>
                                           <option value=""> กลุ่มตำแหน่ง2  </option>
-                                          <option value=""> กลุ่มตำแหน่ง3  </option>
+                                          <option value=""> กลุ่มตำแหน่ง3  </option> -->
                                         </select>
                                     </div>
                                 </div>
@@ -123,7 +126,7 @@ function del_value(id) {
         text: null
     },
     xAxis: {
-        categories: ['สมรรถนะ1', 'สมรรถนะ2', 'สมรรถนะ3', 'สมรรถนะ4', 'สมรรถนะ5']
+        categories: [@foreach($capacity as $rs) '{{$rs->cc_name}}', @endforeach]
     },
     yAxis: {
         min: 0,
@@ -148,13 +151,13 @@ function del_value(id) {
     },
     series: [{
         name: 'จำนวนบุคลากรที่มีทักษะมากกว่า 50 %',
-        data: [3, 5, 1, 13, 10]
+        data: [3, 5, 1, 13, 10, 5]
     }, {
         name: 'จำนวนบุคลากรที่มีทักษะน้อยกว่า 50 %',
-        data: [14, 8, 8, 12, 6]
+        data: [14, 8, 8, 12, 6, 10]
     }, {
         name: 'จำนวนคนที่ยังไม่มีทักษะ',
-        data: [0, 2, 6, 3, 8]
+        data: [0, 2, 6, 3, 8, 4]
     }]
 });
 </script>

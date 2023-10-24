@@ -31,6 +31,7 @@ class CreateTrainingsTable extends Migration
             $table->integer('tn_moneyTrain')->nullable();
             $table->integer('tn_moneyOther')->nullable();
             $table->integer('tn_status')->nullable();
+            $table->text('tn_note')->nullable();
             $table->integer('FKtn_userCreate')->nullable();
             $table->string('tn_userCreate')->nullable();
             $table->string('tn_userUpdate')->nullable();

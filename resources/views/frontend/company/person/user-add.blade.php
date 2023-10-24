@@ -37,17 +37,21 @@ $date_old = $date-60;
                     <div class="font-medium text-center text-lg">เพิ่มบุคลากร</div>
                    
                 </div>
-                <form action="{{ url('backend/skills/add') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('company/user/add') }}" method="post" enctype="multipart/form-data" onSubmit="return checkPassword(this)">
                 {{ csrf_field() }}
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-sl ate-200/60 dark:border-darkmode-400">
                     <div class="font-medium text-base">รายละเอียด</div>
-
+                            <center>
+                                @if(session("success"))
+                                    <b class="text-danger">{{session('success')}}</b>
+                                @endif
+                            </center>
                             <div class="grid grid-cols-12 gap-6 mt-5">
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
                                     <b><label for="horizontal-form-1" class="form-label "> คำนำหน้า </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="" type="text" id="formFile" Placeholder="คำนำหน้า" required>
+                                    <input class="form-control box-form-ct" name="title" type="text" id="title" Placeholder="คำนำหน้า" required>
                                 </div>
                             </div>
                             
@@ -56,7 +60,7 @@ $date_old = $date-60;
                                     <b><label for="horizontal-form-1" class="form-label "> ชื่อ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="" type="text" id="formFile" Placeholder="ชื่อ" required>
+                                    <input class="form-control box-form-ct" name="fname" type="text" id="fname" Placeholder="ชื่อ" required>
                                 </div>
                             </div>
 
@@ -65,7 +69,7 @@ $date_old = $date-60;
                                     <b><label for="horizontal-form-1" class="form-label "> นามสกุล </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="" type="text" id="formFile" Placeholder="นามสกุล" required>
+                                    <input class="form-control box-form-ct" name="lname" type="text" id="lname" Placeholder="นามสกุล" required>
                                 </div>
                             </div>
 
@@ -74,7 +78,7 @@ $date_old = $date-60;
                                     <b><label for="horizontal-form-1" class="form-label "> หมายเลขพนักงาน </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="" type="text" id="formFile" Placeholder="หมายเลขพนักงาน" required>
+                                    <input class="form-control box-form-ct" name="employee_no" type="text" id="employee_no" Placeholder="หมายเลขพนักงาน" required>
                                 </div>
                             </div>
 
@@ -83,11 +87,11 @@ $date_old = $date-60;
                                     <b><label for="horizontal-form-1" class="form-label "> แผนก </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="department" id="department" class="form-control select2">
+                                    <select name="department" id="department" class="form-control select2" onchange="selectDepartment()" required>
                                         <option value="" hidden>- กรุณาเลือกแผนก -</option>
-                                        <option value="1">แผนก 1</option>
-                                        <option value="2">แผนก 2</option>
-                                        <option value="3">แผนก 3</option>
+                                        @foreach($departments as $rs)
+                                        <option value="{{$rs->d_id}}">{{$rs->d_name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -97,11 +101,8 @@ $date_old = $date-60;
                                     <b><label for="horizontal-form-1" class="form-label "> แผนกย่อย </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="departmentSub" id="departmentSub" class="form-control select2">
+                                    <select name="departmentSub" id="departmentSub" class="form-control select2" required>
                                         <option value="" hidden>- กรุณาเลือกแผนกย่อย -</option>
-                                        <option value="1">แผนกย่อย 1</option>
-                                        <option value="2">แผนกย่อย 2</option>
-                                        <option value="3">แผนกย่อย 3</option>
                                     </select>
                                 </div>
                             </div>
@@ -111,11 +112,11 @@ $date_old = $date-60;
                                     <b><label for="horizontal-form-1" class="form-label "> ตำแหน่งปัจจุบัน </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="position" id="position" class="form-control select2">
+                                    <select name="position" id="position" class="form-control select2" required>
                                         <option value="" hidden>- กรุณาเลือกตำแหน่ง -</option>
-                                        <option value="1">ตำแหน่ง 1</option>
-                                        <option value="2">ตำแหน่ง 2</option>
-                                        <option value="3">ตำแหน่ง 3</option>
+                                        @foreach($setPosition as $rs)
+                                        <option value="{{$rs->sp_id}}">{{$rs->p_name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -125,7 +126,7 @@ $date_old = $date-60;
                                     <b><label for="horizontal-form-1" class="form-label "> อีเมล </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="" type="text" id="formFile" Placeholder="อีเมล" required>
+                                    <input class="form-control box-form-ct" name="e_email" type="text" id="e_email" Placeholder="อีเมล" required>
                                 </div>
                             </div>
 
@@ -134,7 +135,7 @@ $date_old = $date-60;
                                     <b><label for="horizontal-form-1" class="form-label "> หมายเลขโทรศัพท์ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="" type="text" id="formFile" Placeholder="หมายเลขโทรศัพท์" required>
+                                    <input class="form-control box-form-ct" name="phone" type="text" id="phone" Placeholder="หมายเลขโทรศัพท์" required>
                                 </div>
                             </div>
 
@@ -143,7 +144,7 @@ $date_old = $date-60;
                                     <b><label for="horizontal-form-1" class="form-label "> รหัสผ่าน </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="" type="password" id="formFile" Placeholder="รหัสผ่าน" required>
+                                    <input class="form-control box-form-ct" name="pass" type="password" id="pass" Placeholder="รหัสผ่าน" required>
                                 </div>
                             </div>
 
@@ -152,7 +153,7 @@ $date_old = $date-60;
                                     <b><label for="horizontal-form-1" class="form-label "> ยืนยันรหัสผ่าน </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="" type="password" id="formFile" Placeholder="ยืนยันรหัสผ่าน" required>
+                                    <input class="form-control box-form-ct" name="passCf" type="password" id="passCf" Placeholder="ยืนยันรหัสผ่าน" required>
                                 </div>
                             </div>
 
@@ -161,7 +162,7 @@ $date_old = $date-60;
                                     <b><label for="horizontal-form-1" class="form-label "> วันเกิด </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="" type="date" id="formFile" required>
+                                    <input class="form-control box-form-ct" name="birthday" type="date" id="birthday">
                                 </div>
                             </div>
 
@@ -177,7 +178,7 @@ $date_old = $date-60;
                                     <b><label for="horizontal-form-1" class="form-label "> ที่อยู่ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" Placeholder="ที่อยู่" required>
+                                    <input class="form-control box-form-ct" name="address_now" type="text" id="address_now" Placeholder="ที่อยู่">
                                 </div>
                             </div>
 
@@ -187,13 +188,11 @@ $date_old = $date-60;
                                     <b><label for="horizontal-form-1" class="form-label "> จังหวัด </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="povices_now" id="povices_now" class="form-control select2" required>
+                                    <select name="povices_now" id="povices_now" class="form-control select2" onchange="provinceNow()">
                                         <option value="" hidden>- กรุณาเลือกจังหวัด -</option>
-                                        <option value="1">กรุงเทพ</option>
-                                        <option value="2">กระบี่</option>
-                                        <option value="3">กาญจนบุรี</option>
-                                        <option value="4">กาฬสินธุ์</option>
-                                        <option value="5">กำแพงเพชร</option>
+                                        @foreach($provinces as $rs)
+                                        <option value="{{$rs->id}}">{{$rs->name_th}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -204,13 +203,8 @@ $date_old = $date-60;
                                     <b><label for="horizontal-form-1" class="form-label "> เขต/อำเภอ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="aumphur_now" id="aumphur_now" class="form-control select2" required>
+                                    <select name="aumphur_now" id="aumphur_now" class="form-control select2" onchange="amphureNow()">
                                         <option value="" hidden>- กรุณาเลือกเขต/อำเภอ -</option>
-                                        <option value="1">บางแค</option>
-                                        <option value="2">อำเภอ 2</option>
-                                        <option value="3">อำเภอ 3</option>
-                                        <option value="4">อำเภอ 4</option>
-                                        <option value="5">อำเภอ 5</option>
                                     </select>
                                 </div>
                             </div>
@@ -221,13 +215,8 @@ $date_old = $date-60;
                                     <b><label for="horizontal-form-1" class="form-label "> แขวง/ตำบล </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="tumbon_now" id="tumbon_now" class="form-control select2" required>
+                                    <select name="tumbon_now" id="tumbon_now" class="form-control select2">
                                         <option value="" hidden>- กรุณาเลือกแขวง/ตำบล -</option>
-                                        <option value="1">บางแค</option>
-                                        <option value="2">ตำบล 2</option>
-                                        <option value="3">ตำบล 3</option>
-                                        <option value="4">ตำบล 4</option>
-                                        <option value="5">ตำบล 5</option>
                                     </select>
                                 </div>
                             </div>
@@ -238,7 +227,7 @@ $date_old = $date-60;
                                     <b><label for="horizontal-form-1" class="form-label "> รหัสไปรษณีย์ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" Placeholder="รหัสไปรษณีย์" required>
+                                    <input class="form-control box-form-ct" name="postcode_now" type="text" id="postcode_now" Placeholder="รหัสไปรษณีย์">
                                 </div>
                             </div>
 
@@ -254,7 +243,7 @@ $date_old = $date-60;
                                     <b><label for="horizontal-form-1" class="form-label "> ที่อยู่ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" Placeholder="ที่อยู่" required>
+                                    <input class="form-control box-form-ct" name="address_past" type="text" id="address_past" Placeholder="ที่อยู่">
                                 </div>
                             </div>
 
@@ -264,13 +253,11 @@ $date_old = $date-60;
                                     <b><label for="horizontal-form-1" class="form-label "> จังหวัด </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="povices_past" id="povices_past" class="form-control select2" required>
+                                    <select name="povices_past" id="povices_past" class="form-control select2" onchange="provincepast()">
                                         <option value="" hidden>- กรุณาเลือกจังหวัด -</option>
-                                        <option value="1">กรุงเทพ</option>
-                                        <option value="2">กระบี่</option>
-                                        <option value="3">กาญจนบุรี</option>
-                                        <option value="4">กาฬสินธุ์</option>
-                                        <option value="5">กำแพงเพชร</option>
+                                        @foreach($provinces as $rs)
+                                        <option value="{{$rs->id}}">{{$rs->name_th}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -281,13 +268,8 @@ $date_old = $date-60;
                                     <b><label for="horizontal-form-1" class="form-label "> เขต/อำเภอ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="aumphur_past" id="aumphur_past" class="form-control select2" required>
+                                    <select name="aumphur_past" id="aumphur_past" class="form-control select2" onchange="amphurepast()">
                                         <option value="" hidden>- กรุณาเลือกเขต/อำเภอ -</option>
-                                        <option value="1">บางแค</option>
-                                        <option value="2">อำเภอ 2</option>
-                                        <option value="3">อำเภอ 3</option>
-                                        <option value="4">อำเภอ 4</option>
-                                        <option value="5">อำเภอ 5</option>
                                     </select>
                                 </div>
                             </div>
@@ -298,13 +280,8 @@ $date_old = $date-60;
                                     <b><label for="horizontal-form-1" class="form-label "> แขวง/ตำบล </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="tumbon_past" id="tumbon_past" class="form-control select2" required>
+                                    <select name="tumbon_past" id="tumbon_past" class="form-control select2">
                                         <option value="" hidden>- กรุณาเลือกแขวง/ตำบล -</option>
-                                        <option value="1">บางแค</option>
-                                        <option value="2">ตำบล 2</option>
-                                        <option value="3">ตำบล 3</option>
-                                        <option value="4">ตำบล 4</option>
-                                        <option value="5">ตำบล 5</option>
                                     </select>
                                 </div>
                             </div>
@@ -315,7 +292,7 @@ $date_old = $date-60;
                                     <b><label for="horizontal-form-1" class="form-label "> รหัสไปรษณีย์ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" Placeholder="รหัสไปรษณีย์" required>
+                                    <input class="form-control box-form-ct" name="postcode_past" type="text" id="postcode_past" Placeholder="รหัสไปรษณีย์">
                                 </div>
                             </div>
 
@@ -324,179 +301,11 @@ $date_old = $date-60;
                                     <b><label for="horizontal-form-1" class="form-label "> เพศ </lable></b>
                                 </div>
                                 <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input type="radio"> ชาย
+                                    <input name="gender" id="gender" type="radio" value="ชาย"> ชาย
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input type="radio"> หญิง
+                                    <input name="gender" id="gender" type="radio" value="หญิง"> หญิง
                                 </div>
                             </div>
-
-                            <!-- <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> ประวัติการศึกษาลำดับที่ 1 </lable></b>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> ปีที่เข้าการศึกษา </lable></b>
-                                </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="year" class="form-select rounded-10 mb-3"> 
-                                        <option hidden>- ปีที่เข้าการศึกษา -</option>
-                                        @for($i=$date;$i>=$date_old;$i--)
-                                            <option value="{{$i-543}}">{{$i}}</option>
-                                        @endfor
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> ปีที่จบการศึกษา </lable></b>
-                                </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="year" class="form-select rounded-10 mb-3"> 
-                                        <option hidden>- ปีที่จบการศึกษา -</option>
-                                        @for($i=$date;$i>=$date_old;$i--)
-                                            <option value="{{$i-543}}">{{$i}}</option>
-                                        @endfor
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> วุติที่ได้รับ </lable></b>
-                                </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" required>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> ชื่อสถาบัน </lable></b>
-                                </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" required>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> แนบเอกสาร </lable></b>
-                                </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="file" id="formFile" required>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> หมายเหตุ </lable></b>
-                                </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <textarea name="" id="news_detail" cols="5" rows="5"></textarea>
-                                </div>
-                            </div>
-
-                            <div id="form-container"></div>
-                            <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div><div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3"></div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <button id="add-form-btn" type="button" class="btn btn-outline-secondary btn200 rounded-10" >เพิ่มประวัติการศึกษา</button>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> ประวัติการทำงาน </lable></b>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> ปีที่เริ่มทำงาน </lable></b>
-                                </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="year" class="form-select rounded-10 mb-3"> 
-                                        <option hidden>- ปีที่เริ่มทำงาน -</option>
-                                        @for($i=$date;$i>=$date_old;$i--)
-                                            <option value="{{$i-543}}">{{$i}}</option>
-                                        @endfor
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> ปีที่สิ้นสุดการทำงาน </lable></b>
-                                </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <select name="year" class="form-select rounded-10 mb-3"> 
-                                        <option hidden>- ปีที่สิ้นสุดการทำงาน -</option>
-                                        @for($i=$date;$i>=$date_old;$i--)
-                                            <option value="{{$i-543}}">{{$i}}</option>
-                                        @endfor
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> หน่วยงาน </lable></b>
-                                </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" required>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> ตำแหน่ง </lable></b>
-                                </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="text" id="formFile" required>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> แนบเอกสาร </lable></b>
-                                </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <input class="form-control box-form-ct" name="news_name" type="file" id="formFile" required>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3">
-                                    <b><label for="horizontal-form-1" class="form-label "> หมายเหตุ </lable></b>
-                                </div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <textarea name="" id="" cols="30" rows="10"></textarea>
-                                </div>
-                            </div>
-
-                            <div id="form-container-skills"></div>
-                            <div class="grid grid-cols-12 gap-6 mt-5">
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-1"></div><div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-3"></div>
-                                <div class="mt-2 col-span-12 sm:col-span-6 xl:col-span-6">
-                                    <button id="skillsSub1" type="button" class="btn btn-outline-secondary btn200 rounded-10" >ประวัติการทำงาน</button>
-                                </div>
-                            </div> -->
 
                             </div>
                             </div>
@@ -504,8 +313,8 @@ $date_old = $date-60;
                             <center>
                                 
                                 <a href="{{url('company/user')}}" class="btn btn-warning w-50">กลับหน้าหลัก</a>
-                                <!-- <button type="submit" class="btn btn-success w-24 ml-2">บันทึก</button>         -->
-                                <a href="#" class="btn btn-success w-50">บันทึก</a>
+                                <button type="submit" class="btn btn-success w-24 ml-2">บันทึก</button>        
+                                <!-- <a href="#" class="btn btn-success w-50">บันทึก</a> -->
                             
                             </center>
                       
@@ -521,6 +330,167 @@ $date_old = $date-60;
 
 
 @section('javascripts')
+<script> 
+	function checkPassword(form) { 
+		password1 = form.pass.value; 
+		password2 = form.passCf.value; 
+
+        var gender = form.gender.value;
+        if (!gender) {
+            alert('กรุณาเลือกเพศ');
+            return false;
+        }
+
+        if (password1 != password2) { 
+            alert("รหัสผ่านไม่ตรงกัน กรุณากรอกใหม่อีกครั้ง") 
+            return false; 
+        }
+        // else {
+        //     if (password1.length < 8) {
+        //         alert("รหัสผ่านของคุณน้อยกว่า 8 ตัวอักษร กรุณากรอกรหัสผ่านใหม่อีกครั้ง") 
+        //         return false; 
+        //     } else if (password1.length > 20) {
+        //         alert("รหัสผ่านของคุณมากกว่า 20 ตัวอักษร กรุณากรอกรหัสผ่านใหม่อีกครั้ง") 
+        //         return false; 
+        //     } 
+
+        //     if(password1.match(/[a-z]/)) {
+        //     } else {
+        //         alert('รหัสผ่านของคุณไม่มีตัวอักษรพิมพ์เล็ก กรุณากรอกรหัสผ่านใหม่อีกครั้ง');
+        //         return false; 
+        //     }
+
+        //     if(password1.match(/[A-Z]/)) {
+        //     } else {
+        //         alert('รหัสผ่านของคุณไม่มีตัวอักษรพิมพ์ใหญ่ กรุณากรอกรหัสผ่านใหม่อีกครั้ง');
+        //         return false; 
+        //     }
+
+        //     if(password1.match(/.[-, \, #, \, $, \, ., \, %, \, &, \, @, \, !, \, +, \, =, \, <, \, >, \, *]/)){
+        //     }else{
+        //         alert('รหัสผ่านของคุณไม่มีสัญลักษณ์ กรุณากรอกรหัสผ่านใหม่อีกครั้ง');
+        //         return false;
+        //     }
+
+        //     if(password1.match(/\d+/)){
+        //     }else{
+        //         alert('รหัสผ่านของคุณตัวเลข กรุณากรอกรหัสผ่านใหม่อีกครั้ง');
+        //         return false;
+        //     }
+        // }
+	} 
+</script>
+
+<script>
+function provinceNow($id) {
+    var provice = $('#povices_now').val();
+    // alert('asd');
+    if(provice == ''){
+    }else{
+        $.ajax({
+            'type': 'post',
+            'url': "{{ url('searchProvice') }}",
+            'dataType': 'json',
+            'data': { 
+                'provice'            : provice,
+                '_token'        : "{{csrf_token()}}"  
+            },
+           'success': function (data){
+            $('#aumphur_now').html(data.html);
+                
+            } 
+        });  
+    }
+}
+function amphureNow() {
+    var amphure = $('#aumphur_now').val();
+    if(amphure == ''){
+    }else{
+        $.ajax({
+            'type': 'post',
+            'url': "{{ url('searchAmphure') }}",
+            'dataType': 'json',
+            'data': { 
+                'amphure'            : amphure,
+                '_token'        : "{{csrf_token()}}"  
+            },
+           'success': function (data){
+            $('#tumbon_now').html(data.html);
+                
+            } 
+        });  
+    }
+}
+
+function provincepast($id) {
+    var provice = $('#povices_past').val();
+    // alert('asd');
+    if(provice == ''){
+    }else{
+        $.ajax({
+            'type': 'post',
+            'url': "{{ url('searchProvice') }}",
+            'dataType': 'json',
+            'data': { 
+                'provice'            : provice,
+                '_token'        : "{{csrf_token()}}"  
+            },
+           'success': function (data){
+            $('#aumphur_past').html(data.html);
+                
+            } 
+        });  
+    }
+}
+function amphurepast() {
+    var amphure = $('#aumphur_past').val();
+    if(amphure == ''){
+    }else{
+        $.ajax({
+            'type': 'post',
+            'url': "{{ url('searchAmphure') }}",
+            'dataType': 'json',
+            'data': { 
+                'amphure'            : amphure,
+                '_token'        : "{{csrf_token()}}"  
+            },
+           'success': function (data){
+            $('#tumbon_past').html(data.html);
+                
+            } 
+        });  
+    }
+}
+</script>
+
+<script>
+    function selectDepartment(){
+        var department = $('#department').val();
+        // alert(department);
+        if (department == '') {
+        } else {
+            $.ajax({
+                type: 'post',
+                url: "{{ url('searchDepartment') }}",
+                dataType: 'json',
+                data: {
+                    department: department,
+                    _token: "{{csrf_token()}}"
+                },
+                'success': function (data){
+                    $('#departmentSub').html(data.html);
+                }
+            });
+        }
+
+        $(document).ready(function(){
+            $('#departmentSub').select2({
+                placeholder: "- กรุณาเลือกแผนกย่อย -",
+                allowClear: true
+            });
+        });
+    }
+</script>
 <script>
     ClassicEditor
     .create( document.querySelector( '#news_detail' ) )
