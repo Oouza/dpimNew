@@ -102,6 +102,7 @@ class FrontendController extends Controller
 
     function userStudyForm()
     {
+        
         $date = date('Y-m-d');
         $courses = CourseModel::where('cou_startTime', '<=', $date)->where('cou_endTime', '>=', $date)->where('FKcou_userCreate', 0)->orderBy('cou_id', 'DESC')->get();
         $typecourses = typeCourse::get();
